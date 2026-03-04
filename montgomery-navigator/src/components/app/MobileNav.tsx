@@ -1,11 +1,10 @@
-import { ClipboardList, FileText, FileUp, MessageSquare, User } from "lucide-react";
+import { Layers, MessageSquare, TrendingUp } from "lucide-react";
 
-export type MobileTab = "chat" | "plan" | "docs" | "profile" | "cv";
+export type MobileTab = "chat" | "services" | "cv";
 
 interface MobileNavProps {
   activeTab: MobileTab;
   onTabChange: (tab: MobileTab) => void;
-  artifactCount: number;
   actionItemCount: number;
 }
 
@@ -23,13 +22,11 @@ const BadgeDot = ({ count }: { count: number }) => {
   );
 };
 
-const MobileNav = ({ activeTab, onTabChange, artifactCount, actionItemCount }: MobileNavProps) => {
+const MobileNav = ({ activeTab, onTabChange, actionItemCount }: MobileNavProps) => {
   const tabs: TabConfig[] = [
     { id: "chat", label: "Chat", icon: MessageSquare },
-    { id: "plan", label: "Plan", icon: ClipboardList, badgeCount: actionItemCount },
-    { id: "cv", label: "CV", icon: FileUp },
-    { id: "docs", label: "Docs", icon: FileText, badgeCount: artifactCount },
-    { id: "profile", label: "Profile", icon: User },
+    { id: "services", label: "Services", icon: Layers, badgeCount: actionItemCount },
+    { id: "cv", label: "Career", icon: TrendingUp },
   ];
 
   return (

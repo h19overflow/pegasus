@@ -1,4 +1,4 @@
-import { MessageSquare, FileUp } from "lucide-react";
+import { MessageSquare, TrendingUp } from "lucide-react";
 import type { AppView } from "@/lib/types";
 import { useApp } from "@/lib/appContext";
 import { FlowStepper } from "./FlowStepper";
@@ -65,10 +65,10 @@ export function FlowSidebar({ onQuickAction }: FlowSidebarProps) {
             onSelect={handleViewSelect}
           />
           <ViewNavButton
-            label="CV Upload"
+            label="Career Growth"
             view="cv"
             activeView={state.activeView}
-            icon={FileUp}
+            icon={TrendingUp}
             onSelect={handleViewSelect}
           />
         </div>

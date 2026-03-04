@@ -11,8 +11,6 @@ import CvUploadView from "@/components/app/cv/CvUploadView";
 import { FlowStepper } from "@/components/app/FlowStepper";
 import { QuickActions } from "@/components/app/QuickActions";
 import ActionItems from "@/components/app/ActionItems";
-import { DocumentShelf } from "@/components/app/DocumentShelf";
-import ProfileSummary from "@/components/app/ProfileSummary";
 import { useApp } from "@/lib/appContext";
 import { getDemoResponse } from "@/lib/demoResponses";
 import type { Language, ProcessingStep } from "@/lib/types";
@@ -74,7 +72,7 @@ function buildArtifactForResponse(messageId: string, responseType: string) {
   };
 }
 
-function MobilePlanTab({ onQuickAction }: { onQuickAction: (text: string) => void }) {
+function MobileServicesTab({ onQuickAction }: { onQuickAction: (text: string) => void }) {
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="px-4 py-3 space-y-2">
@@ -178,18 +176,7 @@ export default function CommandCenter() {
             <>
               {/* Mobile: plan/docs/profile tabs */}
               <div className="lg:hidden flex-1 overflow-hidden flex flex-col">
-                {mobileTab === "plan" && <MobilePlanTab onQuickAction={handleSendMessage} />}
-                {mobileTab === "docs" && (
-                  <div className="flex-1 overflow-y-auto px-4 py-3">
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Documents</p>
-                    <DocumentShelf />
-                  </div>
-                )}
-                {mobileTab === "profile" && (
-                  <div className="flex-1 overflow-y-auto">
-                    <ProfileSummary />
-                  </div>
-                )}
+                {mobileTab === "services" && <MobileServicesTab onQuickAction={handleSendMessage} />}
                 {mobileTab === "chat" && (
                   <div className="flex-1 flex flex-col min-h-0">
                     <FlowBanner />
@@ -229,7 +216,6 @@ export default function CommandCenter() {
       <MobileNav
         activeTab={mobileTab}
         onTabChange={handleMobileTabChange}
-        artifactCount={state.artifacts.length}
         actionItemCount={state.actionItems.filter((i) => !i.completed).length}
       />
     </div>
