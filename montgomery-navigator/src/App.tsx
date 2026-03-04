@@ -2,10 +2,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AppProvider } from "@/lib/appContext";
 import Splash from "./pages/Splash";
-import Onboarding from "./pages/Onboarding";
-import Chat from "./pages/Chat";
+import CommandCenter from "./pages/CommandCenter";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -16,12 +16,15 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Splash />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AppProvider>
+          <Routes>
+            <Route path="/" element={<Splash />} />
+            <Route path="/app" element={<CommandCenter />} />
+            <Route path="/chat" element={<Navigate to="/app" replace />} />
+            <Route path="/onboarding" element={<Navigate to="/app" replace />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AppProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

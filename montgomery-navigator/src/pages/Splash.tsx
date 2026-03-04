@@ -9,14 +9,14 @@ const Splash = () => {
 
   useEffect(() => {
     setTimeout(() => setFadeIn(true), 100);
-    const timer = setTimeout(() => navigate("/onboarding"), 2800);
+    const timer = setTimeout(() => navigate("/app"), 2800);
     return () => clearTimeout(timer);
   }, [navigate]);
 
   return (
     <div
       className="fixed inset-0 bg-primary magnolia-bg flex flex-col items-center justify-between overflow-hidden cursor-pointer"
-      onClick={() => navigate("/onboarding")}
+      onClick={() => navigate("/app")}
     >
       {/* Language toggle */}
       <div className="w-full flex justify-end px-5 pt-14 relative z-10">
