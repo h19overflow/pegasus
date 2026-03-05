@@ -1,0 +1,1020 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.4705673,
+          32.4295936
+        ]
+      },
+      "properties": {
+        "title": "Production Associate: Pulp",
+        "company": "International Paper",
+        "source": "indeed",
+        "address": "100 Jensen Rd, Prattville, AL 36067",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "From $23.49 an hour",
+        "seniority": "",
+        "industry": "",
+        "applicants": null,
+        "posted": "2026-03-03T20:37:31.345Z",
+        "url": "https://www.indeed.com/viewjob?jk=a6a390c1898b4f93",
+        "apply_link": "https://www.indeed.com/applystart?jk=a6a390c1898b4f93&from=vj&pos=bottom&mvj=0&spon=0&asub=mob&astse=3bdd552ecc54f5bd&assa=2862",
+        "skills": {
+          "education": [
+            "high school",
+            "ged",
+            "associate",
+            "certification"
+          ],
+          "technical": [
+            "mechanical"
+          ],
+          "healthcare": [
+            "rn",
+            "medical"
+          ],
+          "soft_skills": [
+            "leadership"
+          ],
+          "experience": [
+            "2 year",
+            "5 year",
+            "entry level"
+          ],
+          "physical": [
+            "lifting",
+            "standing",
+            "physical"
+          ],
+          "clearance": [
+            "drug screen"
+          ]
+        },
+        "skill_summary": "high school, ged, associate, certification, mechanical, rn, medical, leadership, 2 year, 5 year, entry level, lifting, standing, physical, drug screen",
+        "benefits": [
+          "Tuition reimbursement",
+          "401(k)",
+          "Health insurance",
+          "Paid time off",
+          "Dental insurance",
+          "Flexible spending account",
+          "Life insurance",
+          "Disability insurance"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.2325324,
+          32.325935
+        ]
+      },
+      "properties": {
+        "title": "Stocker",
+        "company": "Walmart",
+        "source": "indeed",
+        "address": "3801 Eastern Boulevard, Montgomery, AL 36116",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Part-time",
+        "salary": "$14 - $27 an hour",
+        "seniority": "",
+        "industry": "",
+        "applicants": null,
+        "posted": "2024-11-23T17:20:38.431Z",
+        "url": "https://www.indeed.com/viewjob?jk=72342cdefcc0b5e8",
+        "apply_link": "https://www.indeed.com/applystart?jk=72342cdefcc0b5e8&from=vj&pos=bottom&mvj=0&spon=0&asub=mob&astse=389b9b6300bd02c5&assa=9250",
+        "skills": {
+          "education": [
+            "high school",
+            "bachelor",
+            "associate",
+            "degree"
+          ],
+          "technical": [
+            "forklift"
+          ],
+          "healthcare": [
+            "rn",
+            "medical"
+          ]
+        },
+        "skill_summary": "high school, bachelor, associate, degree, forklift, rn, medical",
+        "benefits": [
+          "Military leave",
+          "Parental leave",
+          "401(k)",
+          "Health insurance",
+          "Paid time off",
+          "Vision insurance",
+          "Dental insurance",
+          "Paid sick time",
+          "Family leave",
+          "Paid jury duty",
+          "Adoption assistance",
+          "Life insurance",
+          "Disability insurance"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.6309229,
+          32.8392013
+        ]
+      },
+      "properties": {
+        "title": "Full-Time Store Manager Trainee (GRAND OPENING)",
+        "company": "Aldi",
+        "source": "indeed",
+        "address": "Clanton, AL 35045",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "From $27.25 an hour",
+        "seniority": "",
+        "industry": "",
+        "applicants": null,
+        "posted": "2026-01-06T20:02:40.369Z",
+        "url": "https://www.indeed.com/viewjob?jk=d6a068e6b11268b0",
+        "apply_link": "https://www.indeed.com/applystart?jk=d6a068e6b11268b0&from=vj&pos=bottom&mvj=0&spon=0&asub=mob&astse=408260d44bea22de&assa=9863",
+        "skills": {
+          "education": [
+            "high school",
+            "diploma"
+          ],
+          "healthcare": [
+            "rn",
+            "medical"
+          ],
+          "soft_skills": [
+            "communication",
+            "teamwork",
+            "customer service"
+          ],
+          "experience": [
+            "1 year",
+            "3 year"
+          ],
+          "physical": [
+            "standing",
+            "physical",
+            "travel"
+          ],
+          "clearance": [
+            "drug test"
+          ]
+        },
+        "skill_summary": "high school, diploma, rn, medical, communication, teamwork, customer service, 1 year, 3 year, standing, physical, travel, drug test",
+        "benefits": [
+          "Paid parental leave",
+          "AD&D insurance",
+          "Parental leave",
+          "Health insurance",
+          "401(k) matching",
+          "Vision insurance",
+          "Dental insurance",
+          "Life insurance",
+          "Employee assistance program",
+          "Disability insurance",
+          "Paid holidays",
+          "Caregiver leave"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3090775,
+          32.3777111
+        ]
+      },
+      "properties": {
+        "title": "Warehouse Associate",
+        "company": "Mtw Aerospace Inc",
+        "source": "indeed",
+        "address": "Montgomery, AL 36108",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "$16 - $19 an hour",
+        "seniority": "",
+        "industry": "",
+        "applicants": null,
+        "posted": "2026-03-02T19:44:17.405Z",
+        "url": "https://www.indeed.com/viewjob?jk=a17d248adf53dc3b",
+        "apply_link": "",
+        "skills": {
+          "education": [
+            "high school",
+            "ged",
+            "associate",
+            "diploma"
+          ],
+          "technical": [
+            "forklift",
+            "excel"
+          ],
+          "soft_skills": [
+            "time management",
+            "organizational"
+          ],
+          "physical": [
+            "lifting",
+            "standing",
+            "warehouse"
+          ]
+        },
+        "skill_summary": "high school, ged, associate, diploma, forklift, excel, time management, organizational, lifting, standing, warehouse",
+        "benefits": [
+          "401(k)",
+          "Health insurance",
+          "401(k) matching",
+          "Paid time off",
+          "Vision insurance",
+          "Dental insurance",
+          "Profit sharing",
+          "Paid holidays"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.17525296552847,
+          32.38082283753548
+        ]
+      },
+      "properties": {
+        "title": "Customer Service Specialist",
+        "company": "Jackson Hospital and Clinic",
+        "source": "indeed",
+        "address": "1725 Pine Street, Montgomery, AL 36106",
+        "geocode_source": "arcgis_business_license",
+        "geocode_address": "128 MITYLENE PARK LANE ",
+        "job_type": "",
+        "salary": "",
+        "seniority": "",
+        "industry": "",
+        "applicants": null,
+        "posted": "2026-02-13T23:27:09.527Z",
+        "url": "https://www.indeed.com/viewjob?jk=39413650f48969e1",
+        "apply_link": "",
+        "skills": {
+          "education": [
+            "high school",
+            "ged",
+            "diploma"
+          ],
+          "technical": [
+            "computer"
+          ]
+        },
+        "skill_summary": "high school, ged, diploma, computer",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.150407,
+          32.3645543
+        ]
+      },
+      "properties": {
+        "title": "Stocker",
+        "company": "Costco Wholesale Corporation",
+        "source": "indeed",
+        "address": "8251 Eastchase Parkway, Montgomery, AL 36117",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "",
+        "salary": "",
+        "seniority": "",
+        "industry": "",
+        "applicants": null,
+        "posted": "2025-07-15T08:50:28.309Z",
+        "url": "https://www.indeed.com/viewjob?jk=48087967794c3cdd",
+        "apply_link": "https://www.indeed.com/applystart?jk=48087967794c3cdd&from=vj&pos=bottom&mvj=0&spon=0&asub=mob&astse=de78918f0fe70617&assa=6906",
+        "skills": {
+          "healthcare": [
+            "rn",
+            "medical",
+            "pharmacy"
+          ],
+          "physical": [
+            "warehouse"
+          ]
+        },
+        "skill_summary": "rn, medical, pharmacy, warehouse",
+        "benefits": [
+          "Employee stock purchase plan",
+          "AD&D insurance",
+          "401(k)",
+          "Health insurance",
+          "Paid time off",
+          "Vision insurance",
+          "Dental insurance",
+          "Life insurance",
+          "Disability insurance",
+          "Dependent care reimbursement"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.4705673,
+          32.4295936
+        ]
+      },
+      "properties": {
+        "title": "Production Associate: Woodyard",
+        "company": "International Paper",
+        "source": "indeed",
+        "address": "100 Jensen Rd, Prattville, AL 36067",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "$23.49 - $39.00 an hour",
+        "seniority": "",
+        "industry": "",
+        "applicants": null,
+        "posted": "2026-03-03T20:37:33.929Z",
+        "url": "https://www.indeed.com/viewjob?jk=6529735022bda1eb",
+        "apply_link": "https://www.indeed.com/applystart?jk=6529735022bda1eb&from=vj&pos=bottom&mvj=0&spon=0&asub=mob&astse=89e215361e386474&assa=1496",
+        "skills": {
+          "education": [
+            "high school",
+            "ged",
+            "associate",
+            "certification"
+          ],
+          "technical": [
+            "mechanical"
+          ],
+          "healthcare": [
+            "rn",
+            "medical"
+          ],
+          "soft_skills": [
+            "leadership"
+          ],
+          "experience": [
+            "2 year",
+            "5 year",
+            "entry level"
+          ],
+          "physical": [
+            "lifting",
+            "standing",
+            "physical"
+          ],
+          "clearance": [
+            "drug screen"
+          ]
+        },
+        "skill_summary": "high school, ged, associate, certification, mechanical, rn, medical, leadership, 2 year, 5 year, entry level, lifting, standing, physical, drug screen",
+        "benefits": [
+          "Tuition reimbursement",
+          "401(k)",
+          "Health insurance",
+          "Paid time off",
+          "Dental insurance",
+          "Flexible spending account",
+          "Life insurance",
+          "Disability insurance"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.2139235,
+          32.3661007
+        ]
+      },
+      "properties": {
+        "title": "(USA) Personal Shopper - Sam's",
+        "company": "Sam's Club",
+        "source": "indeed",
+        "address": "1080 Eastern Boulevard, Montgomery, AL 36109",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "",
+        "salary": "$17 - $25 por hora",
+        "seniority": "",
+        "industry": "",
+        "applicants": null,
+        "posted": "2026-01-14T21:11:03.086Z",
+        "url": "https://www.indeed.com/viewjob?jk=0a4057f34066fd08",
+        "apply_link": "https://www.indeed.com/applystart?jk=0a4057f34066fd08&from=vj&pos=bottom&mvj=0&spon=0&asub=mob&astse=d79990d9891ac462&assa=3050",
+        "skills": {
+          "education": [
+            "high school",
+            "bachelor",
+            "associate",
+            "degree"
+          ],
+          "technical": [
+            "forklift",
+            "excel"
+          ],
+          "healthcare": [
+            "rn",
+            "medical"
+          ]
+        },
+        "skill_summary": "high school, bachelor, associate, degree, forklift, excel, rn, medical",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.36382608976328,
+          32.264495977638425
+        ]
+      },
+      "properties": {
+        "title": "General Production",
+        "company": "Viscofan",
+        "source": "indeed",
+        "address": "50 County Court, Montgomery, AL 36043",
+        "geocode_source": "arcgis_business_license",
+        "geocode_address": "50 COUNTY CT",
+        "job_type": "Full-time",
+        "salary": "",
+        "seniority": "",
+        "industry": "",
+        "applicants": null,
+        "posted": "2025-04-08T23:57:22.802Z",
+        "url": "https://www.indeed.com/viewjob?jk=a44907a1803720d3",
+        "apply_link": "",
+        "skills": {},
+        "skill_summary": "",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3090775,
+          32.3777111
+        ]
+      },
+      "properties": {
+        "title": "Administrative Secretary",
+        "company": "Baldwin County Public Schools",
+        "source": "indeed",
+        "address": "Montgomery, AL 36104",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "$60,002 - $73,141 a year",
+        "seniority": "",
+        "industry": "",
+        "applicants": null,
+        "posted": "2026-03-03T18:56:14.360Z",
+        "url": "https://www.indeed.com/viewjob?jk=47a104b41550c31d",
+        "apply_link": "https://www.indeed.com/applystart?jk=47a104b41550c31d&from=vj&pos=bottom&mvj=0&spon=0&asub=mob&astse=56116b72fc97c710&assa=223",
+        "skills": {
+          "education": [
+            "high school",
+            "diploma",
+            "certification"
+          ],
+          "technical": [
+            "computer",
+            "software"
+          ],
+          "healthcare": [
+            "rn"
+          ],
+          "soft_skills": [
+            "communication",
+            "problem solving",
+            "organizational"
+          ],
+          "experience": [
+            "years of experience"
+          ],
+          "physical": [
+            "physical",
+            "travel"
+          ]
+        },
+        "skill_summary": "high school, diploma, certification, computer, software, rn, communication, problem solving, organizational, years of experience, physical, travel",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.15070698190114,
+          32.36396100470886
+        ]
+      },
+      "properties": {
+        "title": "Stocker",
+        "company": "Costco Wholesale",
+        "source": "linkedin",
+        "address": "Montgomery, AL",
+        "geocode_source": "arcgis_business_license",
+        "geocode_address": "8251 EASTCHASE PKWY",
+        "job_type": "Full-time",
+        "salary": "",
+        "seniority": "Not Applicable",
+        "industry": "Retail",
+        "applicants": 52,
+        "posted": "2025-10-06T13:02:55.024Z",
+        "url": "https://www.linkedin.com/jobs/view/stocker-at-costco-wholesale-4308701878?_l=en",
+        "apply_link": null,
+        "skills": {
+          "healthcare": [
+            "rn",
+            "medical",
+            "pharmacy"
+          ],
+          "physical": [
+            "warehouse"
+          ]
+        },
+        "skill_summary": "rn, medical, pharmacy, warehouse",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3090775,
+          32.3777111
+        ]
+      },
+      "properties": {
+        "title": "Daily Property Field Adjuster",
+        "company": "Alacrity Solutions",
+        "source": "linkedin",
+        "address": "Montgomery, AL",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Contract",
+        "salary": "",
+        "seniority": "Mid-Senior level",
+        "industry": "Internet Publishing",
+        "applicants": 25,
+        "posted": "2025-03-05T13:02:56.676Z",
+        "url": "https://www.linkedin.com/jobs/view/daily-property-field-adjuster-at-alacrity-solutions-4167238506?_l=en",
+        "apply_link": "https://alacritysolutions.applytojob.com/apply/xr7l3tk2uT/Daily-Property-Field-Adjuster?source=LILI&source=LINKEDIN",
+        "skills": {
+          "education": [
+            "ged"
+          ],
+          "technical": [
+            "excel",
+            "computer"
+          ],
+          "healthcare": [
+            "rn",
+            "medical"
+          ],
+          "experience": [
+            "3 year"
+          ],
+          "physical": [
+            "physical",
+            "outdoors",
+            "travel"
+          ]
+        },
+        "skill_summary": "ged, excel, computer, rn, medical, 3 year, physical, outdoors, travel",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3090775,
+          32.3777111
+        ]
+      },
+      "properties": {
+        "title": "READING TEACHER",
+        "company": "Alabama State Department of Education",
+        "source": "linkedin",
+        "address": "Montgomery, AL",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "",
+        "seniority": "Entry level",
+        "industry": "Education Administration Programs",
+        "applicants": 25,
+        "posted": "2025-09-06T13:02:56.726Z",
+        "url": "https://www.linkedin.com/jobs/view/reading-teacher-at-alabama-state-department-of-education-4303978299?_l=en",
+        "apply_link": "https://ats1.atenterprise.powerschool.com/ats/job_board_form?op=view&JOB_ID=2300283894&COMPANY_ID=00008500&redirect_qs=&redirect_qs=start_index=800&COMPANY_ID=00008500",
+        "skills": {
+          "education": [
+            "certification"
+          ],
+          "healthcare": [
+            "rn"
+          ]
+        },
+        "skill_summary": "certification, rn",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.26806670211563,
+          32.32977159853238
+        ]
+      },
+      "properties": {
+        "title": "Property Manager",
+        "company": "Dasmen Residential",
+        "source": "linkedin",
+        "address": "Montgomery, AL",
+        "geocode_source": "arcgis_business_license",
+        "geocode_address": "2259 BONAPARTE BLVD",
+        "job_type": "Full-time",
+        "salary": "",
+        "seniority": "Mid-Senior level",
+        "industry": "Real Estate",
+        "applicants": 25,
+        "posted": "2025-08-07T13:02:57.538Z",
+        "url": "https://www.linkedin.com/jobs/view/property-manager-at-dasmen-residential-4279047471?_l=en",
+        "apply_link": null,
+        "skills": {
+          "education": [
+            "high school",
+            "ged",
+            "associate",
+            "diploma",
+            "degree",
+            "college",
+            "certification"
+          ],
+          "technical": [
+            "microsoft office",
+            "excel",
+            "computer",
+            "software"
+          ],
+          "healthcare": [
+            "rn",
+            "medical"
+          ],
+          "soft_skills": [
+            "communication",
+            "leadership"
+          ],
+          "experience": [
+            "1 year",
+            "3 year",
+            "experience required",
+            "years of experience"
+          ]
+        },
+        "skill_summary": "high school, ged, associate, diploma, degree, college, certification, microsoft office, excel, computer, software, rn, medical, communication, leadership, 1 year, 3 year, experience required, years of experience",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3090775,
+          32.3777111
+        ]
+      },
+      "properties": {
+        "title": "Operations Manager",
+        "company": "McCorquodale Transfer, LLC",
+        "source": "linkedin",
+        "address": "Montgomery, AL",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "$25.00/hr - $30.00/hr",
+        "seniority": "Mid-Senior level",
+        "industry": "Wireless Services, Telecommunications, and Communications Equipment Manufacturing",
+        "applicants": 25,
+        "posted": "2026-02-26T13:02:57.639Z",
+        "url": "https://www.linkedin.com/jobs/view/operations-manager-at-mccorquodale-transfer-llc-4373495336?_l=en",
+        "apply_link": null,
+        "skills": {
+          "technical": [
+            "microsoft office",
+            "excel",
+            "software"
+          ],
+          "soft_skills": [
+            "communication",
+            "leadership",
+            "customer service"
+          ],
+          "experience": [
+            "5 year",
+            "years of experience"
+          ],
+          "physical": [
+            "physical",
+            "warehouse",
+            "travel"
+          ]
+        },
+        "skill_summary": "microsoft office, excel, software, communication, leadership, customer service, 5 year, years of experience, physical, warehouse, travel",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3090775,
+          32.3777111
+        ]
+      },
+      "properties": {
+        "title": "Assistant General Manager",
+        "company": "Ascent Hospitality",
+        "source": "linkedin",
+        "address": "Montgomery, AL",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "",
+        "seniority": "Mid-Senior level",
+        "industry": "Hospitality",
+        "applicants": 25,
+        "posted": "2026-03-02T13:03:00.475Z",
+        "url": "https://www.linkedin.com/jobs/view/assistant-general-manager-at-ascent-hospitality-4380179670?_l=en",
+        "apply_link": "https://recruitingbypaycor.com/career/CareerHome.action?clientId=8a7883d07b55f6ae017b797343c21d80&gnk=job&gni=8a78839f9c9c7850019cb00a8f073654&gns=LinkedIn+Limited",
+        "skills": {
+          "education": [
+            "high school",
+            "degree",
+            "college"
+          ],
+          "technical": [
+            "microsoft office",
+            "excel"
+          ],
+          "soft_skills": [
+            "communication",
+            "leadership",
+            "problem solving"
+          ],
+          "experience": [
+            "2 year"
+          ],
+          "physical": [
+            "standing",
+            "physical"
+          ]
+        },
+        "skill_summary": "high school, degree, college, microsoft office, excel, communication, leadership, problem solving, 2 year, standing, physical",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3090775,
+          32.3777111
+        ]
+      },
+      "properties": {
+        "title": "Inventory Control Analyst",
+        "company": "Women of the Vine & Spirits",
+        "source": "linkedin",
+        "address": "Montgomery, AL",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "$57,713.00/yr - $96,188.00/yr",
+        "seniority": "Entry level",
+        "industry": "Food and Beverage Services",
+        "applicants": 25,
+        "posted": "2026-03-05T07:03:00.499Z",
+        "url": "https://www.linkedin.com/jobs/view/inventory-control-analyst-at-women-of-the-vine-spirits-4381198649?_l=en",
+        "apply_link": null,
+        "skills": {
+          "education": [
+            "ged",
+            "degree",
+            "college"
+          ],
+          "technical": [
+            "excel"
+          ],
+          "healthcare": [
+            "rn"
+          ],
+          "soft_skills": [
+            "communication",
+            "leadership",
+            "problem solving",
+            "organizational"
+          ],
+          "experience": [
+            "experience required"
+          ],
+          "physical": [
+            "standing",
+            "warehouse"
+          ]
+        },
+        "skill_summary": "ged, degree, college, excel, rn, communication, leadership, problem solving, organizational, experience required, standing, warehouse",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3090775,
+          32.3777111
+        ]
+      },
+      "properties": {
+        "title": "Part time-Breakfast Attendant",
+        "company": "Ascent Hospitality",
+        "source": "linkedin",
+        "address": "Montgomery, AL",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "",
+        "seniority": "Not Applicable",
+        "industry": "Hospitality",
+        "applicants": 25,
+        "posted": "2026-03-04T13:03:01.200Z",
+        "url": "https://www.linkedin.com/jobs/view/part-time-breakfast-attendant-at-ascent-hospitality-4381148581?_l=en",
+        "apply_link": "https://recruitingbypaycor.com/career/CareerHome.action?clientId=8a7883d07b55f6ae017b797343c21d80&gnk=job&gni=8a78859e9c9c9777019cba56b81015aa&gns=LinkedIn+Limited",
+        "skills": {
+          "education": [
+            "high school",
+            "diploma"
+          ],
+          "technical": [
+            "excel"
+          ],
+          "healthcare": [
+            "rn"
+          ],
+          "soft_skills": [
+            "leadership",
+            "customer service"
+          ],
+          "physical": [
+            "standing",
+            "physical"
+          ]
+        },
+        "skill_summary": "high school, diploma, excel, rn, leadership, customer service, standing, physical",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3090775,
+          32.3777111
+        ]
+      },
+      "properties": {
+        "title": "Car Washer / Service Washer (hourly) 540432 / 540442 / 540447 (Montgomery, AL)",
+        "company": "Teph Seal Auto Appearance",
+        "source": "linkedin",
+        "address": "Montgomery, AL",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "",
+        "seniority": "Entry level",
+        "industry": "Motor Vehicle Manufacturing",
+        "applicants": 25,
+        "posted": "2026-02-12T13:03:01.220Z",
+        "url": "https://www.linkedin.com/jobs/view/car-washer-service-washer-hourly-540432-540442-540447-montgomery-al-at-teph-seal-auto-appearance-4370733642?_l=en",
+        "apply_link": "https://careers-tephseal.icims.com/jobs/26833/car-washer/u002d/u002d-service-washer-(hourly)-540432/u002d/u002d-540442/u002d/u002d-540447-(montgomery,-al)/job?mode=job&iis=Job+Posting&iisn=LinkedIn",
+        "skills": {
+          "healthcare": [
+            "medical"
+          ],
+          "soft_skills": [
+            "customer service"
+          ],
+          "physical": [
+            "lifting",
+            "physical",
+            "driving"
+          ]
+        },
+        "skill_summary": "medical, customer service, lifting, physical, driving",
+        "benefits": []
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3090775,
+          32.3777111
+        ]
+      },
+      "properties": {
+        "title": "Help Desk Support",
+        "company": "TechFlow, Inc.",
+        "source": "linkedin",
+        "address": "Montgomery, AL",
+        "geocode_source": "nominatim",
+        "geocode_address": "",
+        "job_type": "Full-time",
+        "salary": "",
+        "seniority": "Mid-Senior level",
+        "industry": "IT Services and IT Consulting",
+        "applicants": 25,
+        "posted": "2026-01-04T13:03:02.402Z",
+        "url": "https://www.linkedin.com/jobs/view/help-desk-support-at-techflow-inc-4343415305?_l=en",
+        "apply_link": null,
+        "skills": {
+          "education": [
+            "high school",
+            "ged",
+            "bachelor",
+            "diploma",
+            "certification"
+          ],
+          "technical": [
+            "microsoft office",
+            "excel",
+            "software"
+          ],
+          "healthcare": [
+            "rn",
+            "medical"
+          ],
+          "soft_skills": [
+            "communication"
+          ],
+          "experience": [
+            "1 year",
+            "3 year",
+            "years of experience"
+          ],
+          "physical": [
+            "standing"
+          ]
+        },
+        "skill_summary": "high school, ged, bachelor, diploma, certification, microsoft office, excel, software, rn, medical, communication, 1 year, 3 year, years of experience, standing",
+        "benefits": []
+      }
+    }
+  ]
+}
