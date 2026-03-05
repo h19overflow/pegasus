@@ -30,20 +30,20 @@ const Index = () => {
   const ActiveComponent = screens[activeScreen].component;
 
   return (
-    <div className="min-h-screen bg-charcoal">
+    <div className="min-h-screen bg-[#1b1b1b]">
       {/* Hero header */}
-      <div className="bg-primary magnolia-bg py-12 px-6 text-center">
+      <div className="bg-secondary py-12 px-6 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">
           <img src={capitolDome} alt="" className="w-10 h-10 brightness-200" />
-          <h1 className="text-primary-foreground text-3xl font-bold tracking-tight">MontgomeryAI</h1>
+          <h1 className="text-white text-3xl font-bold tracking-tight">MontgomeryAI</h1>
         </div>
-        <p className="text-primary-foreground/80 text-lg max-w-xl mx-auto">
+        <p className="text-white/80 text-lg max-w-xl mx-auto">
           One conversation. Benefits + Career. Built for Montgomery, Alabama.
         </p>
       </div>
 
       {/* Screen selector */}
-      <div className="bg-charcoal border-b border-foreground/10 sticky top-0 z-40">
+      <div className="bg-[#1b1b1b] border-b border-foreground/10 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-3 overflow-x-auto">
           <div className="flex gap-2 min-w-max">
             {screens.map((screen, i) => (
@@ -53,7 +53,7 @@ const Index = () => {
                 className={`px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
                   activeScreen === i
                     ? "bg-primary text-primary-foreground"
-                    : "bg-foreground/10 text-parchment/70 hover:bg-foreground/20"
+                    : "bg-foreground/10 text-white/70 hover:bg-foreground/20"
                 }`}
               >
                 {screen.id}. {screen.name}
@@ -74,8 +74,8 @@ const Index = () => {
 
       {/* Screen title */}
       <div className="text-center pb-12">
-        <p className="text-parchment/50 text-sm uppercase tracking-widest mb-1">Screen {screens[activeScreen].id}</p>
-        <h2 className="text-parchment text-2xl font-bold">{screens[activeScreen].name}</h2>
+        <p className="text-white/50 text-sm uppercase tracking-widest mb-1">Screen {screens[activeScreen].id}</p>
+        <h2 className="text-white text-2xl font-bold">{screens[activeScreen].name}</h2>
       </div>
     </div>
   );

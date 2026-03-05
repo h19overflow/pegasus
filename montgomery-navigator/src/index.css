@@ -6,58 +6,56 @@
 
 @layer base {
   :root {
-    /* Montgomery Civic Palette */
-    --background: 36 43% 96%; /* #FAF7F2 Parchment White */
-    --foreground: 0 0% 10%; /* #1A1A1A Charcoal */
+    /* Government-Inspired Palette — Navy / Cool White */
+    --background: 0 0% 98%; /* #FAFAFA */
+    --foreground: 0 0% 11%; /* #1b1b1b */
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    --card-foreground: 0 0% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
+    --popover-foreground: 0 0% 11%;
 
-    --primary: 352 63% 37%; /* #9B2335 Crimson */
-    --primary-foreground: 36 43% 96%;
+    --primary: 213 59% 30%; /* #1a4480 Navy */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 214 58% 27%; /* #1C3F6E Montgomery Blue */
-    --secondary-foreground: 36 43% 96%;
+    --secondary: 218 51% 20%; /* #162e51 Dark Navy */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 30 18% 93%; /* #F1EDE8 Input Gray */
-    --muted-foreground: 0 0% 40%;
+    --muted: 0 0% 94%; /* #F0F0F0 */
+    --muted-foreground: 213 4% 47%; /* #71767a */
 
     --accent: 37 63% 47%; /* #C8882A Amber Gold */
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 4 70% 46%; /* #C0392B Alert Red */
+    --destructive: 3 71% 53%; /* #d83933 */
     --destructive-foreground: 0 0% 100%;
 
     --success: 153 42% 30%; /* #2D6A4F Pine Green */
     --success-foreground: 0 0% 100%;
 
-    --border: 30 18% 88%;
-    --input: 30 18% 93%;
-    --ring: 352 63% 37%;
+    --border: 204 6% 87%; /* #DFE1E2 */
+    --input: 0 0% 94%; /* #F0F0F0 */
+    --ring: 213 59% 30%;
 
-    --radius: 1rem;
+    --radius: 0.5rem;
 
     /* Montgomery-specific tokens */
-    --crimson: 352 63% 37%;
-    --montgomery-blue: 214 58% 27%;
+    --montgomery-blue: 213 59% 30%;
     --amber-gold: 37 63% 47%;
-    --parchment: 36 43% 96%;
-    --charcoal: 0 0% 10%;
+    --charcoal: 0 0% 11%;
     --pine-green: 153 42% 30%;
-    --alert-red: 4 70% 46%;
-    --input-gray: 30 18% 93%;
+    --alert-red: 3 71% 53%;
+    --input-gray: 0 0% 94%;
 
-    --sidebar-background: 36 43% 96%;
-    --sidebar-foreground: 0 0% 10%;
-    --sidebar-primary: 352 63% 37%;
-    --sidebar-primary-foreground: 36 43% 96%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 11%;
+    --sidebar-primary: 213 59% 30%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 37 63% 47%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 30 18% 88%;
-    --sidebar-ring: 352 63% 37%;
+    --sidebar-border: 204 6% 87%;
+    --sidebar-ring: 213 59% 30%;
   }
 }
 
@@ -91,6 +89,37 @@
   .pt-safe {
     padding-top: max(env(safe-area-inset-top, 0px), 44px);
   }
+}
+
+/* Chat bubble animations */
+@keyframes bubble-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bubble-pop-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+.animate-bubble-in {
+  animation: bubble-pop-in 0.2s ease-out;
+}
+
+.animate-bubble-out {
+  animation: bubble-pop-out 0.15s ease-in forwards;
 }
 
 /* Scrollbar styling */

@@ -16,9 +16,9 @@ const PhoneFrame = ({ children, className = "", rotate = 0, scale = 1 }: PhoneFr
       height: 844,
     }}
   >
-    <div className="phone-frame w-full h-full bg-charcoal overflow-hidden relative">
+    <div className="phone-frame w-full h-full bg-[#1b1b1b] overflow-hidden relative">
       {/* Notch */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[34px] bg-charcoal rounded-b-2xl z-50" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[34px] bg-[#1b1b1b] rounded-b-2xl z-50" />
       {/* Screen content */}
       <div className="w-full h-full overflow-y-auto">
         {children}
