@@ -1,6 +1,6 @@
 export type FlowId = "U1" | "U2" | "U3" | "U4" | "U5" | "U6";
 export type Language = "EN" | "ES";
-export type AppView = "chat" | "cv";
+export type AppView = "cv" | "services" | "profile" | "news";
 export type MessageType =
   | "text"
   | "benefits-cliff"
@@ -81,6 +81,175 @@ export interface CvData {
   summary: string;
 }
 
+export type ServiceCategory =
+  | "health"
+  | "community"
+  | "childcare"
+  | "education"
+  | "safety"
+  | "libraries"
+  | "parks"
+  | "police";
+
+export interface ServicePoint {
+  id: string;
+  category: ServiceCategory;
+  name: string;
+  address: string;
+  lat: number;
+  lng: number;
+  phone?: string;
+  hours?: string;
+  website?: string;
+  details?: Record<string, string>;
+}
+
+export interface CivicAction {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  category: ServiceCategory;
+  relatedPinId?: string;
+  distance?: string;
+}
+
+export interface GuideMessage {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  pinIds?: string[];
+}
+
+export interface JobSkills {
+  education?: string[];
+  technical?: string[];
+  healthcare?: string[];
+  soft_skills?: string[];
+  experience?: string[];
+  physical?: string[];
+  clearance?: string[];
+}
+
+export interface JobListing {
+  id: string;
+  title: string;
+  company: string;
+  source: "indeed" | "linkedin" | string;
+  address: string;
+  lat: number;
+  lng: number;
+  geocodeSource: string;
+  jobType: string;
+  salary: string;
+  seniority: string;
+  industry: string;
+  applicants?: number;
+  posted: string;
+  url: string;
+  applyLink: string;
+  skills: JobSkills;
+  skillSummary: string;
+  benefits: string[];
+  scrapedAt: string;
+}
+
+export interface JobMatch extends JobListing {
+  matchPercent: number;
+  matchedSkills: string[];
+  missingSkills: string[];
+}
+
+export interface TrendingSkill {
+  name: string;
+  category: string;
+  count: number;
+  percent: number;
+}
+
+/* ── Upskilling ──────────────────────────────────────────── */
+export interface UpskillPath {
+  skillName: string;
+  category: string;
+  demandPercent: number;
+  jobsUnlocked: number;
+  estimatedWeeks: number;
+  trainingOptions: TrainingOption[];
+}
+
+export interface TrainingOption {
+  name: string;
+  provider: string;
+  format: "online" | "in-person" | "hybrid";
+  cost: "free" | "low" | "moderate";
+  url?: string;
+}
+
+export interface UpskillingSummary {
+  currentMatchRate: number;
+  projectedMatchRate: number;
+  topPaths: UpskillPath[];
+  quickWins: UpskillPath[];
+}
+
+/* ── Transit ────────────────────────────────────────────── */
+export interface TransitRoute {
+  id: string;
+  name: string;
+  number: string;
+  schedule: {
+    weekday?: { start: string; end: string; frequencyMinutes: number };
+    saturday?: { start: string; end: string; frequencyMinutes: number };
+  };
+  description?: string;
+}
+
+export interface CommuteEstimate {
+  jobId: string;
+  jobTitle: string;
+  company: string;
+  distanceMiles: number;
+  drivingMinutes: number;
+  transitMinutes: number | null;
+  transitRoutes: string[];
+  walkingMinutes: number | null;
+}
+
+export interface CitizenCivicData extends ProfileData {
+  neighborhood: string;
+  incomeSource: string;
+  childrenAges: number[];
+  housingType: string;
+  monthlyRent: number;
+  hasVehicle: boolean;
+  primaryTransport: string;
+  internetAccess: string;
+  languagesSpoken: string[];
+  veteranStatus: boolean;
+  disabilityStatus: boolean;
+  citizenshipStatus: string;
+  maritalStatus: string;
+  age: number;
+  gender: string;
+  race: string;
+  healthInsurance: string;
+  needsChildcare: boolean;
+  needsLegalHelp: boolean;
+  needsHousingHelp: boolean;
+  needsUtilityHelp: boolean;
+}
+
+export interface CitizenMeta {
+  id: string;
+  persona: string;
+  tagline: string;
+  avatarInitials: string;
+  avatarColor: string;
+  goals: string[];
+  barriers: string[];
+  civicData: CitizenCivicData;
+}
+
 export interface AppState {
   messages: ChatMessage[];
   language: Language;
@@ -95,4 +264,55 @@ export interface AppState {
   cvData: CvData | null;
   cvFileName: string | null;
   cvAnalyzing: boolean;
+  selectedPin: ServicePoint | null;
+  activeCategories: ServiceCategory[];
+  servicePoints: ServicePoint[];
+  guideMessages: GuideMessage[];
+  guideTyping: boolean;
+  jobListings: JobListing[];
+  jobMatches: JobMatch[];
+  trendingSkills: TrendingSkill[];
+  jobsLoading: boolean;
+  upskillingSummary: UpskillingSummary | null;
+  transitRoutes: TransitRoute[];
+  commuteEstimates: CommuteEstimate[];
+  citizenMeta: CitizenMeta | null;
+  newsArticles: NewsArticle[];
+  newsLoading: boolean;
+  newsCategory: NewsCategory;
+  newsComments: NewsComment[];
+  likedArticleIds: string[];
+  selectedArticleId: string | null;
+  chatBubbleOpen: boolean;
+  chatBubbleHasUnread: boolean;
+}
+
+/* ── News ──────────────────────────────────────────────── */
+export type NewsCategory = "all" | "general" | "development" | "government" | "community" | "events";
+
+export interface NewsArticle {
+  id: string;
+  title: string;
+  excerpt: string;
+  body: string;
+  source: string;
+  sourceUrl: string;
+  imageUrl?: string | null;
+  category: string;
+  publishedAt: string;
+  scrapedAt: string;
+  upvotes: number;
+  downvotes: number;
+  commentCount: number;
+}
+
+export interface NewsComment {
+  id: string;
+  articleId: string;
+  citizenId: string;
+  citizenName: string;
+  avatarInitials: string;
+  avatarColor: string;
+  content: string;
+  createdAt: string;
 }

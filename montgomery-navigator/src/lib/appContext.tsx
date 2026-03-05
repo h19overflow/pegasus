@@ -10,6 +10,19 @@ import type {
   ProcessingStep,
   CvData,
   AppView,
+  ServicePoint,
+  ServiceCategory,
+  GuideMessage,
+  JobListing,
+  JobMatch,
+  TrendingSkill,
+  UpskillingSummary,
+  TransitRoute,
+  CommuteEstimate,
+  CitizenMeta,
+  NewsArticle,
+  NewsCategory,
+  NewsComment,
 } from "./types";
 
 type AppAction =
@@ -27,12 +40,35 @@ type AppAction =
   | { type: "SET_CV_DATA"; data: CvData }
   | { type: "SET_CV_FILE"; fileName: string | null }
   | { type: "SET_CV_ANALYZING"; analyzing: boolean }
-  | { type: "CLEAR_CV" };
+  | { type: "CLEAR_CV" }
+  | { type: "SET_SELECTED_PIN"; pin: ServicePoint | null }
+  | { type: "TOGGLE_CATEGORY"; category: ServiceCategory }
+  | { type: "SET_SERVICE_POINTS"; points: ServicePoint[] }
+  | { type: "ADD_SERVICE_POINTS"; points: ServicePoint[] }
+  | { type: "ADD_GUIDE_MESSAGE"; message: GuideMessage }
+  | { type: "SET_GUIDE_TYPING"; typing: boolean }
+  | { type: "SET_JOB_LISTINGS"; listings: JobListing[] }
+  | { type: "SET_JOB_MATCHES"; matches: JobMatch[] }
+  | { type: "SET_TRENDING_SKILLS"; skills: TrendingSkill[] }
+  | { type: "SET_JOBS_LOADING"; loading: boolean }
+  | { type: "SET_UPSKILLING_SUMMARY"; summary: UpskillingSummary | null }
+  | { type: "SET_TRANSIT_ROUTES"; routes: TransitRoute[] }
+  | { type: "SET_COMMUTE_ESTIMATES"; estimates: CommuteEstimate[] }
+  | { type: "SET_CITIZEN_META"; meta: CitizenMeta | null }
+  | { type: "SET_NEWS_ARTICLES"; articles: NewsArticle[] }
+  | { type: "SET_NEWS_LOADING"; loading: boolean }
+  | { type: "SET_NEWS_CATEGORY"; category: NewsCategory }
+  | { type: "TOGGLE_ARTICLE_LIKE"; articleId: string }
+  | { type: "ADD_NEWS_COMMENT"; comment: NewsComment }
+  | { type: "SET_SELECTED_ARTICLE"; articleId: string | null }
+  | { type: "TOGGLE_CHAT_BUBBLE" }
+  | { type: "SET_CHAT_BUBBLE_OPEN"; open: boolean }
+  | { type: "MARK_CHAT_READ" };
 
 const initialState: AppState = {
   messages: [],
   language: "EN",
-  activeView: "chat",
+  activeView: "services",
   activeFlow: null,
   profile: {},
   artifacts: [],
@@ -43,6 +79,27 @@ const initialState: AppState = {
   cvData: null,
   cvFileName: null,
   cvAnalyzing: false,
+  selectedPin: null,
+  activeCategories: ["health", "community", "childcare", "education", "safety", "libraries"] as ServiceCategory[],
+  servicePoints: [],
+  guideMessages: [],
+  guideTyping: false,
+  jobListings: [],
+  jobMatches: [],
+  trendingSkills: [],
+  jobsLoading: false,
+  upskillingSummary: null,
+  transitRoutes: [],
+  commuteEstimates: [],
+  citizenMeta: null,
+  newsArticles: [],
+  newsLoading: false,
+  newsCategory: "all" as NewsCategory,
+  newsComments: [],
+  likedArticleIds: [],
+  selectedArticleId: null,
+  chatBubbleOpen: false,
+  chatBubbleHasUnread: false,
 };
 
 function applyMessageSideEffects(state: AppState, message: ChatMessage): AppState {
@@ -50,6 +107,9 @@ function applyMessageSideEffects(state: AppState, message: ChatMessage): AppStat
   if (message.flowMeta) next.activeFlow = message.flowMeta;
   if (message.profileData) next.profile = { ...state.profile, ...message.profileData };
   if (message.actionItems) next.actionItems = message.actionItems;
+  if (message.role === "assistant" && !state.chatBubbleOpen) {
+    next.chatBubbleHasUnread = true;
+  }
   return next;
 }
 
@@ -91,6 +151,96 @@ function appReducer(state: AppState, action: AppAction): AppState {
       return { ...state, cvAnalyzing: action.analyzing };
     case "CLEAR_CV":
       return { ...state, cvData: null, cvFileName: null, cvAnalyzing: false };
+    case "SET_SELECTED_PIN":
+      return { ...state, selectedPin: action.pin };
+    case "TOGGLE_CATEGORY": {
+      const cats = state.activeCategories;
+      const has = cats.includes(action.category);
+      return {
+        ...state,
+        activeCategories: has
+          ? cats.filter((c) => c !== action.category)
+          : [...cats, action.category],
+      };
+    }
+    case "SET_SERVICE_POINTS":
+      return { ...state, servicePoints: action.points };
+    case "ADD_SERVICE_POINTS":
+      return {
+        ...state,
+        servicePoints: [
+          ...state.servicePoints.filter(
+            (p) => !action.points.some((np) => np.id === p.id)
+          ),
+          ...action.points,
+        ],
+      };
+    case "ADD_GUIDE_MESSAGE":
+      return { ...state, guideMessages: [...state.guideMessages, action.message] };
+    case "SET_GUIDE_TYPING":
+      return { ...state, guideTyping: action.typing };
+    case "SET_JOB_LISTINGS":
+      return { ...state, jobListings: action.listings };
+    case "SET_JOB_MATCHES":
+      return { ...state, jobMatches: action.matches };
+    case "SET_TRENDING_SKILLS":
+      return { ...state, trendingSkills: action.skills };
+    case "SET_JOBS_LOADING":
+      return { ...state, jobsLoading: action.loading };
+    case "SET_UPSKILLING_SUMMARY":
+      return { ...state, upskillingSummary: action.summary };
+    case "SET_TRANSIT_ROUTES":
+      return { ...state, transitRoutes: action.routes };
+    case "SET_COMMUTE_ESTIMATES":
+      return { ...state, commuteEstimates: action.estimates };
+    case "SET_CITIZEN_META":
+      return { ...state, citizenMeta: action.meta };
+    case "SET_NEWS_ARTICLES":
+      return { ...state, newsArticles: action.articles };
+    case "SET_NEWS_LOADING":
+      return { ...state, newsLoading: action.loading };
+    case "SET_NEWS_CATEGORY":
+      return { ...state, newsCategory: action.category };
+    case "TOGGLE_ARTICLE_LIKE": {
+      const wasLiked = state.likedArticleIds.includes(action.articleId);
+      return {
+        ...state,
+        likedArticleIds: wasLiked
+          ? state.likedArticleIds.filter((id) => id !== action.articleId)
+          : [...state.likedArticleIds, action.articleId],
+        newsArticles: state.newsArticles.map((a) =>
+          a.id === action.articleId
+            ? { ...a, upvotes: a.upvotes + (wasLiked ? -1 : 1) }
+            : a
+        ),
+      };
+    }
+    case "ADD_NEWS_COMMENT":
+      return {
+        ...state,
+        newsComments: [...state.newsComments, action.comment],
+        newsArticles: state.newsArticles.map((a) =>
+          a.id === action.comment.articleId
+            ? { ...a, commentCount: a.commentCount + 1 }
+            : a
+        ),
+      };
+    case "SET_SELECTED_ARTICLE":
+      return { ...state, selectedArticleId: action.articleId };
+    case "TOGGLE_CHAT_BUBBLE":
+      return {
+        ...state,
+        chatBubbleOpen: !state.chatBubbleOpen,
+        chatBubbleHasUnread: state.chatBubbleOpen ? state.chatBubbleHasUnread : false,
+      };
+    case "SET_CHAT_BUBBLE_OPEN":
+      return {
+        ...state,
+        chatBubbleOpen: action.open,
+        chatBubbleHasUnread: action.open ? false : state.chatBubbleHasUnread,
+      };
+    case "MARK_CHAT_READ":
+      return { ...state, chatBubbleHasUnread: false };
     default:
       return state;
   }

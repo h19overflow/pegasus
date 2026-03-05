@@ -38,7 +38,7 @@ const formatFileSize = (bytes: number): string => {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 };
 
-export default function UploadZone() {
+export default function UploadZone({ compact = false }: { compact?: boolean }) {
   const { state, dispatch } = useApp();
   const [uploadState, setUploadState] = useState<UploadState>(
     state.cvData ? "complete" : "idle"
@@ -100,8 +100,22 @@ export default function UploadZone() {
 
   const fileName = state.cvFileName ?? "";
 
+  const wrapperClass = compact
+    ? "flex flex-col items-center justify-center p-3"
+    : "flex flex-col h-full min-h-[300px] items-center justify-center p-4";
+
+  const dropzoneClass = compact
+    ? "w-full flex flex-col items-center justify-center border-2 border-dashed border-border/50 rounded-xl cursor-pointer transition-colors hover:border-primary/40 hover:bg-primary/5 py-6 px-4"
+    : "w-full h-full min-h-[300px] flex flex-col items-center justify-center border-2 border-dashed border-border/50 rounded-xl cursor-pointer transition-colors hover:border-primary/40 hover:bg-primary/5";
+
+  const draggingClass = compact
+    ? "w-full flex flex-col items-center justify-center border-2 border-dashed border-primary rounded-xl bg-primary/5 transition-colors py-6 px-4"
+    : "w-full h-full min-h-[300px] flex flex-col items-center justify-center border-2 border-dashed border-primary rounded-xl bg-primary/5 transition-colors";
+
+  const iconSize = compact ? "w-8 h-8" : "w-12 h-12";
+
   return (
-    <div className="flex flex-col h-full min-h-[300px] items-center justify-center p-4">
+    <div className={wrapperClass}>
       <input
         ref={fileInputRef}
         type="file"
@@ -116,12 +130,14 @@ export default function UploadZone() {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
-          className="w-full h-full min-h-[300px] flex flex-col items-center justify-center border-2 border-dashed border-border/50 rounded-xl cursor-pointer transition-colors hover:border-primary/40 hover:bg-primary/5"
+          className={dropzoneClass}
         >
-          <Upload className="w-12 h-12 text-muted-foreground/50 mb-4" />
-          <p className="text-base font-medium text-foreground mb-1">Drop your CV here</p>
-          <p className="text-sm text-muted-foreground mb-3">or click to browse</p>
-          <p className="text-xs text-muted-foreground/70">PDF, DOCX, TXT · Max 10MB</p>
+          <Upload className={`${iconSize} text-muted-foreground/50 mb-3`} />
+          <p className={`${compact ? "text-sm" : "text-base"} font-medium text-foreground mb-1`}>
+            Drop your CV here
+          </p>
+          <p className="text-xs text-muted-foreground mb-2">or click to browse</p>
+          <p className="text-[10px] text-muted-foreground/70">PDF, DOCX, TXT · Max 10MB</p>
         </div>
       )}
 
@@ -130,36 +146,38 @@ export default function UploadZone() {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
-          className="w-full h-full min-h-[300px] flex flex-col items-center justify-center border-2 border-dashed border-primary rounded-xl bg-primary/5 transition-colors"
+          className={draggingClass}
         >
-          <Upload className="w-12 h-12 text-primary mb-4" />
-          <p className="text-base font-medium text-primary">Release to upload</p>
+          <Upload className={`${iconSize} text-primary mb-3`} />
+          <p className={`${compact ? "text-sm" : "text-base"} font-medium text-primary`}>
+            Release to upload
+          </p>
         </div>
       )}
 
       {uploadState === "uploading" && (
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm font-medium text-foreground">{fileName}</p>
-          <p className="text-sm text-muted-foreground">Uploading...</p>
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          <p className="text-xs font-medium text-foreground">{fileName}</p>
+          <p className="text-xs text-muted-foreground">Uploading...</p>
         </div>
       )}
 
       {uploadState === "analyzing" && (
         <div className="flex flex-col items-center">
-          <p className="text-sm font-medium text-foreground mb-1">Analyzing your CV...</p>
+          <p className="text-xs font-medium text-foreground mb-1">Analyzing your CV...</p>
           <AnalyzingSteps completedCount={completedStepCount} />
         </div>
       )}
 
       {uploadState === "complete" && (
-        <div className="flex flex-col items-center gap-3">
-          <CheckCircle className="w-10 h-10 text-success" />
-          <p className="text-sm font-medium text-foreground">{fileName}</p>
-          {fileSize && <p className="text-xs text-muted-foreground">{fileSize}</p>}
+        <div className="flex flex-col items-center gap-2">
+          <CheckCircle className={`${compact ? "w-7 h-7" : "w-10 h-10"} text-success`} />
+          <p className="text-xs font-medium text-foreground">{fileName}</p>
+          {fileSize && <p className="text-[10px] text-muted-foreground">{fileSize}</p>}
           <button
             onClick={handleClearForReupload}
-            className="text-sm text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+            className="text-xs text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
           >
             Upload a different CV
           </button>

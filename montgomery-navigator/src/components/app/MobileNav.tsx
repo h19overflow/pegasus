@@ -1,6 +1,6 @@
-import { Layers, MessageSquare, TrendingUp } from "lucide-react";
+import { Layers, Newspaper, TrendingUp } from "lucide-react";
 
-export type MobileTab = "chat" | "services" | "cv";
+export type MobileTab = "services" | "cv" | "news";
 
 interface MobileNavProps {
   activeTab: MobileTab;
@@ -24,9 +24,9 @@ const BadgeDot = ({ count }: { count: number }) => {
 
 const MobileNav = ({ activeTab, onTabChange, actionItemCount }: MobileNavProps) => {
   const tabs: TabConfig[] = [
-    { id: "chat", label: "Chat", icon: MessageSquare },
     { id: "services", label: "Services", icon: Layers, badgeCount: actionItemCount },
     { id: "cv", label: "Career", icon: TrendingUp },
+    { id: "news", label: "News", icon: Newspaper },
   ];
 
   return (

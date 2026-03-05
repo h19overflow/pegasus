@@ -1,16 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import TopBar from "@/components/app/TopBar";
 import { FlowSidebar } from "@/components/app/FlowSidebar";
 import ContextPanel from "@/components/app/ContextPanel";
-import FlowBanner from "@/components/app/FlowBanner";
-import ProcessingIndicator from "@/components/app/ProcessingIndicator";
-import MessageBubble from "@/components/app/MessageBubble";
-import ChatInput from "@/components/app/ChatInput";
 import MobileNav, { type MobileTab } from "@/components/app/MobileNav";
 import CvUploadView from "@/components/app/cv/CvUploadView";
-import { FlowStepper } from "@/components/app/FlowStepper";
-import { QuickActions } from "@/components/app/QuickActions";
-import ActionItems from "@/components/app/ActionItems";
+import { ServicesView } from "@/components/app/services/ServicesView";
+import ProfileView from "@/components/app/ProfileView";
+import { NewsView } from "@/components/app/news/NewsView";
+import FloatingChatBubble from "@/components/app/FloatingChatBubble";
 import { useApp } from "@/lib/appContext";
 import { getDemoResponse } from "@/lib/demoResponses";
 import type { Language, ProcessingStep } from "@/lib/types";
@@ -72,39 +69,16 @@ function buildArtifactForResponse(messageId: string, responseType: string) {
   };
 }
 
-function MobileServicesTab({ onQuickAction }: { onQuickAction: (text: string) => void }) {
-  return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="px-4 py-3 space-y-2">
-        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Your Journey</p>
-        <FlowStepper />
-      </div>
-      <hr className="border-border/30 mx-4" />
-      <div className="px-4 py-3 space-y-2">
-        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Quick Actions</p>
-        <QuickActions onAction={onQuickAction} />
-      </div>
-      <hr className="border-border/30 mx-4" />
-      <ActionItems />
-    </div>
-  );
-}
-
 export default function CommandCenter() {
   const { state, dispatch } = useApp();
   const [lang, setLang] = useState<Language>("EN");
-  const [mobileTab, setMobileTab] = useState<MobileTab>("chat");
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [mobileTab, setMobileTab] = useState<MobileTab>("services");
 
   useEffect(() => {
-    dispatch({ type: "ADD_MESSAGE", message: buildWelcomeMessage() });
-  }, []);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    if (state.messages.length === 0) {
+      dispatch({ type: "ADD_MESSAGE", message: buildWelcomeMessage() });
     }
-  }, [state.messages, state.isTyping]);
+  }, []);
 
   function handleLanguageChange(newLang: Language) {
     setLang(newLang);
@@ -114,7 +88,8 @@ export default function CommandCenter() {
   function handleMobileTabChange(tab: MobileTab) {
     setMobileTab(tab);
     if (tab === "cv") dispatch({ type: "SET_VIEW", view: "cv" });
-    if (tab === "chat") dispatch({ type: "SET_VIEW", view: "chat" });
+    if (tab === "services") dispatch({ type: "SET_VIEW", view: "services" });
+    if (tab === "news") dispatch({ type: "SET_VIEW", view: "news" });
   }
 
   async function handleSendMessage(text: string) {
@@ -159,58 +134,34 @@ export default function CommandCenter() {
     }, 1800);
   }
 
-  const showCvView = state.activeView === "cv" || mobileTab === "cv";
-  const showChatView = !showCvView;
+  const currentView = state.activeView;
 
   return (
     <div className="h-screen flex flex-col bg-background">
-      <TopBar lang={lang} onLangChange={handleLanguageChange} showProfile />
+      <TopBar lang={lang} onLangChange={handleLanguageChange} />
 
-      <div className="flex-1 flex overflow-hidden">
-        <div className="hidden lg:block">
+      <div className="flex-1 flex min-h-0 overflow-hidden">
+        <div className="hidden lg:flex h-full">
           <FlowSidebar onQuickAction={handleSendMessage} />
         </div>
 
-        <div className="flex-1 flex flex-col min-w-0">
-          {showChatView && (
-            <>
-              {/* Mobile: plan/docs/profile tabs */}
-              <div className="lg:hidden flex-1 overflow-hidden flex flex-col">
-                {mobileTab === "services" && <MobileServicesTab onQuickAction={handleSendMessage} />}
-                {mobileTab === "chat" && (
-                  <div className="flex-1 flex flex-col min-h-0">
-                    <FlowBanner />
-                    <div ref={scrollRef} className="flex-1 overflow-y-auto py-2">
-                      {state.messages.map((msg) => (
-                        <MessageBubble key={msg.id} message={msg} onChipClick={handleSendMessage} />
-                      ))}
-                      <ProcessingIndicator />
-                    </div>
-                    <ChatInput onSend={handleSendMessage} />
-                  </div>
-                )}
-              </div>
-
-              {/* Desktop: always show chat */}
-              <div className="hidden lg:flex flex-col flex-1 min-h-0">
-                <FlowBanner />
-                <div ref={scrollRef} className="flex-1 overflow-y-auto py-2">
-                  {state.messages.map((msg) => (
-                    <MessageBubble key={msg.id} message={msg} onChipClick={handleSendMessage} />
-                  ))}
-                  <ProcessingIndicator />
-                </div>
-                <ChatInput onSend={handleSendMessage} />
-              </div>
-            </>
+        <div className="flex-1 flex flex-col min-w-0 min-h-0">
+          {currentView === "services" && (
+            <ServicesView onNavigateToChat={handleSendMessage} />
           )}
 
-          {showCvView && <CvUploadView />}
+          {currentView === "cv" && <CvUploadView />}
+
+          {currentView === "profile" && <ProfileView />}
+
+          {currentView === "news" && <NewsView />}
         </div>
 
-        <div className="hidden lg:block">
-          <ContextPanel />
-        </div>
+        {currentView === "services" && (
+          <div className="hidden lg:flex h-full">
+            <ContextPanel onNavigateToChat={handleSendMessage} />
+          </div>
+        )}
       </div>
 
       <MobileNav
@@ -218,6 +169,8 @@ export default function CommandCenter() {
         onTabChange={handleMobileTabChange}
         actionItemCount={state.actionItems.filter((i) => !i.completed).length}
       />
+
+      <FloatingChatBubble onSendMessage={handleSendMessage} />
     </div>
   );
 }
