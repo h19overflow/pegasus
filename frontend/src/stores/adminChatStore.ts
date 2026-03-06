@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ANALYSIS_API_BASE } from "@/lib/apiConfig";
+
 import { getToolLabel } from "@/lib/toolLabels";
 import { readSseStream } from "@/lib/sseClient";
 
@@ -47,7 +47,7 @@ export const useAdminChatStore = create<AdminChatState>((set, get) => ({
 
     try {
       await readSseStream(
-        `${ANALYSIS_API_BASE}/api/chat`,
+        "/api/chat",
         { message: text, history },
         (token) => {
           set((state) => ({

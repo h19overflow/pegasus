@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { ArrowLeft, Send } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { ANALYSIS_API_BASE } from "@/lib/apiConfig";
+
 import { readSseStream } from "@/lib/sseClient";
 import { getToolLabel } from "@/lib/toolLabels";
 import { UserBubble, AssistantBubble, SuggestionChips, ToolCallChip } from "@/components/app/admin/ChatBubbles";
@@ -41,7 +41,7 @@ export default function MayorChat() {
 
     try {
       await readSseStream(
-        `${ANALYSIS_API_BASE}/api/chat`,
+        "/api/chat",
         { message, history },
         (token) => setHistory((prev) => appendTokenToLastEntry(prev, token)),
         (toolName) => setActiveToolLabel(getToolLabel(toolName)),
