@@ -1,6 +1,6 @@
-import { Layers, Newspaper, TrendingUp } from "lucide-react";
+import { Layers, TrendingUp } from "lucide-react";
 
-export type MobileTab = "services" | "cv" | "news";
+export type MobileTab = "services" | "cv";
 
 interface MobileNavProps {
   activeTab: MobileTab;
@@ -26,7 +26,6 @@ const MobileNav = ({ activeTab, onTabChange, actionItemCount }: MobileNavProps) 
   const tabs: TabConfig[] = [
     { id: "services", label: "Services", icon: Layers, badgeCount: actionItemCount },
     { id: "cv", label: "Career", icon: TrendingUp },
-    { id: "news", label: "News", icon: Newspaper },
   ];
 
   return (

@@ -7,7 +7,7 @@ import MobileNav, { type MobileTab } from "@/components/app/MobileNav";
 import CvUploadView from "@/components/app/cv/CvUploadView";
 import { ServicesView } from "@/components/app/services/ServicesView";
 import ProfileView from "@/components/app/ProfileView";
-import { NewsView } from "@/components/app/news/NewsView";
+
 import FloatingChatBubble from "@/components/app/FloatingChatBubble";
 import { useApp } from "@/lib/appContext";
 import { useDataStream } from "@/lib/useDataStream";
@@ -20,7 +20,7 @@ import {
 } from "@/lib/chatHelpers";
 import type { AppView, Language } from "@/lib/types";
 
-const VALID_VIEWS = new Set<string>(["services", "cv", "profile", "news"]);
+const VALID_VIEWS = new Set<string>(["services", "cv", "profile"]);
 
 export default function CommandCenter() {
   const { state, dispatch } = useApp();
@@ -122,7 +122,7 @@ export default function CommandCenter() {
           )}
           {currentView === "cv" && <CvUploadView />}
           {currentView === "profile" && <ProfileView />}
-          {currentView === "news" && <NewsView />}
+
         </div>
 
         {currentView === "services" && (

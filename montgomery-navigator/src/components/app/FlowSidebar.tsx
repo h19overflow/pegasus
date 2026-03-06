@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   TrendingUp,
   Layers,
-  Newspaper,
   PanelLeftClose,
   PanelLeftOpen,
+  Shield,
 } from "lucide-react";
 import type { AppView } from "@/lib/types";
 import { useApp } from "@/lib/appContext";
@@ -19,11 +20,11 @@ const NAV_ITEMS: {
 }[] = [
   { label: "Services", view: "services", icon: Layers },
   { label: "Career Growth", view: "cv", icon: TrendingUp },
-  { label: "News", view: "news", icon: Newspaper },
 ];
 
 export function FlowSidebar({ onQuickAction }: FlowSidebarProps) {
   const { state, dispatch } = useApp();
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(true);
 
   function handleViewSelect(view: AppView) {
@@ -60,6 +61,15 @@ export function FlowSidebar({ onQuickAction }: FlowSidebarProps) {
             </button>
           );
         })}
+
+        <hr className="w-6 border-border/30 mt-auto" />
+        <button
+          onClick={() => navigate("/admin")}
+          title="Admin Dashboard"
+          className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors mb-2"
+        >
+          <Shield className="h-4 w-4" />
+        </button>
       </aside>
     );
   }
@@ -97,6 +107,16 @@ export function FlowSidebar({ onQuickAction }: FlowSidebarProps) {
             </button>
           );
         })}
+      </div>
+
+      <div className="mt-auto px-4 py-3 border-t border-border/30">
+        <button
+          onClick={() => navigate("/admin")}
+          className="flex items-center gap-2 w-full px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+        >
+          <Shield className="h-4 w-4" />
+          Admin Dashboard
+        </button>
       </div>
     </aside>
   );
