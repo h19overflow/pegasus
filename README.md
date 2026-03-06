@@ -107,7 +107,7 @@ BRIGHTDATA_UNLOCKER_ZONE=web_unlocker1
 
 ```bash
 # Backend (starts scraper scheduler automatically)
-uv run uvicorn backend.webhook_server:app --port 8787
+uv run uvicorn backend.api.main:app --port 8787
 
 # Frontend
 cd frontend && npm run dev
