@@ -22,7 +22,7 @@ import requests
 BASE = "https://gis.montgomeryal.gov/server/rest/services"
 PERMITS_URL = f"{BASE}/HostedDatasets/Construction_Permits/FeatureServer/0"
 LICENSES_URL = f"{BASE}/HostedDatasets/Business_Licenses/FeatureServer/0"
-OUTPUT_DIR = Path(__file__).resolve().parent.parent / "montgomery-navigator" / "public" / "data"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "frontend" / "public" / "data"
 OUTPUT_FILE = OUTPUT_DIR / "business_growth.json"
 
 

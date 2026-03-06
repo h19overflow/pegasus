@@ -63,7 +63,7 @@ def get_top_concerns(limit: int = 5, neighborhood: str | None = None) -> str:
 def get_neighborhood_mood(neighborhood: str) -> str:
     """Get sentiment breakdown and top articles for a specific neighborhood."""
     data = _load_results()
-    news_path = REPO_ROOT / "montgomery-navigator" / "public" / "data" / "news_feed.json"
+    news_path = REPO_ROOT / "frontend" / "public" / "data" / "news_feed.json"
     if not news_path.exists():
         return f"No news data available for {neighborhood}."
 
