@@ -25,14 +25,6 @@ def get_api_key() -> str:
     return require_env("BRIGHTDATA_API_KEY")
 
 
-def get_api_token() -> str:
-    """Return API token for the Bright Data SDK.
-
-    Bridges our BRIGHTDATA_API_KEY env var to the SDK's expected token param.
-    """
-    return get_api_key()
-
-
 SERP_ZONE = os.environ.get("BRIGHTDATA_SERP_ZONE", "serp_api1")
 UNLOCKER_ZONE = os.environ.get("BRIGHTDATA_UNLOCKER_ZONE", "web_unlocker1")
 

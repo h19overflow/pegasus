@@ -20,12 +20,3 @@ def redact_comment_text(text: str) -> str:
     result = _EMAIL_PATTERN.sub("[REDACTED_EMAIL]", result)
     result = _ADDRESS_PATTERN.sub("[REDACTED_ADDRESS]", result)
     return result
-
-
-def scan_output_for_pii(text: str) -> bool:
-    """Check if LLM output contains leaked PII. Returns True if PII found."""
-    return bool(
-        _PHONE_PATTERN.search(text)
-        or _EMAIL_PATTERN.search(text)
-        or _ADDRESS_PATTERN.search(text)
-    )
