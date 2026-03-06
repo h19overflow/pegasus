@@ -1,33 +1,58 @@
-import { ArrowLeft } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowLeft, Map } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { AIInsightsCard } from "@/components/app/admin/AIInsightsCard";
+import { AdminChatBubble } from "@/components/app/admin/AdminChatBubble";
+import { AnalyzeButton } from "@/components/app/admin/AnalyzeButton";
+import { OnboardingBanner } from "@/components/app/admin/OnboardingBanner";
 import { CommentFeed } from "@/components/app/admin/CommentFeed";
-import { ExportControls } from "@/components/app/admin/ExportControls";
 import { HotSpotsPanel } from "@/components/app/admin/HotSpotsPanel";
 import { MayorsBrief } from "@/components/app/admin/MayorsBrief";
 import { SentimentOverview } from "@/components/app/admin/SentimentOverview";
 import { useApp } from "@/lib/appContext";
 import { computeNeighborhoodActivity } from "@/lib/newsAggregations";
-import { loadStoredComments } from "@/lib/newsCommentStore";
-import { filterGeolocatedArticles } from "@/lib/newsMapMarkers";
+import { fetchNewsArticles, fetchNewsComments } from "@/lib/newsService";
 import { loadStoredReactions } from "@/lib/newsReactionStore";
 
-function loadAdminData() {
-  const { comments } = { comments: loadStoredComments() };
-  const { reactions } = loadStoredReactions();
-  return { comments, reactions };
+function buildGreeting(): string {
+  const hour = new Date().getHours();
+  if (hour < 12) return "Good morning, Mayor";
+  if (hour < 17) return "Good afternoon, Mayor";
+  return "Good evening, Mayor";
 }
 
 export default function AdminDashboard() {
-  const { state } = useApp();
+  const { state, dispatch } = useApp();
   const navigate = useNavigate();
+  const [aiRefreshTrigger, setAiRefreshTrigger] = useState(0);
+  const [chatQuestion, setChatQuestion] = useState<string | undefined>();
+  const questionCounterRef = useRef(0);
 
-  const { comments, reactions } = loadAdminData();
-  const geolocatedArticles = filterGeolocatedArticles(state.newsArticles);
-  const allComments = [...state.newsComments, ...comments].filter(
-    (comment, index, self) => self.findIndex((c) => c.id === comment.id) === index,
-  );
+  // Append a counter so repeated identical questions still trigger the effect
+  const askAI = useCallback((question: string) => {
+    questionCounterRef.current += 1;
+    setChatQuestion(`${question}##${questionCounterRef.current}`);
+  }, []);
+
+  // Strip the counter before passing to the chat bubble
+  const cleanQuestion = chatQuestion?.replace(/##\d+$/, "");
+
+  useEffect(() => {
+    if (state.newsArticles.length === 0) {
+      fetchNewsArticles().then((articles) => {
+        if (articles.length > 0) dispatch({ type: "SET_NEWS_ARTICLES", articles });
+      });
+    }
+    if (state.newsComments.length === 0) {
+      fetchNewsComments().then((comments) => {
+        if (comments.length > 0) dispatch({ type: "SET_NEWS_COMMENTS", comments });
+      });
+    }
+  }, []);
+
+  const { reactions } = loadStoredReactions();
   const mergedReactions = { ...reactions, ...state.newsReactions };
-  const neighborhoods = computeNeighborhoodActivity(state.newsArticles, mergedReactions, allComments);
+  const neighborhoods = computeNeighborhoodActivity(state.newsArticles, mergedReactions, state.newsComments);
 
   return (
     <div className="min-h-screen bg-background">
@@ -43,37 +68,46 @@ export default function AdminDashboard() {
       </header>
 
       <main className="max-w-6xl mx-auto px-4 py-6 space-y-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <MayorsBrief
-            articles={state.newsArticles}
-            comments={allComments}
-            reactions={mergedReactions}
-          />
-          <SentimentOverview articles={state.newsArticles} />
-        </div>
+        <OnboardingBanner />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <HotSpotsPanel neighborhoods={neighborhoods} />
-          <CommentFeed comments={allComments} articles={state.newsArticles} />
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <ExportControls
-            comments={allComments}
-            reactions={mergedReactions}
-            articles={state.newsArticles}
-          />
-          <div className="rounded-lg border border-border bg-muted/30 p-4 flex items-start gap-3">
-            <div>
-              <p className="text-sm font-medium text-foreground">Geolocated Articles</p>
-              <p className="text-2xl font-bold text-foreground mt-1">{geolocatedArticles.length}</p>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                of {state.newsArticles.length} total articles have map coordinates
-              </p>
-            </div>
+        <section className="space-y-3">
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <h2 className="text-2xl font-bold text-foreground">{buildGreeting()}</h2>
+            <button
+              onClick={() => {
+                dispatch({ type: "SET_SELECTED_ARTICLE", articleId: null });
+                navigate("/app/services");
+              }}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-md border border-border bg-background text-sm font-medium text-foreground hover:bg-muted transition-colors min-h-[44px]"
+            >
+              <Map className="w-4 h-4" aria-hidden="true" />
+              View Map
+            </button>
           </div>
+          <AnalyzeButton onComplete={() => setAiRefreshTrigger((n) => n + 1)} />
+        </section>
+
+        <MayorsBrief
+          articles={state.newsArticles}
+          comments={state.newsComments}
+          reactions={mergedReactions}
+          onAskAI={askAI}
+        />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <CommentFeed articles={state.newsArticles} onAskAI={askAI} />
+          <AIInsightsCard
+            refreshTrigger={aiRefreshTrigger}
+            onAskAI={askAI}
+          />
         </div>
+
+        <SentimentOverview articles={state.newsArticles} onAskAI={askAI} />
+
+        <HotSpotsPanel neighborhoods={neighborhoods} onAskAI={askAI} />
       </main>
+
+      <AdminChatBubble initialQuestion={cleanQuestion} />
     </div>
   );
 }

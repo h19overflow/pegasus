@@ -7,6 +7,7 @@ import { AppProvider } from "@/lib/appContext";
 import Splash from "./pages/Splash";
 import CommandCenter from "./pages/CommandCenter";
 import AdminDashboard from "./pages/AdminDashboard";
+import MayorChat from "./pages/MayorChat";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/chat" element={<Navigate to="/app/services" replace />} />
             <Route path="/onboarding" element={<Navigate to="/app/services" replace />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/chat" element={<MayorChat />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppProvider>

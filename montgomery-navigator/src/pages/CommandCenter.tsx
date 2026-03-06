@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import TopBar from "@/components/app/TopBar";
 import { FlowSidebar } from "@/components/app/FlowSidebar";
@@ -7,7 +7,6 @@ import MobileNav, { type MobileTab } from "@/components/app/MobileNav";
 import CvUploadView from "@/components/app/cv/CvUploadView";
 import { ServicesView } from "@/components/app/services/ServicesView";
 import ProfileView from "@/components/app/ProfileView";
-
 import FloatingChatBubble from "@/components/app/FloatingChatBubble";
 import { useApp } from "@/lib/appContext";
 import { useDataStream } from "@/lib/useDataStream";
@@ -29,16 +28,25 @@ export default function CommandCenter() {
   const navigate = useNavigate();
   const [lang, setLang] = useState<Language>("EN");
 
-  // Sync URL → state on mount and URL changes
+  const hasSyncedRef = useRef(false);
+
+  // URL is the source of truth on mount. After mount, state changes drive the URL.
   useEffect(() => {
-    if (urlView && VALID_VIEWS.has(urlView) && urlView !== state.activeView) {
-      dispatch({ type: "SET_VIEW", view: urlView as AppView });
+    if (urlView && VALID_VIEWS.has(urlView)) {
+      if (urlView !== state.activeView) {
+        dispatch({ type: "SET_VIEW", view: urlView as AppView });
+      }
+      hasSyncedRef.current = true;
+    } else {
+      navigate(`/app/${state.activeView}`, { replace: true });
+      hasSyncedRef.current = true;
     }
   }, [urlView]);
 
-  // Sync state → URL when view changes via sidebar/buttons
+  // Sync state → URL only after initial mount sync is done
   useEffect(() => {
-    if (state.activeView !== urlView) {
+    if (!hasSyncedRef.current) return;
+    if (state.activeView !== urlView && VALID_VIEWS.has(state.activeView)) {
       navigate(`/app/${state.activeView}`, { replace: true });
     }
   }, [state.activeView]);
