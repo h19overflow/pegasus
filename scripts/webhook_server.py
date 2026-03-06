@@ -168,7 +168,7 @@ async def health() -> JSONResponse:
 
 
 @app.post("/roadmap/generate")
-async def generate_roadmap(request: RoadmapRequest) -> dict:
+def generate_roadmap(request: RoadmapRequest) -> dict:
     """
     POST /roadmap/generate  (React calls /api/roadmap/generate via Vite proxy)
 

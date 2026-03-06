@@ -15,41 +15,21 @@ export function GuideExpandedContent({
 }) {
   const { state, dispatch } = useApp();
   const [isGenerating, setIsGenerating] = useState(false);
-  const hasPersona = Boolean(state.citizenMeta);
 
   async function handleBuildRoadmap() {
-    // #region agent log
-    fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:handleBuildRoadmap", message: "handler invoked", data: { hasPersona, guideId: guide.id }, runId: "roadmap", hypothesisId: "H1,H2", timestamp: Date.now() }) }).catch(() => {});
-    // #endregion
-    // No persona loaded — fall back to original chat behavior
-    if (!state.citizenMeta) {
-      // #region agent log
-      fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:noPersona", message: "no persona fallback to chat", data: {}, runId: "roadmap", hypothesisId: "H2", timestamp: Date.now() }) }).catch(() => {});
-      // #endregion
-      onNavigateToChat(
-        `Help me apply for ${guide.title}. I want to check eligibility and understand the steps.`
-      );
-      return;
-    }
-
     setIsGenerating(true);
     try {
-      // #region agent log
-      fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:fetchStart", message: "fetch /api/roadmap/generate", data: { serviceId: guide.id }, runId: "roadmap", hypothesisId: "H3", timestamp: Date.now() }) }).catch(() => {});
-      // #endregion
-      // /api/roadmap/generate → Vite proxy → localhost:8787/roadmap/generate
+      const body: Record<string, unknown> = { serviceId: guide.id };
+      // Include citizen only when a persona is loaded — backend handles both cases
+      if (state.citizenMeta) {
+        body.citizen = state.citizenMeta;
+      }
+
       const response = await fetch("/api/roadmap/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          serviceId: guide.id,
-          citizen: state.citizenMeta,
-        }),
+        body: JSON.stringify(body),
       });
-
-      // #region agent log
-      fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:afterFetch", message: "response received", data: { ok: response.ok, status: response.status }, runId: "roadmap", hypothesisId: "H3,H4", timestamp: Date.now() }) }).catch(() => {});
-      // #endregion
 
       if (!response.ok) {
         const err = await response.json().catch(() => ({}));
@@ -59,14 +39,7 @@ export function GuideExpandedContent({
       const roadmap = await response.json();
       dispatch({ type: "SET_ACTIVE_ROADMAP", roadmap });
 
-      // #region agent log
-      fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:roadmapSet", message: "dispatch SET_ACTIVE_ROADMAP", data: { stepsCount: roadmap?.steps?.length }, runId: "roadmap", hypothesisId: "H5", timestamp: Date.now() }) }).catch(() => {});
-      // #endregion
-
     } catch (error) {
-      // #region agent log
-      fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:catch", message: "roadmap failed", data: { errorMessage: String(error) }, runId: "roadmap", hypothesisId: "H3,H4,H5", timestamp: Date.now() }) }).catch(() => {});
-      // #endregion
       // Graceful fallback — demo must never show a broken state
       console.error("[RoadmapAgent] Failed:", error);
       onNavigateToChat(
@@ -148,19 +121,11 @@ export function GuideExpandedContent({
         >
           {isGenerating ? (
             <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Building...</>
-          ) : hasPersona ? (
-            <><Map className="w-3.5 h-3.5" /> Build My Roadmap →</>
           ) : (
-            "Help Me Apply"
+            <><Map className="w-3.5 h-3.5" /> Build My Roadmap &rarr;</>
           )}
         </button>
       </div>
-
-      {!hasPersona && (
-        <p className="text-[10px] text-muted-foreground text-center">
-          Select a citizen profile to unlock your personalized roadmap
-        </p>
-      )}
     </div>
   );
 }

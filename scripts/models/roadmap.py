@@ -107,7 +107,9 @@ class CitizenMeta(CamelModel):
 class RoadmapRequest(CamelModel):
     """
     The POST body from the React frontend.
-    Frontend sends { citizen: CitizenMeta, serviceId: string }.
+    Frontend sends { serviceId: string } for a generic roadmap,
+    or { serviceId, citizen: CitizenMeta } for a personalized one.
+    citizen is optional — roadmap generation works either way.
     """
-    citizen: CitizenMeta
-    service_id: str  
+    citizen: Optional[CitizenMeta] = None
+    service_id: str

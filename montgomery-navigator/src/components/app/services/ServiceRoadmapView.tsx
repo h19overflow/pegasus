@@ -18,7 +18,7 @@ export function ServiceRoadmapView() {
   }
 
   return (
-    <div className="flex flex-col h-full bg-background">
+    <div className="flex flex-col flex-1 bg-background overflow-hidden">
       <header className="shrink-0 px-4 py-3 border-b border-border/30 flex items-center justify-between gap-3">
         <h1 className="text-sm font-bold text-foreground truncate flex-1 min-w-0">
           {roadmap.serviceTitle}

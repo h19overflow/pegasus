@@ -8,7 +8,9 @@ export type MessageType =
   | "medicaid"
   | "skill-gap"
   | "reentry"
-  | "pdf-preview";
+  | "pdf-preview"
+  | "service-list"
+  | "service-roadmap";
 
 export interface FlowMeta {
   flowId: FlowId;
@@ -48,6 +50,8 @@ export interface ChatMessage {
   profileData?: ProfileData;
   actionItems?: ActionItem[];
   processingSteps?: ProcessingStep[];
+  serviceId?: string;
+  serviceTitle?: string;
 }
 
 export interface Artifact {

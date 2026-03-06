@@ -154,10 +154,10 @@ async def _run_stream_in_thread(name: str, fn) -> None:
 
 
 async def run_all_streams() -> None:
-    """Run all scrape streams concurrently (each in its own thread)."""
+    """Run all scrape streams sequentially."""
     logger.info("Starting all scrape streams at %s", datetime.now(timezone.utc).isoformat())
-    tasks = [_run_stream_in_thread(name, fn) for name, fn in STREAMS]
-    await asyncio.gather(*tasks)
+    for name, fn in STREAMS:
+        await _run_stream_in_thread(name, fn)
     logger.info("All streams complete")
 
 

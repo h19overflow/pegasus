@@ -89,10 +89,10 @@ def load_existing_articles() -> list[dict]:
     path = OUTPUT_FILES["news"]
     if path.exists():
         try:
-            with open(path) as f:
+            with open(path, encoding="utf-8") as f:
                 data = json.load(f)
                 return data.get("articles", [])
-        except (json.JSONDecodeError, KeyError):
+        except (json.JSONDecodeError, KeyError, UnicodeDecodeError):
             return []
     return []
 

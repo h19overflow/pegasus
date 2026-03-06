@@ -24,7 +24,7 @@ from scripts.config import require_env
 from scripts.models.roadmap import (
     CitizenMeta, PersonalizedRoadmap, RoadmapStep, RoadmapLocation,
 )
-from scripts.triggers import PUBLIC_DATA
+from scripts.config import PUBLIC_DATA
 
 logger = logging.getLogger("roadmap_agent")
 
@@ -136,13 +136,16 @@ _OUTPUT_SCHEMA = """
 }"""
 
 
-def _call_gemini(citizen: CitizenMeta, guide: dict) -> dict:
+def _call_gemini(citizen: "CitizenMeta | None", guide: dict) -> dict:
     """
-    Call Gemini with the citizen profile + service documentation.
+    Call Gemini with optional citizen profile + service documentation.
     Returns parsed JSON dict. Strips markdown fences if present.
 
-    Temperature 0.1 — we want factual, deterministic output, not creativity.
-    response_mime_type="application/json" tells Gemini to return JSON directly.
+    When citizen is None, generates a generic step-by-step guide for any
+    Montgomery resident using only the official service documentation.
+    When citizen is provided, personalizes each step for that individual.
+
+    Temperature 0.1 — factual, deterministic output, not creativity.
     """
     import google.generativeai as genai
 
@@ -150,7 +153,34 @@ def _call_gemini(citizen: CitizenMeta, guide: dict) -> dict:
     genai.configure(api_key=require_env("GEMINI_API_KEY"))
     model = genai.GenerativeModel("gemini-2.5-flash")
 
-    prompt = f"""You are CivicPath, a civic navigator for Montgomery, Alabama.
+    if citizen is None:
+        # ── Generic path: no citizen profile ─────────────────────────────────
+        prompt = f"""You are CivicPath, a civic navigator for Montgomery, Alabama.
+Convert this government service documentation into a clear, step-by-step roadmap
+that any Montgomery resident can follow. Write in plain English.
+
+## OFFICIAL SERVICE DOCUMENTATION (ground truth — do not contradict this)
+{_format_guide_for_prompt(guide)}
+
+## YOUR TASK
+For each step in "HOW TO APPLY", write a clear guide that:
+1. Uses plain English — no bureaucratic jargon
+2. Names the exact Montgomery office, address, and hours — never write "local office"
+3. Lists all documents from the documentation that may be needed for this step
+4. Adds a pro_tip only for real Montgomery-specific warnings (not generic advice)
+5. Sets can_do_online: true only if the step genuinely can be completed online
+
+## STRICT RULES
+- Return ONLY valid JSON matching the schema — no markdown, no explanation
+- Never invent facts not in the documentation above
+- If unsure about office hours, write: "Call {guide.get('phone', 'the office')} to confirm"
+- eligibility_note MUST summarize who qualifies based on the official criteria
+
+## OUTPUT SCHEMA
+{_OUTPUT_SCHEMA}"""
+    else:
+        # ── Personalized path: citizen profile provided ────────────────────────
+        prompt = f"""You are CivicPath, a civic navigator for Montgomery, Alabama.
 Transform this generic government service application process into a PERSONALIZED
 roadmap for one specific citizen. Every instruction must speak directly to their situation.
 
@@ -199,7 +229,7 @@ For each step in "HOW TO APPLY", write a personalized version that:
 def _build_roadmap_model(
     gemini_output: dict,
     guide: dict,
-    citizen: CitizenMeta,
+    citizen: "CitizenMeta | None",
 ) -> PersonalizedRoadmap:
     """
     Convert Gemini's raw dict into a validated PersonalizedRoadmap.
@@ -224,9 +254,10 @@ def _build_roadmap_model(
             online_url=raw_step.get("online_url"),
         ))
 
+    citizen_id = citizen.id if citizen else "generic"
     now = datetime.now(timezone.utc)
     return PersonalizedRoadmap(
-        id=f"roadmap-{guide['id']}-{citizen.id}-{int(now.timestamp())}",
+        id=f"roadmap-{guide['id']}-{citizen_id}-{int(now.timestamp())}",
         service_id=guide["id"],
         service_title=guide["title"],
         service_category=guide.get("category", ""),
@@ -240,16 +271,21 @@ def _build_roadmap_model(
 # ── Public API ────────────────────────────────────────────────────────────────
 
 def generate_personalized_roadmap(
-    citizen: CitizenMeta,
+    citizen: "CitizenMeta | None",
     service_id: str,
 ) -> PersonalizedRoadmap:
     """
     Main entry point. Called by the FastAPI route in webhook_server.py.
 
+    citizen is optional. When None, Gemini generates a generic step-by-step
+    guide for any Montgomery resident using only the service documentation.
+    When provided, returns a roadmap personalized to that citizen's profile.
+
     Raises ValueError if service_id not found in gov_services.json.
     Raises RuntimeError if Gemini call fails (caller handles graceful fallback).
     """
-    logger.info("Generating roadmap: citizen=%s service=%s", citizen.id, service_id)
+    citizen_id = citizen.id if citizen else "generic"
+    logger.info("Generating roadmap: citizen=%s service=%s", citizen_id, service_id)
 
     guide = _get_service(service_id)
     logger.info("Retrieved: %s (%d steps)", guide["title"], len(guide.get("how_to_apply", [])))
