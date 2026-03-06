@@ -15,7 +15,7 @@ import traceback
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
-from backend.sse_broadcaster import broadcast_event
+from backend.core.sse_broadcaster import broadcast_event
 
 logger = logging.getLogger("scrape_scheduler")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(message)s")
@@ -32,8 +32,8 @@ _executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="scraper")
 
 def _run_jobs_scrape() -> int:
     """Trigger + poll job scrapers. Returns count of features saved."""
-    from backend.payloads import JOB_SCRAPERS
-    from backend.bright_data_client import trigger_and_collect
+    from backend.core.payloads import JOB_SCRAPERS
+    from backend.core.bright_data_client import trigger_and_collect
     from backend.processors.process_jobs import (
         detect_source, process_jobs, build_geojson_feature, save_job_results,
     )
@@ -93,7 +93,7 @@ def _run_news_scrape() -> int:
 def _run_housing_scrape() -> int:
     """Trigger + poll Zillow scraper. Returns listing count."""
     from backend.config import DATASETS
-    from backend.bright_data_client import trigger_and_collect
+    from backend.core.bright_data_client import trigger_and_collect
     from backend.processors.process_housing import (
         process_zillow_listings, save_housing_results,
     )

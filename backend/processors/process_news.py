@@ -9,7 +9,7 @@ import json
 from datetime import datetime, timezone
 
 from backend.config import OUTPUT_FILES
-from backend.sentiment_rules import score_sentiment, score_misinfo_risk, build_summary
+from backend.core.sentiment_rules import score_sentiment, score_misinfo_risk, build_summary
 
 
 def generate_article_id(title: str, source_url: str) -> str:

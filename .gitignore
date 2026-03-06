@@ -17,3 +17,4 @@ wheels/
 # Worktrees
 .worktrees/
 MEMORY.md.claude/worktrees/
+.claude/agent-memory-local/

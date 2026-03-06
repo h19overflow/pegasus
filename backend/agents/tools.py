@@ -9,7 +9,7 @@ from pathlib import Path
 
 from backend.config import REPO_ROOT
 
-ANALYSIS_PATH = REPO_ROOT / "scripts" / "data" / "analysis_results.json"
+ANALYSIS_PATH = REPO_ROOT / "backend" / "data" / "analysis_results.json"
 
 
 def _load_results() -> dict:

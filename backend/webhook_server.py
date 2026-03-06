@@ -23,7 +23,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 
 from backend.config import RAW_DIR
-from backend.sse_broadcaster import (
+from backend.core.sse_broadcaster import (
     broadcast_event,
     create_client_queue,
     remove_client_queue,
@@ -49,7 +49,7 @@ async def lifespan(application: FastAPI):
     has_api_key = bool(os.environ.get("BRIGHTDATA_API_KEY"))
 
     if auto_scrape and has_api_key:
-        from backend.scrape_scheduler import start_scheduled_scraping
+        from backend.core.scrape_scheduler import start_scheduled_scraping
         scraper_task = asyncio.create_task(start_scheduled_scraping())
 
     yield

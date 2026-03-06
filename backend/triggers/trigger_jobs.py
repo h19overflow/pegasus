@@ -10,8 +10,8 @@ import json
 from datetime import datetime, timezone
 
 from backend.config import RAW_DIR
-from backend.payloads import JOB_SCRAPERS
-from backend.bright_data_client import trigger_scraper, poll_snapshot
+from backend.core.payloads import JOB_SCRAPERS
+from backend.core.bright_data_client import trigger_scraper, poll_snapshot
 from backend.processors.process_jobs import (
     detect_source, process_jobs, build_geojson_feature, save_job_results,
 )

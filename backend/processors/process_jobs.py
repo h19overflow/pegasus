@@ -13,7 +13,7 @@ import urllib.request
 from datetime import datetime, timezone
 
 from backend.config import ARCGIS_BASE, OUTPUT_FILES, RAW_DIR
-from backend.payloads import SKILL_CATEGORIES
+from backend.core.payloads import SKILL_CATEGORIES
 from backend.processors.geocoding_utils import geocode_nominatim
 
 

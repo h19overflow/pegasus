@@ -9,7 +9,7 @@ from backend.processors.analyze_comments import run_batch_analysis, save_analysi
 
 router = APIRouter(tags=["analysis"])
 
-ANALYSIS_PATH = REPO_ROOT / "scripts" / "data" / "analysis_results.json"
+ANALYSIS_PATH = REPO_ROOT / "backend" / "data" / "analysis_results.json"
 _status = {"state": "idle", "message": ""}
 
 
@@ -35,7 +35,7 @@ async def _run_analysis():
         news_data = json.loads(news_path.read_text())
         articles = news_data.get("articles", [])
 
-        comments_path = REPO_ROOT / "scripts" / "data" / "exported_comments.json"
+        comments_path = REPO_ROOT / "backend" / "data" / "exported_comments.json"
         comments = []
         if comments_path.exists():
             exported = json.loads(comments_path.read_text())

@@ -22,8 +22,8 @@ from backend.processors.schemas import ArticleAnalysis, AnalysisResults
 from backend.processors.redact_pii import redact_comment_text
 from backend.agents.prompts import BATCH_ANALYSIS_PROMPT
 
-ANALYSIS_OUTPUT = REPO_ROOT / "scripts" / "data" / "analysis_results.json"
-METRICS_OUTPUT = REPO_ROOT / "scripts" / "data" / "analysis_metrics.jsonl"
+ANALYSIS_OUTPUT = REPO_ROOT / "backend" / "data" / "analysis_results.json"
+METRICS_OUTPUT = REPO_ROOT / "backend" / "data" / "analysis_metrics.jsonl"
 MODEL_NAME = "gemini-3.1-flash-lite-preview"
 PROMPT_VERSION = "v1.0"
 

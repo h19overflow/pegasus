@@ -10,7 +10,7 @@ from pathlib import Path
 from backend.config import REPO_ROOT
 
 NEWS_FEED_PATH = REPO_ROOT / "frontend" / "public" / "data" / "news_feed.json"
-COMMENTS_PATH = REPO_ROOT / "scripts" / "data" / "exported_comments.json"
+COMMENTS_PATH = REPO_ROOT / "backend" / "data" / "exported_comments.json"
 
 
 def _load_articles() -> list[dict]:
