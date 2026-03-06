@@ -2,6 +2,7 @@ import { useEffect, useRef, useCallback } from "react";
 import { Marker, Popup, CircleMarker } from "react-leaflet";
 import L from "leaflet";
 import { useApp } from "@/lib/appContext";
+import { fetchNewsComments } from "@/lib/newsService";
 import { createNewsMarker, filterGeolocatedArticles, getSentimentColor } from "@/lib/newsMapMarkers";
 import { loadStoredReactions, saveReactions } from "@/lib/newsReactionStore";
 import { loadStoredComments, saveAllComments } from "@/lib/newsCommentStore";
@@ -28,12 +29,24 @@ export function NewsMapOverlay({ selectedArticleId, selectionTs = 0 }: NewsMapOv
     }
   }, []);
 
-  // Load comments from localStorage on mount
+  // Load seeded + localStorage comments on mount
   useEffect(() => {
-    const stored = loadStoredComments();
-    if (stored.length > 0) {
-      dispatch({ type: "SET_NEWS_COMMENTS", comments: stored });
+    async function loadComments() {
+      const [seeded, stored] = await Promise.all([
+        fetchNewsComments(),
+        Promise.resolve(loadStoredComments()),
+      ]);
+      const seen = new Set<string>();
+      const merged = [...seeded, ...stored].filter((c) => {
+        if (seen.has(c.id)) return false;
+        seen.add(c.id);
+        return true;
+      });
+      if (merged.length > 0) {
+        dispatch({ type: "SET_NEWS_COMMENTS", comments: merged });
+      }
     }
+    loadComments();
   }, []);
 
   // Save reactions to localStorage on change

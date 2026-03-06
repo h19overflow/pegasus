@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ServiceDirectory from "./ServiceDirectory";
 import ServiceDetailView from "./ServiceDetailView";
 import ServiceMapView from "./ServiceMapView";
+import { useApp } from "@/lib/appContext";
 import type { ServiceCategory } from "@/lib/types";
 
 type ServicesMode = "directory" | "map" | "detail";
@@ -11,8 +12,16 @@ interface ServicesViewProps {
 }
 
 export function ServicesView({ onNavigateToChat }: ServicesViewProps) {
+  const { state } = useApp();
   const [mode, setMode] = useState<ServicesMode>("directory");
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(null);
+
+  // Auto-switch to map when an article is selected (e.g. from admin chat)
+  useEffect(() => {
+    if (state.selectedArticleId && mode !== "map") {
+      setMode("map");
+    }
+  }, [state.selectedArticleId]);
 
   function handleSelectCategory(category: ServiceCategory) {
     setSelectedCategory(category);

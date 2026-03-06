@@ -1,0 +1,928 @@
+{
+  "comments": [
+    {
+      "id": "seed-001",
+      "articleId": "9f35bf6a7695",
+      "citizenId": "citizen-1",
+      "citizenName": "Marcus Johnson",
+      "avatarInitials": "MJ",
+      "avatarColor": "#3b82f6",
+      "content": "About time these guys faced consequences. I live over on West Jeff Davis and we been dealing with illegal guns in this neighborhood for years. Two down, plenty more to go.",
+      "createdAt": "2026-03-05T08:15:00Z"
+    },
+    {
+      "id": "seed-002",
+      "articleId": "9f35bf6a7695",
+      "citizenId": "citizen-6",
+      "citizenName": "Patricia Brown",
+      "avatarInitials": "PB",
+      "avatarColor": "#06b6d4",
+      "content": "My congregation has been praying for safer streets in Capitol Heights for a long time. Federal charges send a stronger message than local ones. I just wish we focused equally on prevention — jobs, mentorship, youth programs — not just incarceration after the fact.",
+      "createdAt": "2026-03-05T09:42:00Z"
+    },
+    {
+      "id": "seed-003",
+      "articleId": "9f35bf6a7695",
+      "citizenId": "citizen-7",
+      "citizenName": "James Wilson",
+      "avatarInitials": "JW",
+      "avatarColor": "#84cc16",
+      "content": "Federal sentencing guidelines are no joke. Good.",
+      "createdAt": "2026-03-05T11:00:00Z"
+    },
+    {
+      "id": "seed-004",
+      "articleId": "9f35bf6a7695",
+      "citizenId": "citizen-9",
+      "citizenName": "Thomas Mitchell",
+      "avatarInitials": "TM",
+      "avatarColor": "#8b5cf6",
+      "content": "As a retired veteran I believe in law and order, but I also believe in redemption. I hope there are reentry programs waiting for these men when they get out, otherwise we just cycle them right back into the same situation.",
+      "createdAt": "2026-03-05T13:20:00Z"
+    },
+    {
+      "id": "seed-005",
+      "articleId": "a3dc6b33237a",
+      "citizenId": "citizen-2",
+      "citizenName": "Angela Davis",
+      "avatarInitials": "AD",
+      "avatarColor": "#ef4444",
+      "content": "After 30 years teaching in Montgomery Public Schools I can tell you — special education is chronically understaffed. This job fair is a step in the right direction but we need competitive salaries to keep good people. The district loses qualified teachers to private schools and other counties because the pay just doesn't match the workload.",
+      "createdAt": "2026-03-04T10:30:00Z"
+    },
+    {
+      "id": "seed-006",
+      "articleId": "a3dc6b33237a",
+      "citizenId": "citizen-8",
+      "citizenName": "Maria Garcia",
+      "avatarInitials": "MG",
+      "avatarColor": "#f43f5e",
+      "content": "My son has an IEP and his resource teacher quit in January. They've had three substitutes since then. I'm glad they're hiring but this shouldn't be a crisis we're scrambling to fix — it should have been a priority all along.",
+      "createdAt": "2026-03-04T12:15:00Z"
+    },
+    {
+      "id": "seed-007",
+      "articleId": "a3dc6b33237a",
+      "citizenId": "citizen-10",
+      "citizenName": "Sarah Jenkins",
+      "avatarInitials": "SJ",
+      "avatarColor": "#ec4899",
+      "content": "I'm studying education at Alabama State and I actually applied at this job fair! The starting salary for sped aides is pretty low tbh but the district representative was nice and said there's room to grow. Fingers crossed!",
+      "createdAt": "2026-03-04T15:45:00Z"
+    },
+    {
+      "id": "seed-008",
+      "articleId": "4274413fe29f",
+      "citizenId": "citizen-10",
+      "citizenName": "Sarah Jenkins",
+      "avatarInitials": "SJ",
+      "avatarColor": "#ec4899",
+      "content": "I was AT this game!! The Lady Hornets came so close. Grambling just had a hot shooting night. Still proud of our girls — they fight til the buzzer every time.",
+      "createdAt": "2026-03-05T22:10:00Z"
+    },
+    {
+      "id": "seed-009",
+      "articleId": "4274413fe29f",
+      "citizenId": "citizen-3",
+      "citizenName": "Robert Williams",
+      "avatarInitials": "RW",
+      "avatarColor": "#22c55e",
+      "content": "Alabama State basketball brings real energy downtown. When the Hornets play I see a big pickup in foot traffic at my shop on Dexter Ave. Win or lose, Bama State fans know how to support their team.",
+      "createdAt": "2026-03-06T07:30:00Z"
+    },
+    {
+      "id": "seed-010",
+      "articleId": "4274413fe29f",
+      "citizenId": "citizen-9",
+      "citizenName": "Thomas Mitchell",
+      "avatarInitials": "TM",
+      "avatarColor": "#8b5cf6",
+      "content": "Two points. That's all it came down to. The SWAC is always competitive.",
+      "createdAt": "2026-03-06T08:00:00Z"
+    },
+    {
+      "id": "seed-011",
+      "articleId": "31df9b20e2fc",
+      "citizenId": "citizen-5",
+      "citizenName": "David Chen",
+      "avatarInitials": "DC",
+      "avatarColor": "#f59e0b",
+      "content": "I relocated from Atlanta six months ago for a job and honestly the infrastructure investment I'm seeing in Central Alabama is impressive. These state grants signal that the region is serious about growth. Still some work to do on broadband and transit but the trajectory looks good.",
+      "createdAt": "2026-03-03T09:00:00Z"
+    },
+    {
+      "id": "seed-012",
+      "articleId": "31df9b20e2fc",
+      "citizenId": "citizen-1",
+      "citizenName": "Marcus Johnson",
+      "avatarInitials": "MJ",
+      "avatarColor": "#3b82f6",
+      "content": "Where is the money going though? Is any of it reaching west side neighborhoods or is it all going to already-developed parts of the city? Would love to see a breakdown by zip code.",
+      "createdAt": "2026-03-03T11:45:00Z"
+    },
+    {
+      "id": "seed-013",
+      "articleId": "31df9b20e2fc",
+      "citizenId": "citizen-4",
+      "citizenName": "Lisa Thompson",
+      "avatarInitials": "LT",
+      "avatarColor": "#a855f7",
+      "content": "Millions in grants sounds great until you see how slowly the projects actually get built. I'll believe it when I see results on the ground.",
+      "createdAt": "2026-03-03T14:00:00Z"
+    },
+    {
+      "id": "seed-014",
+      "articleId": "4531e03bd38d",
+      "citizenId": "citizen-5",
+      "citizenName": "David Chen",
+      "avatarInitials": "DC",
+      "avatarColor": "#f59e0b",
+      "content": "$1.5 billion total investment from Meta is genuinely transformational for this region. That kind of anchor investment attracts suppliers, services, and talent. Montgomery has a real opportunity to position itself as a mid-tier tech hub if the city can build on this momentum with workforce development and housing.",
+      "createdAt": "2026-03-02T10:00:00Z"
+    },
+    {
+      "id": "seed-015",
+      "articleId": "4531e03bd38d",
+      "citizenId": "citizen-7",
+      "citizenName": "James Wilson",
+      "avatarInitials": "JW",
+      "avatarColor": "#84cc16",
+      "content": "I work construction and data center projects pay well but they don't need huge permanent crews. The build-out will employ a lot of us for a couple years, but I'm worried about what happens after. Hope there's a plan for local hiring on the ongoing operations side.",
+      "createdAt": "2026-03-02T13:30:00Z"
+    },
+    {
+      "id": "seed-016",
+      "articleId": "4531e03bd38d",
+      "citizenId": "citizen-2",
+      "citizenName": "Angela Davis",
+      "avatarInitials": "AD",
+      "avatarColor": "#ef4444",
+      "content": "Big tech moving in always raises my antenna. Who negotiated the tax incentives? How many years before Meta pays full local taxes? These details matter for schools and public services.",
+      "createdAt": "2026-03-02T15:00:00Z"
+    },
+    {
+      "id": "seed-017",
+      "articleId": "f6fd8340fcb3",
+      "citizenId": "citizen-4",
+      "citizenName": "Lisa Thompson",
+      "avatarInitials": "LT",
+      "avatarColor": "#a855f7",
+      "content": "I live a few blocks from Old Cloverdale Village and this redevelopment is long overdue. The old storefronts have been vacant for years. As long as they keep the historic character of the neighborhood and don't just turn it into another strip mall with chain restaurants, I'm very supportive.",
+      "createdAt": "2026-03-01T09:30:00Z"
+    },
+    {
+      "id": "seed-018",
+      "articleId": "f6fd8340fcb3",
+      "citizenId": "citizen-9",
+      "citizenName": "Thomas Mitchell",
+      "avatarInitials": "TM",
+      "avatarColor": "#8b5cf6",
+      "content": "Old Cloverdale has great bones. It reminds me of neighborhoods I saw in Savannah and Charleston — walkable, charming, full of history. The right redevelopment could make it a real destination. The wrong one could ruin it. Hoping the developers actually listen to residents.",
+      "createdAt": "2026-03-01T11:00:00Z"
+    },
+    {
+      "id": "seed-019",
+      "articleId": "f6fd8340fcb3",
+      "citizenId": "citizen-3",
+      "citizenName": "Robert Williams",
+      "avatarInitials": "RW",
+      "avatarColor": "#22c55e",
+      "content": "Competition from a revitalized Cloverdale might actually push downtown to step up its game too. Rising tides and all that. I'm cautiously optimistic.",
+      "createdAt": "2026-03-01T14:00:00Z"
+    },
+    {
+      "id": "seed-020",
+      "articleId": "da851578f534",
+      "citizenId": "citizen-1",
+      "citizenName": "Marcus Johnson",
+      "avatarInitials": "MJ",
+      "avatarColor": "#3b82f6",
+      "content": "I have been waiting for this article. West side residents have been asking about the city's growth plans for YEARS and getting ignored. Carter Hill Road, Mobile Highway, Narrow Lane — these corridors need investment just as much as downtown. Show us the details.",
+      "createdAt": "2026-02-28T10:00:00Z"
+    },
+    {
+      "id": "seed-021",
+      "articleId": "da851578f534",
+      "citizenId": "citizen-8",
+      "citizenName": "Maria Garcia",
+      "avatarInitials": "MG",
+      "avatarColor": "#f43f5e",
+      "content": "I work at Baptist South and live out west. The infrastructure — roads, sidewalks, lighting — is noticeably worse on this side of town compared to east Montgomery. Growth plans are nice but what about fixing what's already broken first?",
+      "createdAt": "2026-02-28T12:30:00Z"
+    },
+    {
+      "id": "seed-022",
+      "articleId": "da851578f534",
+      "citizenId": "citizen-6",
+      "citizenName": "Patricia Brown",
+      "avatarInitials": "PB",
+      "avatarColor": "#06b6d4",
+      "content": "The church I lead has been anchoring this community for 40 years. Any growth plan needs to include affordable housing or we will price out the families that have made west Montgomery home for generations.",
+      "createdAt": "2026-02-28T15:15:00Z"
+    },
+    {
+      "id": "seed-023",
+      "articleId": "2085ef6825a8",
+      "citizenId": "citizen-7",
+      "citizenName": "James Wilson",
+      "avatarInitials": "JW",
+      "avatarColor": "#84cc16",
+      "content": "Thousands of new homes means thousands of construction jobs. My crew has been steadily booked with southeast Montgomery projects for two years now. The growth out there is real — Taylor Road corridor has changed completely.",
+      "createdAt": "2026-03-04T08:45:00Z"
+    },
+    {
+      "id": "seed-024",
+      "articleId": "2085ef6825a8",
+      "citizenId": "citizen-5",
+      "citizenName": "David Chen",
+      "avatarInitials": "DC",
+      "avatarColor": "#f59e0b",
+      "content": "Southeast Montgomery is booming but the schools need to keep pace. I looked at houses out there and the first thing I researched was school capacity. If they're building thousands of homes they need to be building schools at the same time, not after.",
+      "createdAt": "2026-03-04T10:15:00Z"
+    },
+    {
+      "id": "seed-025",
+      "articleId": "2085ef6825a8",
+      "citizenId": "citizen-4",
+      "citizenName": "Lisa Thompson",
+      "avatarInitials": "LT",
+      "avatarColor": "#a855f7",
+      "content": "More sprawl. That's all this is. We keep building outward instead of densifying what we already have. All those new homes mean more car traffic, more highway expansion, more emissions. I'd love to see Montgomery invest in infill housing near transit corridors instead.",
+      "createdAt": "2026-03-04T13:00:00Z"
+    },
+    {
+      "id": "seed-026",
+      "articleId": "c17c71f4797b",
+      "citizenId": "citizen-2",
+      "citizenName": "Angela Davis",
+      "avatarInitials": "AD",
+      "avatarColor": "#ef4444",
+      "content": "Six schools under construction — this is what I've been advocating for since I retired from the classroom. Our buildings were falling apart. One school I taught at had a roof that leaked every single time it rained. These kids deserve safe, modern facilities.",
+      "createdAt": "2026-03-05T09:00:00Z"
+    },
+    {
+      "id": "seed-027",
+      "articleId": "c17c71f4797b",
+      "citizenId": "citizen-8",
+      "citizenName": "Maria Garcia",
+      "avatarInitials": "MG",
+      "avatarColor": "#f43f5e",
+      "content": "Which six schools? Are any of them in west Montgomery? That part always gets left out of these announcements.",
+      "createdAt": "2026-03-05T11:30:00Z"
+    },
+    {
+      "id": "seed-028",
+      "articleId": "c17c71f4797b",
+      "citizenId": "citizen-1",
+      "citizenName": "Marcus Johnson",
+      "avatarInitials": "MJ",
+      "avatarColor": "#3b82f6",
+      "content": "My kids go to school in this district and construction disruption is real. For two years they've been doing class in trailers while the main building is worked on. We need to see a real timeline that gets kept.",
+      "createdAt": "2026-03-05T14:00:00Z"
+    },
+    {
+      "id": "seed-029",
+      "articleId": "b3a90b7b22ae",
+      "citizenId": "citizen-6",
+      "citizenName": "Patricia Brown",
+      "avatarInitials": "PB",
+      "avatarColor": "#06b6d4",
+      "content": "Freedom Village is a blessing. As someone who ministers to elderly members of my congregation who have been struggling to find affordable housing, seeing the city actually build something instead of just talk about it means everything. We need more of this.",
+      "createdAt": "2026-03-03T10:00:00Z"
+    },
+    {
+      "id": "seed-030",
+      "articleId": "b3a90b7b22ae",
+      "citizenId": "citizen-9",
+      "citizenName": "Thomas Mitchell",
+      "avatarInitials": "TM",
+      "avatarColor": "#8b5cf6",
+      "content": "Senior housing done right keeps veterans and older residents from falling into homelessness. I know too many guys from my unit who came back and aged out of the system. This kind of project matters more than people realize.",
+      "createdAt": "2026-03-03T12:45:00Z"
+    },
+    {
+      "id": "seed-031",
+      "articleId": "b3a90b7b22ae",
+      "citizenId": "citizen-4",
+      "citizenName": "Lisa Thompson",
+      "avatarInitials": "LT",
+      "avatarColor": "#a855f7",
+      "content": "Love to see affordable senior housing. Now can we get the same energy for affordable workforce housing for younger residents? Rents in Montgomery have gone up significantly in the last two years and it's getting hard for people like me to stay in neighborhoods I love.",
+      "createdAt": "2026-03-03T15:00:00Z"
+    },
+    {
+      "id": "seed-032",
+      "articleId": "f8794981ffe4",
+      "citizenId": "citizen-6",
+      "citizenName": "Patricia Brown",
+      "avatarInitials": "PB",
+      "avatarColor": "#06b6d4",
+      "content": "Jackson Hospital serves communities that no other hospital in this city will reach. Capitol Heights, west side, the uninsured — Jackson has always been there. The council did the right thing. We cannot let this hospital close.",
+      "createdAt": "2026-03-04T09:30:00Z"
+    },
+    {
+      "id": "seed-033",
+      "articleId": "f8794981ffe4",
+      "citizenId": "citizen-8",
+      "citizenName": "Maria Garcia",
+      "avatarInitials": "MG",
+      "avatarColor": "#f43f5e",
+      "content": "As a healthcare worker I can tell you — this community would be devastated if Jackson closes. The ER there handles a huge volume of Medicaid and uninsured patients. Where would those people go? Baptist and Encompass are not set up to absorb that load.",
+      "createdAt": "2026-03-04T11:00:00Z"
+    },
+    {
+      "id": "seed-034",
+      "articleId": "f8794981ffe4",
+      "citizenId": "citizen-3",
+      "citizenName": "Robert Williams",
+      "avatarInitials": "RW",
+      "avatarColor": "#22c55e",
+      "content": "I'm conflicted. I want Jackson to survive but the city shouldn't keep throwing money at an organization without a real turnaround plan. What's the exit strategy?",
+      "createdAt": "2026-03-04T13:30:00Z"
+    },
+    {
+      "id": "seed-035",
+      "articleId": "91990524ef7c",
+      "citizenId": "citizen-2",
+      "citizenName": "Angela Davis",
+      "avatarInitials": "AD",
+      "avatarColor": "#ef4444",
+      "content": "Every time something goes wrong in this city, outside politicians rush to use us as a political football instead of offering actual help. The shooting was a tragedy. Attacking Mayor Reed instead of working with him to address root causes is pure political opportunism and the people of Montgomery see right through it.",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "seed-036",
+      "articleId": "91990524ef7c",
+      "citizenId": "citizen-9",
+      "citizenName": "Thomas Mitchell",
+      "avatarInitials": "TM",
+      "avatarColor": "#8b5cf6",
+      "content": "Politics aside — the city needs more officers on the street. I support Mayor Reed but staffing is a real problem and it was before this shooting happened.",
+      "createdAt": "2026-03-05T11:30:00Z"
+    },
+    {
+      "id": "seed-037",
+      "articleId": "91990524ef7c",
+      "citizenId": "citizen-7",
+      "citizenName": "James Wilson",
+      "avatarInitials": "JW",
+      "avatarColor": "#84cc16",
+      "content": "The state coming in to score political points doesn't help the families who lost somebody. Focus on victims not cameras.",
+      "createdAt": "2026-03-05T14:15:00Z"
+    },
+    {
+      "id": "seed-038",
+      "articleId": "c7636f6cd2a7",
+      "citizenId": "citizen-3",
+      "citizenName": "Robert Williams",
+      "avatarInitials": "RW",
+      "avatarColor": "#22c55e",
+      "content": "State troopers patrolling downtown feels like an overreach to me. My shop is on Dexter Ave and I deal with the same foot traffic every day — it's not a warzone. More visible local policing with community relationships would do more good than troopers who don't know these streets.",
+      "createdAt": "2026-03-04T09:00:00Z"
+    },
+    {
+      "id": "seed-039",
+      "articleId": "c7636f6cd2a7",
+      "citizenId": "citizen-1",
+      "citizenName": "Marcus Johnson",
+      "avatarInitials": "MJ",
+      "avatarColor": "#3b82f6",
+      "content": "The shooting was downtown but don't let them use that to pour all the safety resources downtown while the west side stays forgotten. We need police presence everywhere, not just where the bars and restaurants are.",
+      "createdAt": "2026-03-04T12:00:00Z"
+    },
+    {
+      "id": "seed-040",
+      "articleId": "c7636f6cd2a7",
+      "citizenId": "citizen-10",
+      "citizenName": "Sarah Jenkins",
+      "avatarInitials": "SJ",
+      "avatarColor": "#ec4899",
+      "content": "As a college student I come downtown with friends sometimes. After the shooting I've been nervous about it. I understand the need for more security but I also hope they're not going to just over-police Black residents while making white tourists feel safe.",
+      "createdAt": "2026-03-04T15:00:00Z"
+    },
+    {
+      "id": "seed-041",
+      "articleId": "0f49698db569",
+      "citizenId": "citizen-3",
+      "citizenName": "Robert Williams",
+      "avatarInitials": "RW",
+      "avatarColor": "#22c55e",
+      "content": "Largest budget in city history is big news. As a small business owner I want to see that money go toward infrastructure, small business support, and public safety. What I don't want to see is it disappear into administrative overhead.",
+      "createdAt": "2026-03-03T10:00:00Z"
+    },
+    {
+      "id": "seed-042",
+      "articleId": "0f49698db569",
+      "citizenId": "citizen-2",
+      "citizenName": "Angela Davis",
+      "avatarInitials": "AD",
+      "avatarColor": "#ef4444",
+      "content": "Council oversight is exactly what we need. I've lived through too many budget cycles where the money was allocated and the community never saw the results. Accountability has to be built into this process.",
+      "createdAt": "2026-03-03T11:30:00Z"
+    },
+    {
+      "id": "seed-043",
+      "articleId": "0f49698db569",
+      "citizenId": "citizen-5",
+      "citizenName": "David Chen",
+      "avatarInitials": "DC",
+      "avatarColor": "#f59e0b",
+      "content": "Coming from Atlanta, a large city budget is only meaningful if it's spent efficiently. Montgomery has a real chance here — lower cost of living means budgets can go further. Hope they're thinking long-term about infrastructure and not just patching holes.",
+      "createdAt": "2026-03-03T13:45:00Z"
+    },
+    {
+      "id": "seed-044",
+      "articleId": "5dc0d87a709a",
+      "citizenId": "citizen-6",
+      "citizenName": "Patricia Brown",
+      "avatarInitials": "PB",
+      "avatarColor": "#06b6d4",
+      "content": "Two souls lost and twelve families forever changed by a night of senseless violence. I am heartbroken for this community. We will be holding a vigil at our church on Sunday. All are welcome regardless of faith. Montgomery is better than this and we will not let evil define us.",
+      "createdAt": "2026-03-03T20:00:00Z"
+    },
+    {
+      "id": "seed-045",
+      "articleId": "5dc0d87a709a",
+      "citizenId": "citizen-1",
+      "citizenName": "Marcus Johnson",
+      "avatarInitials": "MJ",
+      "avatarColor": "#3b82f6",
+      "content": "Every time something like this happens I hug my kids a little tighter. It's terrifying. And I'm tired of it being normalized. Leadership needs to treat this like the emergency it is — not a political opportunity.",
+      "createdAt": "2026-03-04T07:00:00Z"
+    },
+    {
+      "id": "seed-046",
+      "articleId": "5dc0d87a709a",
+      "citizenId": "citizen-9",
+      "citizenName": "Thomas Mitchell",
+      "avatarInitials": "TM",
+      "avatarColor": "#8b5cf6",
+      "content": "Mass casualty events are now a regular occurrence in American cities. This is a systemic failure — guns everywhere, mental health support nowhere. Montgomery isn't uniquely bad but we aren't doing enough to address the underlying conditions either.",
+      "createdAt": "2026-03-04T09:15:00Z"
+    },
+    {
+      "id": "seed-047",
+      "articleId": "fd81b038cb4c",
+      "citizenId": "citizen-4",
+      "citizenName": "Lisa Thompson",
+      "avatarInitials": "LT",
+      "avatarColor": "#a855f7",
+      "content": "Really excited about the events calendar for 2026. Old Cloverdale's neighborhood festival, the riverfront series, and the civil rights anniversary programming are all on my list. Montgomery punches above its weight on culture.",
+      "createdAt": "2026-03-02T11:00:00Z"
+    },
+    {
+      "id": "seed-048",
+      "articleId": "fd81b038cb4c",
+      "citizenId": "citizen-3",
+      "citizenName": "Robert Williams",
+      "avatarInitials": "RW",
+      "avatarColor": "#22c55e",
+      "content": "Major events are great for foot traffic. I always see a bump in sales around festivals downtown. I just wish the city would coordinate better with local businesses during event planning — we sometimes find out about road closures the day before.",
+      "createdAt": "2026-03-02T13:00:00Z"
+    },
+    {
+      "id": "seed-049",
+      "articleId": "fd81b038cb4c",
+      "citizenId": "citizen-10",
+      "citizenName": "Sarah Jenkins",
+      "avatarInitials": "SJ",
+      "avatarColor": "#ec4899",
+      "content": "Hope some of these events are accessible without a car! Transit to downtown is really spotty on weekends and not everyone can Uber everywhere.",
+      "createdAt": "2026-03-02T15:30:00Z"
+    },
+    {
+      "id": "seed-050",
+      "articleId": "75884d85ee65",
+      "citizenId": "citizen-4",
+      "citizenName": "Lisa Thompson",
+      "avatarInitials": "LT",
+      "avatarColor": "#a855f7",
+      "content": "The holiday events in Montgomery are genuinely underrated. The Winterfest light show on the Riverwalk, the First Night celebration — I've lived in bigger cities and Montgomery holds its own.",
+      "createdAt": "2026-01-01T10:00:00Z"
+    },
+    {
+      "id": "seed-051",
+      "articleId": "75884d85ee65",
+      "citizenId": "citizen-5",
+      "citizenName": "David Chen",
+      "avatarInitials": "DC",
+      "avatarColor": "#f59e0b",
+      "content": "First holiday season in Montgomery and I was pleasantly surprised. People here are genuinely warm and welcoming. It made the transition from Atlanta feel a lot easier.",
+      "createdAt": "2026-01-01T14:00:00Z"
+    },
+    {
+      "id": "seed-052",
+      "articleId": "75884d85ee65",
+      "citizenId": "citizen-9",
+      "citizenName": "Thomas Mitchell",
+      "avatarInitials": "TM",
+      "avatarColor": "#8b5cf6",
+      "content": "Good to see community events that bring different parts of the city together. We need more of that, not less.",
+      "createdAt": "2026-01-01T17:00:00Z"
+    },
+    {
+      "id": "seed-053",
+      "articleId": "bd9888d043e6",
+      "citizenId": "citizen-6",
+      "citizenName": "Patricia Brown",
+      "avatarInitials": "PB",
+      "avatarColor": "#06b6d4",
+      "content": "The Central Alabama Community Foundation does incredible work. Several of the nonprofits that received grants serve families in Capitol Heights directly. This kind of local philanthropy is what holds communities together when government funding falls short.",
+      "createdAt": "2026-03-03T09:00:00Z"
+    },
+    {
+      "id": "seed-054",
+      "articleId": "bd9888d043e6",
+      "citizenId": "citizen-8",
+      "citizenName": "Maria Garcia",
+      "avatarInitials": "MG",
+      "avatarColor": "#f43f5e",
+      "content": "$184,000 split across multiple nonprofits — that's not a lot per organization. I run a small single-mom support group and we applied last cycle and didn't get funded. These grants help but the need is so much bigger than the pool of money available.",
+      "createdAt": "2026-03-03T11:30:00Z"
+    },
+    {
+      "id": "seed-055",
+      "articleId": "bd9888d043e6",
+      "citizenId": "citizen-2",
+      "citizenName": "Angela Davis",
+      "avatarInitials": "AD",
+      "avatarColor": "#ef4444",
+      "content": "I've served on grant review panels and I know how hard these organizations work to compete for limited dollars. Congratulations to the recipients. The community counts on you.",
+      "createdAt": "2026-03-03T13:00:00Z"
+    },
+    {
+      "id": "seed-056",
+      "articleId": "763fe375c2c2",
+      "citizenId": "citizen-8",
+      "citizenName": "Maria Garcia",
+      "avatarInitials": "MG",
+      "avatarColor": "#f43f5e",
+      "content": "The SNAP cuts are hitting families I know personally. I'm a single mom with two kids and the food bank on Mobile Highway has been a lifeline for people in my neighborhood when the benefits run out at the end of the month. These cuts are devastating and Congress does not seem to care.",
+      "createdAt": "2026-03-05T08:30:00Z"
+    },
+    {
+      "id": "seed-057",
+      "articleId": "763fe375c2c2",
+      "citizenId": "citizen-6",
+      "citizenName": "Patricia Brown",
+      "avatarInitials": "PB",
+      "avatarColor": "#06b6d4",
+      "content": "Our church partners with the food bank and the demand this winter has been unlike anything we've seen. Dignified access to food is not a political issue — it is a moral one.",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "seed-058",
+      "articleId": "763fe375c2c2",
+      "citizenId": "citizen-1",
+      "citizenName": "Marcus Johnson",
+      "avatarInitials": "MJ",
+      "avatarColor": "#3b82f6",
+      "content": "My sister volunteers at the River Region food bank. She says they're turning people away because supply can't keep up. This is a crisis that doesn't get enough coverage.",
+      "createdAt": "2026-03-05T12:00:00Z"
+    },
+    {
+      "id": "seed-059",
+      "articleId": "a77d39d9e984",
+      "citizenId": "citizen-9",
+      "citizenName": "Thomas Mitchell",
+      "avatarInitials": "TM",
+      "avatarColor": "#8b5cf6",
+      "content": "Recruitment has to be paired with retention. Montgomery PD loses officers to other departments and to private security every year because of pay and working conditions. Hire them, then give them a reason to stay.",
+      "createdAt": "2026-03-06T09:00:00Z"
+    },
+    {
+      "id": "seed-060",
+      "articleId": "a77d39d9e984",
+      "citizenId": "citizen-2",
+      "citizenName": "Angela Davis",
+      "avatarInitials": "AD",
+      "avatarColor": "#ef4444",
+      "content": "Crime data meetings are good but where is the community input on policing strategy? I've attended three of these briefings and it's always a one-way presentation. We need real dialogue about what safe neighborhoods look like to the people who live there.",
+      "createdAt": "2026-03-06T11:00:00Z"
+    },
+    {
+      "id": "seed-061",
+      "articleId": "a77d39d9e984",
+      "citizenId": "citizen-7",
+      "citizenName": "James Wilson",
+      "avatarInitials": "JW",
+      "avatarColor": "#84cc16",
+      "content": "East Montgomery has seen a real uptick in car break-ins over the last six months. My truck was broken into twice near Forest Avenue. These briefings need to address specific corridors not just citywide numbers.",
+      "createdAt": "2026-03-06T13:30:00Z"
+    },
+    {
+      "id": "seed-062",
+      "articleId": "4ed8030393c1",
+      "citizenId": "citizen-1",
+      "citizenName": "Marcus Johnson",
+      "avatarInitials": "MJ",
+      "avatarColor": "#3b82f6",
+      "content": "The Whitewater project has completely changed how I see what's possible on the west side. My family drives out there on weekends now. If you can build something like that out here you can build anything. Now let's talk about fixing the roads leading to it.",
+      "createdAt": "2026-03-05T09:00:00Z"
+    },
+    {
+      "id": "seed-063",
+      "articleId": "4ed8030393c1",
+      "citizenId": "citizen-5",
+      "citizenName": "David Chen",
+      "avatarInitials": "DC",
+      "avatarColor": "#f59e0b",
+      "content": "A whitewater attraction as an anchor for economic development is actually a smart play. It differentiates Montgomery from every other mid-sized Southern city. I've already recommended it to visiting colleagues as a unique experience.",
+      "createdAt": "2026-03-05T11:00:00Z"
+    },
+    {
+      "id": "seed-064",
+      "articleId": "4ed8030393c1",
+      "citizenId": "citizen-4",
+      "citizenName": "Lisa Thompson",
+      "avatarInitials": "LT",
+      "avatarColor": "#a855f7",
+      "content": "Went out last month and it was spectacular. The real test is whether the surrounding development materializes — restaurants, shops, hotels. The attraction alone won't be enough to sustain west Montgomery growth.",
+      "createdAt": "2026-03-05T14:00:00Z"
+    },
+    {
+      "id": "seed-065",
+      "articleId": "9124a43b4c4c",
+      "citizenId": "citizen-8",
+      "citizenName": "Maria Garcia",
+      "avatarInitials": "MG",
+      "avatarColor": "#f43f5e",
+      "content": "New playgrounds!! My kids have been playing on the same broken equipment near Cloverdale Road for three years. Half the swings are missing seats. If any of these 15 are near us I will literally cry happy tears.",
+      "createdAt": "2026-03-04T08:00:00Z"
+    },
+    {
+      "id": "seed-066",
+      "articleId": "9124a43b4c4c",
+      "citizenId": "citizen-6",
+      "citizenName": "Patricia Brown",
+      "avatarInitials": "PB",
+      "avatarColor": "#06b6d4",
+      "content": "Safe outdoor spaces for children to play are foundational to healthy communities. $1.68 million across 15 playgrounds is a smart investment. I hope they prioritize neighborhoods where children have the least access to private green space.",
+      "createdAt": "2026-03-04T10:00:00Z"
+    },
+    {
+      "id": "seed-067",
+      "articleId": "9124a43b4c4c",
+      "citizenId": "citizen-10",
+      "citizenName": "Sarah Jenkins",
+      "avatarInitials": "SJ",
+      "avatarColor": "#ec4899",
+      "content": "This is the kind of quality-of-life investment that makes people want to stay and raise families here. More of this please!",
+      "createdAt": "2026-03-04T13:00:00Z"
+    },
+    {
+      "id": "seed-068",
+      "articleId": "fd55fbe24505",
+      "citizenId": "citizen-2",
+      "citizenName": "Angela Davis",
+      "avatarInitials": "AD",
+      "avatarColor": "#ef4444",
+      "content": "Administrative leave without transparency serves no one. The school district owes the Capitol Heights community a full explanation. Teachers in MPS are already stretched thin — they need support and clarity from leadership, not silence.",
+      "createdAt": "2026-03-06T09:00:00Z"
+    },
+    {
+      "id": "seed-069",
+      "articleId": "fd55fbe24505",
+      "citizenId": "citizen-6",
+      "citizenName": "Patricia Brown",
+      "avatarInitials": "PB",
+      "avatarColor": "#06b6d4",
+      "content": "Parents in this neighborhood deserve to know what's happening at their school. My contacts in Capitol Heights are worried and getting conflicting information. The district's communications are never clear enough in situations like this.",
+      "createdAt": "2026-03-06T11:00:00Z"
+    },
+    {
+      "id": "seed-070",
+      "articleId": "fd55fbe24505",
+      "citizenId": "citizen-10",
+      "citizenName": "Sarah Jenkins",
+      "avatarInitials": "SJ",
+      "avatarColor": "#ec4899",
+      "content": "I student-taught in Montgomery last semester and I saw how much pressure teachers are under. Whatever happened here, I hope the district handles it fairly and quickly. Uncertainty hurts students most.",
+      "createdAt": "2026-03-06T14:00:00Z"
+    },
+    {
+      "id": "seed-071",
+      "articleId": "7d8f5f3381af",
+      "citizenId": "citizen-7",
+      "citizenName": "James Wilson",
+      "avatarInitials": "JW",
+      "avatarColor": "#84cc16",
+      "content": "Renfroe's closing that east Montgomery location is a real blow. That was one of the few proper grocery stores on that side of Taylor Road. Now people have to drive further or rely on Dollar General for produce. Food deserts are a real problem here.",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "seed-072",
+      "articleId": "7d8f5f3381af",
+      "citizenId": "citizen-8",
+      "citizenName": "Maria Garcia",
+      "avatarInitials": "MG",
+      "avatarColor": "#f43f5e",
+      "content": "I shopped at that Renfroe's for years. Local grocery stores anchor neighborhoods in ways that chains can't. Once they're gone they don't come back. This is devastating for the community out there.",
+      "createdAt": "2026-03-05T12:30:00Z"
+    },
+    {
+      "id": "seed-073",
+      "articleId": "7d8f5f3381af",
+      "citizenId": "citizen-3",
+      "citizenName": "Robert Williams",
+      "avatarInitials": "RW",
+      "avatarColor": "#22c55e",
+      "content": "As a small business owner I understand the pressures that force these decisions. Margins are brutal right now — labor costs, supply chain, insurance. But we lose something irreplaceable when local institutions close.",
+      "createdAt": "2026-03-05T15:00:00Z"
+    },
+    {
+      "id": "seed-074",
+      "articleId": "eb1946fc2580",
+      "citizenId": "citizen-4",
+      "citizenName": "Lisa Thompson",
+      "avatarInitials": "LT",
+      "avatarColor": "#a855f7",
+      "content": "A nature park and trail network downtown would be transformational for quality of life. I bike commute when I can and Montgomery's trail infrastructure is painfully inadequate. Connect the Riverwalk to neighborhood parks and you change how people move through the city.",
+      "createdAt": "2026-03-04T09:00:00Z"
+    },
+    {
+      "id": "seed-075",
+      "articleId": "eb1946fc2580",
+      "citizenId": "citizen-5",
+      "citizenName": "David Chen",
+      "avatarInitials": "DC",
+      "avatarColor": "#f59e0b",
+      "content": "Green space and recreational infrastructure are top-three factors for tech workers deciding where to live. If Montgomery wants to attract and retain talent like me, investing in parks and trails is not optional — it's competitive strategy.",
+      "createdAt": "2026-03-04T11:00:00Z"
+    },
+    {
+      "id": "seed-076",
+      "articleId": "eb1946fc2580",
+      "citizenId": "citizen-9",
+      "citizenName": "Thomas Mitchell",
+      "avatarInitials": "TM",
+      "avatarColor": "#8b5cf6",
+      "content": "Getting outdoors helps veterans dealing with PTSD more than most people know. A well-designed trail network downtown — safe, accessible, maintained — would genuinely improve mental health outcomes for a lot of people in this community.",
+      "createdAt": "2026-03-04T14:00:00Z"
+    },
+    {
+      "id": "seed-077",
+      "articleId": "eb1946fc2580",
+      "citizenId": "citizen-10",
+      "citizenName": "Sarah Jenkins",
+      "avatarInitials": "SJ",
+      "avatarColor": "#ec4899",
+      "content": "YES PLEASE. I run near Blount Cultural Park and the trails stop so abruptly it's frustrating. A connected trail network would make me feel so much safer running solo. This is a public health issue as much as a parks issue.",
+      "createdAt": "2026-03-04T17:00:00Z"
+    }
+  ],
+  "reactions": {},
+  "articles": [
+    {
+      "id": "9f35bf6a7695",
+      "title": "Two Montgomery Men Sentenced on Federal Firearms Charges",
+      "category": "general",
+      "sentiment": "negative"
+    },
+    {
+      "id": "a3dc6b33237a",
+      "title": "Montgomery Public Schools announces Special Education Job Fair",
+      "category": "general",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "4274413fe29f",
+      "title": "Grambling secures 65-63 win over Alabama State",
+      "category": "general",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "31df9b20e2fc",
+      "title": "Millions in state grants pour into Central Alabama: Here's where the money is going",
+      "category": "development",
+      "sentiment": "positive"
+    },
+    {
+      "id": "4531e03bd38d",
+      "title": "Meta to expand Montgomery, Alabama data hub, pushing total investment to $1.5 billion",
+      "category": "development",
+      "sentiment": "positive"
+    },
+    {
+      "id": "f6fd8340fcb3",
+      "title": "Partnership Begins Redevelopment of Old Cloverdale Village in Montgomery, Alabama",
+      "category": "development",
+      "sentiment": "positive"
+    },
+    {
+      "id": "da851578f534",
+      "title": "What we know about the city's growth plans for west Montgomery",
+      "category": "development",
+      "sentiment": "positive"
+    },
+    {
+      "id": "2085ef6825a8",
+      "title": "Thousands of new homes planned for southeast Montgomery",
+      "category": "development",
+      "sentiment": "positive"
+    },
+    {
+      "id": "c17c71f4797b",
+      "title": "Six school construction projects are underway in Montgomery",
+      "category": "development",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "b3a90b7b22ae",
+      "title": "City of Montgomery opens Freedom Village senior housing development",
+      "category": "development",
+      "sentiment": "positive"
+    },
+    {
+      "id": "f8794981ffe4",
+      "title": "Montgomery's city council passes resolution to support financially ailing Jackson Hospital",
+      "category": "government",
+      "sentiment": "positive"
+    },
+    {
+      "id": "91990524ef7c",
+      "title": "GOP officials attack Montgomery leaders in wake of shooting; city leaders push back",
+      "category": "government",
+      "sentiment": "negative"
+    },
+    {
+      "id": "c7636f6cd2a7",
+      "title": "AL Governor Kay Ivey to extend state police presence in Montgomery after mass shooting",
+      "category": "government",
+      "sentiment": "negative"
+    },
+    {
+      "id": "0f49698db569",
+      "title": "Montgomery passes largest budget in City's history, council pushes to oversee millions",
+      "category": "government",
+      "sentiment": "positive"
+    },
+    {
+      "id": "5dc0d87a709a",
+      "title": "2 dead, 12 injured in Montgomery, Alabama mass shooting",
+      "category": "events",
+      "sentiment": "negative"
+    },
+    {
+      "id": "fd81b038cb4c",
+      "title": "Major events are coming to Montgomery in 2026. What we know",
+      "category": "events",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "75884d85ee65",
+      "title": "Things to do in Montgomery for Dec. 25-31",
+      "category": "events",
+      "sentiment": "positive"
+    },
+    {
+      "id": "bd9888d043e6",
+      "title": "Central Alabama Community Foundation awards $184,652 in grants to River Region nonprofits",
+      "category": "community",
+      "sentiment": "positive"
+    },
+    {
+      "id": "763fe375c2c2",
+      "title": "How an Alabama food bank is filling emergency need amid SNAP crisis",
+      "category": "community",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "a77d39d9e984",
+      "title": "Police discuss crime data, recruitment at monthly public safety update",
+      "category": "community",
+      "sentiment": "negative"
+    },
+    {
+      "id": "4ed8030393c1",
+      "title": "Montgomery Whitewater predicts fast growth amid ambition to anchor West Montgomery",
+      "category": "community",
+      "sentiment": "positive"
+    },
+    {
+      "id": "9124a43b4c4c",
+      "title": "$1.68M goes to 15 new Montgomery playgrounds",
+      "category": "community",
+      "sentiment": "positive"
+    },
+    {
+      "id": "fd55fbe24505",
+      "title": "Montgomery Public Schools teacher placed on administrative leave",
+      "category": "community",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "7d8f5f3381af",
+      "title": "Renfroe's Market to close east Montgomery location",
+      "category": "general",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "eb1946fc2580",
+      "title": "Montgomery eyes new nature park, recreational trail network",
+      "category": "community",
+      "sentiment": "positive"
+    }
+  ],
+  "exportedAt": "2026-03-06T20:00:00Z"
+}

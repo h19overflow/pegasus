@@ -165,7 +165,7 @@
       "scrapedAt": "2026-03-06T14:27:37.474285+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 3,
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
@@ -565,7 +565,7 @@
       "scrapedAt": "2026-03-06T14:27:55.044403+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 1,
       "sentiment": "positive",
       "sentimentScore": 70,
       "misinfoRisk": 0,
@@ -665,7 +665,7 @@
       "scrapedAt": "2026-03-06T14:27:55.044403+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 3,
       "sentiment": "positive",
       "sentimentScore": 80,
       "misinfoRisk": 0,
@@ -715,7 +715,7 @@
       "scrapedAt": "2026-03-06T14:27:55.044403+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 2,
       "sentiment": "positive",
       "sentimentScore": 80,
       "misinfoRisk": 0,
@@ -890,7 +890,7 @@
       "scrapedAt": "2026-03-06T14:28:03.934770+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 3,
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
@@ -1440,7 +1440,7 @@
       "scrapedAt": "2026-03-06T14:28:24.679848+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 3,
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
@@ -1565,7 +1565,7 @@
       "scrapedAt": "2026-03-06T14:28:24.679848+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 2,
       "sentiment": "positive",
       "sentimentScore": 80,
       "misinfoRisk": 0,
@@ -1765,7 +1765,7 @@
       "scrapedAt": "2026-03-06T14:28:32.072757+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 1,
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
@@ -3490,7 +3490,7 @@
       "scrapedAt": "2026-03-06T14:29:19.486280+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 3,
       "sentiment": "negative",
       "sentimentScore": 60,
       "misinfoRisk": 0,
@@ -3790,7 +3790,7 @@
       "scrapedAt": "2026-03-06T14:29:25.638860+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 2,
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
@@ -4090,7 +4090,7 @@
       "scrapedAt": "2026-03-06T14:29:35.738742+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 4,
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
@@ -4340,7 +4340,7 @@
       "scrapedAt": "2026-03-06T14:29:42.230231+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 2,
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
@@ -4715,7 +4715,7 @@
       "scrapedAt": "2026-03-06T14:29:51.035427+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 3,
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
@@ -4740,7 +4740,7 @@
       "scrapedAt": "2026-03-06T14:30:01.345098+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 3,
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
@@ -5715,7 +5715,7 @@
       "scrapedAt": "2026-03-05T22:32:10.101063+00:00",
       "upvotes": 0,
       "downvotes": 0,
-      "commentCount": 0,
+      "commentCount": 2,
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
@@ -6176,6 +6176,282 @@
         "address": "Montgomery, AL",
         "neighborhood": "Montgomery"
       }
+    }
+  ],
+  "comments": [
+    {
+      "id": "seed-02-00",
+      "articleId": "a3dc6b33237a",
+      "citizenId": "citizen-02",
+      "citizenName": "Sarah Thompson",
+      "avatarInitials": "ST",
+      "avatarColor": "#d97706",
+      "content": "We need more action on this, not just talk. Our community deserves better.",
+      "createdAt": "2025-02-09T10:00:00Z"
+    },
+    {
+      "id": "seed-02-01",
+      "articleId": "a3dc6b33237a",
+      "citizenId": "citizen-01",
+      "citizenName": "David Williams",
+      "avatarInitials": "DW",
+      "avatarColor": "#059669",
+      "content": "I've lived here for 10 years. Curious to see how this plays out.",
+      "createdAt": "2025-02-09T11:00:00Z"
+    },
+    {
+      "id": "seed-02-02",
+      "articleId": "a3dc6b33237a",
+      "citizenId": "citizen-05",
+      "citizenName": "Robert Mitchell",
+      "avatarInitials": "RM",
+      "avatarColor": "#0891b2",
+      "content": "Interesting development. Would love to hear more details about the timeline.",
+      "createdAt": "2025-02-09T12:00:00Z"
+    },
+    {
+      "id": "seed-04-00",
+      "articleId": "0f49698db569",
+      "citizenId": "citizen-03",
+      "citizenName": "James Carter",
+      "avatarInitials": "JC",
+      "avatarColor": "#7c3aed",
+      "content": "This gives me hope for the future of our city.",
+      "createdAt": "2025-02-11T10:00:00Z"
+    },
+    {
+      "id": "seed-13-00",
+      "articleId": "4531e03bd38d",
+      "citizenId": "citizen-04",
+      "citizenName": "Lisa Chen",
+      "avatarInitials": "LC",
+      "avatarColor": "#dc2626",
+      "content": "Finally some positive movement on this. Our neighborhood really needed this.",
+      "createdAt": "2025-02-20T10:00:00Z"
+    },
+    {
+      "id": "72f5351fe0f2",
+      "articleId": "2180a30149d5",
+      "content": "This hits home. My husband works at Hyundai's supplier and his pay hasn't budged in 3 years while cost of living keeps going up.",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "negative"
+    },
+    {
+      "id": "f5f7bd73382a",
+      "articleId": "2180a30149d5",
+      "content": "Using prison labor to undercut free workers is morally wrong. The city needs to take a stand on this.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "negative"
+    },
+    {
+      "id": "c3e7561ac88e",
+      "articleId": "2180a30149d5",
+      "content": "I'm not surprised. Everyone in east Montgomery knows the auto plants use every trick to keep wages low.",
+      "createdAt": "2026-03-05T13:34:00Z",
+      "sentiment": "negative"
+    },
+    {
+      "id": "d5066cf8a9cf",
+      "articleId": "2180a30149d5",
+      "content": "Before we jump to conclusions, let's see the full methodology. Correlation doesn't equal causation.",
+      "createdAt": "2026-03-05T15:51:00Z",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "a450ad093730",
+      "articleId": "48ccc0f35f8a",
+      "content": "I'm conflicted. I want Jackson to survive but the city shouldn't keep throwing money at an organization without a real turnaround plan.",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "negative"
+    },
+    {
+      "id": "d0819ae26740",
+      "articleId": "48ccc0f35f8a",
+      "content": "As a healthcare worker at Jackson, morale is low. We need leadership that actually listens to staff concerns.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "negative"
+    },
+    {
+      "id": "ce94512fa807",
+      "articleId": "48ccc0f35f8a",
+      "content": "Venture philanthropy sounds nice on paper but who's accountable if it fails? Taxpayers as always.",
+      "createdAt": "2026-03-05T13:34:00Z",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "615446a767a7",
+      "articleId": "cb9222db358d",
+      "content": "About time. Downtown should be safe for everyone, not just during business hours.",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "c630b2da3140",
+      "articleId": "cb9222db358d",
+      "content": "Safety plan is meaningless without actual enforcement. We've heard these promises before.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "negative"
+    },
+    {
+      "id": "bfe3a13364ce",
+      "articleId": "cb9222db358d",
+      "content": "I own a restaurant on Commerce St and safety concerns are driving away customers. We need action not plans.",
+      "createdAt": "2026-03-05T13:34:00Z",
+      "sentiment": "negative"
+    },
+    {
+      "id": "876eab7b5679",
+      "articleId": "10dc5b10ceba",
+      "content": "Finally! Our kids deserve modern facilities. The old building was falling apart.",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "5d68ec251908",
+      "articleId": "10dc5b10ceba",
+      "content": "I just hope they hire local contractors and workers for this project.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "a61a4aaf4052",
+      "articleId": "10dc5b10ceba",
+      "content": "Great investment in our community. Education infrastructure matters.",
+      "createdAt": "2026-03-05T13:34:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "11877f3060d6",
+      "articleId": "02a76c198924",
+      "content": "What's the plan for the property? We need transparency on how taxpayer money is being spent.",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "6fe8c3456705",
+      "articleId": "02a76c198924",
+      "content": "This could be a great opportunity for community space downtown. Hope they get public input.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "ae7731948818",
+      "articleId": "02a76c198924",
+      "content": "Another property purchase with no clear vision. Show us a plan first.",
+      "createdAt": "2026-03-05T13:34:00Z",
+      "sentiment": "negative"
+    },
+    {
+      "id": "5c48a5e62e35",
+      "articleId": "3fa1b8c5e16b",
+      "content": "As a vet, this means everything. Moore and Sewell working together is what we need more of.",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "6fcb8a6acb5e",
+      "articleId": "3fa1b8c5e16b",
+      "content": "Protecting veteran benefits should be non-partisan. Glad to see bipartisan cooperation.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "0ebe72fd3522",
+      "articleId": "3fa1b8c5e16b",
+      "content": "Veterans in Montgomery deserve better access to healthcare and job training programs.",
+      "createdAt": "2026-03-05T13:34:00Z",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "cca4f57d1884",
+      "articleId": "da658cab47dc",
+      "content": "Growth numbers look good on paper but are regular folks seeing it in their paychecks?",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "46eec62b1261",
+      "articleId": "da658cab47dc",
+      "content": "Downtown Montgomery is transforming. New restaurants, businesses opening. The momentum is real.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "9fa4fb23e3ad",
+      "articleId": "da658cab47dc",
+      "content": "Economic growth means nothing if it's not reaching west and north Montgomery neighborhoods.",
+      "createdAt": "2026-03-05T13:34:00Z",
+      "sentiment": "negative"
+    },
+    {
+      "id": "2fc4478e3e9b",
+      "articleId": "9b8c7c4783a5",
+      "content": "Rural communities need this badly. Hope Montgomery area benefits too.",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "e257250772c9",
+      "articleId": "9b8c7c4783a5",
+      "content": "Investment is great but we need broadband infrastructure first. Can't grow without internet.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "cc07bd7084ef",
+      "articleId": "5a5814382233",
+      "content": "Montgomery has so much potential. We just need consistent investment and leadership.",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "9848fd973838",
+      "articleId": "5a5814382233",
+      "content": "The developer is right \u2014 Montgomery's riverfront alone could rival anything in Birmingham.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "7ab3d163b41a",
+      "articleId": "3d7d56748afb",
+      "content": "Great program! My deck is 15 years old and I've been worried about safety.",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "9c9b6f89b366",
+      "articleId": "3d7d56748afb",
+      "content": "How do I sign up? This is exactly the kind of service the county should offer.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "f0189a8c0759",
+      "articleId": "875d42c47260",
+      "content": "Already? Summer just started. Let kids be kids for a bit longer.",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "d65f0f4912ab",
+      "articleId": "875d42c47260",
+      "content": "Early start means early end. My kids prefer getting out in May.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "positive"
+    },
+    {
+      "id": "fc3b842ab3ee",
+      "articleId": "0f048ffb1dbb",
+      "content": "Huntsville gets all the federal investment. What about Montgomery?",
+      "createdAt": "2026-03-05T09:00:00Z",
+      "sentiment": "negative"
+    },
+    {
+      "id": "480227dbcd08",
+      "articleId": "0f048ffb1dbb",
+      "content": "This could create supplier opportunities for Montgomery-area businesses if we position ourselves right.",
+      "createdAt": "2026-03-05T11:17:00Z",
+      "sentiment": "positive"
     }
   ]
 }

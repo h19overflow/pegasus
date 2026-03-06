@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SidebarArticleRow } from "./SidebarArticleRow";
 import { NewsCommentSection } from "./NewsCommentSection";
@@ -24,6 +24,7 @@ interface NewsSidebarPanelProps {
   onModeChange: (mode: "pins" | "heat") => void;
   onZoomToNeighborhood: (lat: number, lng: number) => void;
   onSelectArticle: (articleId: string) => void;
+  focusedArticleId?: string | null;
 }
 
 function sortByLatest(articles: NewsArticle[]): NewsArticle[] {
@@ -35,11 +36,18 @@ function sortByLatest(articles: NewsArticle[]): NewsArticle[] {
 }
 
 export function NewsSidebarPanel({
-  articles, reactionCounts, comments, mode, onModeChange, onSelectArticle,
+  articles, reactionCounts, comments, mode, onModeChange, onSelectArticle, focusedArticleId,
 }: NewsSidebarPanelProps) {
   const [sort, setSort] = useState<SortMode>("latest");
   const [category, setCategory] = useState<NewsCategory | "all">("all");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  // Sync externally focused article (e.g. from admin chat) into local selection
+  useEffect(() => {
+    if (focusedArticleId && focusedArticleId !== selectedId) {
+      setSelectedId(focusedArticleId);
+    }
+  }, [focusedArticleId]);
 
   const filtered = category === "all" ? articles : articles.filter((a) => a.category === category);
   const sorted = sort === "latest"

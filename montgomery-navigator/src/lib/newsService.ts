@@ -1,9 +1,10 @@
-import type { NewsArticle, NewsCategory } from "./types";
+import type { NewsArticle, NewsCategory, NewsComment } from "./types";
 
 interface NewsFeedResponse {
   lastScraped: string;
   totalArticles: number;
   articles: NewsArticle[];
+  comments?: NewsComment[];
 }
 
 let cached: NewsArticle[] | null = null;
@@ -32,6 +33,13 @@ export async function fetchNewsArticles(): Promise<NewsArticle[]> {
   const raw = data.articles ?? [];
   cached = deduplicateByTitle(raw);
   return cached;
+}
+
+export async function fetchNewsComments(): Promise<NewsComment[]> {
+  const response = await fetch("/data/news_feed.json");
+  if (!response.ok) return [];
+  const data: NewsFeedResponse = await response.json();
+  return data.comments ?? [];
 }
 
 export function filterArticlesByCategory(

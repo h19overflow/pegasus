@@ -58,6 +58,15 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
   const [flyTarget, setFlyTarget] = useState<{ lat: number; lng: number; ts: number } | null>(null);
   const [focusedArticle, setFocusedArticle] = useState<{ id: string; ts: number } | null>(null);
 
+  // Sync global selectedArticleId → local focusedArticle (for cross-page navigation)
+  useEffect(() => {
+    if (state.selectedArticleId) {
+      setFocusedArticle({ id: state.selectedArticleId, ts: Date.now() });
+      if (!state.newsMapVisible) dispatch({ type: "TOGGLE_NEWS_MAP" });
+      dispatch({ type: "SET_SELECTED_ARTICLE", articleId: null });
+    }
+  }, [state.selectedArticleId]);
+
   useEffect(() => {
     async function loadAll() {
       for (const cat of MAP_CATEGORIES) {
@@ -189,6 +198,7 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
               onModeChange={(mode) => dispatch({ type: "SET_NEWS_MAP_MODE", mode })}
               onZoomToNeighborhood={handleZoomToNeighborhood}
               onSelectArticle={handleSelectArticle}
+              focusedArticleId={focusedArticle?.id ?? null}
             />
           )}
         </div>
