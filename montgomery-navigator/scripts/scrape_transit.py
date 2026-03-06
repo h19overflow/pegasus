@@ -17,9 +17,13 @@ from transit_record_builder import build_route_record
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
+import os
+
+_customer_id = os.environ.get("BRIGHTDATA_CUSTOMER_ID", "")
+_browser_password = os.environ.get("BRIGHTDATA_BROWSER_PASSWORD", "")
 BRIGHT_DATA_WSS = (
-    "wss://brd-customer-hl_9067ef31-zone-scraping_browser1"
-    ":54iofevfivh1@brd.superproxy.io:9222"
+    f"wss://brd-customer-{_customer_id}-zone-scraping_browser1"
+    f":{_browser_password}@brd.superproxy.io:9222"
 )
 ROUTES_URL = "https://themtransit.com/routes/"
 SYSTEM_MAP_URL = "https://themtransit.com/system-map/"

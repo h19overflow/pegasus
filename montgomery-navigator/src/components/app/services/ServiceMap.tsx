@@ -1,37 +1,12 @@
 import { useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import L from "leaflet";
-import type { ServicePoint, ServiceCategory } from "@/lib/types";
+import type { ServicePoint } from "@/lib/types";
 import { useApp } from "@/lib/appContext";
 import { fetchServicePoints } from "@/lib/arcgisService";
+import { createCategoryMarker } from "@/lib/mapMarkers";
 
 const MONTGOMERY_CENTER: [number, number] = [32.3668, -86.3];
 const DEFAULT_ZOOM = 12;
-
-const CATEGORY_COLORS: Record<ServiceCategory, string> = {
-  health: "#E74C3C",
-  community: "#2ECC71",
-  childcare: "#F39C12",
-  education: "#3498DB",
-  safety: "#E67E22",
-  libraries: "#9B59B6",
-};
-
-function createColoredIcon(color: string): L.DivIcon {
-  return L.divIcon({
-    className: "custom-marker",
-    html: `<div style="
-      background-color: ${color};
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 2px solid white;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    "></div>`,
-    iconSize: [12, 12],
-    iconAnchor: [6, 6],
-  });
-}
 
 function MapDataLoader() {
   const { state, dispatch } = useApp();
@@ -103,7 +78,7 @@ export function ServiceMap() {
         <Marker
           key={point.id}
           position={[point.lat, point.lng]}
-          icon={createColoredIcon(CATEGORY_COLORS[point.category])}
+          icon={createCategoryMarker(point.category)}
           eventHandlers={{ click: () => handleMarkerClick(point) }}
         >
           <Popup>

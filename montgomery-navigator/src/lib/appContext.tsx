@@ -63,7 +63,9 @@ type AppAction =
   | { type: "SET_SELECTED_ARTICLE"; articleId: string | null }
   | { type: "TOGGLE_CHAT_BUBBLE" }
   | { type: "SET_CHAT_BUBBLE_OPEN"; open: boolean }
-  | { type: "MARK_CHAT_READ" };
+  | { type: "MARK_CHAT_READ" }
+  | { type: "MERGE_JOB_LISTINGS"; listings: JobListing[] }
+  | { type: "MERGE_NEWS_ARTICLES"; articles: NewsArticle[] };
 
 const initialState: AppState = {
   messages: [],
@@ -241,6 +243,16 @@ function appReducer(state: AppState, action: AppAction): AppState {
       };
     case "MARK_CHAT_READ":
       return { ...state, chatBubbleHasUnread: false };
+    case "MERGE_JOB_LISTINGS": {
+      const existingIds = new Set(state.jobListings.map((j) => j.id));
+      const fresh = action.listings.filter((j) => !existingIds.has(j.id));
+      return { ...state, jobListings: [...fresh, ...state.jobListings] };
+    }
+    case "MERGE_NEWS_ARTICLES": {
+      const existingIds = new Set(state.newsArticles.map((a) => a.id));
+      const fresh = action.articles.filter((a) => !existingIds.has(a.id));
+      return { ...state, newsArticles: [...fresh, ...state.newsArticles] };
+    }
     default:
       return state;
   }

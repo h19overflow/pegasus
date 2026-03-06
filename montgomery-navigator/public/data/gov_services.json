@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-03-05T15:31:47.415318Z",
+  "generated_at": "2026-03-05T22:34:22.194018+00:00",
   "total_services": 12,
   "categories": [
-    "childcare",
-    "housing",
     "utilities",
-    "legal",
-    "benefits",
     "food",
+    "benefits",
+    "housing",
+    "healthcare",
     "workforce",
-    "healthcare"
+    "legal",
+    "childcare"
   ],
   "services": [
     {
@@ -186,7 +186,7 @@
         "WIOA training funds available for eligible job seekers"
       ],
       "how_to_apply": [
-        "Walk in \u2014 no appointment needed for most services",
+        "Walk in — no appointment needed for most services",
         "Register at joblink.alabama.gov",
         "Attend orientation session (offered weekly)",
         "Meet with career counselor for individualized plan"
@@ -259,7 +259,7 @@
         "Montgomery resident or working in Montgomery",
         "Pass background screening",
         "U.S. citizen or eligible non-citizen",
-        "Waitlist may be open or closed \u2014 call to check"
+        "Waitlist may be open or closed — call to check"
       ],
       "how_to_apply": [
         "Contact Montgomery Housing Authority at (334) 206-7200",
@@ -370,7 +370,7 @@
         "Open to everyone regardless of insurance status",
         "Sliding fee scale based on family size and income",
         "Accepts Medicaid, Medicare, and most private insurance",
-        "Uninsured patients welcome \u2014 fees based on ability to pay"
+        "Uninsured patients welcome — fees based on ability to pay"
       ],
       "how_to_apply": [
         "Call to schedule an appointment: (334) 263-2532",
@@ -443,7 +443,7 @@
       "provider": "United Way 211",
       "description": "Free, confidential referral service connecting you to local help 24/7. Covers food, housing, utilities, health, mental health, disaster assistance, veteran services, and more.",
       "eligibility": [
-        "Available to everyone \u2014 no eligibility requirements",
+        "Available to everyone — no eligibility requirements",
         "Available 24 hours a day, 7 days a week",
         "Multilingual services available"
       ],
@@ -454,11 +454,11 @@
         "Specialists will assess your needs and provide referrals"
       ],
       "documents_needed": [
-        "No documents needed \u2014 just call"
+        "No documents needed — just call"
       ],
       "url": "https://www.211connectsalabama.org",
       "phone": "211",
-      "address": "N/A \u2014 phone and web service",
+      "address": "N/A — phone and web service",
       "tags": [
         "211",
         "referral",

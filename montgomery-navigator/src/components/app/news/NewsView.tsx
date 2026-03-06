@@ -4,12 +4,9 @@ import { fetchNewsArticles, filterArticlesByCategory, sortArticlesByDate } from 
 import { NewsCard } from "./NewsCard";
 import { NewsDetail } from "./NewsDetail";
 import { NewsCategoryTabs } from "./NewsCategoryTabs";
+import { NewsFilterBar } from "./NewsFilterBar";
 import type { NewsArticle, NewsCategory } from "@/lib/types";
-import {
-  Newspaper,
-  Search,
-  ArrowUpDown,
-} from "lucide-react";
+import { Newspaper } from "lucide-react";
 
 type SortMode = "newest" | "oldest" | "most_liked";
 
@@ -67,12 +64,18 @@ function filterBySource(articles: NewsArticle[], source: string): NewsArticle[] 
   return articles.filter((a) => a.source === source);
 }
 
+function filterBySentiment(articles: NewsArticle[], sentiment: string): NewsArticle[] {
+  if (!sentiment) return articles;
+  return articles.filter((a) => a.sentiment === sentiment);
+}
+
 export function NewsView() {
   const { state, dispatch } = useApp();
   const [lastScraped, setLastScraped] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortMode, setSortMode] = useState<SortMode>("newest");
   const [sourceFilter, setSourceFilter] = useState("");
+  const [sentimentFilter, setSentimentFilter] = useState<"" | "positive" | "negative" | "neutral">("");
 
   async function loadArticles() {
     dispatch({ type: "SET_NEWS_LOADING", loading: true });
@@ -134,7 +137,8 @@ export function NewsView() {
 
   // Apply filters + sort
   const afterCategory = filterArticlesByCategory(state.newsArticles, state.newsCategory);
-  const afterSource = filterBySource(afterCategory, sourceFilter);
+  const afterSentiment = filterBySentiment(afterCategory, sentimentFilter);
+  const afterSource = filterBySource(afterSentiment, sourceFilter);
   const afterSearch = filterBySearch(afterSource, searchQuery);
   const visibleArticles = sortArticles(afterSearch, sortMode);
   const articleCounts = buildArticleCountsPerCategory(state.newsArticles);
@@ -163,56 +167,17 @@ export function NewsView() {
           articleCounts={articleCounts}
         />
 
-        {/* Search + Sort + Source filter row */}
-        <div className="flex gap-2 flex-wrap">
-          {/* Search */}
-          <div className="relative flex-1 min-w-[180px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
-            <input
-              type="text"
-              placeholder="Search articles, sources..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-sm border border-border/50 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-            />
-          </div>
-
-          {/* Sort */}
-          <div className="flex items-center gap-1 rounded-lg border border-border/50 overflow-hidden">
-            <ArrowUpDown className="w-3.5 h-3.5 text-muted-foreground ml-2.5" />
-            {(
-              [
-                { key: "newest", label: "Newest" },
-                { key: "oldest", label: "Oldest" },
-                { key: "most_liked", label: "Popular" },
-              ] as const
-            ).map(({ key, label }) => (
-              <button
-                key={key}
-                onClick={() => setSortMode(key)}
-                className={`px-2.5 py-2 text-xs font-medium transition-colors ${
-                  sortMode === key
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-white text-muted-foreground hover:bg-muted/50"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-
-          {/* Source filter */}
-          <select
-            value={sourceFilter}
-            onChange={(e) => setSourceFilter(e.target.value)}
-            className="text-xs px-2.5 py-2 rounded-lg border border-border/50 bg-white text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 min-w-[120px]"
-          >
-            <option value="">All Sources</option>
-            {uniqueSources.map((src) => (
-              <option key={src} value={src}>{src}</option>
-            ))}
-          </select>
-        </div>
+        <NewsFilterBar
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          sortMode={sortMode}
+          onSortChange={setSortMode}
+          sourceFilter={sourceFilter}
+          onSourceChange={setSourceFilter}
+          uniqueSources={uniqueSources}
+          sentimentFilter={sentimentFilter}
+          onSentimentChange={setSentimentFilter}
+        />
       </div>
 
       {/* Results count */}
@@ -222,9 +187,9 @@ export function NewsView() {
           {searchQuery && ` matching "${searchQuery}"`}
           {sourceFilter && ` from ${sourceFilter}`}
         </span>
-        {(searchQuery || sourceFilter) && (
+        {(searchQuery || sourceFilter || sentimentFilter) && (
           <button
-            onClick={() => { setSearchQuery(""); setSourceFilter(""); }}
+            onClick={() => { setSearchQuery(""); setSourceFilter(""); setSentimentFilter(""); }}
             className="text-xs text-primary hover:underline"
           >
             Clear filters

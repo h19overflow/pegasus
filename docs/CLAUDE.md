@@ -75,7 +75,7 @@ Global state via `useReducer` in `appContext.tsx`. All views read from `state` a
 
 | Key | Value | Used For |
 |-----|-------|----------|
-| `BRIGHTDATA_API_KEY` | `1f7ca8eb-5b67-45a0-8ae8-5f7087141477` | Web Scraper API, SERP API, Crawl API |
+| `BRIGHTDATA_API_KEY` | *(see `.env`)* | Web Scraper API, SERP API, Crawl API |
 | Indeed dataset ID | `gd_l4dx9j9sscpvs7no2` | Job scraping |
 | LinkedIn dataset ID | `gd_lpfll7v5hcqtkxl6l` | Job scraping |
 | Glassdoor dataset ID | `gd_lpfbbndm1xnopbrcr0` | Salary data |
@@ -104,7 +104,7 @@ The scraper must use Bright Data's async webhook delivery pattern:
 
 ```
 POST https://api.brightdata.com/request
-Authorization: Bearer 1f7ca8eb-5b67-45a0-8ae8-5f7087141477
+Authorization: Bearer $BRIGHTDATA_API_KEY
 
 {
   "zone": "serp_api1",
@@ -129,7 +129,7 @@ For each discovered article URL, fetch the full content:
 
 ```
 POST https://api.brightdata.com/request
-Authorization: Bearer 1f7ca8eb-5b67-45a0-8ae8-5f7087141477
+Authorization: Bearer $BRIGHTDATA_API_KEY
 
 {
   "zone": "web_unlocker1",

@@ -5,6 +5,7 @@ import type { ServiceCategory, ServicePoint } from "@/lib/types";
 import { useApp } from "@/lib/appContext";
 import { fetchServicePoints } from "@/lib/arcgisService";
 import "@/lib/leafletSetup";
+import { createCategoryMarker, getMarkerColor, getMarkerSymbol } from "@/lib/mapMarkers";
 import { CATEGORY_META } from "./serviceCategoryMeta";
 import { ServiceLocationCard } from "./serviceDetailHelpers";
 import { DetailViewHeader } from "./ServiceDetailHeader";
@@ -15,16 +16,6 @@ export type SortOption = "alphabetical" | "nearest";
 
 const MONTGOMERY_CENTER: [number, number] = [32.3668, -86.3];
 
-function createMarkerIcon(color: string, isSelected: boolean): L.DivIcon {
-  const size = isSelected ? 16 : 11;
-  const border = isSelected ? 3 : 2;
-  return L.divIcon({
-    className: "custom-marker",
-    html: `<div style="background-color:${color};width:${size}px;height:${size}px;border-radius:50%;border:${border}px solid white;box-shadow:0 ${isSelected ? 2 : 1}px ${isSelected ? 6 : 3}px rgba(0,0,0,${isSelected ? 0.4 : 0.3});"></div>`,
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
-  });
-}
 
 function FlyToPoint({ lat, lng }: { lat: number | null; lng: number | null }) {
   const map = useMap();
@@ -96,7 +87,7 @@ export default function ServiceDetailView({ category, onBack, onNavigateToChat }
               <Marker
                 key={point.id}
                 position={[point.lat, point.lng]}
-                icon={createMarkerIcon(meta.markerColor, point.id === selectedPointId)}
+                icon={createCategoryMarker(category, { selected: point.id === selectedPointId })}
                 eventHandlers={{ click: () => handleSelectPoint(point) }}
               >
                 <Popup>
@@ -113,13 +104,14 @@ export default function ServiceDetailView({ category, onBack, onNavigateToChat }
 
           <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-sm z-[1000]">
             <div className="flex items-center gap-1.5">
-              <div className="w-3 h-3 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: meta.markerColor }} />
+              <span className="text-xs">{getMarkerSymbol(category)}</span>
+              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: getMarkerColor(category) }} />
               <span className="text-[10px] text-muted-foreground">{meta.label}</span>
             </div>
           </div>
         </div>
 
-        <div ref={listRef} className="w-[380px] shrink-0 border-l border-border/30 overflow-y-auto bg-white">
+        <div ref={listRef} className="w-[320px] shrink-0 border-l border-border/30 overflow-y-auto bg-white">
           <ServiceListPanel
             points={filteredPoints}
             selectedPointId={selectedPointId}

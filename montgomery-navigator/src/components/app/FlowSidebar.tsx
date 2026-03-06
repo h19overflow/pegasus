@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   TrendingUp,
   Layers,
-  UserCircle,
   Newspaper,
   PanelLeftClose,
   PanelLeftOpen,
@@ -18,7 +17,6 @@ const NAV_ITEMS: {
   view: AppView;
   icon: React.ComponentType<{ className?: string }>;
 }[] = [
-  { label: "Profile", view: "profile", icon: UserCircle },
   { label: "Services", view: "services", icon: Layers },
   { label: "Career Growth", view: "cv", icon: TrendingUp },
   { label: "News", view: "news", icon: Newspaper },
@@ -26,7 +24,7 @@ const NAV_ITEMS: {
 
 export function FlowSidebar({ onQuickAction }: FlowSidebarProps) {
   const { state, dispatch } = useApp();
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   function handleViewSelect(view: AppView) {
     dispatch({ type: "SET_VIEW", view });

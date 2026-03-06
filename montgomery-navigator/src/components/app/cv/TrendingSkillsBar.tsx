@@ -35,11 +35,11 @@ const TrendingSkillsBar = ({ skills, activeSkill, onFilterBySkill }: TrendingSki
       </p>
       <div className="space-y-1">
         {top10.map((skill) => {
-          const isActive = activeSkill === skill.name;
+          const isActive = activeSkill === skill.rawKey;
           return (
             <button
               key={skill.name}
-              onClick={() => onFilterBySkill?.(isActive ? "" : skill.name)}
+              onClick={() => onFilterBySkill?.(isActive ? "" : skill.rawKey)}
               className={`flex items-center gap-2 w-full rounded-md px-1 -mx-1 py-0.5 transition-colors ${
                 isActive ? "bg-primary/5 ring-1 ring-primary/20" : "hover:bg-muted/30"
               } ${onFilterBySkill ? "cursor-pointer" : "cursor-default"}`}

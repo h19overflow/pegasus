@@ -21,6 +21,16 @@ function categoryStyle(category: string): string {
   return CATEGORY_STYLES[category] ?? CATEGORY_STYLES.general;
 }
 
+const SENTIMENT_STYLES: Record<string, string> = {
+  positive: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  neutral: "bg-gray-100 text-gray-600 border-gray-200",
+  negative: "bg-rose-50 text-rose-700 border-rose-200",
+};
+
+function sentimentStyle(sentiment: string): string {
+  return SENTIMENT_STYLES[sentiment] ?? SENTIMENT_STYLES.neutral;
+}
+
 function formatScrapedDate(isoString: string): string {
   const date = new Date(isoString);
   if (isNaN(date.getTime())) return "";
@@ -53,6 +63,16 @@ export function NewsCard({ article, isLiked, onSelect, onLike }: NewsCardProps) 
             <span className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded border ${categoryStyle(article.category)}`}>
               {article.category}
             </span>
+            {article.sentiment && (
+              <span className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded border ${sentimentStyle(article.sentiment)}`}>
+                {article.sentiment}
+              </span>
+            )}
+            {article.misinfoRisk != null && article.misinfoRisk > 60 && (
+              <span className="text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded border bg-orange-50 text-orange-700 border-orange-200">
+                ⚠ Verify
+              </span>
+            )}
             <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
               <Clock className="w-3 h-3" />
               {formatRelativeTime(article.publishedAt)}
@@ -70,10 +90,10 @@ export function NewsCard({ article, isLiked, onSelect, onLike }: NewsCardProps) 
             {article.title}
           </h3>
 
-          {/* Excerpt */}
-          {article.excerpt && (
+          {/* Excerpt or summary fallback */}
+          {(article.excerpt || article.summary) && (
             <p className="text-xs text-muted-foreground line-clamp-3 leading-relaxed">
-              {article.excerpt}
+              {article.excerpt || article.summary}
             </p>
           )}
 

@@ -1,0 +1,2405 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.198286,
+          32.300854
+        ]
+      },
+      "properties": {
+        "id": "6782df7b2526",
+        "address": "{'city': 'Montgomery', 'streetAddress': '100 Legends Dr', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1460,
+        "price_formatted": "$1,460",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/legends-at-taylor-lakes/5XjBMz/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159333+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.302249,
+          32.356829
+        ]
+      },
+      "properties": {
+        "id": "8a0f7ba66b09",
+        "address": "{'city': 'Montgomery', 'streetAddress': '1813 S Hull St', 'zipcode': '36104', 'state': 'AL'}, Montgomery, AL",
+        "price": 750,
+        "price_formatted": "$750",
+        "beds": null,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/1813-s.-hull/5ZbQKQ/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159353+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.302249,
+          32.356829
+        ]
+      },
+      "properties": {
+        "id": "617c46aadd93",
+        "address": "{'city': 'Montgomery', 'streetAddress': '1813 S Hull St', 'zipcode': '36104', 'state': 'AL'}, Montgomery, AL",
+        "price": 890,
+        "price_formatted": "$890",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/1813-s.-hull/5ZbQKQ/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159360+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "92fd2eec7d2f",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 620,
+        "price_formatted": "$620",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159366+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "a8918228f0c8",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 625,
+        "price_formatted": "$625",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159372+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "91d088a9589d",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 647,
+        "price_formatted": "$647",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159384+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "0ee9fcbd859b",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 657,
+        "price_formatted": "$657",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159392+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "ad762b4cd18f",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 666,
+        "price_formatted": "$666",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159397+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "33887c8c2948",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 672,
+        "price_formatted": "$672",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159403+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "86b9c9b1e2c6",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 662,
+        "price_formatted": "$662",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159408+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "6c43181e75d4",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 674,
+        "price_formatted": "$674",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159413+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "ee7f6afa075f",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 715,
+        "price_formatted": "$715",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159418+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "dd1b23563160",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 724,
+        "price_formatted": "$724",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159423+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "ce2a25f09f5b",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 730,
+        "price_formatted": "$730",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159428+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "7362ecf1d712",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 734,
+        "price_formatted": "$734",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159433+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "0cf04afe8f3b",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 735,
+        "price_formatted": "$735",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159439+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "2a20c6aa48cd",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 764,
+        "price_formatted": "$764",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159444+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "78d54062f040",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 765,
+        "price_formatted": "$765",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159449+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "1df9e9ecd27c",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 725,
+        "price_formatted": "$725",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159454+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "0cf04afe8f3b",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 735,
+        "price_formatted": "$735",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159460+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "b2304cb14285",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 741,
+        "price_formatted": "$741",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159465+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "2946620a2da3",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 746,
+        "price_formatted": "$746",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159469+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "ba79b2e2f77d",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 755,
+        "price_formatted": "$755",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159474+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "2dc997c71f06",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 776,
+        "price_formatted": "$776",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159479+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "5de9cfb3f092",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 843,
+        "price_formatted": "$843",
+        "beds": 2,
+        "baths": 1.5,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159486+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "18f9458e6c3a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 858,
+        "price_formatted": "$858",
+        "beds": 2,
+        "baths": 1.5,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159494+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "a40b112422dc",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 882,
+        "price_formatted": "$882",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159501+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.269359,
+          32.325603
+        ]
+      },
+      "properties": {
+        "id": "8ce5681bf43e",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2230 Woodley Sq W', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 888,
+        "price_formatted": "$888",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/ravenwood-apartments/5Xxd9r/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159506+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.240223,
+          32.314628
+        ]
+      },
+      "properties": {
+        "id": "1337f3709220",
+        "address": "{'city': 'Montgomery', 'streetAddress': '4604 Virginia Loop Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 795,
+        "price_formatted": "$795",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/greenbriar-apartments/5XmKkj/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159513+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.240223,
+          32.314628
+        ]
+      },
+      "properties": {
+        "id": "848d562f02f5",
+        "address": "{'city': 'Montgomery', 'streetAddress': '4604 Virginia Loop Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 849,
+        "price_formatted": "$849",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/greenbriar-apartments/5XmKkj/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159518+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.240223,
+          32.314628
+        ]
+      },
+      "properties": {
+        "id": "053d0a78b012",
+        "address": "{'city': 'Montgomery', 'streetAddress': '4604 Virginia Loop Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 895,
+        "price_formatted": "$895",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/greenbriar-apartments/5XmKkj/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159523+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "8bd2dd2ba778",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 979,
+        "price_formatted": "$979",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159529+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "8bd2dd2ba778",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 979,
+        "price_formatted": "$979",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159533+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "fc1c0ae7a403",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1184,
+        "price_formatted": "$1,184",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159538+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "fc1c0ae7a403",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1184,
+        "price_formatted": "$1,184",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159545+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "fc1c0ae7a403",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1184,
+        "price_formatted": "$1,184",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159550+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "9f6e3336dbf4",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1104,
+        "price_formatted": "$1,104",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159554+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "dda5f856a780",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1164,
+        "price_formatted": "$1,164",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159559+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "dda5f856a780",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1164,
+        "price_formatted": "$1,164",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159563+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "40ddf8fc3f14",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1187,
+        "price_formatted": "$1,187",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159568+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "32d62e8cf860",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1253,
+        "price_formatted": "$1,253",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159573+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "a714cc834c6e",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1264,
+        "price_formatted": "$1,264",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159577+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "dd86eb36f3a9",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1132,
+        "price_formatted": "$1,132",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159582+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "f5d55be2bde3",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1146,
+        "price_formatted": "$1,146",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159586+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "63f125bbd4a2",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1177,
+        "price_formatted": "$1,177",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159593+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "63f125bbd4a2",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1177,
+        "price_formatted": "$1,177",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159602+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "526356744889",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1227,
+        "price_formatted": "$1,227",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159607+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "3c01017fb4b6",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1241,
+        "price_formatted": "$1,241",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159613+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "3c01017fb4b6",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1241,
+        "price_formatted": "$1,241",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159620+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "95d647045336",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1417,
+        "price_formatted": "$1,417",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159627+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "49e7438468fe",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1425,
+        "price_formatted": "$1,425",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159634+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "b6ca9955f4e5",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1456,
+        "price_formatted": "$1,456",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159641+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "7530ee1d34cf",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1405,
+        "price_formatted": "$1,405",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159649+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.212543,
+          32.31981
+        ]
+      },
+      "properties": {
+        "id": "d4d5561f735b",
+        "address": "{'city': 'Montgomery', 'streetAddress': '5050 Bell Rd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1415,
+        "price_formatted": "$1,415",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/elevate-5050/5Xjq4n/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159656+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.210702,
+          32.356318
+        ]
+      },
+      "properties": {
+        "id": "8d82a670ef04",
+        "address": "{'city': 'Montgomery', 'streetAddress': '1421 Stonehenge Rd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 799,
+        "price_formatted": "$799",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/woodmere-reserve/CkB9PG/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159662+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.210702,
+          32.356318
+        ]
+      },
+      "properties": {
+        "id": "175979addccf",
+        "address": "{'city': 'Montgomery', 'streetAddress': '1421 Stonehenge Rd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 949,
+        "price_formatted": "$949",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/woodmere-reserve/CkB9PG/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159671+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.210702,
+          32.356318
+        ]
+      },
+      "properties": {
+        "id": "48c8398b0423",
+        "address": "{'city': 'Montgomery', 'streetAddress': '1421 Stonehenge Rd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1199,
+        "price_formatted": "$1,199",
+        "beds": 3,
+        "baths": 1.5,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/woodmere-reserve/CkB9PG/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159677+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.227323,
+          32.332963
+        ]
+      },
+      "properties": {
+        "id": "f9788fb4640a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '3364 Fountain Ln', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 699,
+        "price_formatted": "$699",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-lofts-on-fountain/5Xjq4w/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159684+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.227323,
+          32.332963
+        ]
+      },
+      "properties": {
+        "id": "28094d9d3e4a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '3364 Fountain Ln', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 849,
+        "price_formatted": "$849",
+        "beds": 2,
+        "baths": 2.5,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-lofts-on-fountain/5Xjq4w/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159691+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.227323,
+          32.332963
+        ]
+      },
+      "properties": {
+        "id": "28094d9d3e4a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '3364 Fountain Ln', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 849,
+        "price_formatted": "$849",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-lofts-on-fountain/5Xjq4w/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159700+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.227323,
+          32.332963
+        ]
+      },
+      "properties": {
+        "id": "520ae386d26a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '3364 Fountain Ln', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 999,
+        "price_formatted": "$999",
+        "beds": 3,
+        "baths": 2.5,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-lofts-on-fountain/5Xjq4w/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159708+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "c487e3d723e8",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1318,
+        "price_formatted": "$1,318",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159716+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "29cff904786e",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1319,
+        "price_formatted": "$1,319",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159723+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "c268f60ff233",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1345,
+        "price_formatted": "$1,345",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159729+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "c268f60ff233",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1345,
+        "price_formatted": "$1,345",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159736+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "b0bde13bbf8f",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1348,
+        "price_formatted": "$1,348",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159745+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "bcd2cf030fba",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1313,
+        "price_formatted": "$1,313",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159752+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "bcd2cf030fba",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1313,
+        "price_formatted": "$1,313",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159760+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "f087b6e88fb1",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1332,
+        "price_formatted": "$1,332",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159767+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "db856bb4a2b5",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1337,
+        "price_formatted": "$1,337",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159774+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "e12a4013fc24",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1360,
+        "price_formatted": "$1,360",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159781+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "1f65b70fedd3",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1482,
+        "price_formatted": "$1,482",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159787+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "e64de967ba54",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1494,
+        "price_formatted": "$1,494",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159796+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "fe89007e359d",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1558,
+        "price_formatted": "$1,558",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159802+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "fe89007e359d",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1558,
+        "price_formatted": "$1,558",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159809+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "a8db791b1cd2",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1580,
+        "price_formatted": "$1,580",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159818+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "bea5758d912c",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1631,
+        "price_formatted": "$1,631",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159826+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "cd7ea0edbfd7",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1674,
+        "price_formatted": "$1,674",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159836+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.14674,
+          32.362745
+        ]
+      },
+      "properties": {
+        "id": "314dfd9a8b1d",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8462 Eastchase Pkwy', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1757,
+        "price_formatted": "$1,757",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/broadstreet-at-eastchase-apartments/5XqWZn/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159843+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "568ce4ac73fa",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1290,
+        "price_formatted": "$1,290",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159850+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "568ce4ac73fa",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1290,
+        "price_formatted": "$1,290",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159858+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "2ddfae4bd89c",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1316,
+        "price_formatted": "$1,316",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159865+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "2ddfae4bd89c",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1316,
+        "price_formatted": "$1,316",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159872+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "212203ea480d",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1340,
+        "price_formatted": "$1,340",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159879+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "5caee041bbdf",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1365,
+        "price_formatted": "$1,365",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159886+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "5caee041bbdf",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1365,
+        "price_formatted": "$1,365",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159896+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "3e43a2e61cf2",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1367,
+        "price_formatted": "$1,367",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159903+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "32ad5d19f8a1",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1440,
+        "price_formatted": "$1,440",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159909+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "878d362030ce",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1459,
+        "price_formatted": "$1,459",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159916+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "10f7e5c9e915",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1209,
+        "price_formatted": "$1,209",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159923+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "92e4e4fa60b7",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1259,
+        "price_formatted": "$1,259",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159930+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "a8be94234a14",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1284,
+        "price_formatted": "$1,284",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159939+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "6a1adac40bec",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1310,
+        "price_formatted": "$1,310",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159946+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "93589ae20da8",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1334,
+        "price_formatted": "$1,334",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159955+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "93589ae20da8",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1334,
+        "price_formatted": "$1,334",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159962+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "7a12f1405fe8",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1437,
+        "price_formatted": "$1,437",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159970+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "820c92cc6221",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1427,
+        "price_formatted": "$1,427",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159977+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "950daa3f81e7",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1552,
+        "price_formatted": "$1,552",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159983+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "68548939c057",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1518,
+        "price_formatted": "$1,518",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159990+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.172779,
+          32.336865
+        ]
+      },
+      "properties": {
+        "id": "68548939c057",
+        "address": "{'city': 'Montgomery', 'streetAddress': '8700 Seaton Blvd', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1518,
+        "price_formatted": "$1,518",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/sturbridge-commons/5Xjq4L/",
+        "image_url": "",
+        "scraped_at": "2026-03-05T22:34:15.159997+00:00"
+      }
+    }
+  ]
+}

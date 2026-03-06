@@ -14,6 +14,27 @@ function normalizeSkill(skill: string): string {
   return skill.toLowerCase().trim();
 }
 
+/** Healthcare-specific skills that should only match healthcare-titled jobs */
+const HEALTHCARE_ONLY_SKILLS = new Set(["rn", "lpn", "cna", "emt", "cpr", "phlebotomy", "nursing", "patient care", "clinical"]);
+
+const HEALTHCARE_TITLE_PATTERNS = /nurse|nurs|rn\b|lpn|cna|medical|health|hospital|clinic|care\b|pharm|emt|paramedic|dental|therapy|therapist/i;
+
+/**
+ * Checks if a job genuinely requires a specific skill.
+ * Guards against false positives from the skill extraction pipeline
+ * (e.g., "rn" extracted from "learn"/"return" in non-healthcare jobs).
+ */
+export function jobMatchesSkillFilter(job: JobListing, rawSkillKey: string): boolean {
+  const skillInSummary = job.skillSummary.toLowerCase().includes(rawSkillKey);
+  if (!skillInSummary) return false;
+
+  if (HEALTHCARE_ONLY_SKILLS.has(rawSkillKey)) {
+    return HEALTHCARE_TITLE_PATTERNS.test(job.title);
+  }
+
+  return true;
+}
+
 /** Pretty-print skill names for display */
 const DISPLAY_NAMES: Record<string, string> = {
   "cdl": "CDL License",
@@ -136,18 +157,18 @@ export function matchJobsToProfile(
 }
 
 export function computeTrendingSkills(jobs: JobListing[]): TrendingSkill[] {
-  const skillCounts: Record<string, { category: string; count: number }> = {};
+  const skillCounts: Record<string, { rawKey: string; category: string; count: number }> = {};
 
   for (const job of jobs) {
     for (const [category, keywords] of Object.entries(job.skills)) {
-      // Only count actual skills — not clearance, physical reqs, or experience levels
       if (!SKILL_CATEGORIES.has(category) || !Array.isArray(keywords)) continue;
 
       for (const keyword of keywords) {
         const key = normalizeSkill(keyword);
+        if (HEALTHCARE_ONLY_SKILLS.has(key) && !HEALTHCARE_TITLE_PATTERNS.test(job.title)) continue;
         const display = displayName(key);
         if (!skillCounts[display]) {
-          skillCounts[display] = { category, count: 0 };
+          skillCounts[display] = { rawKey: key, category, count: 0 };
         }
         skillCounts[display].count++;
       }
@@ -156,8 +177,9 @@ export function computeTrendingSkills(jobs: JobListing[]): TrendingSkill[] {
 
   const total = jobs.length || 1;
   return Object.entries(skillCounts)
-    .map(([name, { category, count }]) => ({
+    .map(([name, { rawKey, category, count }]) => ({
       name,
+      rawKey,
       category,
       count,
       percent: Math.round((count / total) * 100),

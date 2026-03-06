@@ -6,19 +6,13 @@ import type { ServiceCategory, ServicePoint } from "@/lib/types";
 import { useApp } from "@/lib/appContext";
 import { fetchServicePoints } from "@/lib/arcgisService";
 import "@/lib/leafletSetup";
+import { createCategoryMarker, getMarkerColor, getMarkerSymbol } from "@/lib/mapMarkers";
 import { MAP_CATEGORIES } from "./serviceCategoryMeta";
 import { MapPointDetailPanel } from "./MapPointDetailPanel";
+import { NeighborhoodOverlay } from "./NeighborhoodOverlay";
 
 const MONTGOMERY_CENTER: [number, number] = [32.3668, -86.3];
 
-function createMarkerIcon(color: string): L.DivIcon {
-  return L.divIcon({
-    className: "custom-marker",
-    html: `<div style="background-color:${color};width:11px;height:11px;border-radius:50%;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>`,
-    iconSize: [11, 11],
-    iconAnchor: [5.5, 5.5],
-  });
-}
 
 function FlyToPoint({ lat, lng }: { lat: number | null; lng: number | null }) {
   const map = useMap();
@@ -45,6 +39,7 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
     new Set(MAP_CATEGORIES.map((c) => c.id)),
   );
   const [selectedPoint, setSelectedPoint] = useState<ServicePoint | null>(null);
+  const [showNeighborhood, setShowNeighborhood] = useState(false);
 
   useEffect(() => {
     async function loadAll() {
@@ -69,7 +64,6 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
   const visiblePoints = state.servicePoints.filter(
     (p) => activeCategories.has(p.category) && !Number.isNaN(p.lat) && !Number.isNaN(p.lng),
   );
-  const markerColorMap = Object.fromEntries(MAP_CATEGORIES.map((c) => [c.id, c.markerColor]));
 
   return (
     <div className="flex flex-col h-full">
@@ -80,7 +74,19 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
           </button>
           <h1 className="text-base font-bold text-foreground">All Services Map</h1>
         </div>
-        <span className="text-xs text-muted-foreground">{visiblePoints.length} locations</span>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setShowNeighborhood(!showNeighborhood)}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors shadow-sm ${
+              showNeighborhood
+                ? "bg-primary text-white shadow-primary/25"
+                : "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
+            }`}
+          >
+            {showNeighborhood ? "✕ Hide" : "◉ Show"} Neighborhood Health
+          </button>
+          <span className="text-xs text-muted-foreground">{visiblePoints.length} locations</span>
+        </div>
       </div>
 
       <div className="shrink-0 flex flex-wrap gap-2 px-6 py-3 border-b border-border/20">
@@ -107,7 +113,7 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
             />
             {visiblePoints.map((point) => (
               <Marker key={point.id} position={[point.lat, point.lng]}
-                icon={createMarkerIcon(markerColorMap[point.category] ?? "#888")}
+                icon={createCategoryMarker(point.category)}
                 eventHandlers={{ click: () => setSelectedPoint(point) }}
               >
                 <Popup>
@@ -120,12 +126,14 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
               </Marker>
             ))}
             <FlyToPoint lat={selectedPoint?.lat ?? null} lng={selectedPoint?.lng ?? null} />
+            {showNeighborhood && <NeighborhoodOverlay />}
           </MapContainer>
 
           <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-sm z-[1000] flex flex-wrap gap-x-4 gap-y-1">
-            {MAP_CATEGORIES.filter((c) => activeCategories.has(c.id)).map(({ id, label, markerColor }) => (
+            {MAP_CATEGORIES.filter((c) => activeCategories.has(c.id)).map(({ id, label }) => (
               <div key={id} className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: markerColor }} />
+                <span className="text-xs">{getMarkerSymbol(id)}</span>
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: getMarkerColor(id) }} />
                 <span className="text-[10px] text-muted-foreground">{label}</span>
               </div>
             ))}

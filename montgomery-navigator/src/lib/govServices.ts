@@ -13,6 +13,7 @@ export interface ServiceGuide {
   eligibility: string[];
   howToApply: string[];
   documentsNeeded: string[];
+  incomeLimits: string[];
   url: string;
   phone: string;
   address: string;
@@ -29,6 +30,7 @@ interface RawServiceGuide {
   eligibility: string[];
   how_to_apply: string[];
   documents_needed: string[];
+  income_limits: string[];
   url: string;
   phone: string;
   address: string;
@@ -50,6 +52,7 @@ function parseRawGuide(raw: RawServiceGuide): ServiceGuide {
     eligibility: raw.eligibility,
     howToApply: raw.how_to_apply,
     documentsNeeded: raw.documents_needed,
+    incomeLimits: raw.income_limits ?? [],
     url: raw.url,
     phone: raw.phone,
     address: raw.address,

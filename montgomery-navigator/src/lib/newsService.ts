@@ -18,6 +18,10 @@ function deduplicateByTitle(articles: NewsArticle[]): NewsArticle[] {
   });
 }
 
+export function refreshNewsArticles(): void {
+  cached = null;
+}
+
 export async function fetchNewsArticles(): Promise<NewsArticle[]> {
   if (cached) return cached;
 

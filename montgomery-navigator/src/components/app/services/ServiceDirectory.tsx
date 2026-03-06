@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
+import { MapPin, FileText } from "lucide-react";
 import type { ServiceCategory } from "@/lib/types";
 import { useApp } from "@/lib/appContext";
 import { fetchServicePoints } from "@/lib/arcgisService";
 import { fetchServiceGuides, searchGuides, type ServiceGuide } from "@/lib/govServices";
 import { CATEGORY_CARDS, type CategoryCardConfig } from "./serviceCategories";
-import {
-  DirectoryHero,
-  DirectorySearchBar,
-  SituationCards,
-  CategoryCard,
-  HelpPromptCard,
-} from "./ServiceDirectoryParts";
-import ServiceGuideCards from "./ServiceGuideCards";
+import { DirectoryHero, DirectorySearchBar, HelpPromptCard } from "./ServiceDirectoryParts";
+import { ServicesTabContent, BenefitsTabContent } from "./DirectoryTabContent";
+
+type DirectoryTab = "services" | "benefits";
 
 interface ServiceDirectoryProps {
   onSelectCategory: (category: ServiceCategory) => void;
@@ -27,6 +24,7 @@ export default function ServiceDirectory({
   const { state, dispatch } = useApp();
   const [searchQuery, setSearchQuery] = useState("");
   const [guides, setGuides] = useState<ServiceGuide[]>([]);
+  const [activeTab, setActiveTab] = useState<DirectoryTab>("services");
 
   useEffect(() => {
     async function preloadAllCategories() {
@@ -48,17 +46,13 @@ export default function ServiceDirectory({
   function matchesCategorySearch(cat: CategoryCardConfig): boolean {
     if (!searchQuery) return true;
     const query = searchQuery.toLowerCase();
-    const nameOrDescriptionMatches =
+    return (
       cat.label.toLowerCase().includes(query) ||
-      cat.description.toLowerCase().includes(query);
-    const locationMatches = state.servicePoints
-      .filter((p) => p.category === cat.id)
-      .some(
-        (p) =>
-          p.name.toLowerCase().includes(query) ||
-          p.address.toLowerCase().includes(query),
-      );
-    return nameOrDescriptionMatches || locationMatches;
+      cat.description.toLowerCase().includes(query) ||
+      state.servicePoints
+        .filter((p) => p.category === cat.id)
+        .some((p) => p.name.toLowerCase().includes(query) || p.address.toLowerCase().includes(query))
+    );
   }
 
   const visibleCategories = CATEGORY_CARDS.filter(matchesCategorySearch);
@@ -73,37 +67,82 @@ export default function ServiceDirectory({
       </div>
 
       <div className="px-8 pb-4">
-        <SituationCards onSelectCategory={onSelectCategory} />
+        <DirectoryTabs
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          servicesCount={state.servicePoints.length}
+          benefitsCount={filteredGuides.length}
+        />
       </div>
 
-      <div className="px-8 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {visibleCategories.map((cat) => (
-            <CategoryCard
-              key={cat.id}
-              config={cat}
-              locationCount={countLocationsForCategory(cat.id)}
-              onSelect={() => onSelectCategory(cat.id)}
-            />
-          ))}
-          {visibleCategories.length === 0 && (
-            <p className="col-span-2 py-8 text-center text-sm text-muted-foreground">
-              No services match "{searchQuery}".
-            </p>
-          )}
-        </div>
-      </div>
-
-      {/* Service Guides — detailed program info */}
-      {filteredGuides.length > 0 && (
-        <div className="px-8 pb-8">
-          <ServiceGuideCards guides={filteredGuides} onNavigateToChat={onNavigateToChat} />
-        </div>
+      {activeTab === "services" ? (
+        <ServicesTabContent
+          visibleCategories={visibleCategories}
+          searchQuery={searchQuery}
+          countLocations={countLocationsForCategory}
+          onSelectCategory={onSelectCategory}
+        />
+      ) : (
+        <BenefitsTabContent
+          guides={filteredGuides}
+          searchQuery={searchQuery}
+          onNavigateToChat={onNavigateToChat}
+        />
       )}
 
       <div className="px-8 pb-8">
         <HelpPromptCard onNavigateToChat={onNavigateToChat} />
       </div>
+    </div>
+  );
+}
+
+function DirectoryTabs({
+  activeTab,
+  onTabChange,
+  servicesCount,
+  benefitsCount,
+}: {
+  activeTab: DirectoryTab;
+  onTabChange: (tab: DirectoryTab) => void;
+  servicesCount: number;
+  benefitsCount: number;
+}) {
+  const tabs = [
+    { id: "services" as const, label: "Services", icon: MapPin, count: servicesCount },
+    { id: "benefits" as const, label: "Benefits", icon: FileText, count: benefitsCount },
+  ];
+
+  return (
+    <div className="flex gap-2">
+      {tabs.map(({ id, label, icon: Icon, count }) => {
+        const isActive = activeTab === id;
+        return (
+          <button
+            key={id}
+            onClick={() => onTabChange(id)}
+            className={[
+              "flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all",
+              isActive
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "bg-white border border-border/50 text-muted-foreground hover:bg-muted/50 hover:text-foreground",
+            ].join(" ")}
+          >
+            <Icon className="w-4 h-4" />
+            {label}
+            {count > 0 && (
+              <span
+                className={[
+                  "rounded-full px-2 py-0.5 text-xs font-semibold",
+                  isActive ? "bg-primary-foreground/20 text-primary-foreground" : "bg-muted text-muted-foreground",
+                ].join(" ")}
+              >
+                {count}
+              </span>
+            )}
+          </button>
+        );
+      })}
     </div>
   );
 }

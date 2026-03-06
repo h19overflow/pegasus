@@ -29,10 +29,11 @@ except ImportError:
 DATA_DIR = Path(__file__).parent / "data"
 DATA_DIR.mkdir(exist_ok=True)
 
-BRIGHTDATA_API_KEY = os.environ.get("BRIGHTDATA_API_KEY", "1f7ca8eb-5b67-45a0-8ae8-5f7087141477")
+BRIGHTDATA_API_KEY = os.environ.get("BRIGHTDATA_API_KEY", "")
+BRIGHTDATA_CUSTOMER_ID = os.environ.get("BRIGHTDATA_CUSTOMER_ID", "")
 
 # Bright Data Web Unlocker proxy
-PROXY_URL = f"http://brd-customer-hl_9067ef31-zone-web_unlocker1:{BRIGHTDATA_API_KEY}@brd.superproxy.io:33335"
+PROXY_URL = f"http://brd-customer-{BRIGHTDATA_CUSTOMER_ID}-zone-web_unlocker1:{BRIGHTDATA_API_KEY}@brd.superproxy.io:33335"
 
 ROUTES_URL = "https://themtransit.com/routes/"
 BASE_URL = "https://themtransit.com"

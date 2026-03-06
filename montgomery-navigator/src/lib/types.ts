@@ -162,6 +162,7 @@ export interface JobMatch extends JobListing {
 
 export interface TrendingSkill {
   name: string;
+  rawKey: string;
   category: string;
   count: number;
   percent: number;
@@ -304,6 +305,10 @@ export interface NewsArticle {
   upvotes: number;
   downvotes: number;
   commentCount: number;
+  sentiment?: "positive" | "negative" | "neutral";
+  sentimentScore?: number;
+  summary?: string;
+  misinfoRisk?: number;
 }
 
 export interface NewsComment {

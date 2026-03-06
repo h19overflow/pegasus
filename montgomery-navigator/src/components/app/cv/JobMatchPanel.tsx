@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { useApp } from "@/lib/appContext";
-import { matchJobsToProfile, computeTrendingSkills } from "@/lib/jobMatcher";
+import { matchJobsToProfile, computeTrendingSkills, jobMatchesSkillFilter } from "@/lib/jobMatcher";
 import { fetchJobListings } from "@/lib/jobService";
 import type { JobMatch } from "@/lib/types";
 import JobMatchCard from "./JobMatchCard";
@@ -74,7 +74,7 @@ const JobMatchPanel = () => {
       if (filters.seniority.size > 0 && !filters.seniority.has(job.seniority)) return false;
       if (filters.industry && job.industry !== filters.industry) return false;
       if (filters.titleKeyword && extractTitleKeyword(job.title) !== filters.titleKeyword) return false;
-      if (filters.skill && !job.skillSummary.toLowerCase().includes(filters.skill.toLowerCase())) return false;
+      if (filters.skill && !jobMatchesSkillFilter(job, filters.skill)) return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         return job.title.toLowerCase().includes(q) || job.company.toLowerCase().includes(q) || job.skillSummary.toLowerCase().includes(q);

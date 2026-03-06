@@ -5,7 +5,7 @@
  */
 import type { JobListing, JobSkills } from "./types";
 
-interface GeoJsonFeature {
+export interface GeoJsonFeature {
   type: "Feature";
   geometry: { type: "Point"; coordinates: [number, number] };
   properties: {
@@ -36,7 +36,7 @@ interface GeoJsonCollection {
   features: GeoJsonFeature[];
 }
 
-function parseFeatureToJob(feature: GeoJsonFeature): JobListing {
+export function parseFeatureToJob(feature: GeoJsonFeature): JobListing {
   const p = feature.properties;
   const [lng, lat] = feature.geometry.coordinates;
 

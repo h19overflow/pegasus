@@ -1,12 +1,15 @@
+import { UserCircle } from "lucide-react";
 import capitolDome from "@/assets/capitol-dome.png";
 
 interface TopBarProps {
   lang?: "EN" | "ES";
   onLangChange?: (lang: "EN" | "ES") => void;
   onBack?: () => void;
+  isProfileActive?: boolean;
+  onProfileClick?: () => void;
 }
 
-const TopBar = ({ lang = "EN", onLangChange, onBack }: TopBarProps) => (
+const TopBar = ({ lang = "EN", onLangChange, onBack, isProfileActive, onProfileClick }: TopBarProps) => (
   <div className="flex items-center justify-between px-5 py-2.5 bg-white border-t-[3px] border-primary border-b border-border shrink-0">
     <div className="flex items-center gap-3">
       {onBack && (
@@ -32,6 +35,17 @@ const TopBar = ({ lang = "EN", onLangChange, onBack }: TopBarProps) => (
     </div>
 
     <div className="flex items-center gap-3">
+      <button
+        onClick={onProfileClick}
+        title="Profile"
+        className={`p-2 rounded-full transition-colors ${
+          isProfileActive
+            ? "bg-primary text-primary-foreground"
+            : "text-muted-foreground hover:text-foreground hover:bg-muted"
+        }`}
+      >
+        <UserCircle className="w-5 h-5" />
+      </button>
       <div className="flex rounded-full bg-muted p-0.5">
         <button
           onClick={() => onLangChange?.("EN")}

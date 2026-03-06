@@ -19,9 +19,10 @@ const App = () => (
         <AppProvider>
           <Routes>
             <Route path="/" element={<Splash />} />
-            <Route path="/app" element={<CommandCenter />} />
-            <Route path="/chat" element={<Navigate to="/app" replace />} />
-            <Route path="/onboarding" element={<Navigate to="/app" replace />} />
+            <Route path="/app" element={<Navigate to="/app/services" replace />} />
+            <Route path="/app/:view" element={<CommandCenter />} />
+            <Route path="/chat" element={<Navigate to="/app/services" replace />} />
+            <Route path="/onboarding" element={<Navigate to="/app/services" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppProvider>
