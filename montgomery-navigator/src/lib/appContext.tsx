@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer, type ReactNode } from "react";
+import { IS_DEMO_MODE } from "./appMode";
 import type {
   AppState,
   ChatMessage,
@@ -65,12 +66,20 @@ type AppAction =
   | { type: "SET_CHAT_BUBBLE_OPEN"; open: boolean }
   | { type: "MARK_CHAT_READ" }
   | { type: "MERGE_JOB_LISTINGS"; listings: JobListing[] }
-  | { type: "MERGE_NEWS_ARTICLES"; articles: NewsArticle[] };
+  | { type: "MERGE_NEWS_ARTICLES"; articles: NewsArticle[] }
+  | { type: "UPDATE_MISINFO_SCORES"; scores: Array<{ articleId: string; risk: number; reason: string }> }
+  | { type: "SET_ARTICLE_REACTION"; articleId: string; emoji: string | null }
+  | { type: "TOGGLE_ARTICLE_FLAG"; articleId: string };
+
+function getInitialView(): AppView {
+  const match = window.location.pathname.match(/\/app\/(services|cv|profile|news)/);
+  return (match?.[1] as AppView) ?? "services";
+}
 
 const initialState: AppState = {
   messages: [],
   language: "EN",
-  activeView: "services",
+  activeView: getInitialView(),
   activeFlow: null,
   profile: {},
   artifacts: [],
@@ -99,6 +108,8 @@ const initialState: AppState = {
   newsCategory: "all" as NewsCategory,
   newsComments: [],
   likedArticleIds: [],
+  articleReactions: {},
+  flaggedArticleIds: [],
   selectedArticleId: null,
   chatBubbleOpen: false,
   chatBubbleHasUnread: false,
@@ -252,6 +263,65 @@ function appReducer(state: AppState, action: AppAction): AppState {
       const existingIds = new Set(state.newsArticles.map((a) => a.id));
       const fresh = action.articles.filter((a) => !existingIds.has(a.id));
       return { ...state, newsArticles: [...fresh, ...state.newsArticles] };
+    }
+    case "UPDATE_MISINFO_SCORES": {
+      const scoreMap = new Map(action.scores.map((s) => [s.articleId, s]));
+      return {
+        ...state,
+        newsArticles: state.newsArticles.map((a) => {
+          const s = scoreMap.get(a.id);
+          return s ? { ...a, misinfoRisk: s.risk, misinfoReason: s.reason } : a;
+        }),
+      };
+    }
+    case "SET_ARTICLE_REACTION": {
+      const prev = state.articleReactions[action.articleId];
+      const reactions = { ...state.articleReactions };
+      if (action.emoji === null) {
+        delete reactions[action.articleId];
+      } else {
+        reactions[action.articleId] = action.emoji;
+      }
+      return {
+        ...state,
+        articleReactions: reactions,
+        newsArticles: state.newsArticles.map((a) => {
+          if (a.id !== action.articleId) return a;
+          const counts = { ...(a.reactionCounts ?? {}) };
+          if (prev) counts[prev] = Math.max(0, (counts[prev] ?? 1) - 1);
+          if (action.emoji) counts[action.emoji] = (counts[action.emoji] ?? 0) + 1;
+          return { ...a, reactionCounts: counts };
+        }),
+      };
+    }
+    case "TOGGLE_ARTICLE_FLAG": {
+      if (IS_DEMO_MODE) {
+        // Demo: every click increments — no unflag
+        return {
+          ...state,
+          flaggedArticleIds: state.flaggedArticleIds.includes(action.articleId)
+            ? state.flaggedArticleIds
+            : [...state.flaggedArticleIds, action.articleId],
+          newsArticles: state.newsArticles.map((a) =>
+            a.id === action.articleId
+              ? { ...a, flagCount: (a.flagCount ?? 0) + 1 }
+              : a
+          ),
+        };
+      }
+      // Live: one flag per user, toggleable
+      const wasFlagged = state.flaggedArticleIds.includes(action.articleId);
+      return {
+        ...state,
+        flaggedArticleIds: wasFlagged
+          ? state.flaggedArticleIds.filter((id) => id !== action.articleId)
+          : [...state.flaggedArticleIds, action.articleId],
+        newsArticles: state.newsArticles.map((a) =>
+          a.id === action.articleId
+            ? { ...a, flagCount: Math.max(0, (a.flagCount ?? 0) + (wasFlagged ? -1 : 1)) }
+            : a
+        ),
+      };
     }
     default:
       return state;

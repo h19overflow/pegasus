@@ -5,15 +5,14 @@ import { NewsCard } from "./NewsCard";
 import { NewsDetail } from "./NewsDetail";
 import { NewsCategoryTabs } from "./NewsCategoryTabs";
 import { NewsFilterBar } from "./NewsFilterBar";
+import { NewsMapView } from "./NewsMapView";
 import type { NewsArticle, NewsCategory } from "@/lib/types";
-import { Newspaper } from "lucide-react";
+import { Map, Newspaper, RefreshCw } from "lucide-react";
+import { scrapeLatestNews } from "@/integrations/brightdata/newsScraper";
+import { BrightDataError } from "@/integrations/brightdata/brightdataClient";
+import { runMisinfoAnalysis } from "@/integrations/misinfo/misinfoService";
 
 type SortMode = "newest" | "oldest" | "most_liked";
-
-function isArticleLiked(likedIds: string[], articleId: string): boolean {
-  if (!likedIds || !Array.isArray(likedIds)) return false;
-  return likedIds.includes(articleId);
-}
 
 function buildArticleCountsPerCategory(articles: NewsArticle[]): Record<string, number> {
   const counts: Record<string, number> = { all: articles.length };
@@ -69,9 +68,18 @@ function filterBySentiment(articles: NewsArticle[], sentiment: string): NewsArti
   return articles.filter((a) => a.sentiment === sentiment);
 }
 
+function filterByFlagged(articles: NewsArticle[], flaggedOnly: boolean, flaggedIds: string[]): NewsArticle[] {
+  if (!flaggedOnly) return articles;
+  return articles.filter((a) => flaggedIds.includes(a.id) || (a.misinfoRisk != null && a.misinfoRisk > 60));
+}
+
 export function NewsView() {
   const { state, dispatch } = useApp();
+  const [viewMode, setViewMode] = useState<"feed" | "map">("feed");
   const [lastScraped, setLastScraped] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [refreshError, setRefreshError] = useState<string | null>(null);
+  const [showFlaggedOnly, setShowFlaggedOnly] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortMode, setSortMode] = useState<SortMode>("newest");
   const [sourceFilter, setSourceFilter] = useState("");
@@ -82,6 +90,9 @@ export function NewsView() {
     try {
       const articles = await fetchNewsArticles();
       dispatch({ type: "SET_NEWS_ARTICLES", articles });
+      runMisinfoAnalysis(articles, (scores) =>
+        dispatch({ type: "UPDATE_MISINFO_SCORES", scores }),
+      );
 
       if (!lastScraped) {
         const response = await fetch("/data/news_feed.json");
@@ -109,8 +120,35 @@ export function NewsView() {
     dispatch({ type: "SET_SELECTED_ARTICLE", articleId: null });
   }
 
-  function handleToggleLike(articleId: string) {
-    dispatch({ type: "TOGGLE_ARTICLE_LIKE", articleId });
+  function handleReact(articleId: string, emoji: string | null) {
+    dispatch({ type: "SET_ARTICLE_REACTION", articleId, emoji });
+  }
+
+  function handleFlag(articleId: string) {
+    dispatch({ type: "TOGGLE_ARTICLE_FLAG", articleId });
+  }
+
+  async function handleRefresh() {
+    setRefreshing(true);
+    setRefreshError(null);
+    try {
+      const fresh = await scrapeLatestNews();
+      // Merge: fresh articles first, then existing ones not already in fresh
+      const freshIds = new Set(fresh.map((a) => a.sourceUrl || a.title));
+      const kept = state.newsArticles.filter((a) => !freshIds.has(a.sourceUrl || a.title));
+      const merged = [...fresh, ...kept];
+      dispatch({ type: "SET_NEWS_ARTICLES", articles: merged });
+      setLastScraped(new Date().toISOString());
+      runMisinfoAnalysis(merged, (scores) =>
+        dispatch({ type: "UPDATE_MISINFO_SCORES", scores }),
+      );
+    } catch (err) {
+      const msg = err instanceof BrightDataError ? err.message : "Refresh failed. Check your API key.";
+      setRefreshError(msg);
+      console.error("[NewsView] Refresh failed:", err);
+    } finally {
+      setRefreshing(false);
+    }
   }
 
   // Unique sources for dropdown
@@ -128,9 +166,22 @@ export function NewsView() {
     return (
       <NewsDetail
         article={selectedArticle}
-        isLiked={isArticleLiked(state.likedArticleIds, selectedArticle.id)}
+        userReaction={state.articleReactions[selectedArticle.id] ?? null}
+        isFlagged={state.flaggedArticleIds.includes(selectedArticle.id)}
         onBack={handleBackToFeed}
-        onLike={handleToggleLike}
+        onReact={handleReact}
+        onFlag={handleFlag}
+      />
+    );
+  }
+
+  if (viewMode === "map") {
+    return (
+      <NewsMapView
+        articles={state.newsArticles}
+        flaggedArticleIds={state.flaggedArticleIds}
+        onBack={() => setViewMode("feed")}
+        onSelectArticle={handleSelectArticle}
       />
     );
   }
@@ -140,7 +191,8 @@ export function NewsView() {
   const afterSentiment = filterBySentiment(afterCategory, sentimentFilter);
   const afterSource = filterBySource(afterSentiment, sourceFilter);
   const afterSearch = filterBySearch(afterSource, searchQuery);
-  const visibleArticles = sortArticles(afterSearch, sortMode);
+  const afterFlagged = filterByFlagged(afterSearch, showFlaggedOnly, state.flaggedArticleIds);
+  const visibleArticles = sortArticles(afterFlagged, sortMode);
   const articleCounts = buildArticleCountsPerCategory(state.newsArticles);
 
   return (
@@ -153,10 +205,33 @@ export function NewsView() {
             <Newspaper className="w-5 h-5 text-primary" />
             <h2 className="text-base font-semibold text-foreground">Montgomery News</h2>
           </div>
-          {lastScraped && (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setViewMode("map")}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border/50 bg-white text-sm font-medium text-foreground hover:shadow-md transition-all"
+            >
+              <Map className="w-4 h-4 text-primary" />
+              View on map
+            </button>
+            <button
+              onClick={handleRefresh}
+              disabled={refreshing}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border/50 bg-white text-sm font-medium text-foreground hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <RefreshCw className={`w-4 h-4 text-primary ${refreshing ? "animate-spin" : ""}`} />
+              {refreshing ? "Refreshing…" : "Refresh news"}
+            </button>
+          </div>
+        </div>
+        {/* Timestamp + error — lives below the button row */}
+        <div className="flex items-center gap-3 min-h-[16px]">
+          {lastScraped && !refreshError && (
             <span className="text-[11px] text-muted-foreground">
               Updated {formatLastScrapedTimestamp(lastScraped)}
             </span>
+          )}
+          {refreshError && (
+            <span className="text-[11px] text-destructive leading-tight">{refreshError}</span>
           )}
         </div>
 
@@ -177,6 +252,8 @@ export function NewsView() {
           uniqueSources={uniqueSources}
           sentimentFilter={sentimentFilter}
           onSentimentChange={setSentimentFilter}
+          showFlaggedOnly={showFlaggedOnly}
+          onFlaggedChange={setShowFlaggedOnly}
         />
       </div>
 
@@ -214,9 +291,11 @@ export function NewsView() {
               <NewsCard
                 key={article.id}
                 article={article}
-                isLiked={isArticleLiked(state.likedArticleIds, article.id)}
+                userReaction={state.articleReactions[article.id] ?? null}
+                isFlagged={state.flaggedArticleIds.includes(article.id)}
                 onSelect={handleSelectArticle}
-                onLike={handleToggleLike}
+                onReact={handleReact}
+                onFlag={handleFlag}
               />
             ))}
           </div>

@@ -17,6 +17,21 @@ export default defineConfig(({ mode }) => ({
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api/, ""),
       },
+      // Proxy OpenAI API to avoid CORS — key never crosses origins.
+      "/openai-api": {
+        target: "https://api.openai.com",
+        changeOrigin: true,
+        secure: true,
+        rewrite: (p) => p.replace(/^\/openai-api/, ""),
+      },
+      // Proxy Bright Data REST API to avoid CORS in the browser.
+      // The API key stays server-side in the proxy request.
+      "/brightdata-api": {
+        target: "https://api.brightdata.com",
+        changeOrigin: true,
+        secure: true,
+        rewrite: (p) => p.replace(/^\/brightdata-api/, ""),
+      },
     },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),

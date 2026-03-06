@@ -1,0 +1,27 @@
+/* Scoped override for news map tooltips only.
+   Leaflet sets white-space:nowrap on all .leaflet-tooltip elements;
+   this class resets that just for our news bubbles. */
+.leaflet-tooltip.news-map-tooltip {
+  white-space: normal;
+  max-width: 240px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  background: transparent;
+}
+
+.leaflet-tooltip.news-map-tooltip::before {
+  /* keep the default arrow but let it sit flush */
+  border-top-color: white;
+}
+
+/* Pulsing misinfo ring on news map markers */
+@keyframes misinfo-ring-pulse {
+  0%, 100% { transform: scale(1);    opacity: 0.75; }
+  50%       { transform: scale(1.22); opacity: 0.25; }
+}
+.misinfo-pulse {
+  animation: misinfo-ring-pulse 1.8s ease-in-out infinite;
+}

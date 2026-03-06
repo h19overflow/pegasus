@@ -283,6 +283,8 @@ export interface AppState {
   newsCategory: NewsCategory;
   newsComments: NewsComment[];
   likedArticleIds: string[];
+  articleReactions: Record<string, string>;
+  flaggedArticleIds: string[];
   selectedArticleId: string | null;
   chatBubbleOpen: boolean;
   chatBubbleHasUnread: boolean;
@@ -309,6 +311,9 @@ export interface NewsArticle {
   sentimentScore?: number;
   summary?: string;
   misinfoRisk?: number;
+  misinfoReason?: string;
+  reactionCounts?: Record<string, number>;
+  flagCount?: number;
 }
 
 export interface NewsComment {

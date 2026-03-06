@@ -1,13 +1,16 @@
-import { ArrowLeft, ExternalLink, ThumbsUp, Clock, Globe, Calendar } from "lucide-react";
+import { ArrowLeft, ExternalLink, Clock, Globe, Calendar, ShieldCheck, ShieldAlert, ShieldX } from "lucide-react";
 import type { NewsArticle } from "@/lib/types";
 import { formatRelativeTime } from "@/lib/newsService";
 import { NewsCommentSection } from "./NewsCommentSection";
+import { ArticleReactions } from "./ArticleReactions";
 
 interface NewsDetailProps {
   article: NewsArticle;
-  isLiked: boolean;
+  userReaction: string | null;
+  isFlagged: boolean;
   onBack: () => void;
-  onLike: (articleId: string) => void;
+  onReact: (articleId: string, emoji: string | null) => void;
+  onFlag: (articleId: string) => void;
 }
 
 const CATEGORY_STYLES: Record<string, string> = {
@@ -31,7 +34,31 @@ function formatFullDate(isoString: string): string {
   });
 }
 
-export function NewsDetail({ article, isLiked, onBack, onLike }: NewsDetailProps) {
+function MisinfoPanel({ risk, reason }: { risk: number; reason?: string }) {
+  const isLow    = risk <= 30;
+  const isMedium = risk > 30 && risk <= 60;
+  const Icon     = isLow ? ShieldCheck : isMedium ? ShieldAlert : ShieldX;
+  const { bg, border, text, label } = isLow
+    ? { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-800", label: "Low Risk" }
+    : isMedium
+    ? { bg: "bg-amber-50",   border: "border-amber-200",   text: "text-amber-800",   label: "Medium Risk" }
+    : { bg: "bg-red-50",     border: "border-red-200",     text: "text-red-800",     label: "High Risk"   };
+
+  return (
+    <div className={`rounded-lg border p-4 ${bg} ${border}`}>
+      <div className={`flex items-center gap-2 ${text}`}>
+        <Icon className="w-4 h-4 shrink-0" />
+        <span className="text-sm font-semibold">Misinformation Assessment — {label}</span>
+        <span className="ml-auto text-xs font-bold opacity-70">{risk}/100</span>
+      </div>
+      {reason && (
+        <p className={`mt-2 text-xs leading-relaxed ${text} opacity-80`}>{reason}</p>
+      )}
+    </div>
+  );
+}
+
+export function NewsDetail({ article, userReaction, isFlagged, onBack, onReact, onFlag }: NewsDetailProps) {
   const scrapedDate = formatFullDate(article.scrapedAt);
 
   return (
@@ -104,6 +131,11 @@ export function NewsDetail({ article, isLiked, onBack, onLike }: NewsDetailProps
             </a>
           </div>
 
+          {/* Misinformation assessment panel */}
+          {article.misinfoRisk != null && (
+            <MisinfoPanel risk={article.misinfoRisk} reason={article.misinfoReason} />
+          )}
+
           {/* Excerpt / body */}
           {article.excerpt && (
             <p className="text-sm text-muted-foreground leading-relaxed">{article.excerpt}</p>
@@ -127,18 +159,16 @@ export function NewsDetail({ article, isLiked, onBack, onLike }: NewsDetailProps
           </a>
 
           {/* Actions bar */}
-          <div className="flex items-center justify-between border-y border-border/50 py-3">
-            <button
-              onClick={() => onLike(article.id)}
-              className={`flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                isLiked
-                  ? "text-primary bg-primary/10"
-                  : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-              }`}
-            >
-              <ThumbsUp className={`w-4 h-4 ${isLiked ? "fill-primary" : ""}`} />
-              {article.upvotes} {article.upvotes === 1 ? "like" : "likes"}
-            </button>
+          <div className="border-y border-border/50 py-3">
+            <ArticleReactions
+              articleId={article.id}
+              reactionCounts={article.reactionCounts ?? {}}
+              userReaction={userReaction}
+              flagCount={article.flagCount ?? 0}
+              isFlagged={isFlagged}
+              onReact={onReact}
+              onFlag={onFlag}
+            />
           </div>
 
           {/* Comments */}

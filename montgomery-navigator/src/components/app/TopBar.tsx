@@ -1,4 +1,5 @@
 import { UserCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import capitolDome from "@/assets/capitol-dome.png";
 
 interface TopBarProps {
@@ -19,7 +20,7 @@ const TopBar = ({ lang = "EN", onLangChange, onBack, isProfileActive, onProfileC
           </svg>
         </button>
       )}
-      <div className="flex items-center gap-2.5">
+      <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
         <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
           <img src={capitolDome} alt="" className="w-5 h-5 object-contain" />
         </div>
@@ -31,7 +32,7 @@ const TopBar = ({ lang = "EN", onLangChange, onBack, isProfileActive, onProfileC
             Civic Navigator
           </span>
         </div>
-      </div>
+      </Link>
     </div>
 
     <div className="flex items-center gap-3">

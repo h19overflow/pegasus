@@ -1,12 +1,15 @@
-import { ExternalLink, ThumbsUp, MessageCircle, Clock, Globe } from "lucide-react";
+import { ExternalLink, MessageCircle, Clock, Globe } from "lucide-react";
 import type { NewsArticle } from "@/lib/types";
 import { formatRelativeTime } from "@/lib/newsService";
+import { ArticleReactions } from "./ArticleReactions";
 
 interface NewsCardProps {
   article: NewsArticle;
-  isLiked: boolean;
+  userReaction: string | null;
+  isFlagged: boolean;
   onSelect: (article: NewsArticle) => void;
-  onLike: (articleId: string) => void;
+  onReact: (articleId: string, emoji: string | null) => void;
+  onFlag: (articleId: string) => void;
 }
 
 const CATEGORY_STYLES: Record<string, string> = {
@@ -31,13 +34,32 @@ function sentimentStyle(sentiment: string): string {
   return SENTIMENT_STYLES[sentiment] ?? SENTIMENT_STYLES.neutral;
 }
 
+// ── Misinfo risk badge ─────────────────────────────────────────────────────
+function misinfoLevel(risk: number): { label: string; cls: string; icon: string } {
+  if (risk <= 30) return { label: "Low risk",    icon: "✓", cls: "bg-emerald-50 text-emerald-700 border-emerald-200" };
+  if (risk <= 60) return { label: "Medium risk", icon: "⚠", cls: "bg-amber-50  text-amber-700  border-amber-200"   };
+  return             { label: "High risk",   icon: "🚩", cls: "bg-red-50    text-red-700    border-red-200"     };
+}
+
+function MisinfoRiskBadge({ risk, reason }: { risk: number; reason?: string }) {
+  const { label, icon, cls } = misinfoLevel(risk);
+  return (
+    <span
+      title={reason ?? label}
+      className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded border cursor-help ${cls}`}
+    >
+      {icon} {label}
+    </span>
+  );
+}
+
 function formatScrapedDate(isoString: string): string {
   const date = new Date(isoString);
   if (isNaN(date.getTime())) return "";
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
-export function NewsCard({ article, isLiked, onSelect, onLike }: NewsCardProps) {
+export function NewsCard({ article, userReaction, isFlagged, onSelect, onReact, onFlag }: NewsCardProps) {
   const scrapedDate = formatScrapedDate(article.scrapedAt);
 
   return (
@@ -68,10 +90,8 @@ export function NewsCard({ article, isLiked, onSelect, onLike }: NewsCardProps) 
                 {article.sentiment}
               </span>
             )}
-            {article.misinfoRisk != null && article.misinfoRisk > 60 && (
-              <span className="text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded border bg-orange-50 text-orange-700 border-orange-200">
-                ⚠ Verify
-              </span>
+            {article.misinfoRisk != null && (
+              <MisinfoRiskBadge risk={article.misinfoRisk} reason={article.misinfoReason} />
             )}
             <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
               <Clock className="w-3 h-3" />
@@ -98,45 +118,43 @@ export function NewsCard({ article, isLiked, onSelect, onLike }: NewsCardProps) 
           )}
 
           {/* Footer: source link + actions + scraped date */}
-          <div className="flex items-center justify-between mt-auto pt-1">
-            <div className="flex items-center gap-2">
-              <a
-                href={article.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="flex items-center gap-1 text-[11px] text-primary/80 hover:text-primary font-medium transition-colors"
-              >
-                Read full article
-                <ExternalLink className="w-3 h-3" />
-              </a>
-              {scrapedDate && (
-                <span className="text-[10px] text-muted-foreground/60">
-                  Scraped {scrapedDate}
-                </span>
-              )}
-            </div>
-
-            <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
-              <button
-                onClick={(e) => { e.stopPropagation(); onLike(article.id); }}
-                className={`flex items-center gap-1 rounded-full px-2 py-0.5 transition-colors ${
-                  isLiked
-                    ? "text-primary bg-primary/10"
-                    : "hover:text-primary hover:bg-primary/5"
-                }`}
-              >
-                <ThumbsUp className={`w-3 h-3 ${isLiked ? "fill-primary" : ""}`} />
-                {article.upvotes}
-              </button>
+          <div className="flex flex-col gap-1.5 mt-auto pt-1">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <a
+                  href={article.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex items-center gap-1 text-[11px] text-primary/80 hover:text-primary font-medium transition-colors"
+                >
+                  Read full article
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+                {scrapedDate && (
+                  <span className="text-[10px] text-muted-foreground/60">
+                    Scraped {scrapedDate}
+                  </span>
+                )}
+              </div>
               <button
                 onClick={(e) => { e.stopPropagation(); onSelect(article); }}
-                className="flex items-center gap-1 rounded-full px-2 py-0.5 hover:text-primary hover:bg-primary/5 transition-colors"
+                className="flex items-center gap-1 text-[11px] text-muted-foreground rounded-full px-2 py-0.5 hover:text-primary hover:bg-primary/5 transition-colors"
               >
                 <MessageCircle className="w-3 h-3" />
                 {article.commentCount}
               </button>
             </div>
+            <ArticleReactions
+              articleId={article.id}
+              reactionCounts={article.reactionCounts ?? {}}
+              userReaction={userReaction}
+              flagCount={article.flagCount ?? 0}
+              isFlagged={isFlagged}
+              onReact={onReact}
+              onFlag={onFlag}
+              compact
+            />
           </div>
         </div>
       </div>
