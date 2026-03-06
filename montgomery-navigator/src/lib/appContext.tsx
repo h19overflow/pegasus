@@ -23,6 +23,7 @@ import type {
   NewsArticle,
   NewsCategory,
   NewsComment,
+  ReactionType,
 } from "./types";
 
 type AppAction =
@@ -65,7 +66,11 @@ type AppAction =
   | { type: "SET_CHAT_BUBBLE_OPEN"; open: boolean }
   | { type: "MARK_CHAT_READ" }
   | { type: "MERGE_JOB_LISTINGS"; listings: JobListing[] }
-  | { type: "MERGE_NEWS_ARTICLES"; articles: NewsArticle[] };
+  | { type: "MERGE_NEWS_ARTICLES"; articles: NewsArticle[] }
+  | { type: "TOGGLE_NEWS_MAP" }
+  | { type: "SET_NEWS_MAP_MODE"; mode: "pins" | "heat" }
+  | { type: "SET_ARTICLE_REACTION"; articleId: string; reaction: ReactionType }
+  | { type: "SET_NEWS_COMMENTS"; comments: NewsComment[] };
 
 const initialState: AppState = {
   messages: [],
@@ -100,6 +105,10 @@ const initialState: AppState = {
   newsComments: [],
   likedArticleIds: [],
   selectedArticleId: null,
+  newsMapVisible: false,
+  newsMapMode: "pins" as const,
+  newsReactions: {},
+  userReactions: {},
   chatBubbleOpen: false,
   chatBubbleHasUnread: false,
 };
@@ -252,6 +261,26 @@ function appReducer(state: AppState, action: AppAction): AppState {
       const existingIds = new Set(state.newsArticles.map((a) => a.id));
       const fresh = action.articles.filter((a) => !existingIds.has(a.id));
       return { ...state, newsArticles: [...fresh, ...state.newsArticles] };
+    }
+    case "TOGGLE_NEWS_MAP":
+      return { ...state, newsMapVisible: !state.newsMapVisible };
+    case "SET_NEWS_MAP_MODE":
+      return { ...state, newsMapMode: action.mode };
+    case "SET_NEWS_COMMENTS":
+      return { ...state, newsComments: action.comments };
+    case "SET_ARTICLE_REACTION": {
+      const prev = state.newsReactions[action.articleId] ?? {};
+      const oldReaction = state.userReactions[action.articleId];
+      const updated = { ...prev };
+      if (oldReaction) {
+        updated[oldReaction] = Math.max((updated[oldReaction] ?? 0) - 1, 0);
+      }
+      updated[action.reaction] = (updated[action.reaction] ?? 0) + 1;
+      return {
+        ...state,
+        newsReactions: { ...state.newsReactions, [action.articleId]: updated },
+        userReactions: { ...state.userReactions, [action.articleId]: action.reaction },
+      };
     }
     default:
       return state;

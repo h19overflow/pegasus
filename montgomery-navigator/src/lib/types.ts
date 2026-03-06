@@ -1,6 +1,6 @@
 export type FlowId = "U1" | "U2" | "U3" | "U4" | "U5" | "U6";
 export type Language = "EN" | "ES";
-export type AppView = "cv" | "services" | "profile" | "news";
+export type AppView = "cv" | "services" | "profile" | "admin";
 export type MessageType =
   | "text"
   | "benefits-cliff"
@@ -284,12 +284,36 @@ export interface AppState {
   newsComments: NewsComment[];
   likedArticleIds: string[];
   selectedArticleId: string | null;
+  newsMapVisible: boolean;
+  newsMapMode: "pins" | "heat";
+  newsReactions: Record<string, Record<ReactionType, number>>;
+  userReactions: Record<string, ReactionType>;
   chatBubbleOpen: boolean;
   chatBubbleHasUnread: boolean;
 }
 
+/* ── Neighborhood Activity ────────────────────────────── */
+export interface NeighborhoodActivity {
+  name: string;
+  articleCount: number;
+  reactionCount: number;
+  commentCount: number;
+  topSentiment: "positive" | "neutral" | "negative";
+  centerLat: number;
+  centerLng: number;
+}
+
 /* ── News ──────────────────────────────────────────────── */
 export type NewsCategory = "all" | "general" | "development" | "government" | "community" | "events";
+
+export type ReactionType = "thumbs_up" | "thumbs_down" | "heart" | "sad" | "angry";
+
+export interface NewsLocation {
+  lat: number;
+  lng: number;
+  neighborhood: string;
+  address: string;
+}
 
 export interface NewsArticle {
   id: string;
@@ -309,6 +333,7 @@ export interface NewsArticle {
   sentimentScore?: number;
   summary?: string;
   misinfoRisk?: number;
+  location?: NewsLocation | null;
 }
 
 export interface NewsComment {
