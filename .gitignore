@@ -16,3 +16,4 @@ wheels/
 
 # Worktrees
 .worktrees/
+MEMORY.md
