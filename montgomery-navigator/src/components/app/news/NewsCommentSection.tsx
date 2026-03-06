@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Send } from "lucide-react";
 import type { NewsComment } from "@/lib/types";
 import { useApp } from "@/lib/appContext";
+import { saveComment } from "@/lib/newsCommentStore";
 import { formatRelativeTime } from "@/lib/newsService";
 
 interface NewsCommentSectionProps {
@@ -17,20 +18,21 @@ export function NewsCommentSection({ articleId }: NewsCommentSectionProps) {
 
   function handleSubmitComment() {
     const trimmed = text.trim();
-    if (!trimmed || !citizen) return;
+    if (!trimmed) return;
 
     const comment: NewsComment = {
       id: `cmt-${Date.now()}`,
       articleId,
-      citizenId: citizen.id,
-      citizenName: state.cvData?.name ?? citizen.persona,
-      avatarInitials: citizen.avatarInitials,
-      avatarColor: citizen.avatarColor,
+      citizenId: citizen?.id ?? "guest",
+      citizenName: citizen ? (state.cvData?.name ?? citizen.persona) : "Resident",
+      avatarInitials: citizen?.avatarInitials ?? "R",
+      avatarColor: citizen?.avatarColor ?? "#6b7280",
       content: trimmed,
       createdAt: new Date().toISOString(),
     };
 
     dispatch({ type: "ADD_NEWS_COMMENT", comment });
+    saveComment(comment);
     setText("");
   }
 
@@ -48,37 +50,31 @@ export function NewsCommentSection({ articleId }: NewsCommentSectionProps) {
       </h4>
 
       {/* Comment input */}
-      {citizen ? (
-        <div className="flex items-start gap-3">
-          <div
-            className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
-            style={{ backgroundColor: citizen.avatarColor }}
-          >
-            {citizen.avatarInitials}
-          </div>
-          <div className="flex-1 flex gap-2">
-            <textarea
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Share your thoughts..."
-              rows={2}
-              className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30"
-            />
-            <button
-              onClick={handleSubmitComment}
-              disabled={!text.trim()}
-              className="self-end p-2 rounded-lg bg-primary text-primary-foreground disabled:opacity-40 hover:bg-primary/90 transition-colors"
-            >
-              <Send className="w-4 h-4" />
-            </button>
-          </div>
+      <div className="flex items-start gap-3">
+        <div
+          className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
+          style={{ backgroundColor: citizen?.avatarColor ?? "#6b7280" }}
+        >
+          {citizen?.avatarInitials ?? "R"}
         </div>
-      ) : (
-        <p className="text-xs text-muted-foreground italic">
-          Select a citizen profile to leave comments.
-        </p>
-      )}
+        <div className="flex-1 flex gap-2">
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Share your thoughts..."
+            rows={2}
+            className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30"
+          />
+          <button
+            onClick={handleSubmitComment}
+            disabled={!text.trim()}
+            className="self-end p-2 rounded-lg bg-primary text-primary-foreground disabled:opacity-40 hover:bg-primary/90 transition-colors"
+          >
+            <Send className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
 
       {/* Comment list */}
       <div className="space-y-3">
