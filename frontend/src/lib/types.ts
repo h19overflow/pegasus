@@ -290,6 +290,7 @@ export interface AppState {
   userReactions: Record<string, ReactionType>;
   chatBubbleOpen: boolean;
   chatBubbleHasUnread: boolean;
+  housingListings: HousingListing[];
 }
 
 /* ── Neighborhood Activity ────────────────────────────── */
@@ -345,4 +346,22 @@ export interface NewsComment {
   avatarColor: string;
   content: string;
   createdAt: string;
+}
+
+/* ── Housing ──────────────────────────────────────────────── */
+export interface HousingListing {
+  id: string;
+  address: string;
+  price: number | null;
+  priceFormatted: string;
+  beds: number | null;
+  baths: number | null;
+  sqft: number | null;
+  listingType: string;
+  status: string;
+  url: string;
+  imageUrl: string;
+  lat: number;
+  lng: number;
+  scrapedAt: string;
 }

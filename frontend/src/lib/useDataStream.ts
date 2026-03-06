@@ -2,7 +2,47 @@ import { useEffect, useRef, useState } from "react";
 import { useApp } from "./appContext";
 import { connectSseStream, type SseMessage } from "./sseClient";
 import { parseFeatureToJob, type GeoJsonFeature } from "./jobService";
-import type { NewsArticle } from "./types";
+import type { NewsArticle, HousingListing } from "./types";
+
+interface HousingGeoJsonFeature {
+  type: "Feature";
+  geometry: { type: "Point"; coordinates: [number, number] };
+  properties: {
+    id: string;
+    address: string;
+    price: number | null;
+    price_formatted: string;
+    beds: number | null;
+    baths: number | null;
+    sqft: number | null;
+    listing_type: string;
+    status: string;
+    url: string;
+    image_url: string;
+    scraped_at: string;
+  };
+}
+
+function parseFeatureToHousingListing(feature: HousingGeoJsonFeature): HousingListing {
+  const p = feature.properties;
+  const [lng, lat] = feature.geometry.coordinates;
+  return {
+    id: p.id,
+    address: p.address,
+    price: p.price,
+    priceFormatted: p.price_formatted,
+    beds: p.beds,
+    baths: p.baths,
+    sqft: p.sqft,
+    listingType: p.listing_type,
+    status: p.status,
+    url: p.url,
+    imageUrl: p.image_url,
+    lat,
+    lng,
+    scrapedAt: p.scraped_at,
+  };
+}
 
 /**
  * Connects to the backend SSE stream and dispatches
@@ -46,9 +86,12 @@ function handleSseMessage(
       dispatch({ type: "MERGE_NEWS_ARTICLES", articles });
       break;
     }
-    case "housing":
-      console.log("[SSE] Housing update received:", items.length, "listings");
+    case "housing": {
+      const features = items as HousingGeoJsonFeature[];
+      const listings = features.map(parseFeatureToHousingListing);
+      dispatch({ type: "MERGE_HOUSING_LISTINGS", listings });
       break;
+    }
     default:
       console.log("[SSE] Unknown event type:", msg.type);
   }

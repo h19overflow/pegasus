@@ -24,6 +24,7 @@ import type {
   NewsCategory,
   NewsComment,
   ReactionType,
+  HousingListing,
 } from "./types";
 
 type AppAction =
@@ -67,6 +68,7 @@ type AppAction =
   | { type: "MARK_CHAT_READ" }
   | { type: "MERGE_JOB_LISTINGS"; listings: JobListing[] }
   | { type: "MERGE_NEWS_ARTICLES"; articles: NewsArticle[] }
+  | { type: "MERGE_HOUSING_LISTINGS"; listings: HousingListing[] }
   | { type: "TOGGLE_NEWS_MAP" }
   | { type: "SET_NEWS_MAP_MODE"; mode: "pins" | "heat" }
   | { type: "SET_ARTICLE_REACTION"; articleId: string; reaction: ReactionType }
@@ -111,6 +113,7 @@ const initialState: AppState = {
   userReactions: {},
   chatBubbleOpen: false,
   chatBubbleHasUnread: false,
+  housingListings: [],
 };
 
 function applyMessageSideEffects(state: AppState, message: ChatMessage): AppState {
@@ -261,6 +264,11 @@ function appReducer(state: AppState, action: AppAction): AppState {
       const existingIds = new Set(state.newsArticles.map((a) => a.id));
       const fresh = action.articles.filter((a) => !existingIds.has(a.id));
       return { ...state, newsArticles: [...fresh, ...state.newsArticles] };
+    }
+    case "MERGE_HOUSING_LISTINGS": {
+      const existingIds = new Set(state.housingListings.map((h) => h.id));
+      const fresh = action.listings.filter((h) => !existingIds.has(h.id));
+      return { ...state, housingListings: [...fresh, ...state.housingListings] };
     }
     case "TOGGLE_NEWS_MAP":
       return { ...state, newsMapVisible: !state.newsMapVisible };
