@@ -1,4 +1,8 @@
-"""FastAPI app for comment analysis API and mayor chat."""
+"""Unified FastAPI app — comment analysis, mayor chat, webhooks, and SSE."""
+
+import asyncio
+import os
+from contextlib import asynccontextmanager
 
 from dotenv import load_dotenv
 
@@ -7,13 +11,38 @@ load_dotenv()
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.api.routers import analysis, chat, comments
+from backend.api.routers import analysis, chat, comments, stream, webhooks
 
-app = FastAPI(title="Montgomery Comment Analysis API")
 
+@asynccontextmanager
+async def lifespan(application: FastAPI):
+    """Start background scraping on server boot if API key is available."""
+    scraper_task = None
+    auto_scrape = os.environ.get("AUTO_SCRAPE", "1") != "0"
+    has_api_key = bool(os.environ.get("BRIGHTDATA_API_KEY"))
+
+    if auto_scrape and has_api_key:
+        from backend.core.scrape_scheduler import start_scheduled_scraping
+        scraper_task = asyncio.create_task(start_scheduled_scraping())
+
+    yield
+
+    if scraper_task:
+        scraper_task.cancel()
+
+
+ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:8080",
+    "http://localhost:8081",
+    "http://localhost:8082",
+]
+
+app = FastAPI(title="MontgomeryAI", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://localhost:8080"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -22,8 +51,16 @@ app.add_middleware(
 app.include_router(analysis.router, prefix="/api")
 app.include_router(chat.router, prefix="/api")
 app.include_router(comments.router, prefix="/api")
+app.include_router(webhooks.router)
+app.include_router(stream.router)
 
 
-@app.get("/api/health")
+@app.get("/health")
 async def health():
-    return {"status": "ok"}
+    """Health check endpoint."""
+    from datetime import datetime, timezone
+    return {
+        "status": "ok",
+        "streams": ["jobs", "news", "housing", "benefits"],
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
