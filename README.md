@@ -148,9 +148,24 @@ All Bright Data interactions use the official `brightdata` Python SDK (v0.4+):
 
 The SERP API uses `WebUnlocker` pointed at the SERP zone (same `/request` endpoint, different zone routing). A JSON format fallback handles cases where the raw response returns HTML instead of JSON.
 
+## Features
+
+### News Sentiment Map
+
+**Latest Addition**: Real-time news feed with interactive map visualization and community sentiment tracking.
+
+- **Map Overlay**: View articles as sentiment-colored pins or heat markers across Montgomery
+- **Sidebar Panel**: Browse articles with Latest/Trending sort, category filter, and comment threads
+- **Admin Dashboard** (`/admin`): Charts, hotspots, comment feed, and data export for elected officials
+- **Community Reactions**: 5 reaction types (👍👎❤️😢😡) with persistent counts
+- **Comments**: Inline discussion threads tied to articles, stored in browser localStorage
+- **Sentiment Analysis**: Automatic keyword-based sentiment classification (positive/neutral/negative)
+- **Geocoding**: 3-tier strategy ensures 100% map coverage—high-precision SERP Maps for named locations, jittered city-center for generic mentions
+
 ## Tech Stack
 
-- **Frontend**: React, TypeScript, Vite, Tailwind CSS, shadcn/ui, Leaflet/react-leaflet
+- **Frontend**: React, TypeScript, Vite, Tailwind CSS, shadcn/ui, Leaflet/react-leaflet, Recharts
 - **Backend**: FastAPI, uvicorn, Bright Data SDK, SSE broadcasting
 - **Data**: Static JSON files in `public/data/`, no database required
 - **Maps**: OpenStreetMap tiles, Leaflet markers with sentiment coloring
+- **Persistence**: Browser localStorage for reactions and comments
