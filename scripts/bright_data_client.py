@@ -1,38 +1,43 @@
-"""Bright Data API client using the official SDK.
+"""Bright Data API client using the official SDK (brightdata>=0.4).
 
-Wraps brightdata-sdk (SyncBrightDataClient) with the same function
-signatures used by trigger scripts and the scrape scheduler.
-
-- Page fetching: crawl dataset (replaces Web Unlocker — no zone needed)
-- SERP API: SDK normalized search results via serp_api1 zone
-- Dataset trigger/poll: SDK's DatasetAPIClient for trigger → poll → fetch
+- Web Scraper API: BrightdataEngine for trigger → poll → fetch
+- SERP API: WebUnlocker (same /request endpoint, SERP zone)
+- Page fetcher: SDK crawl_single_url
 """
 
+import asyncio
 import logging
-import time
 from typing import Any
+from urllib.parse import quote
 
-from brightdata import SyncBrightDataClient
-from brightdata.scrapers.api_client import DatasetAPIClient
+from brightdata import WebUnlocker, crawl_single_url
+from brightdata.webscraper_api.engine import BrightdataEngine, get_engine
 
-from scripts.config import get_api_token, SERP_ZONE, DATASETS
+from scripts.config import get_api_key, SERP_ZONE, DATASETS
 
 logger = logging.getLogger("bright_data_client")
 
 
-def _make_client(**overrides) -> SyncBrightDataClient:
-    """Create a SyncBrightDataClient with existing zones (no auto-create)."""
-    defaults = {
-        "token": get_api_token(),
-        "auto_create_zones": False,
-        "serp_zone": SERP_ZONE,
-    }
-    defaults.update(overrides)
-    return SyncBrightDataClient(**defaults)
+def _get_engine() -> BrightdataEngine:
+    return get_engine(token=get_api_key())
+
+
+def _run_async(coro: Any) -> Any:
+    """Run an async coroutine synchronously."""
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = None
+
+    if loop and loop.is_running():
+        import concurrent.futures
+        with concurrent.futures.ThreadPoolExecutor() as pool:
+            return pool.submit(asyncio.run, coro).result()
+    return asyncio.run(coro)
 
 
 # ---------------------------------------------------------------------------
-# Web Scraper API (trigger → poll → fetch via SDK DatasetAPIClient)
+# Web Scraper API (trigger → poll → fetch via SDK BrightdataEngine)
 # ---------------------------------------------------------------------------
 
 def trigger_and_collect(
@@ -42,88 +47,21 @@ def trigger_and_collect(
     max_wait: int = 600,
     interval: int = 15,
 ) -> list[dict]:
-    """Trigger a scraper, poll until ready, return results.
-
-    Combines trigger + poll + download into a single call.
-    Uses SDK's DatasetAPIClient for typed HTTP handling.
-    """
-    with _make_client() as client:
-        api = DatasetAPIClient(client._async_client.engine)
-        snapshot_id = _trigger_dataset(client, api, dataset_id, payload, params)
-        if not snapshot_id:
-            return []
-        return _poll_and_fetch(client, api, snapshot_id, max_wait, interval)
-
-
-def _trigger_dataset(
-    client: SyncBrightDataClient,
-    api: DatasetAPIClient,
-    dataset_id: str,
-    payload: list[dict],
-    params: dict | None,
-) -> str | None:
-    """Trigger a dataset collection. Returns snapshot_id or None."""
-    try:
-        snapshot_id = client._run(
-            api.trigger(payload=payload, dataset_id=dataset_id, extra_params=params)
-        )
-        logger.info("Triggered snapshot: %s", snapshot_id)
-        return snapshot_id
-    except Exception as e:
-        logger.error("Trigger failed: %s", e)
-        return None
-
-
-def _poll_and_fetch(
-    client: SyncBrightDataClient,
-    api: DatasetAPIClient,
-    snapshot_id: str,
-    max_wait: int,
-    interval: int,
-) -> list[dict]:
-    """Poll snapshot status, then fetch results when ready."""
-    elapsed = 0
-    while elapsed < max_wait:
-        try:
-            status = client._run(api.get_status(snapshot_id))
-        except Exception as e:
-            logger.warning("[%ds] Poll error: %s", elapsed, e)
-            time.sleep(interval)
-            elapsed += interval
-            continue
-
-        logger.info("[%ds] %s", elapsed, status)
-
-        if status == "ready":
-            return _fetch_snapshot(client, api, snapshot_id)
-        if status == "failed":
-            logger.error("Snapshot %s FAILED", snapshot_id)
-            return []
-
-        time.sleep(interval)
-        elapsed += interval
-
-    logger.error("Timed out after %ds for %s", max_wait, snapshot_id)
-    return []
-
-
-def _fetch_snapshot(
-    client: SyncBrightDataClient,
-    api: DatasetAPIClient,
-    snapshot_id: str,
-) -> list[dict]:
-    """Download completed snapshot results."""
-    try:
-        records: Any = client._run(api.fetch_result(snapshot_id, format="json"))
-        if isinstance(records, list):
-            return records
-        return records.get("data", [])
-    except Exception as e:
-        logger.error("Download failed: %s", e)
+    """Trigger a scraper, poll until ready, return results."""
+    engine = _get_engine()
+    snapshot_id = _run_async(
+        engine.trigger(payload=payload, dataset_id=dataset_id, extra_params=params)
+    )
+    if not snapshot_id:
         return []
 
+    result = _run_async(
+        engine.poll_until_ready(snapshot_id, poll_interval=interval, timeout=max_wait)
+    )
+    if result and result.data:
+        return result.data if isinstance(result.data, list) else [result.data]
+    return []
 
-# Backward-compatible wrappers for trigger scripts (fire-and-forget mode)
 
 def trigger_scraper(
     dataset_id: str,
@@ -131,17 +69,18 @@ def trigger_scraper(
     params: dict | None = None,
     webhook_url: str | None = None,
 ) -> str | None:
-    """Trigger a Web Scraper API dataset. Returns snapshot_id or None.
-
-    Kept for callers that need fire-and-forget with webhook delivery.
-    For poll mode, prefer trigger_and_collect().
-    """
-    with _make_client() as client:
-        api = DatasetAPIClient(client._async_client.engine)
-        extra = dict(params) if params else {}
-        if webhook_url:
-            extra["notify"] = webhook_url
-        return _trigger_dataset(client, api, dataset_id, payload, extra)
+    """Trigger a Web Scraper API dataset. Returns snapshot_id or None."""
+    engine = _get_engine()
+    extra = dict(params) if params else {}
+    if webhook_url:
+        extra["notify"] = webhook_url
+    try:
+        return _run_async(
+            engine.trigger(payload=payload, dataset_id=dataset_id, extra_params=extra)
+        )
+    except Exception as e:
+        logger.error("Trigger failed: %s", e)
+        return None
 
 
 def poll_snapshot(
@@ -150,13 +89,17 @@ def poll_snapshot(
     interval: int = 15,
 ) -> list[dict]:
     """Poll until snapshot is ready, then download results."""
-    with _make_client() as client:
-        api = DatasetAPIClient(client._async_client.engine)
-        return _poll_and_fetch(client, api, snapshot_id, max_wait, interval)
+    engine = _get_engine()
+    result = _run_async(
+        engine.poll_until_ready(snapshot_id, poll_interval=interval, timeout=max_wait)
+    )
+    if result and result.data:
+        return result.data if isinstance(result.data, list) else [result.data]
+    return []
 
 
 # ---------------------------------------------------------------------------
-# Page fetcher (uses crawl dataset — no Web Unlocker zone needed)
+# Page fetcher (SDK crawl_single_url)
 # ---------------------------------------------------------------------------
 
 def fetch_with_unlocker(
@@ -164,50 +107,108 @@ def fetch_with_unlocker(
     zone: str | None = None,
     as_markdown: bool = True,
 ) -> str | None:
-    """Fetch a URL via the crawl dataset. Returns markdown/HTML or None.
-
-    Uses the crawl dataset which returns markdown by default,
-    avoiding the need for a Web Unlocker zone.
-    """
-    results = trigger_and_collect(
-        dataset_id=DATASETS["crawl"],
-        payload=[{"url": url}],
-        max_wait=120,
-        interval=5,
-    )
-    if not results:
+    """Fetch a URL via SDK crawl. Returns markdown/HTML or None."""
+    try:
+        result = crawl_single_url(url, bearer_token=get_api_key())
+        if not result:
+            return None
+        md = result.get_markdown_content()
+        if as_markdown and md:
+            return md
+        page = result.get_page(0) if result.page_count > 0 else None
+        if page:
+            return page.get("markdown") or page.get("page_html")
+        return None
+    except Exception as e:
+        logger.error("Crawl failed for %s: %s", url, e)
         return None
 
-    page = results[0]
-    if as_markdown:
-        return page.get("markdown") or page.get("html2text") or page.get("page_html")
-    return page.get("page_html") or page.get("markdown")
-
 
 # ---------------------------------------------------------------------------
-# SERP API
+# SERP API (uses SDK WebUnlocker with SERP zone)
 # ---------------------------------------------------------------------------
+
+def _get_serp_client() -> WebUnlocker:
+    """Create a WebUnlocker configured for the SERP zone."""
+    return WebUnlocker(
+        BRIGHTDATA_WEBUNLOCKER_BEARER=get_api_key(),
+        ZONE_STRING=SERP_ZONE,
+    )
+
+
+def _serp_request(google_url: str) -> dict | None:
+    """Make a SERP API request via WebUnlocker. Returns parsed JSON or None.
+
+    Falls back to direct HTTP with format=json if WebUnlocker returns HTML.
+    """
+    client = _get_serp_client()
+    try:
+        result = client.get_source(google_url)
+        if not result.success:
+            logger.error("SERP failed: %s", result.error)
+            return None
+        import json
+        return json.loads(result.data)
+    except (ValueError, TypeError):
+        # WebUnlocker returned HTML — retry with explicit JSON format
+        return _serp_request_json(google_url)
+    except Exception as e:
+        logger.error("SERP request failed for '%s': %s", google_url, e)
+        return None
+
+
+def _serp_request_json(google_url: str) -> dict | None:
+    """Direct HTTP SERP request with format=json as fallback."""
+    import requests
+    payload = {"zone": SERP_ZONE, "url": google_url, "format": "json"}
+    headers = {"Authorization": f"Bearer {get_api_key()}", "Content-Type": "application/json"}
+    try:
+        resp = requests.post("https://api.brightdata.com/request", headers=headers, json=payload, timeout=30)
+        resp.raise_for_status()
+        data = resp.json()
+        # format=json wraps in {status_code, headers, body}
+        if "body" in data:
+            import json
+            return json.loads(data["body"]) if isinstance(data["body"], str) else data["body"]
+        return data
+    except Exception as e:
+        logger.error("SERP JSON fallback failed for '%s': %s", google_url, e)
+        return None
+
 
 def serp_search(
     query: str,
     zone: str | None = None,
     search_type: str = "nws",
 ) -> dict | None:
-    """Run a Google News search. Returns parsed results or None.
+    """Run a Google News search via SERP API. Returns parsed results or None."""
+    encoded = quote(query)
+    url = (
+        f"https://www.google.com/search?"
+        f"q={encoded}&tbm={search_type}&hl=en&gl=us&brd_json=1"
+    )
+    body = _serp_request(url)
+    if not body:
+        return None
 
-    Returns {"results": [...]} so parse_news_results() picks it up
-    via its body.get("results", []) fallback path.
-    """
-    try:
-        overrides = {"serp_zone": zone} if zone else {}
-        with _make_client(**overrides) as client:
-            result = client.search.google(
-                query=query,
-                location="Montgomery, AL",
-                num_results=20,
-            )
-            if result.data:
-                return {"results": result.data, "total": result.total_found}
-    except Exception as e:
-        logger.error("SERP failed for '%s': %s", query, e)
-    return None
+    results = body.get("organic", body.get("results", body.get("news_results", [])))
+    if isinstance(results, list) and len(results) > 0:
+        return {"results": results, "total": len(results)}
+    return body
+
+
+def serp_maps_search(query: str, zone: str | None = None) -> dict | None:
+    """Run a Google Maps search via SERP API. Returns parsed results or None."""
+    encoded = quote(query)
+    url = (
+        f"https://www.google.com/maps/search/{encoded}/"
+        f"@32.3668,-86.3,12z?hl=en&gl=us&brd_json=1"
+    )
+    body = _serp_request(url)
+    if not body:
+        return None
+
+    results = body.get("organic", body.get("local_results", body.get("results", body.get("places", []))))
+    if isinstance(results, list) and len(results) > 0:
+        return {"results": results, "total": len(results)}
+    return body

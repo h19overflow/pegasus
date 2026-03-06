@@ -66,6 +66,7 @@ def _run_news_scrape() -> int:
         enrich_article, deduplicate_articles,
         load_existing_articles, save_news_articles,
     )
+    from scripts.processors.geocode_news import geocode_articles
 
     articles = discover_articles()
     if not articles:
@@ -76,6 +77,8 @@ def _run_news_scrape() -> int:
 
     for article in articles:
         enrich_article(article)
+
+    articles = geocode_articles(articles)
 
     existing = load_existing_articles()
     merged = articles + existing

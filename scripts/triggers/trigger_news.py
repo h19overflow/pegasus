@@ -2,10 +2,12 @@
 
 Step 1: SERP API discovers article URLs + snippets from Google News
 Step 2: Web Unlocker fetches full article text as markdown
+Step 3: Geocode new articles via Google Maps SERP
 
 Usage:
     python -m scripts.triggers.trigger_news --poll
     python -m scripts.triggers.trigger_news --poll --skip-fulltext
+    python -m scripts.triggers.trigger_news --poll --skip-geocode
 """
 
 import argparse
@@ -18,6 +20,7 @@ from scripts.processors.process_news import (
     parse_news_results, enrich_article, deduplicate_articles,
     load_existing_articles, save_news_articles,
 )
+from scripts.processors.geocode_news import geocode_articles
 
 
 def discover_articles() -> list[dict]:
@@ -68,7 +71,7 @@ def fetch_full_article_text(articles: list[dict], max_articles: int = 20) -> lis
     return articles
 
 
-def run_news_pipeline(skip_fulltext: bool = False) -> None:
+def run_news_pipeline(skip_fulltext: bool = False, skip_geocode: bool = False) -> None:
     """Run the full news discovery + enrichment pipeline."""
     print(f"{'=' * 60}")
     print(f"NEWS SCRAPER — {datetime.now().isoformat()}")
@@ -82,6 +85,10 @@ def run_news_pipeline(skip_fulltext: bool = False) -> None:
     for article in articles:
         enrich_article(article)
 
+    if not skip_geocode and articles:
+        print("\nGeocoding articles...")
+        articles = geocode_articles(articles)
+
     existing = load_existing_articles()
     merged = articles + existing
     unique = deduplicate_articles(merged)
@@ -94,9 +101,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Scrape Montgomery news")
     parser.add_argument("--poll", action="store_true", help="Run synchronously (always true for news)")
     parser.add_argument("--skip-fulltext", action="store_true", help="Skip Web Unlocker article fetch")
+    parser.add_argument("--skip-geocode", action="store_true", help="Skip Google Maps geocoding step")
     args = parser.parse_args()
 
-    run_news_pipeline(skip_fulltext=args.skip_fulltext)
+    run_news_pipeline(skip_fulltext=args.skip_fulltext, skip_geocode=args.skip_geocode)
 
 
 if __name__ == "__main__":
