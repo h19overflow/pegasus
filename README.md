@@ -16,7 +16,7 @@ Frontend (React/Vite)          Backend (FastAPI/uvicorn)
 
 ### Scraping Frequency
 
-The backend runs a **scheduled batch scraper** via `scripts/scrape_scheduler.py`:
+The backend runs a **scheduled batch scraper** via `backend/scrape_scheduler.py`:
 
 | Setting | Default | Override |
 |---------|---------|----------|
@@ -26,7 +26,7 @@ The backend runs a **scheduled batch scraper** via `scripts/scrape_scheduler.py`
 
 **This is batch polling, not a live stream.** Each cycle:
 1. Triggers all 4 scrape streams in parallel (each in its own thread)
-2. Processes and saves results to `montgomery-navigator/public/data/`
+2. Processes and saves results to `frontend/public/data/`
 3. Pushes new data to connected frontends via SSE (`/stream` endpoint)
 
 Frontends receive updates in real-time once a batch completes. Between batches, the static JSON files serve as the data source.
@@ -37,7 +37,7 @@ Frontends receive updates in real-time once a batch completes. Between batches, 
 SERP Discovery → Full-Text Fetch → Enrichment → Geocoding → Dedup → Save → SSE Push
 ```
 
-**Step 1: SERP Discovery** (`scripts/triggers/trigger_news.py`)
+**Step 1: SERP Discovery** (`backend/triggers/trigger_news.py`)
 - Runs 22 Google News queries via Bright Data SERP API (WebUnlocker SDK)
 - Queries cover: general news, development, government, events, community
 - Returns article URLs, titles, snippets, sources, and timestamps
@@ -47,12 +47,12 @@ SERP Discovery → Full-Text Fetch → Enrichment → Geocoding → Dedup → Sa
 - Extracts markdown content, truncated to 2000 chars
 - Rate-limited to 10 articles per cycle for speed
 
-**Step 3: Enrichment** (`scripts/processors/process_news.py`)
+**Step 3: Enrichment** (`backend/processors/process_news.py`)
 - Assigns sentiment scores based on keyword analysis
 - Normalizes dates and source names
 - Generates stable article IDs
 
-**Step 4: Geocoding** (`scripts/processors/geocode_news.py`)
+**Step 4: Geocoding** (`backend/processors/geocode_news.py`)
 - 3-tier geocoding strategy for 100% map coverage:
 
 | Tier | Trigger | Method | Precision |
@@ -107,23 +107,23 @@ BRIGHTDATA_UNLOCKER_ZONE=web_unlocker1
 
 ```bash
 # Backend (starts scraper scheduler automatically)
-uv run uvicorn scripts.webhook_server:app --port 8787
+uv run uvicorn backend.webhook_server:app --port 8787
 
 # Frontend
-cd montgomery-navigator && npm run dev
+cd frontend && npm run dev
 ```
 
 ### Manual Scraping
 
 ```bash
 # Full news pipeline
-uv run python -m scripts.triggers.trigger_news --poll
+uv run python -m backend.triggers.trigger_news --poll
 
 # Skip full-text fetch (faster)
-uv run python -m scripts.triggers.trigger_news --poll --skip-fulltext
+uv run python -m backend.triggers.trigger_news --poll --skip-fulltext
 
 # Skip geocoding step
-uv run python -m scripts.triggers.trigger_news --poll --skip-geocode
+uv run python -m backend.triggers.trigger_news --poll --skip-geocode
 ```
 
 ### Configuration
