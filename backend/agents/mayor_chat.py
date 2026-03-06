@@ -19,19 +19,25 @@ from backend.agents.tools.registry import TOOLS
 
 MODEL_NAME = "gemini-3.1-flash-lite-preview"
 
+_cached_agent = None
 
-def build_mayor_agent():
-    """Build the mayor chat agent with Gemini and civic data tools."""
+
+def build_mayor_agent() -> object:
+    """Return the cached mayor chat agent, building it once on first call."""
+    global _cached_agent
+    if _cached_agent is not None:
+        return _cached_agent
     llm = ChatGoogleGenerativeAI(
         model=MODEL_NAME,
         temperature=0.3,
         max_output_tokens=4096,
     )
-    return create_agent(
+    _cached_agent = create_agent(
         model=llm,
         tools=TOOLS,
         system_prompt=MAYOR_CHAT_PROMPT,
     )
+    return _cached_agent
 
 
 def format_chat_history(history: list[dict]) -> list[HumanMessage | AIMessage]:
