@@ -15,7 +15,7 @@ import traceback
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
-from scripts.sse_broadcaster import broadcast_event
+from backend.sse_broadcaster import broadcast_event
 
 logger = logging.getLogger("scrape_scheduler")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(message)s")
@@ -32,9 +32,9 @@ _executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="scraper")
 
 def _run_jobs_scrape() -> int:
     """Trigger + poll job scrapers. Returns count of features saved."""
-    from scripts.config import JOB_SCRAPERS
-    from scripts.bright_data_client import trigger_and_collect
-    from scripts.processors.process_jobs import (
+    from backend.config import JOB_SCRAPERS
+    from backend.bright_data_client import trigger_and_collect
+    from backend.processors.process_jobs import (
         detect_source, process_jobs, build_geojson_feature, save_job_results,
     )
 
@@ -61,12 +61,12 @@ def _run_jobs_scrape() -> int:
 
 def _run_news_scrape() -> int:
     """Run SERP discovery + optional Web Unlocker full-text. Returns article count."""
-    from scripts.triggers.trigger_news import discover_articles, fetch_full_article_text
-    from scripts.processors.process_news import (
+    from backend.triggers.trigger_news import discover_articles, fetch_full_article_text
+    from backend.processors.process_news import (
         enrich_article, deduplicate_articles,
         load_existing_articles, save_news_articles,
     )
-    from scripts.processors.geocode_news import geocode_articles
+    from backend.processors.geocode_news import geocode_articles
 
     articles = discover_articles()
     if not articles:
@@ -92,9 +92,9 @@ def _run_news_scrape() -> int:
 
 def _run_housing_scrape() -> int:
     """Trigger + poll Zillow scraper. Returns listing count."""
-    from scripts.config import DATASETS
-    from scripts.bright_data_client import trigger_and_collect
-    from scripts.processors.process_housing import (
+    from backend.config import DATASETS
+    from backend.bright_data_client import trigger_and_collect
+    from backend.processors.process_housing import (
         process_zillow_listings, save_housing_results,
     )
 
@@ -118,8 +118,8 @@ def _run_housing_scrape() -> int:
 
 def _run_benefits_scrape() -> int:
     """Scrape benefit eligibility pages via Web Unlocker. Returns service count."""
-    from scripts.triggers.trigger_benefits import scrape_benefit_pages
-    from scripts.processors.process_benefits import (
+    from backend.triggers.trigger_benefits import scrape_benefit_pages
+    from backend.processors.process_benefits import (
         load_fallback_services, merge_with_fallback, save_benefits,
     )
 

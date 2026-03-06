@@ -6,9 +6,9 @@ so the agent runtime can discover and invoke them.
 
 from langchain_core.tools import tool
 
-from scripts.agents import tools as analysis_tools
-from scripts.agents import news_tools
-from scripts.agents import web_search_tool
+from backend.agents import tools as analysis_tools
+from backend.agents import news_tools
+from backend.agents import web_search_tool
 
 
 # ---------------------------------------------------------------------------

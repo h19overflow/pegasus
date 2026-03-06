@@ -60,7 +60,7 @@ ARCGIS_BASE = "https://gis.montgomeryal.gov/server/rest/services"
 # ---------------------------------------------------------------------------
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-PUBLIC_DATA = REPO_ROOT / "montgomery-navigator" / "public" / "data"
+PUBLIC_DATA = REPO_ROOT / "frontend" / "public" / "data"
 SCRIPTS_DATA = Path(__file__).resolve().parent / "data"
 RAW_DIR = SCRIPTS_DATA / "raw"
 

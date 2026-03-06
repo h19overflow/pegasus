@@ -7,7 +7,7 @@ and returns formatted text the agent can use in its response.
 import json
 from pathlib import Path
 
-from scripts.config import REPO_ROOT
+from backend.config import REPO_ROOT
 
 NEWS_FEED_PATH = REPO_ROOT / "montgomery-navigator" / "public" / "data" / "news_feed.json"
 COMMENTS_PATH = REPO_ROOT / "scripts" / "data" / "exported_comments.json"

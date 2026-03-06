@@ -6,7 +6,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from sse_starlette.sse import EventSourceResponse
 
-from scripts.agents.mayor_chat import stream_mayor_response
+from backend.agents.mayor_chat import stream_mayor_response
 
 router = APIRouter(tags=["chat"])
 

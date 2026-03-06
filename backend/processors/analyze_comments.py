@@ -17,10 +17,10 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import Runnable
 
-from scripts.config import OUTPUT_FILES, REPO_ROOT
-from scripts.processors.schemas import ArticleAnalysis, AnalysisResults
-from scripts.processors.redact_pii import redact_comment_text
-from scripts.agents.prompts import BATCH_ANALYSIS_PROMPT
+from backend.config import OUTPUT_FILES, REPO_ROOT
+from backend.processors.schemas import ArticleAnalysis, AnalysisResults
+from backend.processors.redact_pii import redact_comment_text
+from backend.agents.prompts import BATCH_ANALYSIS_PROMPT
 
 ANALYSIS_OUTPUT = REPO_ROOT / "scripts" / "data" / "analysis_results.json"
 METRICS_OUTPUT = REPO_ROOT / "scripts" / "data" / "analysis_metrics.jsonl"

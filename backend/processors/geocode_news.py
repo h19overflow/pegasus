@@ -15,7 +15,7 @@ import math
 import re
 import time
 
-from scripts.bright_data_client import serp_maps_search
+from backend.bright_data_client import serp_maps_search
 
 logger = logging.getLogger("geocode_news")
 

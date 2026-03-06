@@ -8,9 +8,9 @@ Usage:
 import argparse
 from datetime import datetime
 
-from scripts.config import DATASETS
-from scripts.bright_data_client import trigger_scraper, poll_snapshot
-from scripts.processors.process_housing import (
+from backend.config import DATASETS
+from backend.bright_data_client import trigger_scraper, poll_snapshot
+from backend.processors.process_housing import (
     process_zillow_listings, save_housing_results,
 )
 

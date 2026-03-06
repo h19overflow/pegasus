@@ -8,8 +8,8 @@ import hashlib
 import json
 from datetime import datetime, timezone
 
-from scripts.config import OUTPUT_FILES
-from scripts.sentiment_rules import score_sentiment, score_misinfo_risk, build_summary
+from backend.config import OUTPUT_FILES
+from backend.sentiment_rules import score_sentiment, score_misinfo_risk, build_summary
 
 
 def generate_article_id(title: str, source_url: str) -> str:

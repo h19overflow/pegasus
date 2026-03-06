@@ -4,8 +4,8 @@ import json
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException
 
-from scripts.config import OUTPUT_FILES, REPO_ROOT
-from scripts.processors.analyze_comments import run_batch_analysis, save_analysis_results
+from backend.config import OUTPUT_FILES, REPO_ROOT
+from backend.processors.analyze_comments import run_batch_analysis, save_analysis_results
 
 router = APIRouter(tags=["analysis"])
 

@@ -13,7 +13,7 @@ from urllib.parse import quote
 from brightdata import WebUnlocker, crawl_single_url
 from brightdata.webscraper_api.engine import BrightdataEngine, get_engine
 
-from scripts.config import get_api_key, SERP_ZONE, DATASETS
+from backend.config import get_api_key, SERP_ZONE, DATASETS
 
 logger = logging.getLogger("bright_data_client")
 

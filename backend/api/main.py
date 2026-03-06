@@ -7,7 +7,7 @@ load_dotenv()
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from scripts.api.routers import analysis, chat, comments
+from backend.api.routers import analysis, chat, comments
 
 app = FastAPI(title="Montgomery Comment Analysis API")
 

@@ -14,8 +14,8 @@ from langchain_core.messages import HumanMessage, AIMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import create_agent
 
-from scripts.agents.prompts import MAYOR_CHAT_PROMPT
-from scripts.agents.tool_registry import TOOLS
+from backend.agents.prompts import MAYOR_CHAT_PROMPT
+from backend.agents.tool_registry import TOOLS
 
 MODEL_NAME = "gemini-3.1-flash-lite-preview"
 

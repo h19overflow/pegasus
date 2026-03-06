@@ -7,7 +7,7 @@ formatted text the agent can use in its response.
 import json
 from pathlib import Path
 
-from scripts.config import REPO_ROOT
+from backend.config import REPO_ROOT
 
 ANALYSIS_PATH = REPO_ROOT / "scripts" / "data" / "analysis_results.json"
 

@@ -14,13 +14,13 @@ import argparse
 import time
 from datetime import datetime
 
-from scripts.config import NEWS_QUERIES
-from scripts.bright_data_client import serp_search, fetch_with_unlocker
-from scripts.processors.process_news import (
+from backend.config import NEWS_QUERIES
+from backend.bright_data_client import serp_search, fetch_with_unlocker
+from backend.processors.process_news import (
     parse_news_results, enrich_article, deduplicate_articles,
     load_existing_articles, save_news_articles,
 )
-from scripts.processors.geocode_news import geocode_articles
+from backend.processors.geocode_news import geocode_articles
 
 
 def discover_articles() -> list[dict]:

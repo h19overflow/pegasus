@@ -7,7 +7,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
-from scripts.config import OUTPUT_FILES
+from backend.config import OUTPUT_FILES
 
 
 def generate_listing_id(listing: dict) -> str:

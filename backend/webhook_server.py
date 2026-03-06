@@ -22,21 +22,21 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 
-from scripts.config import RAW_DIR
-from scripts.sse_broadcaster import (
+from backend.config import RAW_DIR
+from backend.sse_broadcaster import (
     broadcast_event,
     create_client_queue,
     remove_client_queue,
     stream_events,
 )
-from scripts.processors.process_jobs import (
+from backend.processors.process_jobs import (
     detect_source, process_jobs, build_geojson_feature, save_job_results,
 )
-from scripts.processors.process_news import (
+from backend.processors.process_news import (
     parse_news_results, enrich_article, deduplicate_articles,
     load_existing_articles, save_news_articles,
 )
-from scripts.processors.process_housing import (
+from backend.processors.process_housing import (
     process_zillow_listings, save_housing_results,
 )
 
@@ -49,7 +49,7 @@ async def lifespan(application: FastAPI):
     has_api_key = bool(os.environ.get("BRIGHTDATA_API_KEY"))
 
     if auto_scrape and has_api_key:
-        from scripts.scrape_scheduler import start_scheduled_scraping
+        from backend.scrape_scheduler import start_scheduled_scraping
         scraper_task = asyncio.create_task(start_scheduled_scraping())
 
     yield

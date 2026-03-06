@@ -12,7 +12,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
-from scripts.config import SKILL_CATEGORIES, ARCGIS_BASE, OUTPUT_FILES, RAW_DIR
+from backend.config import SKILL_CATEGORIES, ARCGIS_BASE, OUTPUT_FILES, RAW_DIR
 
 
 def detect_source(raw_jobs: list[dict]) -> str:

@@ -6,7 +6,7 @@ Montgomery-specific information when local data is insufficient.
 
 import logging
 
-from scripts.bright_data_client import serp_search
+from backend.bright_data_client import serp_search
 
 logger = logging.getLogger("web_search_tool")
 
