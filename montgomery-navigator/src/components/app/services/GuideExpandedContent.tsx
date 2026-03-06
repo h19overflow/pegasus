@@ -1,12 +1,10 @@
+import { useState } from "react";
 import {
-  ExternalLink,
-  Phone,
-  MapPin,
-  FileText,
-  CheckCircle2,
-  ClipboardList,
+  ExternalLink, Phone, MapPin, FileText,
+  CheckCircle2, ClipboardList, Loader2, Map,
 } from "lucide-react";
 import type { ServiceGuide } from "@/lib/govServices";
+import { useApp } from "@/lib/appContext";
 
 export function GuideExpandedContent({
   guide,
@@ -15,12 +13,79 @@ export function GuideExpandedContent({
   guide: ServiceGuide;
   onNavigateToChat: (msg: string) => void;
 }) {
+  const { state, dispatch } = useApp();
+  const [isGenerating, setIsGenerating] = useState(false);
+  const hasPersona = Boolean(state.citizenMeta);
+
+  async function handleBuildRoadmap() {
+    // #region agent log
+    fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:handleBuildRoadmap", message: "handler invoked", data: { hasPersona, guideId: guide.id }, runId: "roadmap", hypothesisId: "H1,H2", timestamp: Date.now() }) }).catch(() => {});
+    // #endregion
+    // No persona loaded — fall back to original chat behavior
+    if (!state.citizenMeta) {
+      // #region agent log
+      fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:noPersona", message: "no persona fallback to chat", data: {}, runId: "roadmap", hypothesisId: "H2", timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
+      onNavigateToChat(
+        `Help me apply for ${guide.title}. I want to check eligibility and understand the steps.`
+      );
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      // #region agent log
+      fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:fetchStart", message: "fetch /api/roadmap/generate", data: { serviceId: guide.id }, runId: "roadmap", hypothesisId: "H3", timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
+      // /api/roadmap/generate → Vite proxy → localhost:8787/roadmap/generate
+      const response = await fetch("/api/roadmap/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          serviceId: guide.id,
+          citizen: state.citizenMeta,
+        }),
+      });
+
+      // #region agent log
+      fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:afterFetch", message: "response received", data: { ok: response.ok, status: response.status }, runId: "roadmap", hypothesisId: "H3,H4", timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.detail ?? `HTTP ${response.status}`);
+      }
+
+      const roadmap = await response.json();
+      dispatch({ type: "SET_ACTIVE_ROADMAP", roadmap });
+
+      // #region agent log
+      fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:roadmapSet", message: "dispatch SET_ACTIVE_ROADMAP", data: { stepsCount: roadmap?.steps?.length }, runId: "roadmap", hypothesisId: "H5", timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
+
+    } catch (error) {
+      // #region agent log
+      fetch("http://127.0.0.1:7840/ingest/1bd987b1-c546-4781-a3fb-0f849a61c545", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e1ab98" }, body: JSON.stringify({ sessionId: "e1ab98", location: "GuideExpandedContent.tsx:catch", message: "roadmap failed", data: { errorMessage: String(error) }, runId: "roadmap", hypothesisId: "H3,H4,H5", timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
+      // Graceful fallback — demo must never show a broken state
+      console.error("[RoadmapAgent] Failed:", error);
+      onNavigateToChat(
+        `Help me apply for ${guide.title}. I want to check eligibility and understand the steps.`
+      );
+    } finally {
+      setIsGenerating(false);
+    }
+  }
+
   return (
     <div className="px-3 pb-3 space-y-3 border-t border-border/20 pt-2.5">
       <p className="text-xs text-muted-foreground leading-relaxed">{guide.description}</p>
 
       {guide.eligibility.length > 0 && (
-        <GuideSection title="Who's Eligible" icon={<CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}>
+        <GuideSection
+          title="Who's Eligible"
+          icon={<CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
+        >
           {guide.eligibility.map((item, i) => (
             <li key={i} className="text-xs text-muted-foreground leading-relaxed">{item}</li>
           ))}
@@ -28,7 +93,10 @@ export function GuideExpandedContent({
       )}
 
       {guide.howToApply.length > 0 && (
-        <GuideSection title="How to Apply" icon={<ClipboardList className="w-3.5 h-3.5 text-blue-600" />}>
+        <GuideSection
+          title="How to Apply"
+          icon={<ClipboardList className="w-3.5 h-3.5 text-blue-600" />}
+        >
           {guide.howToApply.map((step, i) => (
             <li key={i} className="text-xs text-muted-foreground leading-relaxed">
               <span className="font-semibold text-foreground mr-1">{i + 1}.</span>
@@ -39,7 +107,10 @@ export function GuideExpandedContent({
       )}
 
       {guide.documentsNeeded.length > 0 && (
-        <GuideSection title="Documents Needed" icon={<FileText className="w-3.5 h-3.5 text-amber-600" />}>
+        <GuideSection
+          title="Documents Needed"
+          icon={<FileText className="w-3.5 h-3.5 text-amber-600" />}
+        >
           {guide.documentsNeeded.map((doc, i) => (
             <li key={i} className="text-xs text-muted-foreground leading-relaxed">{doc}</li>
           ))}
@@ -69,15 +140,27 @@ export function GuideExpandedContent({
           <ExternalLink className="w-3.5 h-3.5" />
           Visit Website
         </a>
+
         <button
-          onClick={() => onNavigateToChat(
-            `Help me apply for ${guide.title}. I want to check eligibility and understand the steps.`
-          )}
-          className="flex-1 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors"
+          onClick={handleBuildRoadmap}
+          disabled={isGenerating}
+          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors disabled:opacity-60"
         >
-          Help Me Apply
+          {isGenerating ? (
+            <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Building...</>
+          ) : hasPersona ? (
+            <><Map className="w-3.5 h-3.5" /> Build My Roadmap →</>
+          ) : (
+            "Help Me Apply"
+          )}
         </button>
       </div>
+
+      {!hasPersona && (
+        <p className="text-[10px] text-muted-foreground text-center">
+          Select a citizen profile to unlock your personalized roadmap
+        </p>
+      )}
     </div>
   );
 }
@@ -95,7 +178,9 @@ function GuideSection({
     <div>
       <div className="flex items-center gap-1.5 mb-1.5">
         {icon}
-        <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{title}</p>
+        <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+          {title}
+        </p>
       </div>
       <ul className="space-y-1 pl-1">{children}</ul>
     </div>

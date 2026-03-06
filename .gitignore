@@ -16,3 +16,6 @@ wheels/
 
 # Worktrees
 .worktrees/
+
+# Raw webhook data snapshots
+scripts/data/raw/

@@ -1,138 +1,66 @@
 {
-  "generated_at": "2026-03-05T22:34:22.194018+00:00",
+  "generated_at": "2026-03-06T07:32:19.505984+00:00",
   "total_services": 12,
   "categories": [
-    "utilities",
     "food",
+    "childcare",
+    "workforce",
+    "utilities",
+    "legal",
     "benefits",
     "housing",
-    "healthcare",
-    "workforce",
-    "legal",
-    "childcare"
+    "healthcare"
   ],
   "services": [
     {
       "id": "svc-medicaid-al",
       "category": "healthcare",
       "title": "Alabama Medicaid",
-      "provider": "Alabama Medicaid Agency",
-      "description": "Free or low-cost health coverage for eligible low-income individuals, families, pregnant women, children, and people with disabilities in Alabama.",
-      "eligibility": [
-        "Income at or below 138% of Federal Poverty Level",
-        "Alabama resident",
-        "U.S. citizen or eligible non-citizen",
-        "Pregnant women: up to 146% FPL",
-        "Children under 19: up to 317% FPL (ALL Kids)",
-        "Adults 19-64 without children may qualify under expansion",
-        "Seniors 65+ and people with disabilities: SSI-linked"
-      ],
-      "how_to_apply": [
-        "Apply online at myAlabama.gov portal",
-        "Call Alabama Medicaid at 1-800-362-1504",
-        "Visit your county DHR office in person",
-        "Apply through Healthcare.gov during Open Enrollment",
-        "Processing time: typically 45 days"
-      ],
-      "documents_needed": [
-        "Proof of identity (driver's license, state ID, or birth certificate)",
-        "Proof of income (pay stubs, tax return, or employer letter)",
-        "Proof of Alabama residency (utility bill, lease, or mail)",
-        "Social Security numbers for all household members",
-        "Proof of citizenship or immigration status"
-      ],
+      "provider": "Alabama Medicaid",
+      "description": "*   *   [Newsroom Home](/content/2.0_Newsroom)",
+      "eligibility": [],
+      "income_limits": {},
+      "how_to_apply": [],
+      "documents_needed": [],
       "url": "https://medicaid.alabama.gov",
-      "phone": "1-800-362-1504",
-      "address": "501 Dexter Avenue, Montgomery, AL 36104",
-      "tags": [
-        "health insurance",
-        "free healthcare",
-        "low income",
-        "medicaid",
-        "coverage"
-      ],
-      "scraped_at": "2026-03-05T15:31:45.091116Z"
+      "phone": "",
+      "scraped_at": "2026-03-06T07:32:02.123283+00:00",
+      "source": "live_scrape"
     },
     {
       "id": "svc-snap-al",
       "category": "food",
       "title": "SNAP (Food Stamps)",
-      "provider": "Alabama Department of Human Resources",
-      "description": "Supplemental Nutrition Assistance Program provides monthly benefits on an EBT card to buy groceries. Accepted at most grocery stores and farmers markets.",
+      "provider": "SNAP (Food Stamps)",
+      "description": "Food Assistance – Alabama Department of Human Resources",
       "eligibility": [
-        "Gross monthly income below 130% FPL ($1,580/month for 1 person, $2,137 for 2)",
-        "Net monthly income below 100% FPL after deductions",
-        "Resources below $2,750 ($4,250 if household has elderly/disabled member)",
-        "Must be Alabama resident",
-        "U.S. citizen or eligible non-citizen",
-        "Must meet work requirements if able-bodied adult without dependents (ABAWD)"
+        "[https://apps.dhr.alabama.gov/POE/POEhome](https://apps.dhr.alabama.gov/POE/POEhome)",
+        "[https://dhr.alabama.gov/wp-content/uploads/2020/02/2020-Combined-Plan-for-WIOA-DRAFT.pdf](https://dhr.alabama.gov/wp-content/uploads/2020/02/2020-Combined-Plan-for-WIOA-DRAFT.pdf)"
       ],
-      "how_to_apply": [
-        "Apply online at myDHR.alabama.gov",
-        "Call Montgomery County DHR at (334) 293-3100",
-        "Visit Montgomery County DHR office at 944 S. Perry Street",
-        "Interview required within 30 days of application",
-        "Benefits typically start within 30 days (7 days for emergency)"
-      ],
-      "documents_needed": [
-        "Completed DHR-FAD-2116 application",
-        "Proof of identity for all adults",
-        "Proof of income for all household members",
-        "Rent/mortgage statement and utility bills",
-        "Social Security numbers",
-        "Bank statements (if applicable)"
-      ],
+      "income_limits": {},
+      "how_to_apply": [],
+      "documents_needed": [],
       "url": "https://dhr.alabama.gov/food-assistance/",
-      "phone": "(334) 293-3100",
-      "address": "944 S. Perry Street, Montgomery, AL 36104",
-      "tags": [
-        "food stamps",
-        "snap",
-        "ebt",
-        "groceries",
-        "food assistance",
-        "hunger"
-      ],
-      "scraped_at": "2026-03-05T15:31:45.091116Z"
+      "phone": "(866) 632-9992",
+      "scraped_at": "2026-03-06T07:32:10.640124+00:00",
+      "source": "live_scrape"
     },
     {
       "id": "svc-tanf-al",
       "category": "benefits",
-      "title": "TANF (Temporary Assistance for Needy Families)",
-      "provider": "Alabama Department of Human Resources",
-      "description": "Monthly cash assistance for families with children. Also provides job training, childcare assistance, and transportation help to become self-sufficient.",
-      "eligibility": [
-        "Must have a child under 18 (or pregnant)",
-        "Income below Alabama TANF limits",
-        "Resources below $2,000",
-        "Must participate in work activities or job training",
-        "Alabama resident",
-        "Time limit: 60 months lifetime"
-      ],
-      "how_to_apply": [
-        "Apply at Montgomery County DHR office",
-        "Apply online at myDHR.alabama.gov",
-        "Must complete interview and assessment",
-        "Must develop Individual Responsibility Plan"
-      ],
-      "documents_needed": [
-        "Birth certificates for all children",
-        "Proof of income",
-        "Proof of residency",
-        "School enrollment verification for children",
-        "Social Security cards"
-      ],
-      "url": "https://dhr.alabama.gov/family-assistance/",
-      "phone": "(334) 293-3100",
-      "address": "944 S. Perry Street, Montgomery, AL 36104",
-      "tags": [
-        "cash assistance",
-        "welfare",
-        "tanf",
-        "families",
-        "children"
-      ],
-      "scraped_at": "2026-03-05T15:31:45.091116Z"
+      "title": "TANF",
+      "provider": "TANF",
+      "description": "Temporary Assistance for the Stabilization of Child Care IV – Alabama Department of Human Resources",
+      "eligibility": [],
+      "income_limits": {
+        "10": 0
+      },
+      "how_to_apply": [],
+      "documents_needed": [],
+      "url": "https://dhr.alabama.gov/temporary-assistance/",
+      "phone": "022-200-0104",
+      "scraped_at": "2026-03-06T07:32:19.504847+00:00",
+      "source": "live_scrape"
     },
     {
       "id": "svc-childcare-subsidy",

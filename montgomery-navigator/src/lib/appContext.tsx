@@ -23,6 +23,7 @@ import type {
   NewsArticle,
   NewsCategory,
   NewsComment,
+  PersonalizedRoadmap,
 } from "./types";
 
 type AppAction =
@@ -65,7 +66,10 @@ type AppAction =
   | { type: "SET_CHAT_BUBBLE_OPEN"; open: boolean }
   | { type: "MARK_CHAT_READ" }
   | { type: "MERGE_JOB_LISTINGS"; listings: JobListing[] }
-  | { type: "MERGE_NEWS_ARTICLES"; articles: NewsArticle[] };
+  | { type: "MERGE_NEWS_ARTICLES"; articles: NewsArticle[] }
+  | { type: "SET_ACTIVE_ROADMAP"; roadmap: PersonalizedRoadmap }
+  | { type: "CLEAR_ROADMAP" }
+  | { type: "TOGGLE_ROADMAP_STEP"; stepId: string };
 
 const initialState: AppState = {
   messages: [],
@@ -102,6 +106,8 @@ const initialState: AppState = {
   selectedArticleId: null,
   chatBubbleOpen: false,
   chatBubbleHasUnread: false,
+  activeRoadmap: null,
+  roadmapCompletedStepIds: [],
 };
 
 function applyMessageSideEffects(state: AppState, message: ChatMessage): AppState {
@@ -252,6 +258,18 @@ function appReducer(state: AppState, action: AppAction): AppState {
       const existingIds = new Set(state.newsArticles.map((a) => a.id));
       const fresh = action.articles.filter((a) => !existingIds.has(a.id));
       return { ...state, newsArticles: [...fresh, ...state.newsArticles] };
+    }
+    case "SET_ACTIVE_ROADMAP":
+      return { ...state, activeRoadmap: action.roadmap, roadmapCompletedStepIds: [] };
+    case "CLEAR_ROADMAP":
+      return { ...state, activeRoadmap: null, roadmapCompletedStepIds: [] };
+    case "TOGGLE_ROADMAP_STEP": {
+      const ids = state.roadmapCompletedStepIds;
+      const has = ids.includes(action.stepId);
+      return {
+        ...state,
+        roadmapCompletedStepIds: has ? ids.filter((id) => id !== action.stepId) : [...ids, action.stepId],
+      };
     }
     default:
       return state;

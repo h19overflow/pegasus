@@ -15,12 +15,20 @@ Usage:
 import asyncio
 import json
 import os
+import logging
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi import HTTPException
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 from scripts.config import RAW_DIR
 from scripts.sse_broadcaster import (
@@ -39,7 +47,11 @@ from scripts.processors.process_news import (
 from scripts.processors.process_housing import (
     process_zillow_listings, save_housing_results,
 )
+from scripts.agents.roadmap_agent import generate_personalized_roadmap
+from scripts.models.roadmap import RoadmapRequest
 
+
+logger = logging.getLogger("webhook_server")
 
 @asynccontextmanager
 async def lifespan(application: FastAPI):
@@ -47,7 +59,7 @@ async def lifespan(application: FastAPI):
     scraper_task = None
     auto_scrape = os.environ.get("AUTO_SCRAPE", "1") != "0"
     has_api_key = bool(os.environ.get("BRIGHTDATA_API_KEY"))
-
+    logger.info(f"Auto scrape: {auto_scrape}, Has API key: {has_api_key}")
     if auto_scrape and has_api_key:
         from scripts.scrape_scheduler import start_scheduled_scraping
         scraper_task = asyncio.create_task(start_scheduled_scraping())
@@ -153,3 +165,35 @@ async def health() -> JSONResponse:
         "streams": ["jobs", "news", "housing", "benefits"],
         "timestamp": datetime.now(timezone.utc).isoformat(),
     })
+
+
+@app.post("/roadmap/generate")
+async def generate_roadmap(request: RoadmapRequest) -> dict:
+    """
+    POST /roadmap/generate  (React calls /api/roadmap/generate via Vite proxy)
+
+    Receives citizen profile + service ID from the React frontend.
+    Runs the Roadmap Agent (Gemini-powered) and returns a PersonalizedRoadmap.
+
+    model_dump(by_alias=True) serializes Python snake_case as camelCase JSON
+    so TypeScript receives stepNumber, serviceId etc. (not step_number, service_id).
+    """
+    try:
+        roadmap = generate_personalized_roadmap(
+            citizen=request.citizen,
+            service_id=request.service_id,
+        )
+        return roadmap.model_dump(by_alias=True)
+
+    except ValueError as e:
+        # service_id not found in gov_services.json
+        raise HTTPException(status_code=404, detail=str(e))
+
+    except RuntimeError as e:
+        # Gemini call failed — 503 so frontend knows to retry
+        raise HTTPException(status_code=503, detail=str(e))
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail="Roadmap generation failed.")
