@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-03-05T22:34:22.194018+00:00",
+  "generated_at": "2026-03-06T14:43:09.760375+00:00",
   "total_services": 12,
   "categories": [
-    "utilities",
     "food",
-    "benefits",
-    "housing",
     "healthcare",
     "workforce",
+    "benefits",
+    "childcare",
+    "housing",
     "legal",
-    "childcare"
+    "utilities"
   ],
   "services": [
     {
