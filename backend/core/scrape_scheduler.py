@@ -15,7 +15,7 @@ import traceback
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
-from backend.core.sse_broadcaster import broadcast_event
+from backend.core.sse_broadcaster import broadcast_event_threadsafe as broadcast_event
 
 logger = logging.getLogger("scrape_scheduler")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(message)s")
