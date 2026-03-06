@@ -51,8 +51,8 @@ app.add_middleware(
 app.include_router(analysis.router, prefix="/api")
 app.include_router(chat.router, prefix="/api")
 app.include_router(comments.router, prefix="/api")
-app.include_router(webhooks.router)
-app.include_router(stream.router)
+app.include_router(webhooks.router, prefix="/api")
+app.include_router(stream.router, prefix="/api")
 
 
 @app.get("/health")

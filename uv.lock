@@ -879,6 +879,7 @@ dependencies = [
     { name = "langchain-core" },
     { name = "langchain-google-genai" },
     { name = "langgraph" },
+    { name = "python-dotenv" },
     { name = "sse-starlette" },
     { name = "uvicorn" },
 ]
@@ -891,6 +892,7 @@ requires-dist = [
     { name = "langchain-core", specifier = ">=0.3" },
     { name = "langchain-google-genai", specifier = ">=4.0" },
     { name = "langgraph", specifier = ">=0.3" },
+    { name = "python-dotenv", specifier = ">=1.0" },
     { name = "sse-starlette", specifier = ">=2.0" },
     { name = "uvicorn", specifier = ">=0.41.0" },
 ]
