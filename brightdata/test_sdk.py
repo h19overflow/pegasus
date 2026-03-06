@@ -49,7 +49,7 @@ def test_page_fetch() -> None:
 def test_dataset_trigger() -> None:
     print("\n=== Dataset Trigger (Indeed jobs) ===")
     from scripts.bright_data_client import trigger_and_collect
-    from scripts.config import JOB_SCRAPERS
+    from scripts.payloads import JOB_SCRAPERS
 
     scraper = JOB_SCRAPERS[0]  # Indeed
     print(f"  Triggering: {scraper['name']} ({scraper['dataset_id']})")

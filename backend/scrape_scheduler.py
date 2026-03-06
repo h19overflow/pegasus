@@ -32,7 +32,7 @@ _executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="scraper")
 
 def _run_jobs_scrape() -> int:
     """Trigger + poll job scrapers. Returns count of features saved."""
-    from backend.config import JOB_SCRAPERS
+    from backend.payloads import JOB_SCRAPERS
     from backend.bright_data_client import trigger_and_collect
     from backend.processors.process_jobs import (
         detect_source, process_jobs, build_geojson_feature, save_job_results,

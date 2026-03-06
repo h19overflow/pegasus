@@ -11,7 +11,7 @@ import argparse
 import time
 from datetime import datetime
 
-from backend.config import BENEFITS_TARGETS
+from backend.payloads import BENEFITS_TARGETS
 from backend.bright_data_client import fetch_with_unlocker
 from backend.processors.process_benefits import (
     parse_benefit_markdown, load_fallback_services,

@@ -14,7 +14,7 @@ import argparse
 import time
 from datetime import datetime
 
-from backend.config import NEWS_QUERIES
+from backend.payloads import NEWS_QUERIES
 from backend.bright_data_client import serp_search, fetch_with_unlocker
 from backend.processors.process_news import (
     parse_news_results, enrich_article, deduplicate_articles,

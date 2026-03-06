@@ -4,7 +4,7 @@ import json
 import re
 from datetime import datetime, timezone
 
-from backend.config import OUTPUT_FILES, BENEFITS_TARGETS
+from backend.config import OUTPUT_FILES
 
 
 def parse_income_table(markdown: str) -> dict[str, int]:

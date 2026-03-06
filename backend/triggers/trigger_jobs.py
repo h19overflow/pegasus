@@ -9,7 +9,8 @@ import argparse
 import json
 from datetime import datetime, timezone
 
-from backend.config import JOB_SCRAPERS, RAW_DIR
+from backend.config import RAW_DIR
+from backend.payloads import JOB_SCRAPERS
 from backend.bright_data_client import trigger_scraper, poll_snapshot
 from backend.processors.process_jobs import (
     detect_source, process_jobs, build_geojson_feature, save_job_results,
