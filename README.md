@@ -16,7 +16,7 @@ Frontend (React/Vite)          Backend (FastAPI/uvicorn)
 
 ### Scraping Frequency
 
-The backend runs a **scheduled batch scraper** via `backend/scrape_scheduler.py`:
+The backend runs a **scheduled batch scraper** via `backend/core/scrape_scheduler.py`:
 
 | Setting | Default | Override |
 |---------|---------|----------|
