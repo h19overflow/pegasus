@@ -3,37 +3,16 @@
 import hashlib
 import json
 import time
-import urllib.parse
-import urllib.request
 from datetime import datetime, timezone
 
 from backend.config import OUTPUT_FILES
+from backend.processors.geocoding_utils import geocode_nominatim
 
 
 def generate_listing_id(listing: dict) -> str:
     """Generate stable dedup ID from address + price."""
     key = f"{listing.get('address', '')}__{listing.get('price', '')}"
     return hashlib.md5(key.encode()).hexdigest()[:12]
-
-
-def geocode_nominatim(address: str) -> tuple[float, float] | None:
-    """Geocode via Nominatim. Returns (lat, lng) or None."""
-    query = urllib.parse.quote(address)
-    url = (
-        f"https://nominatim.openstreetmap.org/search"
-        f"?q={query}&format=json&limit=1&countrycodes=us"
-    )
-    req = urllib.request.Request(url)
-    req.add_header("User-Agent", "MontgomeryAI-Hackathon/1.0")
-
-    try:
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            results = json.loads(resp.read().decode())
-            if results:
-                return float(results[0]["lat"]), float(results[0]["lon"])
-    except Exception:
-        pass
-    return None
 
 
 def format_price(price) -> str:

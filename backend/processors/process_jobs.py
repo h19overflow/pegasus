@@ -13,6 +13,7 @@ import urllib.request
 from datetime import datetime, timezone
 
 from backend.config import SKILL_CATEGORIES, ARCGIS_BASE, OUTPUT_FILES, RAW_DIR
+from backend.processors.geocoding_utils import geocode_nominatim
 
 
 def detect_source(raw_jobs: list[dict]) -> str:
@@ -68,26 +69,6 @@ def search_arcgis_business(company_name: str) -> tuple | None:
                 name = features[0]["properties"].get("custCOMPANY_NAME", "")
                 addr = features[0]["properties"].get("Full_Address", "")
                 return coords[1], coords[0], name, addr
-    except Exception:
-        pass
-    return None
-
-
-def geocode_nominatim(address: str) -> tuple[float, float] | None:
-    """Geocode via Nominatim. Returns (lat, lng) or None."""
-    query = urllib.parse.quote(address)
-    url = (
-        f"https://nominatim.openstreetmap.org/search"
-        f"?q={query}&format=json&limit=1&countrycodes=us"
-    )
-    req = urllib.request.Request(url)
-    req.add_header("User-Agent", "MontgomeryAI-Hackathon/1.0")
-
-    try:
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            results = json.loads(resp.read().decode())
-            if results:
-                return float(results[0]["lat"]), float(results[0]["lon"])
     except Exception:
         pass
     return None
