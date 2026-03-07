@@ -1,4 +1,4 @@
-import { Search, ArrowUpDown } from "lucide-react";
+import { Search, ArrowUpDown, ShieldAlert } from "lucide-react";
 
 type SortMode = "newest" | "oldest" | "most_liked";
 type SentimentFilter = "" | "positive" | "negative" | "neutral";
@@ -13,6 +13,8 @@ interface NewsFilterBarProps {
   uniqueSources: string[];
   sentimentFilter: SentimentFilter;
   onSentimentChange: (filter: SentimentFilter) => void;
+  showFlaggedOnly?: boolean;
+  onFlaggedChange?: (flagged: boolean) => void;
 }
 
 const SORT_OPTIONS: { key: SortMode; label: string }[] = [
@@ -32,6 +34,7 @@ export function NewsFilterBar({
   searchQuery, onSearchChange, sortMode, onSortChange,
   sourceFilter, onSourceChange, uniqueSources,
   sentimentFilter, onSentimentChange,
+  showFlaggedOnly, onFlaggedChange,
 }: NewsFilterBarProps) {
   return (
     <div className="space-y-2">
@@ -80,7 +83,7 @@ export function NewsFilterBar({
         </select>
       </div>
 
-      {/* Row 2: Sentiment filter pills */}
+      {/* Row 2: Sentiment filter pills + misinfo filter */}
       <div className="flex items-center gap-1.5">
         <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide mr-1">Sentiment:</span>
         {SENTIMENT_OPTIONS.map(({ key, label, color, activeColor }) => (
@@ -94,6 +97,23 @@ export function NewsFilterBar({
             {label}
           </button>
         ))}
+
+        {onFlaggedChange && (
+          <>
+            <div className="w-px h-4 bg-border mx-1" />
+            <button
+              onClick={() => onFlaggedChange(!showFlaggedOnly)}
+              className={`flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium rounded-full transition-colors ${
+                showFlaggedOnly
+                  ? "bg-orange-100 text-orange-800 ring-1 ring-orange-300"
+                  : "bg-white text-muted-foreground hover:bg-muted/50"
+              }`}
+            >
+              <ShieldAlert className="w-3 h-3" />
+              Misinfo Risk
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

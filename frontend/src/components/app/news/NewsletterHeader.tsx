@@ -1,4 +1,4 @@
-import { Newspaper, Search } from "lucide-react";
+import { Newspaper, Search, ShieldAlert } from "lucide-react";
 import { NewsCategoryTabs } from "./NewsCategoryTabs";
 import type { NewsCategory } from "@/lib/types";
 import type { SortMode } from "./newsletterHelpers";
@@ -11,9 +11,11 @@ interface NewsletterHeaderProps {
   newsCategory: NewsCategory;
   onCategoryChange: (c: NewsCategory) => void;
   articleCounts: Record<string, number>;
+  showFlaggedOnly?: boolean;
+  onFlaggedChange?: (flagged: boolean) => void;
 }
 
-export function NewsletterHeader({ searchQuery, onSearchChange, sortMode, onSortChange, newsCategory, onCategoryChange, articleCounts }: NewsletterHeaderProps) {
+export function NewsletterHeader({ searchQuery, onSearchChange, sortMode, onSortChange, newsCategory, onCategoryChange, articleCounts, showFlaggedOnly, onFlaggedChange }: NewsletterHeaderProps) {
   return (
     <div className="shrink-0 border-b border-border/50 bg-white px-5 py-4 space-y-3">
       <div className="flex items-center justify-between">
@@ -43,7 +45,22 @@ export function NewsletterHeader({ searchQuery, onSearchChange, sortMode, onSort
           </select>
         </div>
       </div>
-      <NewsCategoryTabs activeCategory={newsCategory} onCategoryChange={onCategoryChange} articleCounts={articleCounts} />
+      <div className="flex items-center gap-3">
+        <NewsCategoryTabs activeCategory={newsCategory} onCategoryChange={onCategoryChange} articleCounts={articleCounts} />
+        {onFlaggedChange && (
+          <button
+            onClick={() => onFlaggedChange(!showFlaggedOnly)}
+            className={`flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-full transition-colors whitespace-nowrap ${
+              showFlaggedOnly
+                ? "bg-orange-100 text-orange-800 ring-1 ring-orange-300"
+                : "text-muted-foreground hover:bg-orange-50 hover:text-orange-600"
+            }`}
+          >
+            <ShieldAlert className="w-3 h-3" />
+            Misinfo
+          </button>
+        )}
+      </div>
     </div>
   );
 }
