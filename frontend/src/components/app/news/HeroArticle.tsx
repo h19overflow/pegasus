@@ -65,6 +65,19 @@ export function HeroArticle({ article, onSelect }: HeroArticleProps) {
               {article.sentiment}
             </span>
           )}
+          {article.misinfoRisk != null && article.misinfoRisk > 0 && (
+            <span
+              className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded border ${
+                article.misinfoRisk > 60
+                  ? "bg-red-400/30 text-white border-red-300/40"
+                  : article.misinfoRisk > 30
+                    ? "bg-amber-400/30 text-white border-amber-300/40"
+                    : "bg-emerald-400/30 text-white border-emerald-300/40"
+              }`}
+            >
+              {article.misinfoRisk > 60 ? "High Risk" : article.misinfoRisk > 30 ? "Medium Risk" : "Low Risk"}
+            </span>
+          )}
         </div>
 
         {/* Title */}

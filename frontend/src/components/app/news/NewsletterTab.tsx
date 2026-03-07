@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useApp } from "@/lib/appContext";
 import { fetchNewsArticles, fetchNewsComments, filterArticlesByCategory } from "@/lib/newsService";
 import { loadStoredComments } from "@/lib/newsCommentStore";
+import { runMisinfoAnalysis } from "@/lib/misinfo/misinfoService";
 import { NewsCard } from "./NewsCard";
 import { NewsDetail } from "./NewsDetail";
 import { HeroArticle } from "./HeroArticle";
 import { NewsletterHeader } from "./NewsletterHeader";
-import { isArticleLiked, buildArticleCountsPerCategory, sortArticles, filterBySearch, selectHeroArticle } from "./newsletterHelpers";
+import { buildArticleCountsPerCategory, sortArticles, filterBySearch, selectHeroArticle } from "./newsletterHelpers";
 import type { SortMode } from "./newsletterHelpers";
 import { Newspaper } from "lucide-react";
 
@@ -41,6 +42,8 @@ export function NewsletterTab() {
   const { state, dispatch } = useApp();
   const [searchQuery, setSearchQuery] = useState("");
   const [sortMode, setSortMode] = useState<SortMode>("newest");
+  const [showFlaggedOnly, setShowFlaggedOnly] = useState(false);
+  const misinfoRanRef = useRef(false);
 
   useEffect(() => {
     if (state.newsArticles.length === 0 && !state.newsLoading) {
@@ -56,6 +59,25 @@ export function NewsletterTab() {
     }
   }, []);
 
+  // Run misinfo analysis on articles that don't have scores yet
+  useEffect(() => {
+    const unscored = state.newsArticles.filter((a) => a.misinfoRisk == null);
+    if (unscored.length === 0 || misinfoRanRef.current) return;
+    misinfoRanRef.current = true;
+
+    runMisinfoAnalysis(unscored, (scores) => {
+      dispatch({ type: "UPDATE_MISINFO_SCORES", scores });
+    });
+  }, [state.newsArticles]);
+
+  function handleReact(articleId: string, emoji: string) {
+    dispatch({ type: "SET_EMOJI_REACTION", articleId, emoji });
+  }
+
+  function handleFlag(articleId: string) {
+    dispatch({ type: "TOGGLE_ARTICLE_FLAG", articleId });
+  }
+
   const selectedArticle = state.selectedArticleId
     ? state.newsArticles.find((a) => a.id === state.selectedArticleId) ?? null
     : null;
@@ -64,16 +86,23 @@ export function NewsletterTab() {
     return (
       <NewsDetail
         article={selectedArticle}
-        isLiked={isArticleLiked(state.likedArticleIds, selectedArticle.id)}
+        userReaction={state.articleReactions[selectedArticle.id]}
+        isFlagged={state.flaggedArticleIds.includes(selectedArticle.id)}
         onBack={() => dispatch({ type: "SET_SELECTED_ARTICLE", articleId: null })}
-        onLike={(id) => dispatch({ type: "TOGGLE_ARTICLE_LIKE", articleId: id })}
+        onReact={handleReact}
+        onFlag={handleFlag}
       />
     );
   }
 
   const afterCategory = filterArticlesByCategory(state.newsArticles, state.newsCategory);
   const afterSearch = filterBySearch(afterCategory, searchQuery);
-  const visibleArticles = sortArticles(afterSearch, sortMode);
+  const afterFlagged = showFlaggedOnly
+    ? afterSearch.filter(
+        (a) => state.flaggedArticleIds.includes(a.id) || (a.misinfoRisk ?? 0) > 60,
+      )
+    : afterSearch;
+  const visibleArticles = sortArticles(afterFlagged, sortMode);
   const hero = selectHeroArticle(visibleArticles);
   const gridArticles = hero ? visibleArticles.filter((a) => a.id !== hero.id) : visibleArticles;
   const midpoint = Math.ceil(gridArticles.length / 2);
@@ -89,6 +118,8 @@ export function NewsletterTab() {
         newsCategory={state.newsCategory}
         onCategoryChange={(cat) => dispatch({ type: "SET_NEWS_CATEGORY", category: cat })}
         articleCounts={buildArticleCountsPerCategory(state.newsArticles)}
+        showFlaggedOnly={showFlaggedOnly}
+        onFlaggedChange={setShowFlaggedOnly}
       />
       <div className="flex-1 overflow-y-auto">
         {isLoading ? (
@@ -116,9 +147,11 @@ export function NewsletterTab() {
                       <NewsCard
                         key={article.id}
                         article={article}
-                        isLiked={isArticleLiked(state.likedArticleIds, article.id)}
+                        userReaction={state.articleReactions[article.id]}
+                        isFlagged={state.flaggedArticleIds.includes(article.id)}
                         onSelect={(a) => dispatch({ type: "SET_SELECTED_ARTICLE", articleId: a.id })}
-                        onLike={(id) => dispatch({ type: "TOGGLE_ARTICLE_LIKE", articleId: id })}
+                        onReact={handleReact}
+                        onFlag={handleFlag}
                       />
                     ))}
                   </div>
