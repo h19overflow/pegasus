@@ -42,8 +42,8 @@ def broadcast_event_safe(event_type: str, data: list | dict) -> None:
     """Broadcast SSE event, logging any failure without propagating it."""
     try:
         broadcast_event(event_type, data)
-    except Exception:
-        logger.warning("SSE broadcast failed for event type '%s'", event_type)
+    except (RuntimeError, OSError, ValueError) as e:
+        logger.warning("SSE broadcast failed for event type '%s': %s", event_type, e)
 
 
 @router.post("/jobs")

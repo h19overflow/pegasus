@@ -8,10 +8,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from backend.api.routers import analysis, chat, citizen_chat, comments, roadmap, stream, webhooks
+from backend.core.exceptions import AppException
 
 
 @asynccontextmanager
@@ -47,6 +49,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.exception_handler(AppException)
+async def handle_app_exception(request: Request, exc: AppException) -> JSONResponse:
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"code": exc.code, "message": exc.message, "details": exc.details},
+    )
+
 
 app.include_router(analysis.router, prefix="/api")
 app.include_router(chat.router, prefix="/api")
