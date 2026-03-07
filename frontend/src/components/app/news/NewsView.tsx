@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useApp } from "@/lib/appContext";
 import { fetchNewsArticles } from "@/lib/newsService";
 import { NewsCard } from "./NewsCard";
@@ -40,7 +40,7 @@ export function NewsView() {
     hasActiveFilters,
   } = useArticleFiltering(state.newsArticles, state.newsCategory, state.newsComments);
 
-  async function loadArticles() {
+  const loadArticles = useCallback(async () => {
     dispatch({ type: "SET_NEWS_LOADING", loading: true });
     try {
       const articles = await fetchNewsArticles();
@@ -56,38 +56,44 @@ export function NewsView() {
     } finally {
       dispatch({ type: "SET_NEWS_LOADING", loading: false });
     }
-  }
+  }, [lastScraped, dispatch]);
 
   useEffect(() => { loadArticles(); }, []);
 
-  function handleCategoryChange(category: NewsCategory) {
+  const handleCategoryChange = useCallback((category: NewsCategory) => {
     dispatch({ type: "SET_NEWS_CATEGORY", category });
-  }
+  }, [dispatch]);
 
-  function handleSelectArticle(article: NewsArticle) {
+  const handleSelectArticle = useCallback((article: NewsArticle) => {
     dispatch({ type: "SET_SELECTED_ARTICLE", articleId: article.id });
-  }
+  }, [dispatch]);
 
-  function handleBackToFeed() {
+  const handleBackToFeed = useCallback(() => {
     dispatch({ type: "SET_SELECTED_ARTICLE", articleId: null });
-  }
+  }, [dispatch]);
 
-  function handleReact(articleId: string, emoji: string | null) {
+  const handleReact = useCallback((articleId: string, emoji: string | null) => {
     if (emoji === null) {
       const current = state.articleReactions[articleId];
       if (current) dispatch({ type: "SET_EMOJI_REACTION", articleId, emoji: current });
     } else {
       dispatch({ type: "SET_EMOJI_REACTION", articleId, emoji });
     }
-  }
+  }, [dispatch, state.articleReactions]);
 
-  function handleFlag(articleId: string) {
+  const handleFlag = useCallback((articleId: string) => {
     dispatch({ type: "TOGGLE_ARTICLE_FLAG", articleId });
-  }
+  }, [dispatch]);
 
-  const selectedArticle = state.selectedArticleId
-    ? state.newsArticles.find((a) => a.id === state.selectedArticleId)
-    : null;
+  const selectedArticle = useMemo(
+    () => state.selectedArticleId ? state.newsArticles.find((a) => a.id === state.selectedArticleId) ?? null : null,
+    [state.selectedArticleId, state.newsArticles]
+  );
+
+  const articleCounts = useMemo(
+    () => buildArticleCountsPerCategory(state.newsArticles),
+    [state.newsArticles]
+  );
 
   if (selectedArticle) {
     return (
@@ -101,8 +107,6 @@ export function NewsView() {
       />
     );
   }
-
-  const articleCounts = buildArticleCountsPerCategory(state.newsArticles);
 
   return (
     <div className="flex flex-col h-full overflow-hidden">

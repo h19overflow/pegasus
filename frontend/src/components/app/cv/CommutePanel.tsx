@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowUpDown } from "lucide-react";
 import { useApp } from "@/lib/appContext";
 import { estimateCommutes, getDefaultUserLocation } from "@/lib/commuteEngine";
@@ -52,8 +52,12 @@ const CommutePanel = () => {
     return coordMap;
   }, [state.jobListings]);
 
-  const userLocation = getDefaultUserLocation();
+  const userLocation = useMemo(() => getDefaultUserLocation(), []);
   const selectedCoords = selectedJobId ? jobCoords.get(selectedJobId) : undefined;
+
+  const handleSelectJob = useCallback((jobId: string) => {
+    setSelectedJobId(jobId);
+  }, []);
 
   return (
     <div className="flex flex-col h-full">
@@ -63,7 +67,7 @@ const CommutePanel = () => {
         selectedJobId={selectedJobId}
         selectedCoords={selectedCoords}
         userLocation={userLocation}
-        onSelectJob={setSelectedJobId}
+        onSelectJob={handleSelectJob}
       />
 
       <div className="flex-1 overflow-y-auto border-t border-border/50">
