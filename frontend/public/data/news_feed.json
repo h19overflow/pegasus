@@ -1,5 +1,5 @@
 {
-  "lastScraped": "2026-03-06T23:59:36.093234+00:00",
+  "lastScraped": "2026-03-07T14:53:37.275857+00:00",
   "totalArticles": 259,
   "articles": [
     {
@@ -1882,15 +1882,15 @@
         "neighborhood": "Montgomery"
       },
       "communitySentiment": "negative",
-      "communityConfidence": 0.9,
+      "communityConfidence": 0.85,
       "sentimentBreakdown": {
-        "negative": 2,
+        "negative": 3,
         "neutral": 1
       },
-      "communitySummary": "Citizens are expressing significant frustration with the politicization of local crime issues by state officials. While residents are divided on the political rhetoric, there is a clear consensus that the city must prioritize tangible solutions, specifically addressing police staffing shortages and support for victims of violence.",
+      "communitySummary": "Citizens are expressing significant frustration with the politicization of local crime issues, viewing external political attacks as unhelpful to the community. While there is support for local leadership, residents are clearly prioritizing tangible solutions, specifically the need for increased police staffing to address public safety concerns.",
       "urgentConcerns": [
         "Police staffing shortages",
-        "Need for direct victim support services"
+        "Public safety in the wake of recent violence"
       ]
     },
     {
