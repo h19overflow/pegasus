@@ -97,7 +97,7 @@ const CommutePanel = () => {
               key={estimate.jobId}
               estimate={estimate}
               isSelected={selectedJobId === estimate.jobId}
-              onSelect={() => setSelectedJobId(estimate.jobId)}
+              onSelect={handleSelectJob}
             />
           ))}
         </div>
