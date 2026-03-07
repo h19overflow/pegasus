@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Map } from "lucide-react";
+import { ArrowLeft, Map } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import citysenseLogo from "@/assets/citysense-logo.png";
 import { AIInsightsCard } from "@/components/app/admin/AIInsightsCard";
@@ -26,6 +26,8 @@ function buildGreeting(): string {
 }
 
 function AdminHeader() {
+  const navigate = useNavigate();
+
   return (
     <header className="sticky top-0 z-[1001] bg-white border-t-[3px] border-[hsl(var(--amber-gold))] border-b border-border/40">
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
@@ -41,10 +43,17 @@ function AdminHeader() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">
             {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
           </span>
+          <button
+            onClick={() => navigate("/app/news")}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/40 bg-white text-xs font-medium text-secondary hover:shadow-sm hover:text-primary transition-all"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+            Citizen View
+          </button>
         </div>
       </div>
     </header>
