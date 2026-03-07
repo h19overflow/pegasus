@@ -1,9 +1,9 @@
 {
-  "analyzed_at": "2026-03-06T23:59:36.084238+00:00",
+  "analyzed_at": "2026-03-07T14:53:37.259284+00:00",
   "model_version": "gemini-3.1-flash-lite-preview",
   "prompt_version": "v1.0",
   "total_articles": 55,
-  "total_comments": 167,
+  "total_comments": 168,
   "articles": [
     {
       "article_id": "4274413fe29f",
@@ -1022,9 +1022,9 @@
     {
       "article_id": "91990524ef7c",
       "article_sentiment": "negative",
-      "article_confidence": 0.9,
+      "article_confidence": 0.85,
       "sentiment_breakdown": {
-        "negative": 2,
+        "negative": 3,
         "neutral": 1
       },
       "comments": [
@@ -1034,7 +1034,7 @@
           "confidence": 0.95,
           "topics": [
             "political discourse",
-            "public safety"
+            "gun violence"
           ],
           "flagged": false
         },
@@ -1051,10 +1051,19 @@
         {
           "comment_id": "seed-037",
           "sentiment": "negative",
-          "confidence": 0.85,
+          "confidence": 0.9,
           "topics": [
             "victim support",
             "political discourse"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "cmt-1772890189811",
+          "sentiment": "neutral",
+          "confidence": 0.6,
+          "topics": [
+            "general"
           ],
           "flagged": false
         }
@@ -1064,21 +1073,21 @@
         "police staffing shortages",
         "victim advocacy"
       ],
-      "admin_summary": "Citizens are expressing significant frustration with the politicization of local crime issues by state officials. While residents are divided on the political rhetoric, there is a clear consensus that the city must prioritize tangible solutions, specifically addressing police staffing shortages and support for victims of violence.",
+      "admin_summary": "Citizens are expressing significant frustration with the politicization of local crime issues, viewing external political attacks as unhelpful to the community. While there is support for local leadership, residents are clearly prioritizing tangible solutions, specifically the need for increased police staffing to address public safety concerns.",
       "urgent_concerns": [
         "Police staffing shortages",
-        "Need for direct victim support services"
+        "Public safety in the wake of recent violence"
       ],
       "recommendations": [
         {
-          "action": "Initiate a public recruitment and retention campaign for the Montgomery Police Department.",
+          "action": "Initiate a public briefing on police recruitment and retention strategies.",
           "priority": "high",
-          "rationale": "1 of 3 comments explicitly identified police staffing as a critical, pre-existing issue that requires immediate attention regardless of political discourse."
+          "rationale": "Staffing shortages were explicitly cited as a primary concern by residents, indicating that citizens want concrete operational improvements over political rhetoric."
         },
         {
-          "action": "Establish a dedicated task force to enhance victim support services and community outreach.",
+          "action": "Establish a community-focused victim support task force.",
           "priority": "medium",
-          "rationale": "1 of 3 comments emphasized that political posturing ignores the immediate needs of families affected by violence, suggesting a need for more direct city-led support."
+          "rationale": "Feedback indicates that residents feel the focus has shifted away from the victims of violence; a dedicated task force would demonstrate a commitment to those directly impacted."
         }
       ]
     },

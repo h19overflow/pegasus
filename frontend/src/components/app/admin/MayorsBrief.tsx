@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { MessageSquare } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAdminCommentStore } from "@/stores/adminCommentStore";
-import { computeNeighborhoodActivity, computeSentimentBreakdown, findTopConcerns } from "@/lib/newsAggregations";
+import { computeNeighborhoodActivity, computeSentimentBreakdown, findTopConcerns, sortArticlesByEngagement } from "@/lib/newsAggregations";
+import { getSentimentColor } from "@/lib/newsMapMarkers";
 import type { NeighborhoodActivity, NewsArticle, NewsComment, ReactionType } from "@/lib/types";
 import { CollapsibleSection } from "./CollapsibleSection";
 
@@ -37,21 +38,92 @@ function ClickableItem({ text, question, onAskAI }: { text: string; question: st
   );
 }
 
-function TopConcernsList({ articles, comments, onAskAI }: { articles: NewsArticle[]; comments: NewsComment[]; onAskAI?: (q: string) => void }) {
+function SentimentDot({ sentiment }: { sentiment: string }) {
+  const color = getSentimentColor(sentiment);
+  return (
+    <span
+      className="inline-block w-2.5 h-2.5 rounded-full shrink-0"
+      style={{ backgroundColor: color }}
+      title={sentiment}
+    />
+  );
+}
+
+function TopConcernsList({ articles, comments, onAskAI }: {
+  articles: NewsArticle[];
+  comments: NewsComment[];
+  onAskAI?: (q: string) => void;
+}) {
   const topConcerns = findTopConcerns(articles, comments).slice(0, 3);
+  const articleMap = new Map(articles.map((a) => [a.id, a]));
+
   if (topConcerns.length === 0) return <p className="text-sm text-muted-foreground">No citizen comments yet.</p>;
   return (
+    <ul className="space-y-2.5">
+      {topConcerns.map((concern) => {
+        const article = articleMap.get(concern.articleId);
+        const neighborhood = article?.location?.neighborhood;
+        const source = article?.source;
+        const sentiment = article?.sentiment ?? "neutral";
+
+        return (
+          <li key={concern.articleId} className="flex items-start gap-2.5">
+            <SentimentDot sentiment={sentiment} />
+            <div className="flex-1 min-w-0">
+              <ClickableItem
+                text={concern.title}
+                question={`Tell me more about: ${concern.title}`}
+                onAskAI={onAskAI}
+              />
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {source && <>{source}</>}
+                {source && neighborhood && " · "}
+                {neighborhood && <>{neighborhood}</>}
+              </p>
+            </div>
+            <span className="text-xs text-muted-foreground whitespace-nowrap pt-0.5 bg-muted/60 px-1.5 py-0.5 rounded-full">
+              {concern.commentCount} comments
+            </span>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function HottestThisWeek({ articles, comments, reactions, onAskAI }: {
+  articles: NewsArticle[];
+  comments: NewsComment[];
+  reactions: Record<string, Record<ReactionType, number>>;
+  onAskAI?: (q: string) => void;
+}) {
+  const sorted = sortArticlesByEngagement(articles, reactions, comments).slice(0, 3);
+  if (sorted.length === 0) return <p className="text-sm text-muted-foreground">No articles yet.</p>;
+
+  return (
     <ul className="space-y-2">
-      {topConcerns.map((concern) => (
-        <li key={concern.articleId} className="flex items-start justify-between gap-2">
-          <ClickableItem
-            text={concern.title}
-            question={`Tell me more about: ${concern.title}`}
-            onAskAI={onAskAI}
-          />
-          <span className="text-xs text-muted-foreground whitespace-nowrap pt-0.5">{concern.commentCount} comments</span>
-        </li>
-      ))}
+      {sorted.map((article) => {
+        const totalReactions = Object.values(reactions[article.id] ?? {}).reduce((sum, n) => sum + n, 0);
+        return (
+          <li key={article.id}>
+            <button
+              onClick={() => onAskAI?.(`Tell me more about: ${article.title}`)}
+              className="w-full flex items-center gap-2.5 text-left hover:text-primary transition-colors group"
+            >
+              <div className="flex-1 min-w-0">
+                <span className="text-sm text-foreground group-hover:text-primary transition-colors flex items-center gap-1">
+                  {article.title}
+                  <MessageSquare className="w-3 h-3 opacity-0 group-hover:opacity-60 transition-opacity shrink-0" />
+                </span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground whitespace-nowrap shrink-0">
+                <span>↑{article.upvotes}</span>
+                <span>{totalReactions} reactions</span>
+              </div>
+            </button>
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -69,7 +141,7 @@ function NeighborhoodList({ neighborhoods, onAskAI }: { neighborhoods: Neighborh
             onAskAI={onAskAI}
           />
           <span className="text-xs text-muted-foreground">
-            {hood.articleCount} articles · {hood.reactionCount + hood.commentCount} engagements
+            {hood.articleCount} articles · {hood.reactionCount + hood.commentCount} comments & reactions
           </span>
         </li>
       ))}
@@ -89,7 +161,7 @@ export function MayorsBrief({ articles, comments: propComments, reactions, onAsk
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Mayor's Brief</CardTitle>
+        <CardTitle className="text-base">Daily Overview</CardTitle>
         <p className="text-xs text-muted-foreground">Your daily briefing on citizen sentiment</p>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -100,10 +172,13 @@ export function MayorsBrief({ articles, comments: propComments, reactions, onAsk
           <p className="text-sm text-foreground leading-relaxed group-hover:text-primary transition-colors">{sentimentSummary}</p>
         </button>
         <section>
-          <h3 className="text-sm font-semibold text-foreground mb-2">Top 3 Concerns</h3>
+          <h3 className="text-sm font-semibold text-foreground mb-2">Most Talked About</h3>
           <TopConcernsList articles={articles} comments={allComments} onAskAI={onAskAI} />
         </section>
-        <CollapsibleSection title="Most Discussed Neighborhoods" defaultOpen={false}>
+        <CollapsibleSection title="Hottest This Week" defaultOpen={false}>
+          <HottestThisWeek articles={articles} comments={allComments} reactions={reactions} onAskAI={onAskAI} />
+        </CollapsibleSection>
+        <CollapsibleSection title="Busiest Areas" defaultOpen={false}>
           <NeighborhoodList neighborhoods={neighborhoods} onAskAI={onAskAI} />
         </CollapsibleSection>
       </CardContent>

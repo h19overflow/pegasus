@@ -6,10 +6,10 @@ import { ArticleReactions } from "./ArticleReactions";
 
 interface NewsDetailProps {
   article: NewsArticle;
-  userReaction: string | undefined;
+  userReaction: string | null;
   isFlagged: boolean;
   onBack: () => void;
-  onReact: (articleId: string, emoji: string) => void;
+  onReact: (articleId: string, emoji: string | null) => void;
   onFlag: (articleId: string) => void;
 }
 
@@ -165,7 +165,9 @@ export function NewsDetail({ article, userReaction, isFlagged, onBack, onReact, 
           <div className="flex items-center border-y border-border/50 py-3">
             <ArticleReactions
               articleId={article.id}
+              reactionCounts={article.reactionCounts ?? {}}
               userReaction={userReaction}
+              flagCount={article.flagCount ?? 0}
               isFlagged={isFlagged}
               onReact={onReact}
               onFlag={onFlag}

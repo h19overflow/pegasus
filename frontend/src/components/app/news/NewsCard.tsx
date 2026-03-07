@@ -9,6 +9,7 @@ interface NewsCardProps {
   userReaction: string | null;
   flagCount: number;
   isFlagged: boolean;
+  commentCount?: number;
   onSelect: (article: NewsArticle) => void;
   onReact: (articleId: string, emoji: string | null) => void;
   onFlag: (articleId: string) => void;
@@ -68,13 +69,13 @@ function MisinfoRiskBadge({ risk }: { risk: number }) {
   return null;
 }
 
-export function NewsCard({ article, reactionCounts, userReaction, flagCount, isFlagged, onSelect, onReact, onFlag }: NewsCardProps) {
+export function NewsCard({ article, reactionCounts, userReaction, flagCount, isFlagged, commentCount, onSelect, onReact, onFlag }: NewsCardProps) {
   const scrapedDate = formatScrapedDate(article.scrapedAt);
 
   return (
     <div
       className="group relative w-full text-left rounded-2xl bg-white border border-border/40
-                 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 overflow-hidden cursor-pointer magnolia-bg"
+                 hover:shadow-lg hover:-translate-y-0.5 hover:z-10 transition-all duration-200 cursor-pointer magnolia-bg"
       onClick={() => onSelect(article)}
     >
       {/* Left accent stripe */}
@@ -162,7 +163,7 @@ export function NewsCard({ article, reactionCounts, userReaction, flagCount, isF
                 className="flex items-center gap-1 rounded-full px-2 py-0.5 hover:text-primary hover:bg-primary/5 transition-colors"
               >
                 <MessageCircle className="w-3 h-3" />
-                {article.commentCount}
+                {commentCount ?? article.commentCount}
               </button>
             </div>
           </div>

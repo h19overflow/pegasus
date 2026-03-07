@@ -84,6 +84,7 @@ export function NewsletterHeader({
             <option value="newest">Newest</option>
             <option value="oldest">Oldest</option>
             <option value="most_liked">Popular</option>
+            <option value="most_comments">Most Discussed</option>
           </select>
         </div>
       </div>

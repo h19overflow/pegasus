@@ -57,7 +57,7 @@ function TopThreeList({ neighborhoods, onAskAI }: { neighborhoods: NeighborhoodA
               {hood.name}
               <MessageSquare className="w-3 h-3 opacity-0 group-hover:opacity-60 transition-opacity" />
             </span>
-            <span className="text-xs text-muted-foreground">{computeEngagementTotal(hood)} pts</span>
+            <span className="text-xs text-muted-foreground">{computeEngagementTotal(hood)} activity</span>
           </button>
         </li>
       ))}
@@ -72,11 +72,11 @@ export function HotSpotsPanel({ neighborhoods, onAskAI }: HotSpotsPanelProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Neighborhood Hot Spots</CardTitle>
+        <CardTitle className="text-base">Most Active Areas</CardTitle>
       </CardHeader>
       <CardContent>
         <TopThreeList neighborhoods={ranked} onAskAI={onAskAI} />
-        <CollapsibleSection title="All Neighborhoods" defaultOpen={false}>
+        <CollapsibleSection title="All Areas" defaultOpen={false}>
           {ranked.length === 0 ? (
             <p className="text-sm text-muted-foreground">No data yet.</p>
           ) : (

@@ -70,7 +70,7 @@ export function AnalyzeButton({ onComplete }: AnalyzeButtonProps) {
         ) : (
           <Sparkles className="w-4 h-4" aria-hidden="true" />
         )}
-        {analysisState === "running" ? "Analyzing articles & comments…" : "Run AI Analysis"}
+        {analysisState === "running" ? "Analyzing articles & comments…" : "Run Analysis"}
       </button>
       {analysisState === "success" && (
         <span className="flex items-center gap-1.5 text-sm text-emerald-600">
