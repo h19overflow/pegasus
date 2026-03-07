@@ -83,7 +83,7 @@ function BenefitCategoryCard({
   const Icon = config.icon;
 
   return (
-    <div className={`rounded-2xl border p-5 ${config.bgLight} transition-all`}>
+    <div className={`rounded-2xl border p-5 ${config.bgLight} transition-all overflow-hidden`}>
       <div className="flex items-center gap-3 mb-4">
         <div className={`w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm ${config.color}`}>
           <Icon className="w-5 h-5" />

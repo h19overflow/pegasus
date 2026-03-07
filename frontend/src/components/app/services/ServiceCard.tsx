@@ -3,9 +3,9 @@ import type { ServiceCardData } from "@/lib/types";
 
 export function ServiceCard({ card }: { card: ServiceCardData }) {
   return (
-    <div className="rounded-lg border border-border/60 bg-white p-2.5 space-y-1.5">
+    <div className="rounded-lg border border-border/60 bg-white p-2.5 space-y-1.5 overflow-hidden">
       <div className="flex items-start justify-between gap-2">
-        <p className="text-[11px] font-semibold leading-tight">{card.title}</p>
+        <p className="text-[11px] font-semibold leading-tight break-words min-w-0">{card.title}</p>
         {card.category && (
           <span className="shrink-0 text-[9px] px-1.5 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
             {card.category}
@@ -13,7 +13,7 @@ export function ServiceCard({ card }: { card: ServiceCardData }) {
         )}
       </div>
       {card.description && (
-        <p className="text-[10px] text-muted-foreground leading-snug">{card.description}</p>
+        <p className="text-[10px] text-muted-foreground leading-snug break-words">{card.description}</p>
       )}
       <div className="space-y-0.5">
         {card.phone && (

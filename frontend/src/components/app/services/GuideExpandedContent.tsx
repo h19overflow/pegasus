@@ -47,7 +47,7 @@ export function GuideExpandedContent({
     }
   }
   return (
-    <div className="px-3 pb-3 space-y-3 border-t border-border/20 pt-2.5">
+    <div className="px-3 pb-3 space-y-3 border-t border-border/20 pt-2.5 overflow-hidden">
       <p className="text-xs text-muted-foreground leading-relaxed">{guide.description}</p>
 
       {guide.eligibility.length > 0 && (

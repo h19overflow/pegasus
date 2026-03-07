@@ -77,7 +77,7 @@ function RoadmapStepCard({
   onToggle: () => void;
 }) {
   return (
-    <li className="space-y-2 rounded-xl border border-border/40 p-3">
+    <li className="space-y-2 rounded-xl border border-border/40 p-3 overflow-hidden">
       <div className="flex items-start gap-2">
         <button
           type="button"
@@ -96,7 +96,7 @@ function RoadmapStepCard({
           <p className="text-xs font-semibold text-foreground">
             {step.stepNumber}. {step.title}
           </p>
-          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-words">
             {step.action}
           </p>
           {step.estimatedTime && (
@@ -135,7 +135,7 @@ function RoadmapStepCard({
       )}
 
       {step.proTip && (
-        <p className="rounded bg-amber-500/10 p-2 pl-7 text-[10px] text-amber-700 dark:text-amber-400">
+        <p className="rounded bg-amber-500/10 p-2 pl-7 text-[10px] text-amber-700 dark:text-amber-400 break-words">
           {step.proTip}
         </p>
       )}
