@@ -32,6 +32,27 @@ function SentimentBadge({ sentiment }: { sentiment: string }) {
   );
 }
 
+function CommunitySentimentBadge({ article }: { article: NewsArticle }) {
+  if (!article.communitySentiment) return null;
+  const color = getSentimentColor(article.communitySentiment);
+  const label = article.communitySentiment.charAt(0).toUpperCase() + article.communitySentiment.slice(1);
+  const breakdown = article.sentimentBreakdown;
+  return (
+    <span
+      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold"
+      style={{ background: `${color}20`, color }}
+    >
+      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color }} />
+      Community: {label}
+      {breakdown && (
+        <span className="text-[9px] opacity-70 ml-0.5">
+          +{breakdown.positive ?? 0} ~{breakdown.neutral ?? 0} -{breakdown.negative ?? 0}
+        </span>
+      )}
+    </span>
+  );
+}
+
 export function NewsPopupCard({ article, reactionCounts, userReaction, onReact }: NewsPopupCardProps) {
   const totalReactions = Object.values(reactionCounts).reduce((sum, n) => sum + n, 0);
 
@@ -45,8 +66,9 @@ export function NewsPopupCard({ article, reactionCounts, userReaction, onReact }
         />
       )}
 
-      <div className="flex items-center gap-1.5 mb-1">
+      <div className="flex items-center gap-1.5 mb-1 flex-wrap">
         <SentimentBadge sentiment={article.sentiment ?? "neutral"} />
+        <CommunitySentimentBadge article={article} />
         <span className="text-[10px] text-muted-foreground capitalize">{article.category}</span>
       </div>
 

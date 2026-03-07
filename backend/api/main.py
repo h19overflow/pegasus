@@ -18,7 +18,7 @@ from backend.api.routers import analysis, chat, comments, stream, webhooks
 async def lifespan(application: FastAPI):
     """Start background scraping on server boot if API key is available."""
     scraper_task = None
-    auto_scrape = os.environ.get("AUTO_SCRAPE", "1") != "0"
+    auto_scrape = os.environ.get("AUTO_SCRAPE", "0") != "0"
     has_api_key = bool(os.environ.get("BRIGHTDATA_API_KEY"))
 
     if auto_scrape and has_api_key:

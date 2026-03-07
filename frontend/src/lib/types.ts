@@ -335,6 +335,11 @@ export interface NewsArticle {
   summary?: string;
   misinfoRisk?: number;
   location?: NewsLocation | null;
+  communitySentiment?: "positive" | "negative" | "neutral";
+  communityConfidence?: number;
+  sentimentBreakdown?: Record<string, number>;
+  communitySummary?: string;
+  urgentConcerns?: string[];
 }
 
 export interface NewsComment {

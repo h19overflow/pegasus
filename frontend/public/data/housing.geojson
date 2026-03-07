@@ -6,6 +6,1782 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "135d774cf323",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1412,
+        "price_formatted": "$1,412",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565340+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "135d774cf323",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1412,
+        "price_formatted": "$1,412",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565345+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "135d774cf323",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1412,
+        "price_formatted": "$1,412",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565350+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "ee0fcdbc6c4c",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1434,
+        "price_formatted": "$1,434",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565355+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "23dff66b2dd3",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1469,
+        "price_formatted": "$1,469",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565360+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "4b603dccad6e",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1504,
+        "price_formatted": "$1,504",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565365+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "ff3482958e86",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1514,
+        "price_formatted": "$1,514",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565369+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "ff3482958e86",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1514,
+        "price_formatted": "$1,514",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565374+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "6b21d3a983a3",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1529,
+        "price_formatted": "$1,529",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565380+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "555086cf5d0b",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1614,
+        "price_formatted": "$1,614",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565384+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "555086cf5d0b",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1614,
+        "price_formatted": "$1,614",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565388+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "555086cf5d0b",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1614,
+        "price_formatted": "$1,614",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565392+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "de9653b8eb59",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1679,
+        "price_formatted": "$1,679",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565396+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "2cf656a55636",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1699,
+        "price_formatted": "$1,699",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565401+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "2cf656a55636",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1699,
+        "price_formatted": "$1,699",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565406+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "2cf656a55636",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1699,
+        "price_formatted": "$1,699",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565410+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "48b5f82732f9",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1704,
+        "price_formatted": "$1,704",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565415+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "48b5f82732f9",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1704,
+        "price_formatted": "$1,704",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565420+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "48b5f82732f9",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1704,
+        "price_formatted": "$1,704",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565425+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "c2a4917e6cc0",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1714,
+        "price_formatted": "$1,714",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565429+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "c2a4917e6cc0",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1714,
+        "price_formatted": "$1,714",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565434+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "c2a4917e6cc0",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1714,
+        "price_formatted": "$1,714",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565438+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.156832,
+          32.375296
+        ]
+      },
+      "properties": {
+        "id": "a1e083e3f988",
+        "address": "{'city': 'Montgomery', 'streetAddress': '280 New Haven Blvd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1724,
+        "price_formatted": "$1,724",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/barrington-place/5Xjq3n/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565442+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "d295439c78c1",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 849,
+        "price_formatted": "$849",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565518+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "d295439c78c1",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 849,
+        "price_formatted": "$849",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565522+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "d295439c78c1",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 849,
+        "price_formatted": "$849",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565526+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "d295439c78c1",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 849,
+        "price_formatted": "$849",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565530+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "d295439c78c1",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 849,
+        "price_formatted": "$849",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565534+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "01c6f7b291f9",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 1024,
+        "price_formatted": "$1,024",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565538+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "01c6f7b291f9",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 1024,
+        "price_formatted": "$1,024",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565542+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "01c6f7b291f9",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 1024,
+        "price_formatted": "$1,024",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565546+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "01c6f7b291f9",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 1024,
+        "price_formatted": "$1,024",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565550+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "01c6f7b291f9",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 1024,
+        "price_formatted": "$1,024",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565555+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "cbf100a03ffc",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 1099,
+        "price_formatted": "$1,099",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565561+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.263389,
+          32.360279
+        ]
+      },
+      "properties": {
+        "id": "cbf100a03ffc",
+        "address": "{'city': 'Montgomery', 'streetAddress': '2845 Zelda Rd', 'zipcode': '36106', 'state': 'AL'}, Montgomery, AL",
+        "price": 1099,
+        "price_formatted": "$1,099",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/zelda-pointe/5Xjq4d/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565565+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.267545,
+          32.362015
+        ]
+      },
+      "properties": {
+        "id": "03a0e43f55f7",
+        "address": "{'city': 'Montgomery', 'streetAddress': '1 Gatsby Dr', 'zipcode': '36107', 'state': 'AL'}, Montgomery, AL",
+        "price": 1200,
+        "price_formatted": "$1,200",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-gatsby-at-midtown-apartment-living/CkB9cX/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565570+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.267545,
+          32.362015
+        ]
+      },
+      "properties": {
+        "id": "03a0e43f55f7",
+        "address": "{'city': 'Montgomery', 'streetAddress': '1 Gatsby Dr', 'zipcode': '36107', 'state': 'AL'}, Montgomery, AL",
+        "price": 1200,
+        "price_formatted": "$1,200",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-gatsby-at-midtown-apartment-living/CkB9cX/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565574+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.267545,
+          32.362015
+        ]
+      },
+      "properties": {
+        "id": "b714133a4b92",
+        "address": "{'city': 'Montgomery', 'streetAddress': '1 Gatsby Dr', 'zipcode': '36107', 'state': 'AL'}, Montgomery, AL",
+        "price": 1320,
+        "price_formatted": "$1,320",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-gatsby-at-midtown-apartment-living/CkB9cX/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565578+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.267545,
+          32.362015
+        ]
+      },
+      "properties": {
+        "id": "b714133a4b92",
+        "address": "{'city': 'Montgomery', 'streetAddress': '1 Gatsby Dr', 'zipcode': '36107', 'state': 'AL'}, Montgomery, AL",
+        "price": 1320,
+        "price_formatted": "$1,320",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-gatsby-at-midtown-apartment-living/CkB9cX/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565582+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.267545,
+          32.362015
+        ]
+      },
+      "properties": {
+        "id": "a4568556a735",
+        "address": "{'city': 'Montgomery', 'streetAddress': '1 Gatsby Dr', 'zipcode': '36107', 'state': 'AL'}, Montgomery, AL",
+        "price": 1475,
+        "price_formatted": "$1,475",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-gatsby-at-midtown-apartment-living/CkB9cX/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565586+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.232593,
+          32.324145
+        ]
+      },
+      "properties": {
+        "id": "6cfefdd828b3",
+        "address": "{'city': 'Montgomery', 'streetAddress': '3889 Liberty Square Dr', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 950,
+        "price_formatted": "$950",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/liberty-square-apartments/Chckr8/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565592+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.232593,
+          32.324145
+        ]
+      },
+      "properties": {
+        "id": "cdb942238d33",
+        "address": "{'city': 'Montgomery', 'streetAddress': '3889 Liberty Square Dr', 'zipcode': '36116', 'state': 'AL'}, Montgomery, AL",
+        "price": 1050,
+        "price_formatted": "$1,050",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/liberty-square-apartments/Chckr8/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565596+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.204995,
+          32.37907
+        ]
+      },
+      "properties": {
+        "id": "3225bf24607f",
+        "address": "{'city': 'Montgomery', 'streetAddress': '185 Eastdale Rd S', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 950,
+        "price_formatted": "$950",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/gazebo-east/5Xjq4j/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565601+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.204995,
+          32.37907
+        ]
+      },
+      "properties": {
+        "id": "3225bf24607f",
+        "address": "{'city': 'Montgomery', 'streetAddress': '185 Eastdale Rd S', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 950,
+        "price_formatted": "$950",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/gazebo-east/5Xjq4j/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565605+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.204995,
+          32.37907
+        ]
+      },
+      "properties": {
+        "id": "3225bf24607f",
+        "address": "{'city': 'Montgomery', 'streetAddress': '185 Eastdale Rd S', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 950,
+        "price_formatted": "$950",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/gazebo-east/5Xjq4j/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565609+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.204995,
+          32.37907
+        ]
+      },
+      "properties": {
+        "id": "3225bf24607f",
+        "address": "{'city': 'Montgomery', 'streetAddress': '185 Eastdale Rd S', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 950,
+        "price_formatted": "$950",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/gazebo-east/5Xjq4j/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565613+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.204995,
+          32.37907
+        ]
+      },
+      "properties": {
+        "id": "3225bf24607f",
+        "address": "{'city': 'Montgomery', 'streetAddress': '185 Eastdale Rd S', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 950,
+        "price_formatted": "$950",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/gazebo-east/5Xjq4j/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565619+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.204995,
+          32.37907
+        ]
+      },
+      "properties": {
+        "id": "059744d53e8a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '185 Eastdale Rd S', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1100,
+        "price_formatted": "$1,100",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/gazebo-east/5Xjq4j/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565623+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.204995,
+          32.37907
+        ]
+      },
+      "properties": {
+        "id": "059744d53e8a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '185 Eastdale Rd S', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1100,
+        "price_formatted": "$1,100",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/gazebo-east/5Xjq4j/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565627+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.204995,
+          32.37907
+        ]
+      },
+      "properties": {
+        "id": "059744d53e8a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '185 Eastdale Rd S', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1100,
+        "price_formatted": "$1,100",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/gazebo-east/5Xjq4j/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565631+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.204995,
+          32.37907
+        ]
+      },
+      "properties": {
+        "id": "059744d53e8a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '185 Eastdale Rd S', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1100,
+        "price_formatted": "$1,100",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/gazebo-east/5Xjq4j/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565635+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.204995,
+          32.37907
+        ]
+      },
+      "properties": {
+        "id": "059744d53e8a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '185 Eastdale Rd S', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1100,
+        "price_formatted": "$1,100",
+        "beds": 2,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/gazebo-east/5Xjq4j/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565639+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.200445,
+          32.378822
+        ]
+      },
+      "properties": {
+        "id": "b9852a815e9a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '101 S Burbank Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 900,
+        "price_formatted": "$900",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/addison-park/5XjDMD/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565655+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.200445,
+          32.378822
+        ]
+      },
+      "properties": {
+        "id": "b9852a815e9a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '101 S Burbank Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 900,
+        "price_formatted": "$900",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/addison-park/5XjDMD/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565659+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.200445,
+          32.378822
+        ]
+      },
+      "properties": {
+        "id": "b9852a815e9a",
+        "address": "{'city': 'Montgomery', 'streetAddress': '101 S Burbank Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 900,
+        "price_formatted": "$900",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/addison-park/5XjDMD/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565665+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.200445,
+          32.378822
+        ]
+      },
+      "properties": {
+        "id": "750c9cf3fe97",
+        "address": "{'city': 'Montgomery', 'streetAddress': '101 S Burbank Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 985,
+        "price_formatted": "$985",
+        "beds": 2,
+        "baths": 1.5,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/addison-park/5XjDMD/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565669+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.200445,
+          32.378822
+        ]
+      },
+      "properties": {
+        "id": "750c9cf3fe97",
+        "address": "{'city': 'Montgomery', 'streetAddress': '101 S Burbank Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 985,
+        "price_formatted": "$985",
+        "beds": 2,
+        "baths": 1.5,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/addison-park/5XjDMD/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565674+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.200445,
+          32.378822
+        ]
+      },
+      "properties": {
+        "id": "750c9cf3fe97",
+        "address": "{'city': 'Montgomery', 'streetAddress': '101 S Burbank Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 985,
+        "price_formatted": "$985",
+        "beds": 2,
+        "baths": 1.5,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/addison-park/5XjDMD/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565678+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.200445,
+          32.378822
+        ]
+      },
+      "properties": {
+        "id": "c31c44fa9e84",
+        "address": "{'city': 'Montgomery', 'streetAddress': '101 S Burbank Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1195,
+        "price_formatted": "$1,195",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/addison-park/5XjDMD/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565683+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.200445,
+          32.378822
+        ]
+      },
+      "properties": {
+        "id": "c31c44fa9e84",
+        "address": "{'city': 'Montgomery', 'streetAddress': '101 S Burbank Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1195,
+        "price_formatted": "$1,195",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/addison-park/5XjDMD/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565688+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.200445,
+          32.378822
+        ]
+      },
+      "properties": {
+        "id": "c31c44fa9e84",
+        "address": "{'city': 'Montgomery', 'streetAddress': '101 S Burbank Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1195,
+        "price_formatted": "$1,195",
+        "beds": 3,
+        "baths": 2,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/addison-park/5XjDMD/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565692+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.202068,
+          32.366428
+        ]
+      },
+      "properties": {
+        "id": "d1ddc8ae5151",
+        "address": "{'city': 'Montgomery', 'streetAddress': '6037 Monticello Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 925,
+        "price_formatted": "$925",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-park-at-monticello/5XnhR3/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565696+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.202068,
+          32.366428
+        ]
+      },
+      "properties": {
+        "id": "d1ddc8ae5151",
+        "address": "{'city': 'Montgomery', 'streetAddress': '6037 Monticello Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 925,
+        "price_formatted": "$925",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-park-at-monticello/5XnhR3/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565700+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.202068,
+          32.366428
+        ]
+      },
+      "properties": {
+        "id": "4197909578fc",
+        "address": "{'city': 'Montgomery', 'streetAddress': '6037 Monticello Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 975,
+        "price_formatted": "$975",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-park-at-monticello/5XnhR3/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565705+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.202068,
+          32.366428
+        ]
+      },
+      "properties": {
+        "id": "4197909578fc",
+        "address": "{'city': 'Montgomery', 'streetAddress': '6037 Monticello Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 975,
+        "price_formatted": "$975",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-park-at-monticello/5XnhR3/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565709+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.202068,
+          32.366428
+        ]
+      },
+      "properties": {
+        "id": "4197909578fc",
+        "address": "{'city': 'Montgomery', 'streetAddress': '6037 Monticello Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 975,
+        "price_formatted": "$975",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-park-at-monticello/5XnhR3/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565713+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.202068,
+          32.366428
+        ]
+      },
+      "properties": {
+        "id": "4197909578fc",
+        "address": "{'city': 'Montgomery', 'streetAddress': '6037 Monticello Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 975,
+        "price_formatted": "$975",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-park-at-monticello/5XnhR3/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565717+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.202068,
+          32.366428
+        ]
+      },
+      "properties": {
+        "id": "771652cca952",
+        "address": "{'city': 'Montgomery', 'streetAddress': '6037 Monticello Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1040,
+        "price_formatted": "$1,040",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-park-at-monticello/5XnhR3/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565721+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.202068,
+          32.366428
+        ]
+      },
+      "properties": {
+        "id": "771652cca952",
+        "address": "{'city': 'Montgomery', 'streetAddress': '6037 Monticello Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1040,
+        "price_formatted": "$1,040",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-park-at-monticello/5XnhR3/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565726+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.202068,
+          32.366428
+        ]
+      },
+      "properties": {
+        "id": "21ae56265b38",
+        "address": "{'city': 'Montgomery', 'streetAddress': '6037 Monticello Dr', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1175,
+        "price_formatted": "$1,175",
+        "beds": 2,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/the-park-at-monticello/5XnhR3/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565730+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.170871,
+          32.374519
+        ]
+      },
+      "properties": {
+        "id": "5dd704b758ea",
+        "address": "{'city': 'Montgomery', 'streetAddress': '485 Taylor Rd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1006,
+        "price_formatted": "$1,006",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/arbors-on-taylor/5Xjq4J/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565747+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.170871,
+          32.374519
+        ]
+      },
+      "properties": {
+        "id": "a04d1ab3bd5e",
+        "address": "{'city': 'Montgomery', 'streetAddress': '485 Taylor Rd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1009,
+        "price_formatted": "$1,009",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/arbors-on-taylor/5Xjq4J/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565751+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.170871,
+          32.374519
+        ]
+      },
+      "properties": {
+        "id": "bcbae46835bf",
+        "address": "{'city': 'Montgomery', 'streetAddress': '485 Taylor Rd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1014,
+        "price_formatted": "$1,014",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/arbors-on-taylor/5Xjq4J/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565756+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.170871,
+          32.374519
+        ]
+      },
+      "properties": {
+        "id": "b230386c06cb",
+        "address": "{'city': 'Montgomery', 'streetAddress': '485 Taylor Rd', 'zipcode': '36117', 'state': 'AL'}, Montgomery, AL",
+        "price": 1422,
+        "price_formatted": "$1,422",
+        "beds": 1,
+        "baths": 1,
+        "sqft": null,
+        "listing_type": "APARTMENT",
+        "status": "FOR_RENT",
+        "url": "https://www.zillow.com/apartments/montgomery-al/arbors-on-taylor/5Xjq4J/",
+        "image_url": "",
+        "scraped_at": "2026-03-06T21:53:09.565760+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -86.211768,
           32.356234
         ]

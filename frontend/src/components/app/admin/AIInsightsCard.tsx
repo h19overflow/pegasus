@@ -38,16 +38,31 @@ async function fetchAnalysisResults(): Promise<AnalysisResults | null> {
   return response.json();
 }
 
+function rankByFrequency(items: string[]): string[] {
+  const counts = new Map<string, number>();
+  for (const item of items) {
+    counts.set(item, (counts.get(item) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([item]) => item);
+}
+
 function aggregateInsights(results: AnalysisResults): AggregatedInsights {
-  const sorted = [...results.articles].sort((a, b) => b.comments.length - a.comments.length);
-  const topConcern = sorted[0]?.urgent_concerns[0] ?? sorted[0]?.admin_summary ?? "No concerns flagged";
-  const trendingTopic = results.articles.flatMap((a) => a.topic_clusters)[0] ?? "No topics yet";
+  const allConcerns = results.articles.flatMap((a) => a.urgent_concerns);
+  const allTopics = results.articles.flatMap((a) => a.topic_clusters);
+
+  const rankedConcerns = rankByFrequency(allConcerns);
+  const rankedTopics = rankByFrequency(allTopics);
+
+  const topConcern = rankedConcerns[0] ?? "No concerns flagged";
+  const trendingTopic = rankedTopics[0] ?? "No topics yet";
   const negativePct = Math.round(
     (results.articles.filter((a) => a.article_sentiment === "negative").length / Math.max(results.articles.length, 1)) * 100,
   );
   const keySentiment = `${negativePct}% of articles have negative sentiment this week`;
-  const topicClusters = [...new Set(results.articles.flatMap((a) => a.topic_clusters))];
-  const urgentConcerns = [...new Set(results.articles.flatMap((a) => a.urgent_concerns))];
+  const topicClusters = [...new Set(allTopics)];
+  const urgentConcerns = [...new Set(allConcerns)];
   return { topConcern, trendingTopic, keySentiment, topicClusters, urgentConcerns };
 }
 

@@ -27,10 +27,23 @@ interface NewsSidebarPanelProps {
   focusedArticleId?: string | null;
 }
 
+function parseRelativeDate(dateStr: string): number {
+  const now = Date.now();
+  const match = dateStr.match(/^(\d+)\s+(hour|day|week|month)s?\s+ago$/i);
+  if (match) {
+    const amount = parseInt(match[1], 10);
+    const unit = match[2].toLowerCase();
+    const ms = { hour: 3600_000, day: 86400_000, week: 604800_000, month: 2592000_000 };
+    return now - amount * (ms[unit as keyof typeof ms] ?? 0);
+  }
+  const parsed = Date.parse(dateStr);
+  return isNaN(parsed) ? 0 : parsed;
+}
+
 function sortByLatest(articles: NewsArticle[]): NewsArticle[] {
   return [...articles].sort((a, b) => {
-    const timeA = new Date(a.scrapedAt).getTime();
-    const timeB = new Date(b.scrapedAt).getTime();
+    const timeA = parseRelativeDate(a.publishedAt) || new Date(a.scrapedAt).getTime();
+    const timeB = parseRelativeDate(b.publishedAt) || new Date(b.scrapedAt).getTime();
     return timeB - timeA;
   });
 }

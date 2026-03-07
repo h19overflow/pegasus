@@ -36,10 +36,14 @@ export async function fetchNewsArticles(): Promise<NewsArticle[]> {
 }
 
 export async function fetchNewsComments(): Promise<NewsComment[]> {
-  const response = await fetch("/data/news_feed.json");
-  if (!response.ok) return [];
-  const data: NewsFeedResponse = await response.json();
-  return data.comments ?? [];
+  try {
+    const response = await fetch("/api/comments");
+    if (!response.ok) return [];
+    const data = await response.json();
+    return (data.comments ?? []) as NewsComment[];
+  } catch {
+    return [];
+  }
 }
 
 export function filterArticlesByCategory(
@@ -50,12 +54,23 @@ export function filterArticlesByCategory(
   return articles.filter((a) => a.category === category);
 }
 
+function parseRelativeDate(dateStr: string): number {
+  const now = Date.now();
+  const match = dateStr.match(/^(\d+)\s+(hour|day|week|month)s?\s+ago$/i);
+  if (match) {
+    const amount = parseInt(match[1], 10);
+    const unit = match[2].toLowerCase();
+    const ms = { hour: 3600_000, day: 86400_000, week: 604800_000, month: 2592000_000 };
+    return now - amount * (ms[unit as keyof typeof ms] ?? 0);
+  }
+  const parsed = Date.parse(dateStr);
+  return isNaN(parsed) ? 0 : parsed;
+}
+
 export function sortArticlesByDate(articles: NewsArticle[]): NewsArticle[] {
   return [...articles].sort((a, b) => {
-    // publishedAt can be relative ("14 hours ago") or ISO date
-    // For relative dates, prefer scrapedAt as fallback sort key
-    const dateA = Date.parse(a.publishedAt) || Date.parse(a.scrapedAt) || 0;
-    const dateB = Date.parse(b.publishedAt) || Date.parse(b.scrapedAt) || 0;
+    const dateA = parseRelativeDate(a.publishedAt) || Date.parse(a.scrapedAt) || 0;
+    const dateB = parseRelativeDate(b.publishedAt) || Date.parse(b.scrapedAt) || 0;
     return dateB - dateA;
   });
 }

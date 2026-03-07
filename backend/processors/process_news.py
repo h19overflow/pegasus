@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 
 from backend.config import OUTPUT_FILES
 from backend.core.sentiment_rules import score_sentiment, score_misinfo_risk, build_summary
+from backend.processors.schemas import AnalysisResults
 
 
 def generate_article_id(title: str, source_url: str) -> str:
@@ -112,3 +113,33 @@ def save_news_articles(articles: list[dict]) -> None:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     print(f"Saved {len(articles)} articles to {path}")
+
+
+def merge_community_sentiment_into_news_feed(results: AnalysisResults) -> None:
+    """Inject AI community-sentiment fields from analysis results into news_feed.json.
+
+    Reads the current news_feed.json, looks up each article in the analysis
+    results by article_id, writes communitySentiment / communityConfidence /
+    sentimentBreakdown / communitySummary / urgentConcerns, then saves back.
+    The existing rule-based ``sentiment`` field is left untouched.
+    """
+    articles = load_existing_articles()
+    if not articles:
+        return
+
+    analysis_map = {a.article_id: a for a in results.articles}
+
+    changed = False
+    for article in articles:
+        analysis = analysis_map.get(article["id"])
+        if not analysis:
+            continue
+        article["communitySentiment"] = analysis.article_sentiment
+        article["communityConfidence"] = analysis.article_confidence
+        article["sentimentBreakdown"] = analysis.sentiment_breakdown
+        article["communitySummary"] = analysis.admin_summary
+        article["urgentConcerns"] = analysis.urgent_concerns
+        changed = True
+
+    if changed:
+        save_news_articles(articles)

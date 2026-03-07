@@ -6,6 +6,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 
 from backend.config import OUTPUT_FILES, REPO_ROOT
 from backend.processors.analyze_comments import run_batch_analysis, save_analysis_results
+from backend.processors.process_news import merge_community_sentiment_into_news_feed
 
 router = APIRouter(tags=["analysis"])
 
@@ -45,9 +46,17 @@ async def _run_analysis():
             _status.update(state="failed", message="No comments to analyze")
             return
 
-        _status["message"] = f"Analyzing {len(articles)} articles..."
-        results = await run_batch_analysis(articles, comments)
+        # Only analyze articles that have comments
+        commented_ids = {c["articleId"] for c in comments}
+        articles_with_comments = [a for a in articles if a["id"] in commented_ids]
+        if not articles_with_comments:
+            _status.update(state="failed", message="No articles with comments to analyze")
+            return
+
+        _status["message"] = f"Analyzing {len(articles_with_comments)} articles with comments..."
+        results = await run_batch_analysis(articles_with_comments, comments)
         save_analysis_results(results)
+        merge_community_sentiment_into_news_feed(results)
         _status.update(
             state="complete",
             message=f"Analyzed {results.total_articles} articles, {results.total_comments} comments",

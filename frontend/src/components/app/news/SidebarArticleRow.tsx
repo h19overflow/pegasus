@@ -16,6 +16,9 @@ export function SidebarArticleRow({
 }: SidebarArticleRowProps) {
   const sentimentColor = getSentimentColor(article.sentiment ?? "neutral");
   const sentimentLabel = article.sentiment ?? "neutral";
+  const communityColor = article.communitySentiment
+    ? getSentimentColor(article.communitySentiment)
+    : null;
 
   return (
     <button
@@ -27,12 +30,21 @@ export function SidebarArticleRow({
         }`}
     >
       <div className="flex items-start gap-2">
-        {/* Sentiment indicator */}
-        <span
-          className="mt-1.5 shrink-0 w-2 h-2 rounded-full"
-          style={{ backgroundColor: sentimentColor }}
-          aria-hidden="true"
-        />
+        {/* Sentiment indicators */}
+        <div className="mt-1.5 shrink-0 flex gap-0.5">
+          <span
+            className="w-2 h-2 rounded-full"
+            style={{ backgroundColor: sentimentColor }}
+            aria-hidden="true"
+          />
+          {communityColor && (
+            <span
+              className="w-2 h-2 rounded-full ring-1 ring-white"
+              style={{ backgroundColor: communityColor }}
+              aria-label="Community sentiment"
+            />
+          )}
+        </div>
         <div className="flex-1 min-w-0">
           <p className="text-[13px] font-semibold text-foreground leading-snug line-clamp-2">
             {article.title}

@@ -4,6 +4,7 @@ Reads news_feed.json + comments, runs per-article analysis via Gemini,
 saves results to analysis_results.json.
 """
 
+import asyncio
 import json
 import time
 from datetime import datetime, timezone
@@ -79,30 +80,58 @@ async def analyze_single_article(
         return None
 
 
-async def run_batch_analysis(
-    articles: list[dict],
-    comments: list[dict],
-) -> AnalysisResults:
-    """Run full batch analysis on all articles with comments."""
-    llm = build_llm()
-    chain = build_analysis_chain(llm)
-    results: list[ArticleAnalysis] = []
-    total_comments = 0
-
-    for article in articles:
-        article_comments = load_comments_for_article(article["id"], comments)
-        if not article_comments:
-            continue
-
+async def _analyze_and_track(
+    chain, article: dict, article_comments: list[dict], semaphore: asyncio.Semaphore,
+) -> tuple[ArticleAnalysis | None, int, float]:
+    """Analyze one article under a concurrency semaphore. Returns (result, comment_count, elapsed)."""
+    async with semaphore:
         print(f"  Analyzing: {article['title'][:60]}... ({len(article_comments)} comments)")
         start = time.time()
         result = await analyze_single_article(chain, article, article_comments)
         elapsed = time.time() - start
+        return result, len(article_comments), elapsed
 
+
+MAX_CONCURRENCY = 10
+
+
+async def run_batch_analysis(
+    articles: list[dict],
+    comments: list[dict],
+) -> AnalysisResults:
+    """Run parallel analysis on articles that have comments (up to 10 concurrent)."""
+    llm = build_llm()
+    chain = build_analysis_chain(llm)
+    semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
+
+    # Build tasks only for articles that have comments
+    tasks = []
+    for article in articles:
+        article_comments = load_comments_for_article(article["id"], comments)
+        if not article_comments:
+            continue
+        tasks.append(_analyze_and_track(chain, article, article_comments, semaphore))
+
+    if not tasks:
+        return AnalysisResults(
+            analyzed_at=datetime.now(timezone.utc).isoformat(),
+            model_version=MODEL_NAME,
+            prompt_version=PROMPT_VERSION,
+            total_articles=0,
+            total_comments=0,
+            articles=[],
+        )
+
+    print(f"  Running {len(tasks)} analyses with concurrency={MAX_CONCURRENCY}")
+    outcomes = await asyncio.gather(*tasks)
+
+    results: list[ArticleAnalysis] = []
+    total_comments = 0
+    for result, comment_count, elapsed in outcomes:
         if result:
             results.append(result)
-            total_comments += len(article_comments)
-            log_metrics(article["id"], len(article_comments), elapsed)
+            total_comments += comment_count
+            log_metrics(result.article_id, comment_count, elapsed)
 
     return AnalysisResults(
         analyzed_at=datetime.now(timezone.utc).isoformat(),

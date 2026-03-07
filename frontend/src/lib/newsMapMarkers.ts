@@ -9,26 +9,37 @@ const SENTIMENT_COLORS: Record<string, string> = {
 
 const newsIconCache = new Map<string, L.DivIcon>();
 
-function buildNewsMarkerHtml(sentiment: string, size: number): string {
-  const color = SENTIMENT_COLORS[sentiment] ?? SENTIMENT_COLORS.neutral;
+function buildCommunityRingHtml(communitySentiment: string): string {
+  const color = SENTIMENT_COLORS[communitySentiment] ?? SENTIMENT_COLORS.neutral;
   return `<div style="
-    width:${size}px;height:${size}px;border-radius:50%;
+    position:absolute;bottom:-2px;right:-2px;
+    width:12px;height:12px;border-radius:50%;
+    background:${color};border:1.5px solid white;
+    box-shadow:0 1px 3px rgba(0,0,0,0.3);
+  "></div>`;
+}
+
+function buildNewsMarkerHtml(sentiment: string, communitySentiment: string | undefined, size: number): string {
+  const color = SENTIMENT_COLORS[sentiment] ?? SENTIMENT_COLORS.neutral;
+  const ring = communitySentiment ? buildCommunityRingHtml(communitySentiment) : "";
+  return `<div style="
+    position:relative;width:${size}px;height:${size}px;border-radius:50%;
     background:${color};border:2.5px solid white;
     box-shadow:0 2px 6px rgba(0,0,0,0.35);
     display:flex;align-items:center;justify-content:center;
     font-size:${Math.round(size * 0.45)}px;line-height:1;
-  ">📰</div>`;
+  ">📰${ring}</div>`;
 }
 
-export function createNewsMarker(sentiment: string = "neutral"): L.DivIcon {
+export function createNewsMarker(sentiment: string = "neutral", communitySentiment?: string): L.DivIcon {
   const size = 30;
-  const cacheKey = `news-${sentiment}-${size}`;
+  const cacheKey = `news-${sentiment}-${communitySentiment ?? "none"}-${size}`;
   const cached = newsIconCache.get(cacheKey);
   if (cached) return cached;
 
   const icon = L.divIcon({
     className: "news-marker",
-    html: buildNewsMarkerHtml(sentiment, size),
+    html: buildNewsMarkerHtml(sentiment, communitySentiment, size),
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
   });

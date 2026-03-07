@@ -97,7 +97,7 @@ export function NewsMapOverlay({ selectedArticleId, selectionTs = 0 }: NewsMapOv
           <Marker
             key={`news-${article.id}`}
             position={[article.location!.lat, article.location!.lng]}
-            icon={createNewsMarker(article.sentiment ?? "neutral")}
+            icon={createNewsMarker(article.sentiment ?? "neutral", article.communitySentiment)}
             ref={(ref) => setMarkerRef(article.id, ref)}
           >
             <Popup maxWidth={320} minWidth={260}>

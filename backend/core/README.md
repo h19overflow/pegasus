@@ -102,6 +102,37 @@ Runs on startup and repeats every `SCRAPE_INTERVAL_SECONDS` (default 900s / 15 m
 2. Each runs synchronously in a thread to avoid blocking the event loop
 3. Results are processed, saved to disk, and broadcast via SSE to all connected clients
 
+#### Community Sentiment Analysis Flow
+
+After each news scrape, the scheduler chains AI comment analysis to determine how citizens feel about news topics. This produces a **two-layer sentiment model**:
+
+- **Pin color** = article sentiment (rule-based keyword scoring, unchanged)
+- **Community badge** = AI-analyzed comment sentiment (only on articles with comments)
+
+```
+Citizen posts comment → POST /api/comments → exported_comments.json
+                                                ↓
+Scrape cycle completes → save_news_articles() → _run_comment_analysis()
+                                                ↓
+                                run_batch_analysis(articles_with_comments, comments)
+                                  (Gemini LLM via LangChain structured output)
+                                                ↓
+                                merge results → news_feed.json gets community fields:
+                                  communitySentiment, communityConfidence,
+                                  sentimentBreakdown, communitySummary, urgentConcerns
+                                                ↓
+                                broadcast SSE "news_sentiment"
+                                  → frontend re-fetches news_feed.json
+                                  → map re-renders with community badges
+```
+
+Key design decisions:
+
+- **localStorage stays the UX source of truth** — the `POST /api/comments` is fire-and-forget so commenting never feels slow
+- **Analysis runs after each scrape**, not after each comment — batching is cheaper and avoids hammering the LLM
+- **Existing `sentiment` field is untouched** — the new `communitySentiment` fields sit alongside it so nothing breaks
+- **`asyncio.run()` is safe** from the ThreadPoolExecutor thread (no running event loop in that context)
+
 ### Payloads (`payloads.py`)
 
 Data-heavy constants that feed the scraping pipelines:

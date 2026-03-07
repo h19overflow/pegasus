@@ -59,6 +59,61 @@ def _run_jobs_scrape() -> int:
     return len(all_features)
 
 
+def _load_backend_comments() -> list[dict]:
+    """Load citizen comments from exported_comments.json."""
+    import json
+    from backend.api.routers.comments import COMMENTS_PATH
+
+    if not COMMENTS_PATH.exists():
+        return []
+    try:
+        data = json.loads(COMMENTS_PATH.read_text(encoding="utf-8"))
+        return data.get("comments", [])
+    except (json.JSONDecodeError, KeyError):
+        return []
+
+
+def _run_comment_analysis() -> None:
+    """Run AI comment analysis on articles that have comments, then merge back."""
+    from backend.processors.process_news import (
+        load_existing_articles, merge_community_sentiment_into_news_feed,
+    )
+    from backend.processors.analyze_comments import (
+        run_batch_analysis, save_analysis_results,
+    )
+
+    comments = _load_backend_comments()
+    if not comments:
+        logger.info("Comment analysis: no comments found, skipping")
+        return
+
+    articles = load_existing_articles()
+    if not articles:
+        logger.info("Comment analysis: no articles found, skipping")
+        return
+
+    # Filter to articles that actually have comments
+    commented_ids = {c["articleId"] for c in comments}
+    articles_with_comments = [a for a in articles if a["id"] in commented_ids]
+    if not articles_with_comments:
+        logger.info("Comment analysis: no articles with comments, skipping")
+        return
+
+    logger.info(
+        "Comment analysis: analyzing %d articles with %d comments",
+        len(articles_with_comments), len(comments),
+    )
+
+    # Safe to call asyncio.run() from ThreadPoolExecutor thread (no running loop)
+    results = asyncio.run(run_batch_analysis(articles_with_comments, comments))
+
+    save_analysis_results(results)
+    merge_community_sentiment_into_news_feed(results)
+    broadcast_event("news_sentiment", {"analyzedArticles": results.total_articles})
+
+    logger.info("Comment analysis: complete — %d articles analyzed", results.total_articles)
+
+
 def _run_news_scrape() -> int:
     """Run SERP discovery + optional Web Unlocker full-text. Returns article count."""
     from backend.triggers.trigger_news import discover_articles, fetch_full_article_text
@@ -87,6 +142,10 @@ def _run_news_scrape() -> int:
 
     # Broadcast only the new articles (frontend merges client-side)
     broadcast_event("news", articles)
+
+    # Chain AI comment analysis on articles that have community comments
+    _run_comment_analysis()
+
     return len(articles)
 
 

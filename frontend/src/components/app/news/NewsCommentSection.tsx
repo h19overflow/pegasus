@@ -33,6 +33,12 @@ export function NewsCommentSection({ articleId }: NewsCommentSectionProps) {
 
     dispatch({ type: "ADD_NEWS_COMMENT", comment });
     saveComment(comment);
+    // Fire-and-forget: sync comment to backend for AI analysis
+    fetch("/api/comments", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(comment),
+    }).catch(() => {});
     setText("");
   }
 

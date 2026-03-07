@@ -1,88 +1,24 @@
 {
-  "analyzed_at": "2026-03-06T17:38:57.565797+00:00",
+  "analyzed_at": "2026-03-06T23:59:36.084238+00:00",
   "model_version": "gemini-3.1-flash-lite-preview",
   "prompt_version": "v1.0",
-  "total_articles": 25,
-  "total_comments": 77,
+  "total_articles": 55,
+  "total_comments": 167,
   "articles": [
-    {
-      "article_id": "9f35bf6a7695",
-      "article_sentiment": "neutral",
-      "article_confidence": 0.85,
-      "sentiment_breakdown": {
-        "positive": 2,
-        "neutral": 2,
-        "negative": 0
-      },
-      "comments": [
-        {
-          "comment_id": "seed-001",
-          "sentiment": "positive",
-          "confidence": 0.95,
-          "topics": [
-            "gun violence",
-            "public safety"
-          ],
-          "flagged": false
-        },
-        {
-          "comment_id": "seed-002",
-          "sentiment": "neutral",
-          "confidence": 0.9,
-          "topics": [
-            "public safety",
-            "youth programs",
-            "economic development"
-          ],
-          "flagged": false
-        },
-        {
-          "comment_id": "seed-003",
-          "sentiment": "positive",
-          "confidence": 0.85,
-          "topics": [
-            "law enforcement",
-            "judicial system"
-          ],
-          "flagged": false
-        },
-        {
-          "comment_id": "seed-004",
-          "sentiment": "neutral",
-          "confidence": 0.9,
-          "topics": [
-            "reentry programs",
-            "criminal justice reform"
-          ],
-          "flagged": false
-        }
-      ],
-      "topic_clusters": [
-        "Public Safety and Gun Violence",
-        "Criminal Justice and Reentry",
-        "Community Prevention Programs"
-      ],
-      "admin_summary": "Residents generally support the enforcement of federal firearms charges to improve neighborhood safety. However, there is a clear call for the city to balance incarceration with proactive investments in youth mentorship, job creation, and effective reentry programs to reduce recidivism.",
-      "urgent_concerns": [
-        "Persistent illegal firearm activity in the West Jeff Davis neighborhood",
-        "Need for expanded youth and community development programs",
-        "Requirement for robust reentry support services"
-      ]
-    },
     {
       "article_id": "4274413fe29f",
       "article_sentiment": "positive",
       "article_confidence": 0.95,
       "sentiment_breakdown": {
-        "positive": 2,
-        "neutral": 1,
+        "positive": 3,
+        "neutral": 0,
         "negative": 0
       },
       "comments": [
         {
           "comment_id": "seed-008",
           "sentiment": "positive",
-          "confidence": 0.95,
+          "confidence": 0.98,
           "topics": [
             "athletics",
             "community pride"
@@ -92,11 +28,10 @@
         {
           "comment_id": "seed-009",
           "sentiment": "positive",
-          "confidence": 0.98,
+          "confidence": 0.95,
           "topics": [
             "economic development",
-            "downtown vitality",
-            "athletics"
+            "downtown vitality"
           ],
           "flagged": false
         },
@@ -113,14 +48,85 @@
       "topic_clusters": [
         "athletics",
         "economic impact",
-        "downtown activity"
+        "downtown vitality"
       ],
-      "admin_summary": "Citizens expressed strong support for the university basketball program, highlighting both team performance and the positive economic impact on downtown businesses. The event successfully drove foot traffic to local shops, reinforcing the value of university athletics to the city's commercial vitality.",
-      "urgent_concerns": []
+      "admin_summary": "Citizens expressed strong support for Alabama State University athletics, highlighting both team performance and the positive economic impact on downtown businesses. The community views these events as vital for maintaining foot traffic and energy in the city center.",
+      "urgent_concerns": [],
+      "recommendations": [
+        {
+          "action": "Coordinate with local business owners on Dexter Avenue to optimize event-day logistics.",
+          "priority": "medium",
+          "rationale": "Feedback from local business owners indicates that university athletic events directly increase foot traffic and economic activity downtown."
+        }
+      ]
+    },
+    {
+      "article_id": "5c10df84f421",
+      "article_sentiment": "negative",
+      "article_confidence": 0.95,
+      "sentiment_breakdown": {
+        "negative": 3,
+        "neutral": 0,
+        "positive": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-5c10df-7209",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "emergency response",
+            "leadership"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-5c10df-2691",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "fire station management",
+            "leadership"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-5c10df-9006",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "public accountability",
+            "service quality"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "leadership accountability",
+        "emergency response times",
+        "operational management"
+      ],
+      "admin_summary": "Citizens are expressing significant dissatisfaction with the permanent appointment of the fire chief, citing a lack of measurable improvements in service delivery. Residents feel that current leadership has failed to address inconsistent response times and operational issues at specific stations. There is a clear demand for greater accountability and tangible performance outcomes rather than maintaining the status quo.",
+      "urgent_concerns": [
+        "Inconsistent emergency response times in the Garden District",
+        "Operational management issues at the Atlanta Highway fire station"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct an immediate performance audit of response times in the Garden District and operational workflows at the Atlanta Highway station.",
+          "priority": "high",
+          "rationale": "100% of comments (3 of 3) cite specific failures in service delivery and station management, indicating a critical need for data-driven operational oversight."
+        },
+        {
+          "action": "Host a public town hall meeting focused on fire department performance metrics and future improvement strategies.",
+          "priority": "medium",
+          "rationale": "All feedback reflects a lack of trust in current leadership; direct engagement is necessary to address citizen concerns regarding the lack of visible change."
+        }
+      ]
     },
     {
       "article_id": "a3dc6b33237a",
-      "article_sentiment": "neutral",
+      "article_sentiment": "negative",
       "article_confidence": 0.85,
       "sentiment_breakdown": {
         "positive": 1,
@@ -133,9 +139,9 @@
           "sentiment": "negative",
           "confidence": 0.95,
           "topics": [
+            "special education",
             "teacher retention",
-            "competitive salaries",
-            "special education"
+            "compensation"
           ],
           "flagged": false
         },
@@ -145,7 +151,7 @@
           "confidence": 0.9,
           "topics": [
             "special education",
-            "staffing shortages",
+            "staffing crisis",
             "IEP compliance"
           ],
           "flagged": false
@@ -156,8 +162,7 @@
           "confidence": 0.8,
           "topics": [
             "recruitment",
-            "salary",
-            "education"
+            "compensation"
           ],
           "flagged": false
         }
@@ -167,11 +172,22 @@
         "teacher compensation",
         "recruitment challenges"
       ],
-      "admin_summary": "While the job fair is viewed as a positive recruitment step, residents are concerned about chronic understaffing and low teacher pay. There is significant frustration regarding the impact of high turnover on students with IEPs. Addressing salary competitiveness is essential to improving long-term retention and service stability.",
+      "admin_summary": "Citizens are expressing significant frustration regarding the chronic understaffing of special education positions within the district. While the job fair is viewed as a positive recruitment step, feedback indicates that low compensation and high turnover are the primary drivers of the current staffing crisis. Residents are calling for more competitive pay to ensure long-term stability for students with IEPs.",
       "urgent_concerns": [
         "Chronic special education staffing shortages",
-        "High teacher turnover due to salary competition",
-        "Disruption of services for students with IEPs"
+        "High turnover of resource teachers impacting IEP compliance"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct a salary benchmarking study for special education roles compared to neighboring districts.",
+          "priority": "high",
+          "rationale": "2 of 3 comments explicitly cite low compensation as a barrier to retention and recruitment, suggesting that current pay scales are uncompetitive."
+        },
+        {
+          "action": "Establish a task force to review special education workload and support structures.",
+          "priority": "medium",
+          "rationale": "Feedback from long-term staff highlights that the workload-to-pay ratio is a primary factor in losing qualified teachers to other districts."
+        }
       ]
     },
     {
@@ -191,7 +207,7 @@
           "topics": [
             "infrastructure",
             "broadband",
-            "public transit"
+            "transit"
           ],
           "flagged": false
         },
@@ -201,7 +217,7 @@
           "confidence": 0.9,
           "topics": [
             "equity",
-            "budget transparency"
+            "neighborhood development"
           ],
           "flagged": false
         },
@@ -211,20 +227,32 @@
           "confidence": 0.85,
           "topics": [
             "project management",
-            "infrastructure"
+            "accountability"
           ],
           "flagged": false
         }
       ],
       "topic_clusters": [
-        "infrastructure development",
+        "infrastructure investment",
         "equitable distribution",
-        "project execution"
+        "project transparency"
       ],
-      "admin_summary": "Residents are cautiously optimistic about the new state grant funding but are demanding greater transparency regarding project locations and timelines. There is a specific concern that investments may not reach underserved neighborhoods and that project delivery will be delayed. Clear communication on project milestones and geographic distribution is recommended to maintain public trust.",
+      "admin_summary": "Citizens are cautiously optimistic about new state grant funding but express significant concerns regarding project transparency and equitable distribution. While some residents appreciate the growth trajectory, there is a clear demand for better communication on how funds are allocated across neighborhoods and a desire for faster project delivery.",
       "urgent_concerns": [
-        "Need for geographic transparency in grant allocation",
-        "Public skepticism regarding project delivery timelines"
+        "Lack of transparency regarding geographic fund allocation",
+        "Public skepticism regarding project timelines"
+      ],
+      "recommendations": [
+        {
+          "action": "Publish a public-facing dashboard detailing grant allocations by zip code and project status.",
+          "priority": "medium",
+          "rationale": "Addresses the specific request for transparency from 1 of 3 comments and mitigates concerns about equitable distribution."
+        },
+        {
+          "action": "Issue a quarterly progress report on grant-funded projects to demonstrate tangible results.",
+          "priority": "low",
+          "rationale": "Directly counters the skepticism expressed in 1 of 3 comments regarding the slow pace of project implementation."
+        }
       ]
     },
     {
@@ -253,9 +281,8 @@
           "sentiment": "neutral",
           "confidence": 0.9,
           "topics": [
-            "job creation",
-            "construction",
-            "long-term employment"
+            "employment",
+            "local hiring"
           ],
           "flagged": false
         },
@@ -272,33 +299,45 @@
         }
       ],
       "topic_clusters": [
-        "Economic growth and investment",
-        "Workforce and employment sustainability",
-        "Fiscal transparency and tax policy"
+        "economic growth",
+        "long-term employment",
+        "tax transparency"
       ],
-      "admin_summary": "The community recognizes the economic potential of the data center expansion but expresses concern regarding long-term job sustainability and the impact of tax incentives on public services. Residents are seeking greater transparency regarding the fiscal agreements and a clear strategy for local workforce integration beyond the construction phase. Addressing these concerns through clear communication on tax benefits and job training programs will help maintain public support.",
+      "admin_summary": "Citizens recognize the economic potential of the Meta expansion but are concerned about long-term job sustainability and the impact of tax incentives on public services. While there is optimism regarding Montgomery's growth as a tech hub, residents are seeking transparency regarding fiscal agreements and local hiring commitments. Addressing these concerns will be critical to maintaining public support for large-scale industrial projects.",
       "urgent_concerns": [
-        "Transparency regarding tax incentive agreements",
-        "Long-term local employment strategy post-construction"
+        "Long-term local employment sustainability",
+        "Transparency regarding tax incentive agreements"
+      ],
+      "recommendations": [
+        {
+          "action": "Publish a summary of the tax incentive agreement and its impact on local school funding.",
+          "priority": "medium",
+          "rationale": "One of three comments specifically questioned the long-term fiscal impact on public services, indicating a need for greater transparency."
+        },
+        {
+          "action": "Host a workforce development roundtable with Meta to outline permanent hiring pathways for local residents.",
+          "priority": "medium",
+          "rationale": "Two of three comments expressed concern regarding the transition from construction-phase jobs to long-term operational roles."
+        }
       ]
     },
     {
       "article_id": "f6fd8340fcb3",
       "article_sentiment": "positive",
-      "article_confidence": 0.9,
+      "article_confidence": 0.85,
       "sentiment_breakdown": {
-        "positive": 2,
-        "neutral": 1,
+        "positive": 1,
+        "neutral": 2,
         "negative": 0
       },
       "comments": [
         {
           "comment_id": "seed-017",
           "sentiment": "positive",
-          "confidence": 0.95,
+          "confidence": 0.9,
           "topics": [
-            "urban redevelopment",
-            "historic preservation"
+            "historic preservation",
+            "urban redevelopment"
           ],
           "flagged": false
         },
@@ -315,7 +354,7 @@
         {
           "comment_id": "seed-019",
           "sentiment": "positive",
-          "confidence": 0.9,
+          "confidence": 0.8,
           "topics": [
             "economic development",
             "downtown revitalization"
@@ -324,12 +363,19 @@
         }
       ],
       "topic_clusters": [
-        "urban redevelopment",
         "historic preservation",
-        "economic growth"
+        "urban design",
+        "economic development"
       ],
-      "admin_summary": "Residents are generally supportive of the Old Cloverdale Village redevelopment but emphasize the need to maintain the area's historic character. There is a strong desire for developers to engage with the community to ensure the project enhances local charm rather than detracting from it. Overall, the project is viewed as a potential catalyst for broader economic growth in the city.",
-      "urgent_concerns": []
+      "admin_summary": "Residents are generally supportive of the Old Cloverdale Village redevelopment but emphasize the need to maintain the area's historic character. There is a strong desire for the developers to engage with the community to ensure the project enhances the neighborhood's unique charm rather than creating generic commercial space.",
+      "urgent_concerns": [],
+      "recommendations": [
+        {
+          "action": "Facilitate a community design review meeting between the developers and local neighborhood associations.",
+          "priority": "medium",
+          "rationale": "2 of 3 comments explicitly requested that developers listen to residents and preserve the historic character of the neighborhood."
+        }
+      ]
     },
     {
       "article_id": "c17c71f4797b",
@@ -364,7 +410,7 @@
         {
           "comment_id": "seed-028",
           "sentiment": "negative",
-          "confidence": 0.85,
+          "confidence": 0.9,
           "topics": [
             "construction disruption",
             "project management"
@@ -373,15 +419,26 @@
         }
       ],
       "topic_clusters": [
-        "school infrastructure",
-        "geographic equity",
-        "project management"
+        "School infrastructure improvement",
+        "Geographic equity in resource allocation",
+        "Project management and communication"
       ],
-      "admin_summary": "Residents are generally supportive of school facility improvements but are concerned about the transparency of project locations and the impact of construction on student learning environments. There is a clear demand for better communication regarding project timelines and equitable distribution of resources across all districts.",
+      "admin_summary": "Citizens generally support the school construction initiatives but are concerned about transparency and project management. Residents are seeking clearer communication regarding project locations to ensure equitable distribution and are frustrated by the long-term use of temporary classroom facilities. Addressing these concerns will require better public reporting on timelines and site selection.",
       "urgent_concerns": [
-        "Lack of transparency regarding project locations",
-        "Extended use of temporary classroom trailers",
-        "Need for clear and reliable construction timelines"
+        "Lack of transparency regarding specific school locations",
+        "Prolonged use of temporary classroom trailers"
+      ],
+      "recommendations": [
+        {
+          "action": "Publish a detailed, interactive map and timeline for all six construction projects on the city website.",
+          "priority": "medium",
+          "rationale": "2 of 3 comments expressed confusion or concern regarding project locations and timelines, indicating a need for better public transparency."
+        },
+        {
+          "action": "Conduct a review of the use of temporary classroom trailers to establish a firm end-date for students currently displaced.",
+          "priority": "high",
+          "rationale": "1 of 3 comments specifically highlighted the negative impact of long-term trailer usage on student learning environments."
+        }
       ]
     },
     {
@@ -410,8 +467,8 @@
           "confidence": 0.95,
           "topics": [
             "senior housing",
-            "homelessness prevention",
-            "veteran support"
+            "veteran support",
+            "homelessness prevention"
           ],
           "flagged": false
         },
@@ -422,20 +479,349 @@
           "topics": [
             "affordable housing",
             "workforce housing",
-            "rent affordability"
+            "cost of living"
           ],
           "flagged": false
         }
       ],
       "topic_clusters": [
         "affordable housing",
-        "senior services",
-        "workforce housing"
+        "senior and veteran support",
+        "workforce housing affordability"
       ],
-      "admin_summary": "The opening of Freedom Village has been met with strong public approval, with residents praising the city's commitment to supporting vulnerable seniors. While the project is viewed as a success, there is a clear public desire for the city to apply similar development strategies to address rising rent costs for the broader workforce. Residents are eager to see continued investment in affordable housing options across different demographics.",
+      "admin_summary": "Residents are highly supportive of the Freedom Village senior housing project, viewing it as a tangible success in addressing housing insecurity for vulnerable populations. While the project is well-received, there is a clear call from the public to apply similar development strategies to address the rising cost of workforce housing for younger residents.",
+      "urgent_concerns": [],
+      "recommendations": [
+        {
+          "action": "Initiate a feasibility study for a workforce housing development program.",
+          "priority": "medium",
+          "rationale": "While senior housing is praised, 1 of 3 comments specifically requested similar energy for workforce housing due to rising rents, indicating a growing public expectation for broader housing solutions."
+        }
+      ]
+    },
+    {
+      "article_id": "d0bf5b158ae0",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-d0bf5b-5614",
+          "sentiment": "neutral",
+          "confidence": 0.9,
+          "topics": [
+            "economic development",
+            "job creation",
+            "equity"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-d0bf5b-5546",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "economic development",
+            "local business"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-d0bf5b-1172",
+          "sentiment": "negative",
+          "confidence": 0.85,
+          "topics": [
+            "infrastructure",
+            "neighborhood improvement"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "economic development",
+        "infrastructure",
+        "community equity"
+      ],
+      "admin_summary": "Citizens are cautiously optimistic about the new Alabama Development Fund but remain skeptical regarding its local impact. Residents are calling for a balance between large-scale economic development and tangible improvements to neighborhood infrastructure.",
       "urgent_concerns": [
-        "Rising rental costs for the general workforce",
-        "Need for expanded affordable housing inventory"
+        "Lack of visible infrastructure improvements in residential neighborhoods"
+      ],
+      "recommendations": [
+        {
+          "action": "Host a community briefing on the allocation criteria for the Alabama Development Fund.",
+          "priority": "medium",
+          "rationale": "2 of 3 comments expressed skepticism about fund distribution, highlighting a need for transparency to ensure community trust."
+        },
+        {
+          "action": "Conduct a neighborhood infrastructure audit to address resident concerns.",
+          "priority": "medium",
+          "rationale": "1 of 3 comments explicitly prioritized neighborhood infrastructure over new development, suggesting a disconnect between city priorities and resident needs."
+        }
+      ]
+    },
+    {
+      "article_id": "013ba6547784",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 2,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-013ba6-8596",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "economic development",
+            "service efficiency"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-013ba6-1057",
+          "sentiment": "neutral",
+          "confidence": 0.9,
+          "topics": [
+            "consumer choice"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-013ba6-4806",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "economic development"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-013ba6-8296",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "traffic congestion",
+            "urban planning"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "economic development",
+        "traffic congestion",
+        "urban planning"
+      ],
+      "admin_summary": "Residents are generally pleased with the economic growth and new business options in the Eastchase and Atlanta Highway corridors. However, there is significant concern regarding the impact of high-traffic drive-thru businesses on existing road congestion. Addressing these infrastructure pressures is essential to maintaining public support for new commercial developments.",
+      "urgent_concerns": [
+        "Traffic congestion at the Atlanta Highway intersection"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct a traffic impact study for the Atlanta Highway corridor.",
+          "priority": "high",
+          "rationale": "One of four comments explicitly identified the intersection as a 'nightmare,' indicating that current traffic management may be insufficient for new commercial density."
+        },
+        {
+          "action": "Review zoning and site plan approval processes for high-volume drive-thru businesses.",
+          "priority": "medium",
+          "rationale": "Citizen feedback suggests that residents are concerned about poor planning decisions regarding traffic flow, necessitating a more rigorous review of future site plans."
+        }
+      ]
+    },
+    {
+      "article_id": "e175de4e3b90",
+      "article_sentiment": "positive",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-e175de-5778",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "economic development",
+            "job creation"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-e175de-2079",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "local employment",
+            "economic equity"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-e175de-3656",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "traffic congestion",
+            "infrastructure"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "economic growth",
+        "local workforce development",
+        "traffic and infrastructure"
+      ],
+      "admin_summary": "Residents are generally optimistic about the increased investment in the local data center but are concerned about the tangible benefits for the local workforce. There is also a specific request for better traffic management near the construction site to mitigate daily commute disruptions. Balancing economic growth with local hiring and infrastructure maintenance is key to maintaining public support.",
+      "urgent_concerns": [
+        "Traffic congestion near the data center construction site"
+      ],
+      "recommendations": [
+        {
+          "action": "Coordinate with the construction project manager to implement a traffic management plan during peak commute hours.",
+          "priority": "high",
+          "rationale": "One of three comments specifically identified traffic congestion as a current headache for commuters."
+        },
+        {
+          "action": "Host a local job fair or workforce development workshop specifically for residents in the neighborhoods surrounding the data center.",
+          "priority": "medium",
+          "rationale": "Citizen feedback indicates uncertainty regarding whether the project will provide direct employment opportunities for local residents."
+        }
+      ]
+    },
+    {
+      "article_id": "33defed35957",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-33defe-2020",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "economic growth",
+            "infrastructure"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-33defe-7245",
+          "sentiment": "neutral",
+          "confidence": 0.9,
+          "topics": [
+            "job creation",
+            "local hiring"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-33defe-1718",
+          "sentiment": "negative",
+          "confidence": 0.85,
+          "topics": [
+            "property taxes",
+            "cost of living"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "economic development",
+        "local workforce impact",
+        "taxation and affordability"
+      ],
+      "admin_summary": "Residents are cautiously optimistic about the $1.5 billion data center investment, balancing excitement for economic growth with concerns regarding local hiring practices and potential property tax increases. There is a clear desire for the city to ensure that the economic benefits of this project are accessible to local residents and do not negatively impact the cost of living.",
+      "urgent_concerns": [
+        "Potential for rising property taxes",
+        "Ensuring local hiring for new jobs"
+      ],
+      "recommendations": [
+        {
+          "action": "Establish a local hiring task force to coordinate with the developer.",
+          "priority": "medium",
+          "rationale": "One-third of comments specifically requested assurance that local residents, rather than out-of-state contractors, will benefit from the new job opportunities."
+        },
+        {
+          "action": "Issue a public statement clarifying the impact of the investment on local property tax assessments.",
+          "priority": "medium",
+          "rationale": "One-third of comments expressed anxiety regarding the potential for increased property taxes, which could undermine public support for the project."
+        }
+      ]
+    },
+    {
+      "article_id": "1612ae7decbc",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-1612ae-9690",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "infrastructure",
+            "parks"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-1612ae-8919",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "road maintenance",
+            "infrastructure"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-1612ae-5245",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "public safety",
+            "infrastructure"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "infrastructure investment",
+        "neighborhood maintenance",
+        "public safety facilities"
+      ],
+      "admin_summary": "Citizens express mixed reactions to the Montgomery Forward initiative. While there is appreciation for park and fire station improvements, residents in older districts remain frustrated by persistent road maintenance issues. The administration should focus on balancing high-visibility projects with essential neighborhood infrastructure repairs to improve public perception.",
+      "urgent_concerns": [
+        "Persistent pothole issues in the Garden District"
+      ],
+      "recommendations": [
+        {
+          "action": "Launch a targeted road repair assessment for the Garden District.",
+          "priority": "high",
+          "rationale": "1 of 3 comments specifically cited long-term neglect of road maintenance in this area, indicating a gap between city messaging and resident experience."
+        },
+        {
+          "action": "Establish a maintenance schedule for newly renovated public facilities.",
+          "priority": "medium",
+          "rationale": "Citizen feedback highlights a concern regarding the long-term upkeep of infrastructure investments, suggesting a need for transparent maintenance plans."
+        }
       ]
     },
     {
@@ -481,14 +867,26 @@
         }
       ],
       "topic_clusters": [
-        "Economic development and job growth",
-        "Infrastructure and school capacity",
-        "Urban planning and sprawl management"
+        "economic development",
+        "infrastructure capacity",
+        "urban planning"
       ],
-      "admin_summary": "Residents are divided on the rapid expansion in southeast Montgomery, balancing appreciation for economic growth against concerns regarding infrastructure. There is a clear demand for synchronized development, specifically ensuring school capacity and transit infrastructure keep pace with residential construction. Citizens are increasingly advocating for sustainable growth models that prioritize infill development over continued outward sprawl.",
+      "admin_summary": "Residents are divided on the proposed residential expansion in southeast Montgomery. While some acknowledge the economic benefits and job growth, others express significant concerns regarding the strain on school capacity and the environmental impact of continued urban sprawl. There is a clear call for more integrated planning that prioritizes infrastructure and transit-oriented development.",
       "urgent_concerns": [
-        "School capacity planning for the southeast corridor",
-        "Traffic congestion management due to rapid residential expansion"
+        "School capacity planning for new residential developments",
+        "Traffic congestion management in the Taylor Road corridor"
+      ],
+      "recommendations": [
+        {
+          "action": "Coordinate with the Montgomery Public Schools board to conduct a capacity impact study for the southeast sector.",
+          "priority": "high",
+          "rationale": "1 of 3 comments explicitly identified school capacity as a primary barrier to residential growth, indicating a need for proactive infrastructure alignment."
+        },
+        {
+          "action": "Host a public planning session focused on infill development and transit-oriented housing strategies.",
+          "priority": "medium",
+          "rationale": "1 of 3 comments expressed strong opposition to sprawl, suggesting a segment of the population prefers density and transit-focused growth over current expansion models."
+        }
       ]
     },
     {
@@ -496,9 +894,9 @@
       "article_sentiment": "negative",
       "article_confidence": 0.85,
       "sentiment_breakdown": {
-        "positive": 0,
+        "negative": 3,
         "neutral": 0,
-        "negative": 3
+        "positive": 0
       },
       "comments": [
         {
@@ -506,8 +904,8 @@
           "sentiment": "negative",
           "confidence": 0.95,
           "topics": [
-            "urban development",
-            "civic engagement"
+            "infrastructure investment",
+            "civic transparency"
           ],
           "flagged": false
         },
@@ -516,9 +914,9 @@
           "sentiment": "negative",
           "confidence": 0.9,
           "topics": [
-            "infrastructure",
-            "road maintenance",
-            "public safety"
+            "infrastructure maintenance",
+            "road safety",
+            "lighting"
           ],
           "flagged": false
         },
@@ -528,7 +926,7 @@
           "confidence": 0.85,
           "topics": [
             "affordable housing",
-            "community preservation"
+            "community displacement"
           ],
           "flagged": false
         }
@@ -536,18 +934,30 @@
       "topic_clusters": [
         "infrastructure maintenance",
         "equitable development",
-        "community transparency"
+        "civic transparency"
       ],
-      "admin_summary": "Residents of west Montgomery are expressing significant frustration regarding perceived neglect of their neighborhoods compared to other parts of the city. There is a strong demand for prioritizing the repair of existing infrastructure and ensuring that new development projects do not displace long-term residents. Citizens are calling for greater transparency and immediate action on basic maintenance needs.",
+      "admin_summary": "Residents of west Montgomery express frustration regarding a perceived lack of investment and transparency compared to other parts of the city. The community is prioritizing the maintenance of existing infrastructure and the protection of long-term residents from displacement over new development projects. There is a clear demand for immediate improvements to basic services like road safety and lighting.",
       "urgent_concerns": [
-        "Infrastructure maintenance on major corridors",
-        "Displacement risks due to new development",
-        "Lack of communication regarding city planning"
+        "Infrastructure decay on major corridors including Mobile Highway and Narrow Lane",
+        "Lack of public transparency regarding long-term development timelines",
+        "Risk of displacement for long-term residents due to new housing projects"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct a public infrastructure audit and town hall meeting in west Montgomery.",
+          "priority": "high",
+          "rationale": "2 of 3 comments specifically cite failing infrastructure and road safety as immediate needs that should take precedence over new growth."
+        },
+        {
+          "action": "Establish a community advisory board for the west Montgomery redevelopment project.",
+          "priority": "medium",
+          "rationale": "All 3 comments reflect a lack of trust and a desire for more transparency; a board would ensure long-term residents have a voice in preventing displacement."
+        }
       ]
     },
     {
       "article_id": "f8794981ffe4",
-      "article_sentiment": "positive",
+      "article_sentiment": "neutral",
       "article_confidence": 0.85,
       "sentiment_breakdown": {
         "positive": 2,
@@ -571,7 +981,6 @@
           "confidence": 0.95,
           "topics": [
             "healthcare access",
-            "Medicaid",
             "emergency services"
           ],
           "flagged": false
@@ -582,7 +991,7 @@
           "confidence": 0.9,
           "topics": [
             "fiscal responsibility",
-            "healthcare management"
+            "hospital management"
           ],
           "flagged": false
         }
@@ -590,65 +999,24 @@
       "topic_clusters": [
         "healthcare access",
         "fiscal oversight",
-        "emergency services"
+        "emergency capacity"
       ],
-      "admin_summary": "Residents strongly support the city's intervention to keep the hospital operational, citing its critical role in serving uninsured and Medicaid populations. While the public sentiment is largely positive, there is a clear expectation for the city to demand a transparent, long-term financial turnaround plan to ensure fiscal accountability.",
+      "admin_summary": "Citizens strongly support the city's intervention to save Jackson Hospital, citing its critical role in serving uninsured and Medicaid populations. While the sentiment is largely positive, there is a clear expectation for fiscal accountability and a long-term sustainability plan for the facility. Residents are deeply concerned about the potential collapse of emergency services if the hospital closes.",
       "urgent_concerns": [
-        "Potential collapse of emergency services for uninsured populations",
-        "Need for a long-term financial sustainability plan for the hospital"
-      ]
-    },
-    {
-      "article_id": "0f49698db569",
-      "article_sentiment": "neutral",
-      "article_confidence": 0.85,
-      "sentiment_breakdown": {
-        "positive": 1,
-        "neutral": 2,
-        "negative": 0
-      },
-      "comments": [
+        "Potential loss of emergency healthcare access for uninsured populations",
+        "Lack of capacity at alternative facilities to absorb patient load"
+      ],
+      "recommendations": [
         {
-          "comment_id": "seed-041",
-          "sentiment": "neutral",
-          "confidence": 0.9,
-          "topics": [
-            "infrastructure",
-            "small business support",
-            "public safety"
-          ],
-          "flagged": false
+          "action": "Require a public-facing, detailed turnaround plan from hospital leadership as a condition for future funding.",
+          "priority": "high",
+          "rationale": "While 2 of 3 comments support the funding, 1 of 3 specifically demands a clear exit strategy and fiscal accountability to prevent indefinite city bailouts."
         },
         {
-          "comment_id": "seed-042",
-          "sentiment": "neutral",
-          "confidence": 0.95,
-          "topics": [
-            "budget oversight",
-            "accountability"
-          ],
-          "flagged": false
-        },
-        {
-          "comment_id": "seed-043",
-          "sentiment": "positive",
-          "confidence": 0.85,
-          "topics": [
-            "infrastructure",
-            "efficiency"
-          ],
-          "flagged": false
+          "action": "Conduct a capacity impact study on neighboring hospitals to assess the feasibility of absorbing Jackson's patient volume.",
+          "priority": "medium",
+          "rationale": "Healthcare workers and residents expressed significant concern that other local hospitals are not equipped to handle the current volume of uninsured and Medicaid patients."
         }
-      ],
-      "topic_clusters": [
-        "budget transparency",
-        "infrastructure investment",
-        "fiscal accountability"
-      ],
-      "admin_summary": "Citizens are expressing cautious optimism regarding the record-breaking budget, with a strong emphasis on the need for transparency and measurable results. Residents are specifically calling for prioritized investment in infrastructure and public safety while demanding rigorous oversight to prevent administrative waste. The community expects clear accountability measures to ensure these funds directly benefit the city's long-term development.",
-      "urgent_concerns": [
-        "Lack of council oversight mechanisms",
-        "Need for infrastructure maintenance transparency"
       ]
     },
     {
@@ -666,13 +1034,13 @@
           "confidence": 0.95,
           "topics": [
             "political discourse",
-            "gun violence"
+            "public safety"
           ],
           "flagged": false
         },
         {
           "comment_id": "seed-036",
-          "sentiment": "neutral",
+          "sentiment": "negative",
           "confidence": 0.9,
           "topics": [
             "police staffing",
@@ -692,14 +1060,91 @@
         }
       ],
       "topic_clusters": [
-        "political interference",
+        "political polarization",
         "police staffing shortages",
-        "gun violence"
+        "victim advocacy"
       ],
-      "admin_summary": "Residents are expressing significant frustration regarding the politicization of local crime issues by state officials. While there is a clear desire for more substantive support, citizens are also highlighting an urgent need to address police staffing shortages to improve public safety.",
+      "admin_summary": "Citizens are expressing significant frustration with the politicization of local crime issues by state officials. While residents are divided on the political rhetoric, there is a clear consensus that the city must prioritize tangible solutions, specifically addressing police staffing shortages and support for victims of violence.",
       "urgent_concerns": [
-        "police staffing shortages",
-        "gun violence"
+        "Police staffing shortages",
+        "Need for direct victim support services"
+      ],
+      "recommendations": [
+        {
+          "action": "Initiate a public recruitment and retention campaign for the Montgomery Police Department.",
+          "priority": "high",
+          "rationale": "1 of 3 comments explicitly identified police staffing as a critical, pre-existing issue that requires immediate attention regardless of political discourse."
+        },
+        {
+          "action": "Establish a dedicated task force to enhance victim support services and community outreach.",
+          "priority": "medium",
+          "rationale": "1 of 3 comments emphasized that political posturing ignores the immediate needs of families affected by violence, suggesting a need for more direct city-led support."
+        }
+      ]
+    },
+    {
+      "article_id": "0f49698db569",
+      "article_sentiment": "negative",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 0,
+        "neutral": 1,
+        "negative": 2
+      },
+      "comments": [
+        {
+          "comment_id": "seed-041",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "infrastructure",
+            "small business support",
+            "public safety"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-042",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "budget oversight",
+            "accountability"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-043",
+          "sentiment": "neutral",
+          "confidence": 0.8,
+          "topics": [
+            "infrastructure",
+            "budget efficiency"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "budget accountability",
+        "infrastructure investment",
+        "administrative efficiency"
+      ],
+      "admin_summary": "Citizens are expressing significant skepticism regarding the record-breaking fiscal year 2026 budget. The primary concerns center on the lack of council oversight and a strong desire for transparent, long-term investment in infrastructure rather than administrative spending.",
+      "urgent_concerns": [
+        "Lack of budget oversight mechanisms",
+        "Public distrust regarding fund allocation"
+      ],
+      "recommendations": [
+        {
+          "action": "Establish a public-facing budget transparency dashboard to track project milestones.",
+          "priority": "high",
+          "rationale": "2 of 3 comments explicitly demand accountability and results, indicating a lack of public trust in how funds are currently allocated."
+        },
+        {
+          "action": "Host a series of town halls focused on long-term infrastructure planning.",
+          "priority": "medium",
+          "rationale": "2 of 3 comments identified infrastructure as a top priority, suggesting that citizens want to see tangible, long-term improvements rather than temporary fixes."
+        }
       ]
     },
     {
@@ -707,9 +1152,9 @@
       "article_sentiment": "negative",
       "article_confidence": 0.85,
       "sentiment_breakdown": {
-        "positive": 0,
+        "negative": 3,
         "neutral": 0,
-        "negative": 3
+        "positive": 0
       },
       "comments": [
         {
@@ -738,22 +1183,527 @@
           "confidence": 0.85,
           "topics": [
             "public safety",
-            "racial equity",
-            "policing"
+            "equity in policing"
           ],
           "flagged": false
         }
       ],
       "topic_clusters": [
         "policing strategy",
-        "equitable resource distribution",
+        "geographic equity",
         "community trust"
       ],
-      "admin_summary": "Residents are expressing significant concern regarding the deployment of state troopers, citing fears of over-policing and inequitable resource distribution. There is a clear demand for community-focused policing and a more balanced approach to safety that includes underserved neighborhoods rather than focusing exclusively on downtown. Citizens are calling for strategies that prioritize building local relationships over temporary state-level interventions.",
+      "admin_summary": "Residents are expressing significant concern regarding the state police presence in downtown Montgomery. Feedback indicates a preference for community-based local policing over state intervention and highlights a strong desire for equitable resource distribution across all city neighborhoods, not just the downtown corridor.",
       "urgent_concerns": [
         "Perceived inequity in resource allocation between downtown and the west side",
-        "Concerns regarding racial bias in increased police presence",
-        "Preference for community-based policing over state trooper intervention"
+        "Concerns regarding over-policing and racial bias",
+        "Lack of community trust in state-level law enforcement"
+      ],
+      "recommendations": [
+        {
+          "action": "Host a series of community safety forums in the west side and downtown districts.",
+          "priority": "high",
+          "rationale": "All 3 comments reflect a disconnect between current state-led safety measures and community needs, specifically regarding geographic equity and the nature of police presence."
+        },
+        {
+          "action": "Develop a community-policing initiative that emphasizes local officer engagement.",
+          "priority": "medium",
+          "rationale": "Feedback from local business owners suggests that familiar, community-oriented officers are preferred over external state troopers for maintaining long-term safety."
+        }
+      ]
+    },
+    {
+      "article_id": "985a73897e00",
+      "article_sentiment": "negative",
+      "article_confidence": 0.9,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-985a73-1179",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "healthcare access",
+            "emergency services"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-985a73-9930",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "healthcare access",
+            "city governance"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-985a73-7909",
+          "sentiment": "positive",
+          "confidence": 0.85,
+          "topics": [
+            "fiscal responsibility",
+            "city governance"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "healthcare access",
+        "city hall gridlock",
+        "fiscal oversight"
+      ],
+      "admin_summary": "Residents are expressing significant anxiety regarding the potential closure of Jackson Hospital, with a majority of feedback highlighting the critical need for emergency healthcare access. While some citizens support fiscal due diligence, there is a clear demand for the administration and City Council to resolve their differences quickly to ensure the facility remains operational.",
+      "urgent_concerns": [
+        "Potential loss of emergency healthcare services at Jackson Hospital",
+        "Public perception of political gridlock at City Hall"
+      ],
+      "recommendations": [
+        {
+          "action": "Convene an emergency joint session between the Mayor's office and City Council to finalize hospital funding amendments.",
+          "priority": "high",
+          "rationale": "2 of 3 comments explicitly cite the risk of losing essential emergency healthcare services as a primary concern."
+        },
+        {
+          "action": "Issue a public progress report detailing the specific fiscal concerns regarding the hospital plan.",
+          "priority": "medium",
+          "rationale": "Citizen feedback shows a divide between those prioritizing immediate action and those concerned with taxpayer fund management; transparency will help bridge this gap."
+        }
+      ]
+    },
+    {
+      "article_id": "29ed6a432c32",
+      "article_sentiment": "negative",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "negative": 1,
+        "neutral": 2,
+        "positive": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-29ed6a-8616",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "healthcare access",
+            "hospital funding"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-29ed6a-6794",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "hospital funding",
+            "city budget"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-29ed6a-7701",
+          "sentiment": "neutral",
+          "confidence": 0.8,
+          "topics": [
+            "city budget",
+            "fiscal responsibility"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "healthcare infrastructure",
+        "municipal fiscal policy"
+      ],
+      "admin_summary": "Citizens are expressing significant concern regarding the potential loss of healthcare services at Jackson Hospital following the recent veto. While some residents acknowledge the need for fiscal caution, there is a clear expectation for the administration to find a viable solution to maintain essential medical access for the community.",
+      "urgent_concerns": [
+        "Potential closure of major healthcare facility",
+        "Public anxiety regarding medical service availability"
+      ],
+      "recommendations": [
+        {
+          "action": "Host a public briefing to outline the city's long-term healthcare strategy and fiscal constraints.",
+          "priority": "high",
+          "rationale": "With 2 of 3 comments expressing anxiety over hospital closures, transparent communication is necessary to address public concern regarding essential service availability."
+        },
+        {
+          "action": "Form a task force to explore alternative funding models or partnerships for Jackson Hospital.",
+          "priority": "medium",
+          "rationale": "Citizens are actively seeking solutions beyond the vetoed resolution, indicating a need for the city to demonstrate proactive problem-solving regarding healthcare infrastructure."
+        }
+      ]
+    },
+    {
+      "article_id": "6000470fccea",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-600047-7962",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "infrastructure",
+            "road maintenance"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-600047-6686",
+          "sentiment": "positive",
+          "confidence": 0.9,
+          "topics": [
+            "federal spending",
+            "government accountability"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-600047-4878",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "school funding"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "federal budget impact",
+        "local infrastructure",
+        "public education"
+      ],
+      "admin_summary": "Residents are expressing mixed reactions to the proposed federal budget, with concerns focused on potential impacts to local infrastructure and school funding. While some citizens support fiscal restraint, there is clear anxiety regarding the maintenance of city roads and the stability of educational resources. Proactive communication regarding potential budget shifts is recommended to address these community concerns.",
+      "urgent_concerns": [
+        "Potential degradation of road infrastructure near the interstate"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct a comprehensive assessment of road conditions near the interstate.",
+          "priority": "high",
+          "rationale": "One of three comments specifically identified road maintenance near the interstate as a critical failure point that could be exacerbated by federal budget cuts."
+        },
+        {
+          "action": "Issue a public information bulletin regarding the status of local school funding.",
+          "priority": "medium",
+          "rationale": "Citizens are currently uncertain about how federal changes will affect local education, as noted in the feedback regarding the Cloverdale area."
+        }
+      ]
+    },
+    {
+      "article_id": "02f52b1ba298",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-02f52b-6652",
+          "sentiment": "positive",
+          "confidence": 0.9,
+          "topics": [
+            "political discourse",
+            "misinformation"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-02f52b-1515",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "social services",
+            "economic hardship"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-02f52b-5790",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "government transparency",
+            "political trust"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "Political polarization",
+        "Public trust in information",
+        "Social safety net concerns"
+      ],
+      "admin_summary": "Citizens are expressing significant skepticism regarding the accuracy of political reporting and the influence of special interest groups in Montgomery. While there is a desire for clarity, residents remain concerned about the impact of federal policy changes on vulnerable populations in local neighborhoods. Overall, there is a clear demand for more transparent and objective communication from local leadership.",
+      "urgent_concerns": [
+        "Erosion of public trust in local information sources",
+        "Anxiety regarding the stability of social safety nets for local residents"
+      ],
+      "recommendations": [
+        {
+          "action": "Launch a 'City Facts' digital dashboard to provide objective, non-partisan data on local social service impacts.",
+          "priority": "medium",
+          "rationale": "With 2 of 3 comments expressing confusion or distrust regarding current information, a centralized, neutral source is needed to restore public confidence."
+        },
+        {
+          "action": "Host a community listening session in the Highland Avenue area to address specific concerns regarding social service access.",
+          "priority": "medium",
+          "rationale": "Direct feedback indicates that residents are worried about the impact of policy changes on their specific neighborhoods; proactive engagement can mitigate anxiety."
+        }
+      ]
+    },
+    {
+      "article_id": "0a339856f74d",
+      "article_sentiment": "negative",
+      "article_confidence": 0.9,
+      "sentiment_breakdown": {
+        "positive": 0,
+        "neutral": 1,
+        "negative": 2
+      },
+      "comments": [
+        {
+          "comment_id": "seed-0a3398-6701",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "healthcare access",
+            "elderly care"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-0a3398-3338",
+          "sentiment": "positive",
+          "confidence": 0.85,
+          "topics": [
+            "government spending",
+            "fiscal accountability"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-0a3398-2200",
+          "sentiment": "neutral",
+          "confidence": 0.8,
+          "topics": [
+            "healthcare access",
+            "community impact"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "healthcare funding",
+        "fiscal policy",
+        "community vulnerability"
+      ],
+      "admin_summary": "Residents are expressing significant anxiety regarding potential federal Medicaid funding cuts and their impact on local healthcare services. While some citizens advocate for fiscal accountability, the majority of feedback highlights concerns about the stability of care for vulnerable populations and local clinics. The city should prepare for potential increased demand on local social services if federal funding is reduced.",
+      "urgent_concerns": [
+        "Potential loss of healthcare access for elderly residents",
+        "Financial instability for downtown clinics"
+      ],
+      "recommendations": [
+        {
+          "action": "Convene a roundtable with local healthcare providers to assess the potential impact of federal funding cuts on clinic operations.",
+          "priority": "high",
+          "rationale": "2 of 3 comments express direct concern regarding the impact on vulnerable neighbors and local clinics, indicating a high risk to community health infrastructure."
+        },
+        {
+          "action": "Develop a contingency communication plan to inform residents about available local health resources if federal funding is reduced.",
+          "priority": "medium",
+          "rationale": "The uncertainty expressed by residents suggests a need for proactive city engagement to mitigate anxiety and ensure continuity of care."
+        }
+      ]
+    },
+    {
+      "article_id": "3d7d56748afb",
+      "article_sentiment": "positive",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-3d7d56-6202",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "home maintenance",
+            "building safety"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-3d7d56-7493",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "departmental capacity",
+            "public services"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-3d7d56-1572",
+          "sentiment": "negative",
+          "confidence": 0.8,
+          "topics": [
+            "public safety",
+            "code enforcement"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "building safety",
+        "departmental resources",
+        "code enforcement transparency"
+      ],
+      "admin_summary": "Residents generally support the free deck inspection initiative, particularly those in older neighborhoods. However, there is concern regarding the department's capacity to handle high demand and apprehension that the program may be used for punitive code enforcement rather than safety education.",
+      "urgent_concerns": [
+        "Potential for departmental staffing shortages to impact service delivery",
+        "Public distrust regarding the intent of code enforcement inspections"
+      ],
+      "recommendations": [
+        {
+          "action": "Issue a public statement clarifying that the inspections are educational and non-punitive.",
+          "priority": "high",
+          "rationale": "1 of 3 comments explicitly expressed fear of fines, which could deter residents from participating in a vital safety program."
+        },
+        {
+          "action": "Publish a clear service capacity plan or waitlist management strategy for the inspection program.",
+          "priority": "medium",
+          "rationale": "1 of 3 comments raised concerns about the department being stretched thin, which may lead to public frustration if demand exceeds supply."
+        }
+      ]
+    },
+    {
+      "article_id": "afcad06e8384",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 2,
+        "negative": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-afcad0-5445",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "community events",
+            "neighborhood cohesion"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-afcad0-1405",
+          "sentiment": "neutral",
+          "confidence": 0.9,
+          "topics": [
+            "traffic management",
+            "downtown accessibility"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-afcad0-4318",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "event logistics",
+            "weather"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "community engagement",
+        "traffic and infrastructure",
+        "event logistics"
+      ],
+      "admin_summary": "Residents are generally supportive of holiday programming, noting its value for neighborhood cohesion. However, concerns regarding downtown traffic congestion and the need for clear communication on event status during inclement weather remain prominent.",
+      "urgent_concerns": [],
+      "recommendations": [
+        {
+          "action": "Publish a clear weather-related contingency plan for all outdoor holiday events on city social media channels.",
+          "priority": "medium",
+          "rationale": "Citizen feedback indicates uncertainty regarding event status during inclement weather, which impacts family attendance."
+        },
+        {
+          "action": "Coordinate with the traffic engineering department to optimize signal timing in the downtown corridor during peak event hours.",
+          "priority": "medium",
+          "rationale": "Traffic congestion is a recurring quality-of-life concern cited by residents, which may discourage participation in city-sponsored events."
+        }
+      ]
+    },
+    {
+      "article_id": "80618fc5a416",
+      "article_sentiment": "negative",
+      "article_confidence": 0.9,
+      "sentiment_breakdown": {
+        "negative": 2
+      },
+      "comments": [
+        {
+          "comment_id": "seed-80618f-2582",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "infrastructure",
+            "road maintenance",
+            "city spending"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-80618f-7853",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "traffic management",
+            "parking"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "infrastructure maintenance",
+        "event logistics"
+      ],
+      "admin_summary": "Citizens are expressing frustration regarding the city's focus on commemorative events at the expense of daily infrastructure needs. Residents specifically cited deteriorating road conditions and concerns over traffic congestion during large-scale public gatherings.",
+      "urgent_concerns": [
+        "Pothole repairs on Fairview Avenue",
+        "Traffic and parking management for upcoming events"
+      ],
+      "recommendations": [
+        {
+          "action": "Initiate an immediate road assessment and repair schedule for Fairview Avenue.",
+          "priority": "high",
+          "rationale": "Infrastructure neglect was cited as a primary grievance, with 1 of 2 comments specifically identifying Fairview Avenue as a critical failure point."
+        },
+        {
+          "action": "Publish a detailed traffic and parking mitigation plan for the anniversary events.",
+          "priority": "medium",
+          "rationale": "1 of 2 comments highlighted significant concerns regarding traffic congestion and parking accessibility, which impacts resident mobility and daily commutes."
+        }
       ]
     },
     {
@@ -770,7 +1720,7 @@
           "confidence": 0.9,
           "topics": [
             "public safety",
-            "community impact"
+            "community resilience"
           ],
           "flagged": false
         },
@@ -780,7 +1730,7 @@
           "confidence": 0.95,
           "topics": [
             "public safety",
-            "emergency response"
+            "leadership accountability"
           ],
           "flagged": false
         },
@@ -789,9 +1739,9 @@
           "sentiment": "negative",
           "confidence": 0.9,
           "topics": [
-            "gun violence",
+            "public safety",
             "mental health",
-            "systemic failure"
+            "gun violence"
           ],
           "flagged": false
         }
@@ -799,63 +1749,26 @@
       "topic_clusters": [
         "public safety",
         "gun violence",
-        "community trauma"
+        "systemic failure"
       ],
-      "admin_summary": "Residents are expressing deep distress and fear following the recent mass shooting in the downtown district. There is a clear demand for leadership to prioritize public safety as an urgent emergency rather than a political issue, with calls for addressing systemic factors like mental health and gun violence.",
+      "admin_summary": "Citizens are expressing deep distress and frustration following the recent mass shooting in the downtown district. There is a clear demand for leadership to treat gun violence as an urgent emergency rather than a political issue, with concerns regarding both immediate safety and underlying systemic causes.",
       "urgent_concerns": [
         "Public safety in downtown nightlife districts",
-        "Normalization of gun violence",
-        "Need for enhanced mental health support services"
-      ]
-    },
-    {
-      "article_id": "75884d85ee65",
-      "article_sentiment": "positive",
-      "article_confidence": 0.95,
-      "sentiment_breakdown": {
-        "positive": 3,
-        "neutral": 0,
-        "negative": 0
-      },
-      "comments": [
+        "Normalization of mass casualty events",
+        "Lack of mental health support infrastructure"
+      ],
+      "recommendations": [
         {
-          "comment_id": "seed-050",
-          "sentiment": "positive",
-          "confidence": 0.98,
-          "topics": [
-            "community events",
-            "tourism"
-          ],
-          "flagged": false
+          "action": "Increase police presence and implement enhanced security measures in the downtown nightlife district.",
+          "priority": "high",
+          "rationale": "All 3 comments highlight the immediate fear and danger associated with public safety in the city, necessitating an urgent response to restore security."
         },
         {
-          "comment_id": "seed-051",
-          "sentiment": "positive",
-          "confidence": 0.95,
-          "topics": [
-            "community engagement",
-            "city reputation"
-          ],
-          "flagged": false
-        },
-        {
-          "comment_id": "seed-052",
-          "sentiment": "positive",
-          "confidence": 0.92,
-          "topics": [
-            "community cohesion",
-            "public programming"
-          ],
-          "flagged": false
+          "action": "Convene a task force to address systemic violence and mental health resource gaps.",
+          "priority": "medium",
+          "rationale": "2 of 3 comments explicitly cite systemic failures and the need for addressing underlying conditions beyond just immediate policing."
         }
-      ],
-      "topic_clusters": [
-        "community events",
-        "city reputation",
-        "social cohesion"
-      ],
-      "admin_summary": "Residents are expressing high satisfaction with recent holiday programming and community events. There is a clear desire for continued investment in public gatherings that foster city-wide unity and positive civic engagement.",
-      "urgent_concerns": []
+      ]
     },
     {
       "article_id": "fd81b038cb4c",
@@ -900,20 +1813,142 @@
         }
       ],
       "topic_clusters": [
-        "cultural programming",
-        "business logistics",
-        "public transportation"
+        "Cultural Programming",
+        "Business Coordination",
+        "Public Transit Accessibility"
       ],
-      "admin_summary": "Residents are enthusiastic about the 2026 event calendar but have raised concerns regarding operational logistics. Specifically, local businesses require earlier notification of road closures, and there is a clear demand for improved weekend public transit to ensure event accessibility.",
+      "admin_summary": "Residents are enthusiastic about the 2026 event calendar, viewing it as a boost for local culture and economic activity. However, there is a clear need for improved communication with downtown businesses regarding logistics and a requirement for better public transit options to ensure events are accessible to all citizens.",
       "urgent_concerns": [
-        "Inadequate communication regarding road closures",
-        "Lack of reliable weekend public transit for major events"
+        "Inadequate communication regarding road closures affecting local businesses",
+        "Lack of reliable weekend public transit for major event access"
+      ],
+      "recommendations": [
+        {
+          "action": "Establish a formal communication protocol for downtown businesses regarding event-related road closures.",
+          "priority": "medium",
+          "rationale": "1 of 3 comments specifically requested better coordination to prevent last-minute business disruptions."
+        },
+        {
+          "action": "Conduct a feasibility study on expanding weekend transit routes to support downtown event accessibility.",
+          "priority": "medium",
+          "rationale": "1 of 3 comments highlighted that current transit gaps limit event accessibility for non-drivers."
+        }
+      ]
+    },
+    {
+      "article_id": "07a9f578b5eb",
+      "article_sentiment": "negative",
+      "article_confidence": 0.9,
+      "sentiment_breakdown": {
+        "negative": 2,
+        "neutral": 0,
+        "positive": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-07a9f5-8836",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "road maintenance",
+            "public spending"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-07a9f5-7710",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "noise pollution",
+            "crowd management"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "infrastructure maintenance",
+        "quality of life",
+        "event management"
+      ],
+      "admin_summary": "Citizens are expressing frustration regarding the prioritization of public events over essential infrastructure maintenance and neighborhood quality of life. Residents specifically cited poor road conditions and noise disturbances as significant concerns that overshadow the benefits of city-sponsored celebrations.",
+      "urgent_concerns": [
+        "Pothole repairs on Perry Street",
+        "Noise and crowd control management for riverfront events"
+      ],
+      "recommendations": [
+        {
+          "action": "Initiate a targeted road repair project for Perry Street.",
+          "priority": "high",
+          "rationale": "1 of 2 comments specifically identified Perry Street potholes as a primary grievance, indicating a need for visible infrastructure maintenance."
+        },
+        {
+          "action": "Review and adjust noise mitigation and crowd control protocols for riverfront events.",
+          "priority": "medium",
+          "rationale": "1 of 2 comments highlighted significant quality of life concerns regarding noise and congestion for residents living near the riverfront."
+        }
+      ]
+    },
+    {
+      "article_id": "13dc2da9a677",
+      "article_sentiment": "positive",
+      "article_confidence": 0.9,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 2,
+        "negative": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-13dc2d-3092",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "animal welfare",
+            "community events"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-13dc2d-6091",
+          "sentiment": "neutral",
+          "confidence": 0.9,
+          "topics": [
+            "animal welfare",
+            "event logistics"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-13dc2d-2197",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "event logistics",
+            "crowd management"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "animal welfare",
+        "community engagement",
+        "event logistics"
+      ],
+      "admin_summary": "The community generally supports the Humane Society fundraiser, viewing it as a positive way to contribute to animal welfare. While the event is popular, some residents have expressed concerns regarding overcrowding at the venue and are seeking clarification on pet eligibility. Overall, the event is seen as a successful local initiative.",
+      "urgent_concerns": [],
+      "recommendations": [
+        {
+          "action": "Coordinate with the Humane Society to publish a clear FAQ regarding pet eligibility and crowd management strategies.",
+          "priority": "low",
+          "rationale": "Feedback from 2 of 3 comments indicates a need for better logistical information and concerns regarding venue capacity."
+        }
       ]
     },
     {
       "article_id": "bd9888d043e6",
       "article_sentiment": "positive",
-      "article_confidence": 0.85,
+      "article_confidence": 0.9,
       "sentiment_breakdown": {
         "positive": 2,
         "neutral": 1,
@@ -933,32 +1968,36 @@
         {
           "comment_id": "seed-054",
           "sentiment": "neutral",
-          "confidence": 0.9,
+          "confidence": 0.85,
           "topics": [
             "nonprofit funding",
-            "social services"
+            "resource scarcity"
           ],
           "flagged": false
         },
         {
           "comment_id": "seed-055",
           "sentiment": "positive",
-          "confidence": 0.95,
+          "confidence": 0.9,
           "topics": [
-            "nonprofit funding",
-            "community engagement"
+            "nonprofit sector",
+            "community impact"
           ],
           "flagged": false
         }
       ],
       "topic_clusters": [
-        "nonprofit funding",
-        "community support",
-        "philanthropy"
+        "Nonprofit funding adequacy",
+        "Community impact of philanthropy"
       ],
-      "admin_summary": "Residents generally view the grant distribution positively as a vital support mechanism for local nonprofits. However, there is a noted concern regarding the insufficiency of available funding to meet the growing needs of community organizations. The city may want to consider ways to further support or partner with these organizations to bridge the resource gap.",
-      "urgent_concerns": [
-        "insufficient funding for local social service providers"
+      "admin_summary": "Citizens generally view the grant distribution positively but express concern regarding the limited scale of available funding. While the community appreciates the work of local nonprofits, there is a clear sentiment that current financial resources are insufficient to meet the growing needs of the River Region.",
+      "urgent_concerns": [],
+      "recommendations": [
+        {
+          "action": "Host a roundtable discussion with local philanthropic leaders to explore strategies for increasing the total grant pool.",
+          "priority": "medium",
+          "rationale": "1 of 3 comments explicitly highlighted that the current funding pool is insufficient to meet the actual needs of local support groups."
+        }
       ]
     },
     {
@@ -966,7 +2005,9 @@
       "article_sentiment": "negative",
       "article_confidence": 0.95,
       "sentiment_breakdown": {
-        "negative": 3
+        "negative": 3,
+        "neutral": 0,
+        "positive": 0
       },
       "comments": [
         {
@@ -975,8 +2016,7 @@
           "confidence": 0.98,
           "topics": [
             "food insecurity",
-            "SNAP benefits",
-            "poverty"
+            "SNAP benefits"
           ],
           "flagged": false
         },
@@ -985,8 +2025,8 @@
           "sentiment": "negative",
           "confidence": 0.92,
           "topics": [
-            "food bank demand",
-            "community support"
+            "food insecurity",
+            "community resources"
           ],
           "flagged": false
         },
@@ -995,22 +2035,98 @@
           "sentiment": "negative",
           "confidence": 0.95,
           "topics": [
-            "food supply",
-            "resource scarcity"
+            "food insecurity",
+            "supply chain"
           ],
           "flagged": false
         }
       ],
       "topic_clusters": [
         "food insecurity",
-        "resource scarcity",
-        "community support"
+        "SNAP benefit reduction",
+        "resource capacity"
       ],
-      "admin_summary": "Residents are reporting a severe increase in food insecurity due to recent SNAP benefit reductions. Local food banks are struggling to meet the surge in demand, with reports of organizations being forced to turn away families in need. Immediate attention is required to support local food distribution networks and address the growing gap in basic nutritional access.",
+      "admin_summary": "Residents are reporting a severe increase in food insecurity due to recent SNAP benefit reductions, with local food banks struggling to meet the surge in demand. Citizens emphasize that current supply levels are insufficient, leading to instances where families are being turned away. There is a clear call for increased community support and attention to this growing humanitarian crisis.",
       "urgent_concerns": [
-        "Insufficient food supply at local banks",
-        "Increased demand for emergency food assistance",
-        "Impact of SNAP benefit cuts on local families"
+        "Food bank supply shortages",
+        "Increased risk of hunger for families due to SNAP cuts"
+      ],
+      "recommendations": [
+        {
+          "action": "Convene a roundtable with local food bank directors and community partners to assess immediate resource gaps.",
+          "priority": "high",
+          "rationale": "All 3 comments highlight a critical supply-demand mismatch, with reports of food banks being forced to turn away residents in need."
+        },
+        {
+          "action": "Launch a city-wide awareness campaign to encourage donations and volunteer support for local food distribution centers.",
+          "priority": "medium",
+          "rationale": "Citizen feedback indicates that the current crisis is under-reported and that existing infrastructure is overwhelmed by unprecedented demand."
+        }
+      ]
+    },
+    {
+      "article_id": "afda70554a90",
+      "article_sentiment": "negative",
+      "article_confidence": 0.9,
+      "sentiment_breakdown": {
+        "negative": 3,
+        "neutral": 0,
+        "positive": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-afda70-8872",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "political rhetoric",
+            "local autonomy"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-afda70-9184",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "public safety",
+            "neighborhood investment"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-afda70-4809",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "public safety",
+            "neighborhood infrastructure"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "Public safety concerns",
+        "Frustration with state-level political interference",
+        "Need for neighborhood investment"
+      ],
+      "admin_summary": "Residents are expressing significant frustration regarding both the current state of public safety and the perceived political exploitation of Montgomery by outside officials. There is a clear demand for tangible investment in local neighborhoods rather than political rhetoric. Citizens feel vulnerable in their daily routines and are losing trust in current governance.",
+      "urgent_concerns": [
+        "Public safety on Perry Street",
+        "Public safety on Fairview Avenue",
+        "Erosion of public trust in local leadership"
+      ],
+      "recommendations": [
+        {
+          "action": "Increase visible community policing and lighting improvements on Perry Street and Fairview Avenue.",
+          "priority": "high",
+          "rationale": "2 of 3 comments specifically cited safety fears in these areas, indicating an urgent need to address resident anxiety regarding daily activities."
+        },
+        {
+          "action": "Launch a neighborhood investment initiative focused on infrastructure and community resources.",
+          "priority": "medium",
+          "rationale": "Feedback indicates that residents feel neglected and believe that lack of investment is a primary driver of the city's current challenges."
+        }
       ]
     },
     {
@@ -1029,8 +2145,8 @@
           "confidence": 0.95,
           "topics": [
             "police recruitment",
-            "officer retention",
-            "compensation"
+            "employee retention",
+            "public safety"
           ],
           "flagged": false
         },
@@ -1056,15 +2172,286 @@
         }
       ],
       "topic_clusters": [
-        "Police workforce stability",
-        "Community-police communication",
-        "Localized property crime trends"
+        "police staffing and retention",
+        "community-police dialogue",
+        "localized crime reporting"
       ],
-      "admin_summary": "Residents are expressing dissatisfaction with current public safety briefings, citing a lack of two-way communication and a desire for more granular, neighborhood-specific crime data. Additionally, there is significant concern regarding the department's ability to retain officers due to compensation and working conditions. Addressing these feedback gaps and workforce challenges is essential to improving public trust.",
+      "admin_summary": "Citizens are expressing dissatisfaction with current public safety briefings, citing a lack of two-way communication and a failure to address localized crime trends. Additionally, there is significant concern regarding the department's ability to retain officers due to compensation and working conditions. Residents are calling for more granular data reporting and a collaborative approach to neighborhood safety.",
       "urgent_concerns": [
-        "High rate of officer turnover due to pay and conditions",
-        "Lack of community input in policing strategy",
-        "Increased frequency of vehicle break-ins in the Forest Avenue corridor"
+        "High rate of property crime in East Montgomery",
+        "Officer retention crisis impacting public safety"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct a review of MPD compensation and retention incentives.",
+          "priority": "high",
+          "rationale": "1 of 3 comments explicitly identifies officer turnover as a critical failure point for public safety."
+        },
+        {
+          "action": "Restructure public safety briefings to include a dedicated Q&A or breakout session for community input.",
+          "priority": "medium",
+          "rationale": "1 of 3 comments highlights the frustration with the current one-way presentation format."
+        },
+        {
+          "action": "Publish a localized crime heat map for the Forest Avenue corridor to address specific resident concerns.",
+          "priority": "medium",
+          "rationale": "1 of 3 comments specifically cites recurring property crime in the East Montgomery area that is not being addressed by citywide data."
+        }
+      ]
+    },
+    {
+      "article_id": "38d08a58e398",
+      "article_sentiment": "negative",
+      "article_confidence": 0.95,
+      "sentiment_breakdown": {
+        "negative": 2,
+        "neutral": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-38d08a-8909",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "public safety",
+            "downtown development"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-38d08a-5892",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "policing strategy",
+            "crime prevention"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-38d08a-7560",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "downtown development",
+            "community morale"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "public safety",
+        "policing effectiveness",
+        "downtown economic vitality"
+      ],
+      "admin_summary": "Citizens are expressing significant concern regarding public safety in the downtown area, specifically noting that current conditions discourage family visits. While there is support for increased police presence, residents are also calling for deeper, systemic solutions to address the root causes of crime rather than relying solely on increased patrols.",
+      "urgent_concerns": [
+        "Public perception of safety at the riverfront and downtown",
+        "Need for comprehensive crime prevention strategies beyond increased patrols"
+      ],
+      "recommendations": [
+        {
+          "action": "Launch a community safety task force to engage downtown business owners and residents.",
+          "priority": "high",
+          "rationale": "With 2 of 3 comments highlighting safety as a primary barrier to downtown activity, a collaborative approach is needed to restore public confidence."
+        },
+        {
+          "action": "Evaluate and report on long-term crime prevention initiatives beyond increased police presence.",
+          "priority": "medium",
+          "rationale": "Feedback indicates that citizens view increased patrols as a temporary 'band-aid' and are seeking more sustainable solutions to address recurring violence."
+        }
+      ]
+    },
+    {
+      "article_id": "143fb28fa017",
+      "article_sentiment": "negative",
+      "article_confidence": 0.95,
+      "sentiment_breakdown": {
+        "negative": 3,
+        "neutral": 0,
+        "positive": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-143fb2-9256",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "public safety",
+            "neighborhood security"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-143fb2-8626",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "property crime",
+            "downtown safety"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-143fb2-1919",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "police presence",
+            "violent crime"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "public safety perception",
+        "police visibility",
+        "property crime"
+      ],
+      "admin_summary": "Citizens are expressing significant skepticism regarding the reported decline in crime statistics, citing a disconnect between official data and their personal experiences. Residents specifically highlighted concerns about property crime and a perceived lack of visible police presence in their neighborhoods. There is a clear demand for more active patrolling rather than reliance on statistical reporting.",
+      "urgent_concerns": [
+        "High frequency of property crime in downtown areas",
+        "Lack of perceived safety in residential neighborhoods",
+        "Public distrust in crime reporting metrics"
+      ],
+      "recommendations": [
+        {
+          "action": "Increase visible police patrols in high-traffic areas like downtown and near major shopping centers.",
+          "priority": "high",
+          "rationale": "All 3 comments explicitly requested more visible law enforcement presence to address the gap between reported statistics and daily reality."
+        },
+        {
+          "action": "Host a community safety forum to present granular, neighborhood-level data and listen to resident concerns.",
+          "priority": "medium",
+          "rationale": "The total lack of positive sentiment suggests a breakdown in communication; 3 of 3 comments indicate residents do not trust the current city-wide reporting."
+        }
+      ]
+    },
+    {
+      "article_id": "1816bc31f2ed",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-1816bc-9779",
+          "sentiment": "neutral",
+          "confidence": 0.9,
+          "topics": [
+            "school reform",
+            "geographic equity"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-1816bc-6144",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "school resources",
+            "educational planning"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-1816bc-7720",
+          "sentiment": "negative",
+          "confidence": 0.85,
+          "topics": [
+            "educational resources",
+            "accountability"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "school reform",
+        "resource allocation",
+        "public accountability"
+      ],
+      "admin_summary": "Citizens are cautiously optimistic about the new school district vision but express significant skepticism regarding implementation. Residents are specifically looking for tangible improvements in classroom resources and technology to validate the district's promises.",
+      "urgent_concerns": [
+        "Lack of trust in long-term educational reform",
+        "Disparity in resource distribution across neighborhoods"
+      ],
+      "recommendations": [
+        {
+          "action": "Publish a transparent, phased implementation timeline for new school resources.",
+          "priority": "medium",
+          "rationale": "2 of 3 comments express skepticism about whether promises will materialize, indicating a need for clear, verifiable milestones."
+        },
+        {
+          "action": "Host community feedback sessions in Dalraida and downtown to discuss resource allocation.",
+          "priority": "low",
+          "rationale": "Residents from specific neighborhoods are concerned about equitable distribution; direct engagement will help address these geographic equity concerns."
+        }
+      ]
+    },
+    {
+      "article_id": "ae3550fc663f",
+      "article_sentiment": "positive",
+      "article_confidence": 0.9,
+      "sentiment_breakdown": {
+        "positive": 2,
+        "neutral": 1,
+        "negative": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-ae3550-9855",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "youth activities",
+            "public safety"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-ae3550-5068",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "facility utilization",
+            "community programming"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-ae3550-6340",
+          "sentiment": "positive",
+          "confidence": 0.9,
+          "topics": [
+            "facility utilization",
+            "public safety"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "facility utilization",
+        "community programming",
+        "public safety"
+      ],
+      "admin_summary": "Residents are generally supportive of the Haunted Multiplex event, viewing it as a positive use of city facilities. However, feedback indicates a desire for more consistent programming at the venue, as citizens feel the space is currently underutilized.",
+      "urgent_concerns": [
+        "Need for consistent security presence at public events"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct a feasibility study for year-round programming at the Multiplex.",
+          "priority": "medium",
+          "rationale": "2 of 3 comments expressed concern regarding the facility sitting empty or lacking consistent events."
+        },
+        {
+          "action": "Ensure a visible security presence at the upcoming event.",
+          "priority": "high",
+          "rationale": "1 of 3 comments specifically requested security to ensure public safety at the venue."
+        }
       ]
     },
     {
@@ -1082,8 +2469,8 @@
           "sentiment": "positive",
           "confidence": 0.9,
           "topics": [
-            "park maintenance",
-            "recreational facilities"
+            "playground maintenance",
+            "public safety"
           ],
           "flagged": false
         },
@@ -1092,8 +2479,7 @@
           "sentiment": "positive",
           "confidence": 0.95,
           "topics": [
-            "urban planning",
-            "community health",
+            "community development",
             "equity"
           ],
           "flagged": false
@@ -1111,12 +2497,24 @@
       ],
       "topic_clusters": [
         "recreational infrastructure",
-        "community development",
-        "maintenance and equity"
+        "neighborhood equity",
+        "maintenance backlog"
       ],
-      "admin_summary": "Residents are highly supportive of the new playground investment, viewing it as a vital quality-of-life improvement for families. There is a strong community desire for equitable distribution of these facilities and a call to address long-standing maintenance issues at existing sites.",
+      "admin_summary": "Citizens are highly supportive of the $1.68M investment in new playgrounds, viewing it as a vital quality-of-life improvement for families. However, there is a clear expectation that the city should prioritize underserved areas and address long-standing maintenance issues with existing equipment.",
       "urgent_concerns": [
-        "Repair broken equipment at existing Cloverdale Road playground"
+        "Broken playground equipment near Cloverdale Road"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct an immediate safety audit and repair of existing playground equipment near Cloverdale Road.",
+          "priority": "high",
+          "rationale": "One of three comments specifically highlighted broken equipment and missing swing seats that have persisted for three years."
+        },
+        {
+          "action": "Publish a transparent selection criteria for the 15 new playground locations focusing on neighborhood equity.",
+          "priority": "medium",
+          "rationale": "Citizen feedback emphasizes the importance of prioritizing neighborhoods with the least access to private green space."
+        }
       ]
     },
     {
@@ -1161,13 +2559,25 @@
         }
       ],
       "topic_clusters": [
-        "economic development",
-        "infrastructure",
-        "tourism"
+        "Economic Development",
+        "Infrastructure",
+        "Tourism"
       ],
-      "admin_summary": "Residents view the whitewater park as a successful catalyst for regional pride and economic potential. There is a clear expectation that the city must now prioritize supporting infrastructure and commercial development to ensure long-term growth in the area.",
+      "admin_summary": "Citizens are highly optimistic about the Montgomery Whitewater park as a catalyst for economic growth in the west side. While the attraction is viewed as a successful anchor, residents are calling for improved infrastructure and sustained commercial development to ensure long-term viability.",
       "urgent_concerns": [
-        "Road infrastructure improvements leading to the park"
+        "Road infrastructure leading to the Whitewater facility"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct a traffic and road condition assessment for routes leading to the Whitewater park.",
+          "priority": "high",
+          "rationale": "1 of 3 comments explicitly identified road infrastructure as a necessary improvement to support the facility's growth."
+        },
+        {
+          "action": "Develop a targeted incentive package to attract retail and hospitality businesses to the immediate vicinity of the park.",
+          "priority": "medium",
+          "rationale": "1 of 3 comments highlighted that the attraction alone is insufficient and requires surrounding commercial development to sustain growth."
+        }
       ]
     },
     {
@@ -1186,8 +2596,7 @@
           "confidence": 0.95,
           "topics": [
             "trail infrastructure",
-            "urban mobility",
-            "quality of life"
+            "urban mobility"
           ],
           "flagged": false
         },
@@ -1197,8 +2606,7 @@
           "confidence": 0.9,
           "topics": [
             "economic development",
-            "green space",
-            "talent retention"
+            "green space"
           ],
           "flagged": false
         },
@@ -1208,8 +2616,7 @@
           "confidence": 0.95,
           "topics": [
             "mental health",
-            "public safety",
-            "accessibility"
+            "public safety"
           ],
           "flagged": false
         },
@@ -1219,8 +2626,7 @@
           "confidence": 0.95,
           "topics": [
             "public safety",
-            "trail connectivity",
-            "public health"
+            "recreational infrastructure"
           ],
           "flagged": false
         }
@@ -1228,12 +2634,648 @@
       "topic_clusters": [
         "trail connectivity",
         "economic competitiveness",
-        "public health and safety"
+        "public safety and health"
       ],
-      "admin_summary": "Residents are highly supportive of the proposed nature park and trail network, viewing it as a vital investment for economic growth, public health, and quality of life. The primary request from the community is for better connectivity between existing trails to ensure safe, continuous routes for commuters and recreational users.",
+      "admin_summary": "Citizens are highly supportive of the proposed nature park and trail network, viewing it as a vital investment for quality of life, economic talent retention, and public health. The primary feedback emphasizes the need for a connected, safe, and continuous trail system rather than isolated segments. Residents believe this infrastructure is essential for both daily commuting and personal safety.",
       "urgent_concerns": [
-        "Lack of trail connectivity",
-        "Inadequate pedestrian and cyclist infrastructure"
+        "Inadequate connectivity of existing trail networks",
+        "Safety concerns for solo runners and cyclists due to fragmented paths"
+      ],
+      "recommendations": [
+        {
+          "action": "Prioritize a 'Connectivity Master Plan' that links existing trail segments to the new riverfront park.",
+          "priority": "high",
+          "rationale": "All 4 comments highlighted the frustration with fragmented trails and the need for a cohesive network to ensure user safety and utility."
+        },
+        {
+          "action": "Incorporate safety features such as lighting and emergency call boxes into the new park design.",
+          "priority": "medium",
+          "rationale": "2 of 4 comments specifically cited safety as a primary concern for runners and trail users, linking infrastructure to public health outcomes."
+        }
+      ]
+    },
+    {
+      "article_id": "a423bcceeb86",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 0,
+        "negative": 2
+      },
+      "comments": [
+        {
+          "comment_id": "seed-a423bc-4818",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "economic disparity",
+            "local business"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-a423bc-5291",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "job growth",
+            "youth employment"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-a423bc-7444",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "unemployment",
+            "cost of living"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "economic disparity",
+        "job accessibility",
+        "cost of living"
+      ],
+      "admin_summary": "While state-level employment data shows record growth, residents express a disconnect between these reports and their personal economic reality. Citizens are reporting difficulty finding local work and struggling with the cost of living, suggesting that job growth is not being felt equitably across all neighborhoods.",
+      "urgent_concerns": [
+        "Perceived lack of local job accessibility",
+        "Economic hardship regarding rent affordability"
+      ],
+      "recommendations": [
+        {
+          "action": "Launch a targeted workforce development initiative in underserved neighborhoods.",
+          "priority": "high",
+          "rationale": "2 of 3 comments highlight a disconnect between state-level job growth and local neighborhood realities, indicating a need for better job placement accessibility."
+        },
+        {
+          "action": "Conduct a review of small business vacancy rates on Dexter Avenue.",
+          "priority": "medium",
+          "rationale": "Citizen feedback specifically identified empty storefronts as a point of concern, contradicting the narrative of broad economic prosperity."
+        }
+      ]
+    },
+    {
+      "article_id": "2d3e610ca4e8",
+      "article_sentiment": "positive",
+      "article_confidence": 0.95,
+      "sentiment_breakdown": {
+        "positive": 3,
+        "neutral": 0,
+        "negative": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-2d3e61-5685",
+          "sentiment": "positive",
+          "confidence": 0.98,
+          "topics": [
+            "community engagement"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-2d3e61-5574",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "community presence"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-2d3e61-4660",
+          "sentiment": "positive",
+          "confidence": 0.92,
+          "topics": [
+            "civic legacy"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "community legacy",
+        "civic engagement"
+      ],
+      "admin_summary": "The community is expressing collective mourning and respect for a long-time resident who was highly regarded for her civic contributions. The feedback reflects a strong sense of local identity and appreciation for individuals who foster community cohesion.",
+      "urgent_concerns": [],
+      "recommendations": [
+        {
+          "action": "Issue a formal letter of condolence to the family on behalf of the city.",
+          "priority": "low",
+          "rationale": "The high volume of positive sentiment regarding the deceased's civic impact indicates she was a valued member of the Montgomery community."
+        }
+      ]
+    },
+    {
+      "article_id": "9f35bf6a7695",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 2,
+        "neutral": 2,
+        "negative": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-001",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "public safety",
+            "illegal firearms"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-002",
+          "sentiment": "neutral",
+          "confidence": 0.9,
+          "topics": [
+            "public safety",
+            "youth programs",
+            "crime prevention"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-003",
+          "sentiment": "positive",
+          "confidence": 0.9,
+          "topics": [
+            "law enforcement"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-004",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "reentry programs",
+            "public safety"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "public safety and illegal firearms",
+        "crime prevention and youth services",
+        "reentry and rehabilitation"
+      ],
+      "admin_summary": "Residents generally support the enforcement of federal firearms charges as a means to improve neighborhood safety. However, there is a clear call for the city to balance incarceration with proactive investments in youth mentorship, job programs, and effective reentry services to address the root causes of crime.",
+      "urgent_concerns": [
+        "Persistent illegal firearm activity in the West Jeff Davis area"
+      ],
+      "recommendations": [
+        {
+          "action": "Increase police presence and community outreach in the West Jeff Davis corridor.",
+          "priority": "high",
+          "rationale": "Citizen feedback explicitly identifies this area as a long-term hotspot for illegal firearm activity."
+        },
+        {
+          "action": "Host a roundtable with local faith and community leaders to discuss expanding youth mentorship and job training programs.",
+          "priority": "medium",
+          "rationale": "50% of comments emphasize that incarceration alone is insufficient and that prevention programs are necessary for long-term safety."
+        },
+        {
+          "action": "Review and strengthen partnerships with local non-profits focused on post-incarceration reentry support.",
+          "priority": "medium",
+          "rationale": "Community members expressed concern that without reentry support, individuals are likely to cycle back into criminal activity."
+        }
+      ]
+    },
+    {
+      "article_id": "74718008fde7",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-747180-2178",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "healthcare funding",
+            "clinic staffing"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-747180-9714",
+          "sentiment": "positive",
+          "confidence": 0.98,
+          "topics": [
+            "child health insurance"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-747180-6063",
+          "sentiment": "neutral",
+          "confidence": 0.9,
+          "topics": [
+            "healthcare equity",
+            "rural access"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "healthcare funding transparency",
+        "service accessibility",
+        "rural vs urban resource allocation"
+      ],
+      "admin_summary": "Public reaction to the proposed health insurance budget increase is mixed, balancing support for essential child health services with concerns regarding fiscal transparency and local clinic staffing. Residents are specifically calling for clearer accountability on how funds are distributed between urban and rural areas. Addressing these concerns will be critical to maintaining public trust during the budget approval process.",
+      "urgent_concerns": [
+        "Understaffing at local clinics in Old Cloverdale"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct a performance audit of local clinic staffing levels in Old Cloverdale.",
+          "priority": "high",
+          "rationale": "One of three comments specifically cited understaffing as a barrier to supporting further budget increases."
+        },
+        {
+          "action": "Publish a transparent breakdown of projected fund allocation by region.",
+          "priority": "medium",
+          "rationale": "Two of three comments expressed skepticism regarding fund distribution and transparency, indicating a need for clearer communication."
+        }
+      ]
+    },
+    {
+      "article_id": "75884d85ee65",
+      "article_sentiment": "positive",
+      "article_confidence": 0.95,
+      "sentiment_breakdown": {
+        "positive": 3,
+        "neutral": 0,
+        "negative": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-050",
+          "sentiment": "positive",
+          "confidence": 0.98,
+          "topics": [
+            "community events",
+            "tourism"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-051",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "community engagement",
+            "quality of life"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-052",
+          "sentiment": "positive",
+          "confidence": 0.92,
+          "topics": [
+            "community cohesion"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "community events",
+        "city pride",
+        "social cohesion"
+      ],
+      "admin_summary": "Residents are expressing high satisfaction with Montgomery's holiday programming and community-focused events. Feedback indicates that these initiatives successfully foster a sense of belonging and city pride among both long-term residents and newcomers.",
+      "urgent_concerns": [],
+      "recommendations": [
+        {
+          "action": "Increase funding for seasonal community events in the upcoming budget cycle.",
+          "priority": "medium",
+          "rationale": "All 3 comments highlighted the positive impact of community events on city morale and social cohesion."
+        }
+      ]
+    },
+    {
+      "article_id": "89ceeac549e6",
+      "article_sentiment": "negative",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "negative": 2,
+        "neutral": 1,
+        "positive": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-89ceea-4336",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "labor practices",
+            "workplace conditions"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-89ceea-6886",
+          "sentiment": "neutral",
+          "confidence": 0.9,
+          "topics": [
+            "economic impact",
+            "corporate reputation"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-89ceea-6132",
+          "sentiment": "negative",
+          "confidence": 0.85,
+          "topics": [
+            "labor practices",
+            "economic impact"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "labor exploitation allegations",
+        "economic reliance on major employers",
+        "workplace safety and ethics"
+      ],
+      "admin_summary": "Residents are expressing significant concern regarding allegations of labor exploitation at the local automotive facility. While citizens acknowledge the company's importance to the Montgomery economy, there is a clear demand for accountability and transparency regarding these serious claims.",
+      "urgent_concerns": [
+        "Allegations of child and immigrant labor exploitation",
+        "Potential workplace safety and ethical violations at a major local employer"
+      ],
+      "recommendations": [
+        {
+          "action": "Request a formal briefing from the local plant management regarding their supply chain oversight and labor compliance protocols.",
+          "priority": "high",
+          "rationale": "With 2 of 3 comments expressing deep concern over labor practices, immediate verification of compliance is necessary to maintain public trust and ensure legal standards are met."
+        },
+        {
+          "action": "Issue a public statement emphasizing the city's commitment to fair labor standards while awaiting the outcome of the legal proceedings.",
+          "priority": "medium",
+          "rationale": "The community is divided between economic loyalty and ethical concerns; a neutral, firm stance on labor rights will address public anxiety while respecting due process."
+        }
+      ]
+    },
+    {
+      "article_id": "f904d7eb5d8a",
+      "article_sentiment": "negative",
+      "article_confidence": 0.95,
+      "sentiment_breakdown": {
+        "negative": 2,
+        "neutral": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-f904d7-6558",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "road safety",
+            "speeding"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-f904d7-1941",
+          "sentiment": "neutral",
+          "confidence": 0.9,
+          "topics": [
+            "public safety"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-f904d7-7727",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "infrastructure",
+            "pedestrian safety",
+            "lighting"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "road safety",
+        "infrastructure improvements",
+        "pedestrian visibility"
+      ],
+      "admin_summary": "Citizens are expressing significant concern regarding road safety and infrastructure in the Autauga County area following a recent pedestrian accident. Feedback highlights a pattern of excessive speeding and inadequate lighting as primary contributors to hazardous conditions. Residents are calling for increased accountability and immediate infrastructure upgrades to prevent future incidents.",
+      "urgent_concerns": [
+        "Excessive speeding on commuter routes",
+        "Poor visibility and lack of lighting on back roads"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct a safety audit of lighting and speed limits on high-traffic commuter roads.",
+          "priority": "high",
+          "rationale": "2 of 3 comments explicitly identified speeding and poor lighting as critical safety hazards that threaten pedestrian lives."
+        },
+        {
+          "action": "Increase traffic enforcement patrols during peak commuting hours.",
+          "priority": "medium",
+          "rationale": "Citizen feedback indicates that current driving behaviors on these routes are reckless and pose a recurring danger to the public."
+        }
+      ]
+    },
+    {
+      "article_id": "aab1eae6f465",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 2,
+        "negative": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-aab1ea-2626",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "university athletics",
+            "community engagement"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-aab1ea-6441",
+          "sentiment": "neutral",
+          "confidence": 0.9,
+          "topics": [
+            "traffic congestion",
+            "public infrastructure"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-aab1ea-3845",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "university athletics",
+            "event attendance"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "university athletics",
+        "traffic management"
+      ],
+      "admin_summary": "Residents are expressing interest in upcoming university athletic events, though concerns regarding traffic congestion during weeknight games persist. While community support for the team remains high, infrastructure and event logistics are key areas for improvement to ensure smooth neighborhood access.",
+      "urgent_concerns": [
+        "Traffic congestion near university campus during weeknight events"
+      ],
+      "recommendations": [
+        {
+          "action": "Coordinate with university security and local police to implement traffic management plans for weeknight games.",
+          "priority": "medium",
+          "rationale": "1 of 3 comments specifically cited traffic concerns as a deterrent to attending local events, indicating a need for better flow management."
+        }
+      ]
+    },
+    {
+      "article_id": "42783b1e74ae",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 1
+      },
+      "comments": [
+        {
+          "comment_id": "seed-42783b-7554",
+          "sentiment": "positive",
+          "confidence": 0.95,
+          "topics": [
+            "education",
+            "veterans"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-42783b-1461",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "teacher qualifications",
+            "education"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-42783b-7134",
+          "sentiment": "neutral",
+          "confidence": 0.85,
+          "topics": [
+            "teacher shortages",
+            "certification"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "teacher recruitment",
+        "educational standards",
+        "veteran integration"
+      ],
+      "admin_summary": "Residents are divided on the new legislation allowing veterans to teach in public schools. While some see it as a valuable resource for mentorship, others express concern regarding the necessity of specialized pedagogical training and certification to maintain classroom standards.",
+      "urgent_concerns": [],
+      "recommendations": [
+        {
+          "action": "Collaborate with the local school board to host an informational session on the certification requirements for veteran teachers.",
+          "priority": "medium",
+          "rationale": "2 of 3 comments expressed uncertainty or concern regarding the qualifications and training of new veteran teachers, suggesting a need for transparency."
+        }
+      ]
+    },
+    {
+      "article_id": "ba3d7d447951",
+      "article_sentiment": "neutral",
+      "article_confidence": 0.85,
+      "sentiment_breakdown": {
+        "positive": 1,
+        "neutral": 1,
+        "negative": 2
+      },
+      "comments": [
+        {
+          "comment_id": "seed-ba3d7d-6587",
+          "sentiment": "negative",
+          "confidence": 0.9,
+          "topics": [
+            "road maintenance",
+            "infrastructure"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-ba3d7d-1460",
+          "sentiment": "positive",
+          "confidence": 0.85,
+          "topics": [
+            "economic development",
+            "downtown revitalization"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-ba3d7d-6580",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "public safety",
+            "police presence"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-ba3d7d-7144",
+          "sentiment": "neutral",
+          "confidence": 0.8,
+          "topics": [
+            "government transparency"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "infrastructure maintenance",
+        "public safety",
+        "government communication"
+      ],
+      "admin_summary": "Citizens expressed mixed reactions to the recent media briefing, balancing appreciation for legislative engagement with frustration over local service delivery. While some residents value the focus on state and federal partnerships, there is a clear demand for more tangible improvements in road conditions and public safety. Residents are looking for concrete results rather than administrative updates.",
+      "urgent_concerns": [
+        "Cloverdale road infrastructure deterioration",
+        "Public safety concerns on Atlanta Highway"
+      ],
+      "recommendations": [
+        {
+          "action": "Initiate a targeted road repair project in the Cloverdale area.",
+          "priority": "high",
+          "rationale": "Infrastructure maintenance was explicitly cited as a primary concern, with residents prioritizing physical road repairs over legislative updates."
+        },
+        {
+          "action": "Conduct a public safety review and increase visibility on Atlanta Highway.",
+          "priority": "high",
+          "rationale": "Public safety is a critical concern for residents who feel current measures are insufficient to ensure safety at night."
+        }
       ]
     },
     {
@@ -1241,7 +3283,9 @@
       "article_sentiment": "negative",
       "article_confidence": 0.95,
       "sentiment_breakdown": {
-        "negative": 3
+        "negative": 3,
+        "neutral": 0,
+        "positive": 0
       },
       "comments": [
         {
@@ -1249,9 +3293,8 @@
           "sentiment": "negative",
           "confidence": 0.98,
           "topics": [
-            "food access",
             "food deserts",
-            "grocery infrastructure"
+            "grocery access"
           ],
           "flagged": false
         },
@@ -1271,7 +3314,7 @@
           "confidence": 0.9,
           "topics": [
             "small business",
-            "economic climate"
+            "economic pressure"
           ],
           "flagged": false
         }
@@ -1281,10 +3324,22 @@
         "economic viability of local businesses",
         "neighborhood infrastructure"
       ],
-      "admin_summary": "Residents are expressing significant concern regarding the closure of a major grocery store in east Montgomery, citing fears of increased food insecurity and the loss of neighborhood stability. The community views this as a decline in essential local infrastructure and is worried about the lack of accessible fresh produce options in the area.",
+      "admin_summary": "Residents are expressing significant concern over the closure of a major grocery store in east Montgomery, citing the potential for increased food insecurity and the loss of a vital neighborhood anchor. The feedback highlights a growing anxiety regarding the emergence of food deserts and the economic challenges facing local businesses in the area.",
       "urgent_concerns": [
-        "Potential emergence of a food desert in east Montgomery",
-        "Loss of essential neighborhood retail infrastructure"
+        "Increased risk of food desert conditions in east Montgomery",
+        "Loss of essential community infrastructure"
+      ],
+      "recommendations": [
+        {
+          "action": "Conduct a food access assessment for the Taylor Road corridor.",
+          "priority": "high",
+          "rationale": "All 3 comments identified the closure as a major blow to local food access, specifically noting the lack of alternatives for fresh produce."
+        },
+        {
+          "action": "Host a roundtable with local business owners to discuss economic support strategies.",
+          "priority": "medium",
+          "rationale": "Feedback from local business owners indicates that rising operational costs are threatening the survival of neighborhood institutions."
+        }
       ]
     },
     {
@@ -1323,21 +3378,98 @@
           "sentiment": "negative",
           "confidence": 0.85,
           "topics": [
-            "teacher working conditions",
+            "teacher welfare",
             "student impact"
           ],
           "flagged": false
         }
       ],
       "topic_clusters": [
-        "district transparency",
-        "school communication",
-        "teacher welfare"
+        "District transparency and communication",
+        "Teacher support and working conditions",
+        "Community trust in school leadership"
       ],
-      "admin_summary": "Community members and educators are expressing significant frustration regarding the lack of transparency from the school district following a recent personnel issue. There is a clear demand for better communication to alleviate parental anxiety and ensure that the educational environment remains stable for students. Addressing these concerns promptly will help restore public trust in district leadership.",
+      "admin_summary": "Community members are expressing significant frustration regarding the lack of transparency surrounding the recent administrative leave of a teacher at Capitol Heights Middle School. Residents and stakeholders are concerned that the district's poor communication is fueling uncertainty and negatively impacting the school environment. There is a clear demand for more proactive and clear updates from district leadership to restore public trust.",
       "urgent_concerns": [
         "Lack of transparent communication from the school district",
-        "Parental anxiety regarding school safety and stability"
+        "Erosion of community trust in school leadership",
+        "Potential negative impact on student learning environment due to staff uncertainty"
+      ],
+      "recommendations": [
+        {
+          "action": "Direct the school district to issue a formal, transparent statement regarding the status of the investigation.",
+          "priority": "high",
+          "rationale": "All 3 comments explicitly cite a lack of transparency and clear communication as a primary driver of community anxiety."
+        },
+        {
+          "action": "Host a community listening session at Capitol Heights Middle School to address parent concerns.",
+          "priority": "medium",
+          "rationale": "2 of 3 comments highlight that parents and community members feel ignored and are receiving conflicting information."
+        }
+      ]
+    },
+    {
+      "article_id": "7ec26cf951b7",
+      "article_sentiment": "negative",
+      "article_confidence": 0.95,
+      "sentiment_breakdown": {
+        "negative": 3,
+        "neutral": 0,
+        "positive": 0
+      },
+      "comments": [
+        {
+          "comment_id": "seed-7ec26c-3556",
+          "sentiment": "negative",
+          "confidence": 0.98,
+          "topics": [
+            "public safety",
+            "police presence"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-7ec26c-2670",
+          "sentiment": "negative",
+          "confidence": 0.95,
+          "topics": [
+            "public safety",
+            "downtown development"
+          ],
+          "flagged": false
+        },
+        {
+          "comment_id": "seed-7ec26c-8920",
+          "sentiment": "negative",
+          "confidence": 0.92,
+          "topics": [
+            "public safety",
+            "local governance"
+          ],
+          "flagged": false
+        }
+      ],
+      "topic_clusters": [
+        "public safety",
+        "police presence",
+        "downtown revitalization"
+      ],
+      "admin_summary": "Citizens are expressing significant fear regarding downtown safety following the recent mass shooting. There is a clear consensus that current security measures are insufficient, with residents calling for increased police visibility and more effective local leadership to restore public confidence.",
+      "urgent_concerns": [
+        "Increased violent crime in downtown area",
+        "Loss of public trust in local safety measures"
+      ],
+      "recommendations": [
+        {
+          "action": "Increase uniformed police patrols in the downtown entertainment district during evening hours.",
+          "priority": "high",
+          "rationale": "All 3 comments explicitly cite a lack of safety and a need for increased police presence as the primary solution to the current crisis."
+        },
+        {
+          "action": "Host a public safety town hall to outline specific security enhancements for the downtown area.",
+          "priority": "medium",
+          "rationale": "Feedback indicates a perception that local officials are not doing enough; direct communication is necessary to address this lack of trust."
+        }
       ]
     }
   ]

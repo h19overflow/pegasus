@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useApp } from "./appContext";
 import { connectSseStream, type SseMessage } from "./sseClient";
 import { parseFeatureToJob, type GeoJsonFeature } from "./jobService";
+import { refreshNewsArticles, fetchNewsArticles } from "./newsService";
 import type { NewsArticle, HousingListing } from "./types";
 
 interface HousingGeoJsonFeature {
@@ -90,6 +91,16 @@ function handleSseMessage(
       const features = items as HousingGeoJsonFeature[];
       const listings = features.map(parseFeatureToHousingListing);
       dispatch({ type: "MERGE_HOUSING_LISTINGS", listings });
+      break;
+    }
+    case "news_sentiment": {
+      // AI analysis complete — re-fetch news_feed.json to pick up communitySentiment fields
+      refreshNewsArticles();
+      fetchNewsArticles().then((articles) => {
+        if (articles.length > 0) {
+          dispatch({ type: "SET_NEWS_ARTICLES", articles });
+        }
+      });
       break;
     }
     default:
