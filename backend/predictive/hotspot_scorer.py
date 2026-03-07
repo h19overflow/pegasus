@@ -17,21 +17,7 @@ from typing import Any
 
 from backend.models import PredictionResult, HotspotDriver
 from backend.predictive.mock_data import load_complaints, load_events
-
-# Configurable weights
-WEIGHTS = {
-    "complaint_volume": 0.4,
-    "complaint_growth_rate": 0.3,
-    "event_density": 0.2,
-    "negative_sentiment": 0.1,
-}
-
-RISK_THRESHOLDS = {
-    "critical": 75,
-    "high": 50,
-    "medium": 25,
-    "low": 0,
-}
+from backend.predictive.hotspot_config import WEIGHTS, RISK_THRESHOLDS, FACTOR_LABELS
 
 
 def _normalize(value: float, max_value: float) -> float:
@@ -59,13 +45,7 @@ def _build_explanation(
     if not top_driver:
         return f"{neighborhood} shows normal activity levels."
 
-    factor_labels = {
-        "complaint_volume": "complaint volume",
-        "complaint_growth_rate": "rising complaint trend",
-        "event_density": "upcoming event activity",
-        "negative_sentiment": "negative community sentiment",
-    }
-    factor_name = factor_labels.get(top_driver["factor"], top_driver["factor"])
+    factor_name = FACTOR_LABELS.get(top_driver["factor"], top_driver["factor"])
 
     if risk == "critical":
         return f"{neighborhood} is a critical hotspot for {category} issues, primarily driven by {factor_name}."
@@ -87,38 +67,26 @@ def _ui_label(neighborhood: str, risk: str, category: str) -> str:
     return labels.get(risk, f"{neighborhood}: {category}")
 
 
-def compute_hotspots(
-    sentiment_scores: dict[str, float] | None = None,
-) -> list[PredictionResult]:
-    """Compute hotspot scores for all neighborhoods.
-
-    Args:
-        sentiment_scores: Optional dict of {area_id: negative_sentiment_score (0-100)}.
-    """
-    complaints = load_complaints()
-    events = load_events()
-    sentiment_scores = sentiment_scores or {}
-
-    # Group complaints by (area_id, neighborhood, category)
+def _collect_area_stats(
+    complaints: list[dict],
+    events: list[dict],
+) -> tuple[dict, list, list, list]:
+    """Group complaints and events by area and compute per-area stats."""
     area_complaints: dict[tuple[str, str], list[dict]] = defaultdict(list)
-    for c in complaints:
-        key = (c["area_id"], c["neighborhood"])
-        area_complaints[key].append(c)
+    for complaint in complaints:
+        key = (complaint["area_id"], complaint["neighborhood"])
+        area_complaints[key].append(complaint)
 
-    # Group events by area_id
     area_events: dict[str, list[dict]] = defaultdict(list)
-    for e in events:
-        area_events[e["area_id"]].append(e)
+    for event in events:
+        area_events[event["area_id"]].append(event)
 
-    # Find max values for normalization
     all_volumes = []
     all_growth_rates = []
     all_event_counts = []
-
     area_stats: dict[tuple[str, str], dict[str, Any]] = {}
 
     for (area_id, neighborhood), comps in area_complaints.items():
-        # Split into periods (Jan vs Feb based on date)
         jan = [c for c in comps if c["date"].startswith("2026-01")]
         feb = [c for c in comps if c["date"].startswith("2026-02")]
 
@@ -126,10 +94,9 @@ def compute_hotspots(
         growth = ((len(feb) - len(jan)) / max(len(jan), 1)) * 100
         event_count = len(area_events.get(area_id, []))
 
-        # Dominant category
         cat_counts: dict[str, int] = defaultdict(int)
-        for c in comps:
-            cat_counts[c["category"]] += 1
+        for complaint in comps:
+            cat_counts[complaint["category"]] += 1
         top_category = max(cat_counts, key=cat_counts.get) if cat_counts else "general"  # type: ignore[arg-type]
 
         area_stats[(area_id, neighborhood)] = {
@@ -145,33 +112,62 @@ def compute_hotspots(
         all_growth_rates.append(abs(growth))
         all_event_counts.append(event_count)
 
+    return area_stats, all_volumes, all_growth_rates, all_event_counts
+
+
+def _score_area(
+    area_id: str,
+    stats: dict[str, Any],
+    max_volume: float,
+    max_growth: float,
+    max_events: float,
+    sentiment_scores: dict[str, float],
+) -> tuple[list[dict], float]:
+    """Compute normalized driver values and weighted score for one area."""
+    norm_volume = _normalize(stats["volume"], max_volume)
+    norm_growth = _normalize(max(stats["growth"], 0), max_growth)
+    norm_events = _normalize(stats["event_count"], max_events)
+    norm_sentiment = sentiment_scores.get(area_id, 0.0)
+
+    score = (
+        WEIGHTS["complaint_volume"] * norm_volume
+        + WEIGHTS["complaint_growth_rate"] * norm_growth
+        + WEIGHTS["event_density"] * norm_events
+        + WEIGHTS["negative_sentiment"] * norm_sentiment
+    )
+
+    drivers = [
+        {"factor": "complaint_volume", "value": round(norm_volume, 1), "weight": WEIGHTS["complaint_volume"], "contribution": round(WEIGHTS["complaint_volume"] * norm_volume, 1)},
+        {"factor": "complaint_growth_rate", "value": round(norm_growth, 1), "weight": WEIGHTS["complaint_growth_rate"], "contribution": round(WEIGHTS["complaint_growth_rate"] * norm_growth, 1)},
+        {"factor": "event_density", "value": round(norm_events, 1), "weight": WEIGHTS["event_density"], "contribution": round(WEIGHTS["event_density"] * norm_events, 1)},
+        {"factor": "negative_sentiment", "value": round(norm_sentiment, 1), "weight": WEIGHTS["negative_sentiment"], "contribution": round(WEIGHTS["negative_sentiment"] * norm_sentiment, 1)},
+    ]
+
+    return drivers, score
+
+
+def compute_hotspots(
+    sentiment_scores: dict[str, float] | None = None,
+) -> list[PredictionResult]:
+    """Compute hotspot scores for all neighborhoods.
+
+    Args:
+        sentiment_scores: Optional dict of {area_id: negative_sentiment_score (0-100)}.
+    """
+    complaints = load_complaints()
+    events = load_events()
+    sentiment_scores = sentiment_scores or {}
+
+    area_stats, all_volumes, all_growth_rates, all_event_counts = _collect_area_stats(complaints, events)
+
     max_volume = max(all_volumes) if all_volumes else 1
     max_growth = max(all_growth_rates) if all_growth_rates else 1
     max_events = max(all_event_counts) if all_event_counts else 1
 
-    # Compute scores
     results: list[PredictionResult] = []
 
     for (area_id, neighborhood), stats in area_stats.items():
-        norm_volume = _normalize(stats["volume"], max_volume)
-        norm_growth = _normalize(max(stats["growth"], 0), max_growth)
-        norm_events = _normalize(stats["event_count"], max_events)
-        norm_sentiment = sentiment_scores.get(area_id, 0.0)
-
-        score = (
-            WEIGHTS["complaint_volume"] * norm_volume
-            + WEIGHTS["complaint_growth_rate"] * norm_growth
-            + WEIGHTS["event_density"] * norm_events
-            + WEIGHTS["negative_sentiment"] * norm_sentiment
-        )
-
-        drivers = [
-            {"factor": "complaint_volume", "value": round(norm_volume, 1), "weight": WEIGHTS["complaint_volume"], "contribution": round(WEIGHTS["complaint_volume"] * norm_volume, 1)},
-            {"factor": "complaint_growth_rate", "value": round(norm_growth, 1), "weight": WEIGHTS["complaint_growth_rate"], "contribution": round(WEIGHTS["complaint_growth_rate"] * norm_growth, 1)},
-            {"factor": "event_density", "value": round(norm_events, 1), "weight": WEIGHTS["event_density"], "contribution": round(WEIGHTS["event_density"] * norm_events, 1)},
-            {"factor": "negative_sentiment", "value": round(norm_sentiment, 1), "weight": WEIGHTS["negative_sentiment"], "contribution": round(WEIGHTS["negative_sentiment"] * norm_sentiment, 1)},
-        ]
-
+        drivers, score = _score_area(area_id, stats, max_volume, max_growth, max_events, sentiment_scores)
         risk = _risk_level(score)
         trend = "rising" if stats["growth"] > 20 else ("falling" if stats["growth"] < -20 else "stable")
 
