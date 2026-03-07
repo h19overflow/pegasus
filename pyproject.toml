@@ -28,3 +28,8 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["backend/tests"]
 asyncio_mode = "auto"
+markers = [
+    "unit: pure unit tests with no I/O",
+    "integration: tests that cross module boundaries",
+    "e2e: end-to-end workflow tests",
+]
