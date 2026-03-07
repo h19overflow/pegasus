@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
+import type { NewsArticle, NewsComment } from "@/lib/types";
+import { CommentRow } from "./CommentRow";
+import { groupCommentsByArticle, groupCommentsByNeighborhood } from "./commentFeedHelpers";
 
 interface CollapsibleGroupProps {
   label: string;
@@ -32,6 +35,59 @@ export function CollapsibleGroup({ label, sublabel, count, defaultOpen = true, c
         </span>
       </button>
       {isOpen && <div className="mt-2">{children}</div>}
+    </div>
+  );
+}
+
+export function GroupedByStory({ comments, articleIndex, onAskAI }: {
+  comments: NewsComment[];
+  articleIndex: Map<string, NewsArticle>;
+  onAskAI?: (q: string) => void;
+}) {
+  const groups = groupCommentsByArticle(comments, articleIndex);
+  return (
+    <div className="space-y-3">
+      {groups.map(({ articleId, article, comments: groupComments }, index) => (
+        <CollapsibleGroup
+          key={articleId}
+          label={article?.title ?? "Unknown article"}
+          sublabel={article?.location?.neighborhood}
+          count={groupComments.length}
+          defaultOpen={index === 0}
+        >
+          <ul className="space-y-3 pl-3 border-l-2 border-border/30">
+            {groupComments.map((comment) => (
+              <CommentRow key={comment.id} comment={comment} article={article} onAskAI={onAskAI} showMeta={false} />
+            ))}
+          </ul>
+        </CollapsibleGroup>
+      ))}
+    </div>
+  );
+}
+
+export function GroupedByArea({ comments, articleIndex, onAskAI }: {
+  comments: NewsComment[];
+  articleIndex: Map<string, NewsArticle>;
+  onAskAI?: (q: string) => void;
+}) {
+  const groups = groupCommentsByNeighborhood(comments, articleIndex);
+  return (
+    <div className="space-y-3">
+      {groups.map(({ neighborhood, comments: groupComments }, index) => (
+        <CollapsibleGroup
+          key={neighborhood}
+          label={neighborhood}
+          count={groupComments.length}
+          defaultOpen={index === 0}
+        >
+          <ul className="space-y-3 pl-3 border-l-2 border-border/30">
+            {groupComments.map((comment) => (
+              <CommentRow key={comment.id} comment={comment} article={articleIndex.get(comment.articleId)} onAskAI={onAskAI} />
+            ))}
+          </ul>
+        </CollapsibleGroup>
+      ))}
     </div>
   );
 }
