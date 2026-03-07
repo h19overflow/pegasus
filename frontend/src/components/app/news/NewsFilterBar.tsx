@@ -1,6 +1,6 @@
 import { Search, ArrowUpDown, ShieldAlert } from "lucide-react";
 
-type SortMode = "newest" | "oldest" | "most_liked";
+type SortMode = "newest" | "oldest" | "most_liked" | "most_comments";
 type SentimentFilter = "" | "positive" | "negative" | "neutral";
 
 interface NewsFilterBarProps {
@@ -21,6 +21,7 @@ const SORT_OPTIONS: { key: SortMode; label: string }[] = [
   { key: "newest", label: "Newest" },
   { key: "oldest", label: "Oldest" },
   { key: "most_liked", label: "Popular" },
+  { key: "most_comments", label: "Most Discussed" },
 ];
 
 const SENTIMENT_OPTIONS: { key: SentimentFilter; label: string; color: string; activeColor: string }[] = [

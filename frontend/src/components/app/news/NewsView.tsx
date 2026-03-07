@@ -8,7 +8,7 @@ import { NewsFilterBar } from "./NewsFilterBar";
 import type { NewsArticle, NewsCategory } from "@/lib/types";
 import { Newspaper } from "lucide-react";
 
-type SortMode = "newest" | "oldest" | "most_liked";
+type SortMode = "newest" | "oldest" | "most_liked" | "most_comments";
 
 function isArticleLiked(likedIds: string[], articleId: string): boolean {
   if (!likedIds || !Array.isArray(likedIds)) return false;
@@ -43,6 +43,9 @@ function SkeletonCard() {
 function sortArticles(articles: NewsArticle[], sortMode: SortMode): NewsArticle[] {
   if (sortMode === "most_liked") {
     return [...articles].sort((a, b) => b.upvotes - a.upvotes);
+  }
+  if (sortMode === "most_comments") {
+    return [...articles].sort((a, b) => b.commentCount - a.commentCount);
   }
   const sorted = sortArticlesByDate(articles);
   return sortMode === "oldest" ? sorted.reverse() : sorted;
@@ -107,6 +110,19 @@ export function NewsView() {
 
   function handleBackToFeed() {
     dispatch({ type: "SET_SELECTED_ARTICLE", articleId: null });
+  }
+
+  function handleReact(articleId: string, emoji: string | null) {
+    if (emoji === null) {
+      const current = state.articleReactions[articleId];
+      if (current) dispatch({ type: "SET_EMOJI_REACTION", articleId, emoji: current });
+    } else {
+      dispatch({ type: "SET_EMOJI_REACTION", articleId, emoji });
+    }
+  }
+
+  function handleFlag(articleId: string) {
+    dispatch({ type: "TOGGLE_ARTICLE_FLAG", articleId });
   }
 
   function handleToggleLike(articleId: string) {
@@ -214,9 +230,13 @@ export function NewsView() {
               <NewsCard
                 key={article.id}
                 article={article}
-                isLiked={isArticleLiked(state.likedArticleIds, article.id)}
+                reactionCounts={article.reactionCounts ?? {}}
+                userReaction={state.articleReactions[article.id] ?? null}
+                flagCount={article.flagCount ?? 0}
+                isFlagged={state.flaggedArticleIds.includes(article.id)}
                 onSelect={handleSelectArticle}
-                onLike={handleToggleLike}
+                onReact={handleReact}
+                onFlag={handleFlag}
               />
             ))}
           </div>
