@@ -257,11 +257,20 @@ def generate_personalized_roadmap(
     guide = _get_service(service_id)
     prompt = _build_prompt(citizen, guide)
 
+    draft: RoadmapDraft
     try:
         draft = _build_chain().invoke({"prompt": prompt})
     except Exception as exc:
-        logger.error("Roadmap generation failed for %s: %s", service_id, exc)
-        raise RuntimeError(f"Gemini generation failed: {exc}") from exc
+        logger.warning(
+            "Roadmap LLM generation failed for %s; using fallback steps. Error: %s",
+            service_id,
+            exc,
+        )
+        draft = RoadmapDraft(
+            eligibility_note="Auto-generated fallback roadmap. Confirm the latest requirements with the provider.",
+            total_estimated_time="Varies",
+            steps=[],
+        )
 
     roadmap = _build_roadmap_model(draft, guide, citizen)
 
