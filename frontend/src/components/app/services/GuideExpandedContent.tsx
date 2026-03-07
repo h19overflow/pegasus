@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ExternalLink,
   Phone,
@@ -5,8 +6,11 @@ import {
   FileText,
   CheckCircle2,
   ClipboardList,
+  Loader2,
+  Route,
 } from "lucide-react";
 import type { ServiceGuide } from "@/lib/govServices";
+import { useApp } from "@/lib/appContext";
 
 export function GuideExpandedContent({
   guide,
@@ -15,6 +19,33 @@ export function GuideExpandedContent({
   guide: ServiceGuide;
   onNavigateToChat: (msg: string) => void;
 }) {
+  const { state, dispatch } = useApp();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleGenerateRoadmap() {
+    setLoading(true);
+    setError(null);
+    try {
+      const body: Record<string, unknown> = { serviceId: guide.id };
+      if (state.citizenMeta) body.citizen = state.citizenMeta;
+      const response = await fetch("/api/roadmap/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!response.ok) {
+        const detail = await response.json().catch(() => null);
+        throw new Error(detail?.detail ?? "Failed to generate roadmap");
+      }
+      const roadmap = await response.json();
+      dispatch({ type: "SET_ACTIVE_ROADMAP", roadmap });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to generate roadmap");
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <div className="px-3 pb-3 space-y-3 border-t border-border/20 pt-2.5">
       <p className="text-xs text-muted-foreground leading-relaxed">{guide.description}</p>
@@ -70,14 +101,24 @@ export function GuideExpandedContent({
           Visit Website
         </a>
         <button
-          onClick={() => onNavigateToChat(
-            `Help me apply for ${guide.title}. I want to check eligibility and understand the steps.`
-          )}
-          className="flex-1 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors"
+          onClick={handleGenerateRoadmap}
+          disabled={loading}
+          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors disabled:opacity-60"
         >
-          Help Me Apply
+          {loading ? (
+            <>
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              Building Guide...
+            </>
+          ) : (
+            <>
+              <Route className="w-3.5 h-3.5" />
+              Get Step-by-Step Guide
+            </>
+          )}
         </button>
       </div>
+      {error && <p className="text-xs text-red-500 text-center">{error}</p>}
     </div>
   );
 }

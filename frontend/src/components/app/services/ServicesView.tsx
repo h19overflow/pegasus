@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import ServiceDirectory from "./ServiceDirectory";
 import ServiceDetailView from "./ServiceDetailView";
 import ServiceMapView from "./ServiceMapView";
+import { ServiceRoadmapView } from "./ServiceRoadmapView";
 import { useApp } from "@/lib/appContext";
 import type { ServiceCategory } from "@/lib/types";
 
-type ServicesMode = "directory" | "map" | "detail";
+type ServicesMode = "directory" | "map" | "detail" | "roadmap";
 
 interface ServicesViewProps {
   onNavigateToChat: (message: string) => void;
@@ -15,6 +16,13 @@ export function ServicesView({ onNavigateToChat }: ServicesViewProps) {
   const { state } = useApp();
   const [mode, setMode] = useState<ServicesMode>("directory");
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(null);
+
+  // Auto-switch to roadmap mode when activeRoadmap is set
+  useEffect(() => {
+    if (state.activeRoadmap) {
+      setMode("roadmap");
+    }
+  }, [state.activeRoadmap]);
 
   // Auto-switch to map mode when a map command arrives (chat → map)
   useEffect(() => {
@@ -48,6 +56,10 @@ export function ServicesView({ onNavigateToChat }: ServicesViewProps) {
         onNavigateToChat={onNavigateToChat}
       />
     );
+  }
+
+  if (mode === "roadmap" && state.activeRoadmap) {
+    return <ServiceRoadmapView />;
   }
 
   if (mode === "map") {
