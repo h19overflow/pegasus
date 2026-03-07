@@ -595,11 +595,11 @@ graph TD
 
 | Module | Files | Components | Key Responsibility |
 |--------|-------|------------|--------------------|
-| **services** | 32 | ServiceDirectory, ServiceDetailView, ServiceMapView, ServiceRoadmapView | Browse & locate community services; view skill roadmaps. |
-| **news** | 24 | NewsletterTab, NewsMapTab, ArticleCard, CommentSection | Social news feed with reactions, comments, sentiment. |
-| **cv** | 32 | CvUploadForm, JobMatchPanel, CommuteCard, UpskillingSummary | Upload CV, view job matches, commute times, upskilling paths. |
-| **admin** | 19 | ModerationQueue, UserMetrics, SystemHealth, ConfigPanel | Content moderation, analytics, system diagnostics. |
-| **cards** | 8 | ServiceCard, JobCard, ArticleCard, SkillCard, etc. | Reusable card layouts for consistency. |
+| **services** | 37 | ServiceDirectory, ServiceDetailView, ServiceMapView, ServiceRoadmapView | Browse & locate community services; view skill roadmaps. |
+| **news** | 28 | NewsletterTab, NewsMapTab, NewsCard, NewsCommentSection | Social news feed with reactions, comments, sentiment. |
+| **cv** | 36 | CvUploadView, JobMatchPanel, CommuteCard, UpskillingPanel | Upload CV, view job matches, commute times, upskilling paths. |
+| **admin** | 22 | AIInsightsCard, MayorsBrief, CommentFeed, SentimentOverview | AI insights, comment analysis, predictive analytics. |
+| **cards** | 8 | JobCard, SkillGapCard, ChatRoadmapCard, BenefitsCliffCard, etc. | Reusable card layouts for consistency. |
 | **chat-bubble** | 2 | ChatBubble, ChatContent | AI chatbot interface. |
 | **personas** | 2 | PersonaSelector, PersonaFlow | Role selection & onboarding. |
 
@@ -656,8 +656,6 @@ export function MyComponent() {
 
 4. **Lazy loading**: Code-split feature modules (e.g., admin panel) for faster initial load.
 
-5. **Virtual scrolling**: Use react-window for long lists (news feed, service directory).
-
 ---
 
 ## Styling & Theming
@@ -701,7 +699,7 @@ if (!state.newsArticles || state.newsArticles.length === 0) {
 
 ## Testing Strategy
 
-Tests use **pytest** + **React Testing Library** (if applicable in this stack).
+Tests use **Vitest** + **React Testing Library**.
 
 **Coverage targets**:
 - Integration tests for view containers (ServicesView, NewsPage, etc.).
@@ -746,7 +744,7 @@ frontend/src/components/app/
 ├── SettingsSection.tsx
 ├── ProfileView.tsx
 │
-├── services/                   # Service directory & map (32 files)
+├── services/                   # Service directory & map (37 files)
 │   ├── ServicesView.tsx
 │   ├── ServiceDirectory.tsx
 │   ├── ServiceDetailView.tsx
@@ -754,44 +752,45 @@ frontend/src/components/app/
 │   ├── ServiceRoadmapView.tsx
 │   └── ... (helpers, sub-components)
 │
-├── news/                       # News feed & sentiment (24 files)
+├── news/                       # News feed & sentiment (28 files)
 │   ├── NewsPage.tsx
 │   ├── NewsletterTab.tsx
 │   ├── NewsMapTab.tsx
-│   ├── ArticleCard.tsx
-│   ├── CommentSection.tsx
+│   ├── NewsCard.tsx
+│   ├── NewsCommentSection.tsx
 │   └── ... (sub-components)
 │
-├── cv/                         # CV & job matching (32 files)
-│   ├── CvUploadForm.tsx
+├── cv/                         # CV & job matching (36 files)
+│   ├── CvUploadView.tsx
 │   ├── JobMatchPanel.tsx
 │   ├── CommuteCard.tsx
-│   ├── UpskillingSummary.tsx
+│   ├── UpskillingPanel.tsx
 │   └── ... (sub-components)
 │
-├── admin/                      # Admin moderation & analytics (19 files)
-│   ├── ModerationQueue.tsx
-│   ├── UserMetrics.tsx
-│   ├── SystemHealth.tsx
-│   ├── ConfigPanel.tsx
+├── admin/                      # Admin dashboard & analytics (22 files)
+│   ├── AIInsightsCard.tsx
+│   ├── MayorsBrief.tsx
+│   ├── CommentFeed.tsx
+│   ├── SentimentOverview.tsx
+│   ├── PredictiveHeatmap.tsx
 │   └── ... (sub-components)
 │
 ├── cards/                      # Reusable card components (8 files)
-│   ├── ServiceCard.tsx
 │   ├── JobCard.tsx
-│   ├── ArticleCard.tsx
-│   ├── CommuteCard.tsx
-│   ├── SkillCard.tsx
-│   ├── RoadmapStepCard.tsx
+│   ├── SkillGapCard.tsx
+│   ├── ChatRoadmapCard.tsx
+│   ├── BenefitsCliffCard.tsx
+│   ├── MedicaidCard.tsx
+│   ├── PredictiveInsightCard.tsx
 │   └── ...
 │
 ├── chat-bubble/                # Chat UI (2 files)
-│   ├── ChatBubble.tsx
-│   └── ChatContent.tsx
+│   ├── CollapsedBubble.tsx
+│   └── ExpandedPanel.tsx
 │
-└── personas/                   # Persona selection (2 files)
-    ├── PersonaSelector.tsx
-    └── PersonaFlow.tsx
+└── personas/                   # Persona display (2 files)
+    ├── PersonaCard.tsx
+    └── PersonaDetail.tsx
 ```
 
 ---
