@@ -1,4 +1,4 @@
-import capitolDome from "@/assets/capitol-dome.png";
+import citysenseLogo from "@/assets/citysense-logo.png";
 
 interface TopBarProps {
   onBack?: () => void;
@@ -15,15 +15,13 @@ const TopBar = ({ onBack }: TopBarProps) => (
         </button>
       )}
       <div className="flex items-center gap-2.5">
-        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-          <img src={capitolDome} alt="" className="w-5 h-5 object-contain" />
-        </div>
+        <img src={citysenseLogo} alt="CitySense" className="w-8 h-8 object-contain" />
         <div className="flex flex-col">
           <span className="text-secondary font-bold text-[15px] leading-tight tracking-tight">
-            MyMontgomery
+            CitySense
           </span>
           <span className="text-[hsl(var(--amber-gold))] text-[10px] leading-tight font-bold uppercase tracking-[0.12em]">
-            Civic Navigator
+            Montgomery
           </span>
         </div>
       </div>

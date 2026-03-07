@@ -10,7 +10,7 @@ import SkillGapScreen from "@/components/mockup/screens/SkillGapScreen";
 import PdfPreviewScreen from "@/components/mockup/screens/PdfPreviewScreen";
 import SpanishScreen from "@/components/mockup/screens/SpanishScreen";
 import ReentryScreen from "@/components/mockup/screens/ReentryScreen";
-import capitolDome from "@/assets/capitol-dome.png";
+import citysenseLogo from "@/assets/citysense-logo.png";
 
 const screens = [
   { id: 1, name: "Splash", component: SplashScreen },
@@ -34,8 +34,8 @@ const Index = () => {
       {/* Hero header */}
       <div className="bg-secondary py-12 px-6 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <img src={capitolDome} alt="" className="w-10 h-10 brightness-200" />
-          <h1 className="text-white text-3xl font-bold tracking-tight">MontgomeryAI</h1>
+          <img src={citysenseLogo} alt="CitySense" className="w-10 h-10 object-contain" />
+          <h1 className="text-white text-3xl font-bold tracking-tight">CitySense</h1>
         </div>
         <p className="text-white/80 text-lg max-w-xl mx-auto">
           One conversation. Benefits + Career. Built for Montgomery, Alabama.

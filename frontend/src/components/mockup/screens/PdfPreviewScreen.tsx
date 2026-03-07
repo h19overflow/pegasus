@@ -1,7 +1,7 @@
 import TopBar from "../TopBar";
 import AiBubble from "../AiBubble";
 import ChatInput from "../ChatInput";
-import capitolDome from "@/assets/capitol-dome.png";
+import citysenseLogo from "@/assets/citysense-logo.png";
 
 const PdfPreviewScreen = () => (
   <div className="w-full h-full bg-background flex flex-col">
@@ -20,7 +20,7 @@ const PdfPreviewScreen = () => (
                 <h3 className="text-xs font-bold text-primary">Your Benefits Summary</h3>
                 <p className="text-[9px] text-muted-foreground">Montgomery, AL — March 5, 2026</p>
               </div>
-              <img src={capitolDome} alt="" className="w-4 h-4 opacity-40" />
+              <img src={citysenseLogo} alt="" className="w-4 h-4 opacity-40" />
             </div>
 
             {/* Table */}

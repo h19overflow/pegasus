@@ -1,4 +1,4 @@
-import capitolDome from "@/assets/capitol-dome.png";
+import citysenseLogo from "@/assets/citysense-logo.png";
 import { toast } from "sonner";
 
 const PdfPreviewCard = () => (
@@ -12,7 +12,7 @@ const PdfPreviewCard = () => (
             <h3 className="text-xs font-bold text-primary">Your Benefits Summary</h3>
             <p className="text-[9px] text-muted-foreground">Montgomery, AL — March 5, 2026</p>
           </div>
-          <img src={capitolDome} alt="" className="w-4 h-4 opacity-40" />
+          <img src={citysenseLogo} alt="" className="w-4 h-4 opacity-40" />
         </div>
 
         <p className="text-[9px] font-bold text-foreground uppercase tracking-wider">

@@ -9,7 +9,7 @@ import {
   Users,
   Bell,
 } from "lucide-react";
-import capitolDome from "@/assets/capitol-dome.png";
+import citysenseLogo from "@/assets/citysense-logo.png";
 import skyline from "@/assets/montgomery-skyline.png";
 
 interface Feature {
@@ -71,14 +71,14 @@ function HeroSection({ onGetStarted }: { onGetStarted: () => void }) {
       <div className="max-w-5xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-36 text-center relative z-10">
         <div className="flex items-center justify-center gap-3 mb-6">
           <img
-            src={capitolDome}
-            alt="Alabama State Capitol"
-            className="w-14 h-14 object-contain brightness-200"
+            src={citysenseLogo}
+            alt="CitySense"
+            className="w-20 h-20 object-contain"
           />
         </div>
 
         <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-5">
-          MontgomeryAI
+          CitySense
         </h1>
 
         <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
@@ -160,7 +160,7 @@ function FeaturesSection() {
             Everything you need in one place
           </h2>
           <p className="text-muted-foreground text-base max-w-xl mx-auto">
-            MontgomeryAI connects residents to benefits, career tools, and city services
+            CitySense connects residents to benefits, career tools, and city services
             through a simple, guided experience.
           </p>
         </div>
@@ -195,7 +195,7 @@ function CTASection({ onGetStarted }: { onGetStarted: () => void }) {
           onClick={onGetStarted}
           className="inline-flex items-center gap-2 bg-white text-secondary font-semibold px-8 py-3.5 rounded-full text-base shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
         >
-          Open MontgomeryAI
+          Open CitySense
           <ArrowRight className="w-5 h-5" />
         </button>
       </div>
@@ -208,8 +208,8 @@ function Footer() {
     <footer className="bg-foreground/5 border-t border-border py-8 px-6">
       <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
         <div className="flex items-center gap-2">
-          <img src={capitolDome} alt="" className="w-5 h-5 object-contain opacity-50" />
-          <span>MontgomeryAI Civic Navigator</span>
+          <img src={citysenseLogo} alt="" className="w-5 h-5 object-contain opacity-50" />
+          <span>CitySense Montgomery</span>
         </div>
         <p>Built for Montgomery, Alabama residents.</p>
       </div>

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Map } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import capitolDome from "@/assets/capitol-dome.png";
+import citysenseLogo from "@/assets/citysense-logo.png";
 import { AIInsightsCard } from "@/components/app/admin/AIInsightsCard";
 import { AdminChatBubble } from "@/components/app/admin/AdminChatBubble";
 import { AnalyzeButton } from "@/components/app/admin/AnalyzeButton";
@@ -30,12 +30,10 @@ function AdminHeader() {
     <header className="sticky top-0 z-[1001] bg-white border-t-[3px] border-[hsl(var(--amber-gold))] border-b border-border/40">
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-            <img src={capitolDome} alt="" className="w-5 h-5 object-contain" />
-          </div>
+          <img src={citysenseLogo} alt="CitySense" className="w-8 h-8 object-contain" />
           <div className="flex flex-col">
             <span className="text-secondary font-bold text-[15px] leading-tight tracking-tight">
-              MyMontgomery
+              CitySense
             </span>
             <span className="text-[hsl(var(--amber-gold))] text-[10px] leading-tight font-bold uppercase tracking-[0.12em]">
               Admin Dashboard

@@ -30,7 +30,7 @@ const OnboardingScreen = () => (
 
       {/* Send button */}
       <button className="w-full bg-primary text-primary-foreground font-bold py-4 rounded-2xl text-base">
-        Ask MontgomeryAI
+        Ask CitySense
       </button>
 
       <p className="text-center text-caption text-muted-foreground">
