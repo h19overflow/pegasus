@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Compass, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import ActiveArtifact from "./ActiveArtifact";
 import ProfileSummary from "./ProfileSummary";
@@ -13,6 +13,13 @@ interface ContextPanelProps {
 export default function ContextPanel({ onNavigateToChat }: ContextPanelProps) {
   const { state } = useApp();
   const [guideExpanded, setGuideExpanded] = useState(false);
+
+  // Auto-expand when a guide message is dispatched
+  useEffect(() => {
+    if (state.guidePendingMessage && !guideExpanded) {
+      setGuideExpanded(true);
+    }
+  }, [state.guidePendingMessage]);
 
   // Services view: collapsible guide panel
   if (state.activeView === "services") {

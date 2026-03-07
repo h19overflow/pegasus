@@ -1,6 +1,6 @@
 export type FlowId = "U1" | "U2" | "U3" | "U4" | "U5" | "U6";
 export type Language = "EN" | "ES";
-export type AppView = "cv" | "services" | "profile" | "admin";
+export type AppView = "cv" | "services" | "profile" | "admin" | "news";
 export type MessageType =
   | "text"
   | "benefits-cliff"
@@ -50,6 +50,7 @@ export interface ChatMessage {
   processingSteps?: ProcessingStep[];
   mapAction?: MapCommand;
   hotspots?: PredictionHotspot[];
+  serviceCards?: ServiceCardData[];
 }
 
 export interface Artifact {
@@ -116,11 +117,26 @@ export interface CivicAction {
   distance?: string;
 }
 
+export interface ServiceCardData {
+  title: string;
+  description: string | null;
+  category: string | null;
+  phone: string | null;
+  address: string | null;
+  url: string | null;
+  hours: string | null;
+  wait_time: string | null;
+  what_to_bring: string[];
+  programs: string[];
+}
+
 export interface GuideMessage {
   id: string;
   role: "user" | "assistant";
   content: string;
   pinIds?: string[];
+  chips?: string[];
+  serviceCards?: ServiceCardData[];
 }
 
 export interface JobSkills {
@@ -293,6 +309,7 @@ export interface AppState {
   chatBubbleOpen: boolean;
   chatBubbleHasUnread: boolean;
   mapCommand: MapCommand | null;
+  guidePendingMessage: string | null;
   housingListings: HousingListing[];
 }
 
@@ -391,8 +408,9 @@ export interface AiChatResponse {
   extracted_entities: Record<string, string | null>;
   follow_up_question: string | null;
   suggested_actions: { label: string; action_type: string; url?: string }[];
-  source_items: { title: string; description: string; url?: string; category?: string }[];
+  source_items: ServiceCardData[];
   map_highlights: { lat: number; lng: number; label: string; category?: string }[];
+  map_commands?: MapCommand[];
   chips: string[];
   answer_summary: string | null;
   reasoning_notes: string | null;

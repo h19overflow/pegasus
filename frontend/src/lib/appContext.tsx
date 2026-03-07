@@ -75,7 +75,9 @@ type AppAction =
   | { type: "SET_ARTICLE_REACTION"; articleId: string; reaction: ReactionType }
   | { type: "SET_NEWS_COMMENTS"; comments: NewsComment[] }
   | { type: "SET_MAP_COMMAND"; command: MapCommand }
-  | { type: "CLEAR_MAP_COMMAND" };
+  | { type: "CLEAR_MAP_COMMAND" }
+  | { type: "SEND_GUIDE_MESSAGE"; message: string }
+  | { type: "CLEAR_GUIDE_PENDING" };
 
 const initialState: AppState = {
   messages: [],
@@ -117,6 +119,7 @@ const initialState: AppState = {
   chatBubbleOpen: false,
   chatBubbleHasUnread: false,
   mapCommand: null,
+  guidePendingMessage: null,
   housingListings: [],
 };
 
@@ -298,6 +301,10 @@ function appReducer(state: AppState, action: AppAction): AppState {
       return { ...state, mapCommand: action.command };
     case "CLEAR_MAP_COMMAND":
       return { ...state, mapCommand: null };
+    case "SEND_GUIDE_MESSAGE":
+      return { ...state, guidePendingMessage: action.message };
+    case "CLEAR_GUIDE_PENDING":
+      return { ...state, guidePendingMessage: null };
     default:
       return state;
   }
