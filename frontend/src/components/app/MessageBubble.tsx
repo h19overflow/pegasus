@@ -1,3 +1,4 @@
+import ReactMarkdown from "react-markdown";
 import yellowhammer from "@/assets/yellowhammer.png";
 import { Button } from "@/components/ui/button";
 import type { ChatMessage } from "@/lib/types";
@@ -30,10 +31,18 @@ const MessageBubble = ({ message, onChipClick }: MessageBubbleProps) => {
     <div className="animate-fade-up">
       <div className="flex gap-2 px-4 py-1.5">
         <img src={yellowhammer} alt="AI" className="w-7 h-7 rounded-full object-cover shrink-0 mt-1" />
-        <div className="bg-card rounded-2xl rounded-tl-md p-4 border-l-4 border-secondary max-w-[calc(100%-48px)] shadow-sm space-y-3">
-          {/* Text content */}
+        <div className="bg-card rounded-2xl rounded-tl-md p-4 border-l-4 border-secondary max-w-[calc(100%-48px)] min-w-0 shadow-sm space-y-3 overflow-hidden">
+          {/* Markdown content */}
           {message.content && (
-            <p className="text-sm text-foreground leading-relaxed">{message.content}</p>
+            <div className="text-sm text-foreground leading-relaxed prose prose-sm max-w-none break-words overflow-wrap-anywhere
+              prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0.5
+              prose-headings:text-foreground prose-headings:font-bold
+              prose-h3:text-sm prose-h4:text-sm
+              prose-strong:text-foreground prose-strong:font-semibold
+              prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+            ">
+              <ReactMarkdown>{message.content}</ReactMarkdown>
+            </div>
           )}
 
           {/* Embedded cards based on type */}
