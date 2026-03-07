@@ -10,6 +10,7 @@ import { createCategoryMarker, getMarkerColor, getMarkerSymbol } from "@/lib/map
 import { MAP_CATEGORIES } from "./serviceCategoryMeta";
 import { MapPointDetailPanel } from "./MapPointDetailPanel";
 import { NeighborhoodOverlay } from "./NeighborhoodOverlay";
+import { HotspotOverlay } from "./HotspotOverlay";
 
 const MONTGOMERY_CENTER: [number, number] = [32.3668, -86.3];
 
@@ -27,6 +28,47 @@ function FlyToPoint({ lat, lng }: { lat: number | null; lng: number | null }) {
   return null;
 }
 
+/** Listens for map commands dispatched from the chat and executes them. */
+function MapCommandHandler({ visiblePoints }: { visiblePoints: ServicePoint[] }) {
+  const map = useMap();
+  const { state, dispatch } = useApp();
+  const prevCmdRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const cmd = state.mapCommand;
+    if (!cmd || cmd.id === prevCmdRef.current) return;
+    prevCmdRef.current = cmd.id;
+
+    switch (cmd.type) {
+      case "zoom_to":
+        if (cmd.lat != null && cmd.lng != null) {
+          map.flyTo([cmd.lat, cmd.lng], cmd.zoom ?? 14, { duration: 0.8 });
+        }
+        break;
+      case "filter_category":
+        // If the command includes a neighborhood center, zoom there first
+        if (cmd.lat != null && cmd.lng != null) {
+          map.flyTo([cmd.lat, cmd.lng], cmd.zoom ?? 14, { duration: 0.8 });
+        } else if (visiblePoints.length > 0) {
+          // Otherwise zoom to fit the filtered markers
+          const bounds = L.latLngBounds(visiblePoints.map((p) => [p.lat, p.lng] as [number, number]));
+          map.flyToBounds(bounds, { padding: [40, 40], duration: 0.8, maxZoom: 14 });
+        }
+        break;
+      case "highlight_hotspots":
+        break;
+      case "clear":
+        map.flyTo(MONTGOMERY_CENTER, 12, { duration: 0.6 });
+        break;
+    }
+
+    // Clear the command after processing
+    setTimeout(() => dispatch({ type: "CLEAR_MAP_COMMAND" }), 300);
+  }, [state.mapCommand, map, dispatch, visiblePoints]);
+
+  return null;
+}
+
 interface ServiceMapViewProps {
   onBack: () => void;
   onSelectCategory: (category: ServiceCategory) => void;
@@ -40,6 +82,19 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
   );
   const [selectedPoint, setSelectedPoint] = useState<ServicePoint | null>(null);
   const [showNeighborhood, setShowNeighborhood] = useState(false);
+  const [showHotspots, setShowHotspots] = useState(false);
+
+  // Listen for filter_category map commands
+  useEffect(() => {
+    const cmd = state.mapCommand;
+    if (!cmd) return;
+    if (cmd.type === "filter_category" && cmd.category) {
+      setActiveCategories(new Set([cmd.category]));
+    }
+    if (cmd.type === "highlight_hotspots") {
+      setShowHotspots(true);
+    }
+  }, [state.mapCommand]);
 
   useEffect(() => {
     async function loadAll() {
@@ -85,6 +140,16 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
           >
             {showNeighborhood ? "✕ Hide" : "◉ Show"} Neighborhood Health
           </button>
+          <button
+            onClick={() => setShowHotspots(!showHotspots)}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors shadow-sm ${
+              showHotspots
+                ? "bg-red-600 text-white shadow-red-600/25"
+                : "bg-red-50 text-red-700 border border-red-200 hover:bg-red-100"
+            }`}
+          >
+            {showHotspots ? "✕ Hide" : "🔥 Show"} Predictive Hotspots
+          </button>
           <span className="text-xs text-muted-foreground">{visiblePoints.length} locations</span>
         </div>
       </div>
@@ -126,7 +191,9 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
               </Marker>
             ))}
             <FlyToPoint lat={selectedPoint?.lat ?? null} lng={selectedPoint?.lng ?? null} />
+            <MapCommandHandler visiblePoints={visiblePoints} />
             {showNeighborhood && <NeighborhoodOverlay />}
+            {showHotspots && <HotspotOverlay />}
           </MapContainer>
 
           <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-sm z-[1000] flex flex-wrap gap-x-4 gap-y-1">

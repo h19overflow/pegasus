@@ -23,6 +23,7 @@ import type {
   NewsArticle,
   NewsCategory,
   NewsComment,
+  MapCommand,
 } from "./types";
 
 type AppAction =
@@ -65,7 +66,9 @@ type AppAction =
   | { type: "SET_CHAT_BUBBLE_OPEN"; open: boolean }
   | { type: "MARK_CHAT_READ" }
   | { type: "MERGE_JOB_LISTINGS"; listings: JobListing[] }
-  | { type: "MERGE_NEWS_ARTICLES"; articles: NewsArticle[] };
+  | { type: "MERGE_NEWS_ARTICLES"; articles: NewsArticle[] }
+  | { type: "SET_MAP_COMMAND"; command: MapCommand }
+  | { type: "CLEAR_MAP_COMMAND" };
 
 const initialState: AppState = {
   messages: [],
@@ -102,6 +105,7 @@ const initialState: AppState = {
   selectedArticleId: null,
   chatBubbleOpen: false,
   chatBubbleHasUnread: false,
+  mapCommand: null,
 };
 
 function applyMessageSideEffects(state: AppState, message: ChatMessage): AppState {
@@ -253,6 +257,10 @@ function appReducer(state: AppState, action: AppAction): AppState {
       const fresh = action.articles.filter((a) => !existingIds.has(a.id));
       return { ...state, newsArticles: [...fresh, ...state.newsArticles] };
     }
+    case "SET_MAP_COMMAND":
+      return { ...state, mapCommand: action.command };
+    case "CLEAR_MAP_COMMAND":
+      return { ...state, mapCommand: null };
     default:
       return state;
   }

@@ -145,11 +145,65 @@ async def webhook_housing(request: Request) -> JSONResponse:
     return JSONResponse({"ok": True, "listings": len(features)})
 
 
+# ── AI Chatbot & Predictive Analysis Routes ─────────────
+
+@app.post("/chat")
+async def chat_endpoint(request: Request) -> JSONResponse:
+    """AI civic chatbot endpoint."""
+    from scripts.models import ChatRequest
+    from scripts.chatbot.responder import handle_chat
+
+    body = await request.json()
+    chat_request = ChatRequest(
+        message=body.get("message", ""),
+        conversation_id=body.get("conversation_id"),
+        context=body.get("context"),
+    )
+    response = await handle_chat(chat_request)
+    return JSONResponse(response.to_dict())
+
+
+@app.get("/predictions/hotspots")
+async def predictions_hotspots() -> JSONResponse:
+    """Return civic hotspot predictions by neighborhood."""
+    from scripts.predictive.hotspot_scorer import compute_hotspots
+
+    results = compute_hotspots()
+    return JSONResponse({
+        "hotspots": [r.to_dict() for r in results],
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "weights": {
+            "complaint_volume": 0.4,
+            "complaint_growth_rate": 0.3,
+            "event_density": 0.2,
+            "negative_sentiment": 0.1,
+        },
+    })
+
+
+@app.get("/predictions/trends")
+async def predictions_trends() -> JSONResponse:
+    """Return civic complaint trend analysis."""
+    from scripts.predictive.trend_detector import detect_trends
+
+    results = detect_trends()
+    return JSONResponse({
+        "trends": [r.to_dict() for r in results],
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    })
+
+
 @app.get("/health")
 async def health() -> JSONResponse:
     """Health check endpoint."""
+    from scripts.chatbot.llm_provider import get_llm_provider
+
+    provider = get_llm_provider()
     return JSONResponse({
         "status": "ok",
         "streams": ["jobs", "news", "housing", "benefits"],
+        "ai_chatbot": "active",
+        "llm_provider": type(provider).__name__,
+        "predictive_analysis": "active",
         "timestamp": datetime.now(timezone.utc).isoformat(),
     })

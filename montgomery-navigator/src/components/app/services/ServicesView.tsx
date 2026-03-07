@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ServiceDirectory from "./ServiceDirectory";
 import ServiceDetailView from "./ServiceDetailView";
 import ServiceMapView from "./ServiceMapView";
 import type { ServiceCategory } from "@/lib/types";
+import { useApp } from "@/lib/appContext";
 
 type ServicesMode = "directory" | "map" | "detail";
 
@@ -11,8 +12,16 @@ interface ServicesViewProps {
 }
 
 export function ServicesView({ onNavigateToChat }: ServicesViewProps) {
+  const { state } = useApp();
   const [mode, setMode] = useState<ServicesMode>("directory");
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(null);
+
+  // Auto-switch to map mode when a map command arrives
+  useEffect(() => {
+    if (state.mapCommand && mode !== "map") {
+      setMode("map");
+    }
+  }, [state.mapCommand]);
 
   function handleSelectCategory(category: ServiceCategory) {
     setSelectedCategory(category);

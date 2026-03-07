@@ -16,3 +16,7 @@ wheels/
 
 # Worktrees
 .worktrees/
+
+# OS / Editor files
+.DS_Store
+.vscode/
