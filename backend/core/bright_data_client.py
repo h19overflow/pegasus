@@ -179,13 +179,17 @@ def _serp_request_json(google_url: str) -> dict | None:
 def serp_search(
     query: str,
     zone: str | None = None,
-    search_type: str = "nws",
+    search_type: str = "web",
 ) -> dict | None:
-    """Run a Google News search via SERP API. Returns parsed results or None."""
+    """Run a Google search via SERP API. Returns parsed results or None.
+
+    search_type: "web" for regular search, "nws" for news.
+    """
     encoded = quote(query)
+    tbm_param = f"&tbm={search_type}" if search_type != "web" else ""
     url = (
         f"https://www.google.com/search?"
-        f"q={encoded}&tbm={search_type}&hl=en&gl=us&brd_json=1"
+        f"q={encoded}{tbm_param}&hl=en&gl=us&brd_json=1"
     )
     body = _serp_request(url)
     if not body:

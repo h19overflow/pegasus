@@ -1,60 +1,63 @@
-import { NEWS_MAP_CATEGORIES } from "@/lib/newsMapUtils";
-import type { NewsArticle } from "@/lib/types";
+import { ArrowLeft, ShieldAlert } from "lucide-react";
+import type { NewsCategory } from "@/lib/types";
+import { CATEGORY_META } from "@/lib/newsMapUtils";
 
 interface NewsMapCategoryBarProps {
-  articles: NewsArticle[];
-  activeCategories: Set<string>;
-  onToggle: (id: string) => void;
-  misinfoOnly: boolean;
+  activeCategory: NewsCategory;
+  onCategoryChange: (category: NewsCategory) => void;
+  showMisinfoOnly: boolean;
   onMisinfoToggle: () => void;
-  flaggedArticleIds: string[];
+  onBack?: () => void;
 }
 
 export function NewsMapCategoryBar({
-  articles, activeCategories, onToggle,
-  misinfoOnly, onMisinfoToggle, flaggedArticleIds,
+  activeCategory,
+  onCategoryChange,
+  showMisinfoOnly,
+  onMisinfoToggle,
+  onBack,
 }: NewsMapCategoryBarProps) {
-  const misinfoCount = articles.filter(
-    (a) => flaggedArticleIds.includes(a.id) || (a.misinfoRisk != null && a.misinfoRisk > 30)
-  ).length;
-
   return (
-    <div className="shrink-0 flex flex-wrap gap-2 px-6 py-3 border-b border-border/20 bg-white">
-      {NEWS_MAP_CATEGORIES.map(({ id, label, symbol }) => {
-        const active = activeCategories.has(id);
-        const count = articles.filter((a) => a.category === id).length;
-        return (
+    <div className="absolute top-3 left-3 z-[1000] flex items-center gap-1.5 bg-white/95 backdrop-blur rounded-xl px-2 py-1.5 shadow-lg border border-border/50">
+      {onBack && (
+        <>
           <button
-            key={id}
-            onClick={() => onToggle(id)}
-            className={[
-              "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border transition-all",
-              active
-                ? "bg-primary/10 text-primary border-primary/30"
-                : "bg-muted/30 text-muted-foreground border-transparent opacity-50",
-            ].join(" ")}
+            onClick={onBack}
+            className="flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg text-secondary hover:bg-muted/60 transition-colors"
           >
-            <span>{symbol}</span>
-            {label}
-            {count > 0 && <span className="text-[10px] opacity-70">{count}</span>}
+            <ArrowLeft className="w-3.5 h-3.5" />
+            Feed
           </button>
-        );
-      })}
+          <div className="w-px h-5 bg-border mx-0.5" />
+        </>
+      )}
+      {CATEGORY_META.map(({ key, label, emoji }) => (
+        <button
+          key={key}
+          onClick={() => onCategoryChange(key)}
+          className={`flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
+            activeCategory === key
+              ? "bg-primary text-primary-foreground"
+              : "text-muted-foreground hover:bg-muted/60"
+          }`}
+        >
+          <span>{emoji}</span>
+          {label}
+        </button>
+      ))}
 
-      <span className="w-px self-stretch bg-border/40 mx-1" />
+      <div className="w-px h-5 bg-border mx-0.5" />
 
       <button
         onClick={onMisinfoToggle}
-        className={[
-          "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border transition-all",
-          misinfoOnly
-            ? "bg-primary/10 text-primary border-primary/30"
-            : "bg-muted/30 text-muted-foreground border-transparent opacity-50",
-        ].join(" ")}
+        className={`flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
+          showMisinfoOnly
+            ? "bg-red-100 text-red-800 ring-1 ring-red-300"
+            : "text-muted-foreground hover:bg-red-50 hover:text-red-600"
+        }`}
       >
-        <span>🚩</span>
-        Misinformation
-        {misinfoCount > 0 && <span className="text-[10px] opacity-70">{misinfoCount}</span>}
+        <ShieldAlert className="w-3 h-3" />
+        Misinfo
       </button>
     </div>
   );

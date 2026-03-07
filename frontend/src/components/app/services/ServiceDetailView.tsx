@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import L from "leaflet";
 import type { ServiceCategory, ServicePoint } from "@/lib/types";
 import { useApp } from "@/lib/appContext";
 import { fetchServicePoints } from "@/lib/arcgisService";
@@ -10,12 +9,12 @@ import { CATEGORY_META } from "./serviceCategoryMeta";
 import { ServiceLocationCard } from "./serviceDetailHelpers";
 import { DetailViewHeader } from "./ServiceDetailHeader";
 import { ServiceListPanel } from "./ServiceListPanel";
+import { ServiceGuideChat } from "./ServiceGuideChat";
 import { filterAndSortPoints } from "./serviceDetailUtils";
 
 export type SortOption = "alphabetical" | "nearest";
 
 const MONTGOMERY_CENTER: [number, number] = [32.3668, -86.3];
-
 
 function FlyToPoint({ lat, lng }: { lat: number | null; lng: number | null }) {
   const map = useMap();
@@ -31,12 +30,13 @@ interface ServiceDetailViewProps {
   onNavigateToChat: (message: string) => void;
 }
 
-export default function ServiceDetailView({ category, onBack, onNavigateToChat }: ServiceDetailViewProps) {
+export default function ServiceDetailView({ category, onBack }: ServiceDetailViewProps) {
   const { state, dispatch } = useApp();
   const [selectedPointId, setSelectedPointId] = useState<string | null>(null);
   const [locationSearch, setLocationSearch] = useState("");
   const [sortOption, setSortOption] = useState<SortOption>("alphabetical");
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+  const [guideOpen, setGuideOpen] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
 
   const meta = CATEGORY_META[category];
@@ -61,6 +61,13 @@ export default function ServiceDetailView({ category, onBack, onNavigateToChat }
     }
   }, [sortOption]);
 
+  // Auto-open guide when a pending message arrives
+  useEffect(() => {
+    if (state.guidePendingMessage && !guideOpen) {
+      setGuideOpen(true);
+    }
+  }, [state.guidePendingMessage]);
+
   const allPoints = state.servicePoints.filter(
     (p) => p.category === category && !Number.isNaN(p.lat) && !Number.isNaN(p.lng),
   );
@@ -72,9 +79,21 @@ export default function ServiceDetailView({ category, onBack, onNavigateToChat }
     setSelectedPointId(point.id === selectedPointId ? null : point.id);
   }
 
+  function handleGuideMessage(message: string) {
+    dispatch({ type: "SEND_GUIDE_MESSAGE", message });
+    if (!guideOpen) setGuideOpen(true);
+  }
+
   return (
     <div className="flex flex-col h-full">
-      <DetailViewHeader meta={meta} Icon={Icon} totalCount={allPoints.length} onBack={onBack} />
+      <DetailViewHeader
+        meta={meta}
+        Icon={Icon}
+        totalCount={allPoints.length}
+        onBack={onBack}
+        guideOpen={guideOpen}
+        onToggleGuide={() => setGuideOpen((prev) => !prev)}
+      />
 
       <div className="flex-1 flex min-h-0">
         <div className="flex-1 min-w-0 relative">
@@ -115,15 +134,21 @@ export default function ServiceDetailView({ category, onBack, onNavigateToChat }
           <ServiceListPanel
             points={filteredPoints}
             selectedPointId={selectedPointId}
-            categoryColor={meta.color}
+            categoryColor={meta.markerColor}
             locationSearch={locationSearch}
             sortOption={sortOption}
             onChangeLocationSearch={setLocationSearch}
             onChangeSortOption={setSortOption}
             onSelectPoint={handleSelectPoint}
-            onNavigateToChat={onNavigateToChat}
+            onNavigateToChat={handleGuideMessage}
           />
         </div>
+
+        {guideOpen && (
+          <div className="w-[340px] shrink-0 border-l border-border/30 bg-white">
+            <ServiceGuideChat />
+          </div>
+        )}
       </div>
     </div>
   );

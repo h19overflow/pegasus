@@ -2,11 +2,11 @@ import { useState, useRef, useEffect } from "react";
 import { Flag, Smile } from "lucide-react";
 
 export const REACTIONS = [
-  { emoji: "👍", label: "Like"  },
-  { emoji: "❤️", label: "Love"  },
-  { emoji: "😮", label: "Wow"   },
-  { emoji: "😢", label: "Sad"   },
-  { emoji: "😡", label: "Angry" },
+  { emoji: "\ud83d\udc4d", label: "Like"  },
+  { emoji: "\u2764\ufe0f", label: "Love"  },
+  { emoji: "\ud83d\ude2e", label: "Wow"   },
+  { emoji: "\ud83d\ude22", label: "Sad"   },
+  { emoji: "\ud83d\ude21", label: "Angry" },
 ] as const;
 
 interface ArticleReactionsProps {
@@ -117,7 +117,7 @@ export function ArticleReactions({
         <Flag className={compact ? "w-3 h-3" : "w-3.5 h-3.5"} />
         {compact
           ? flagCount > 0 ? <span className="text-[10px]">{flagCount}</span> : null
-          : <span>{isFlagged ? `Flagged · ${flagCount} report${flagCount !== 1 ? "s" : ""}` : "Flag as misinformation"}</span>
+          : <span>{isFlagged ? `Flagged \u00b7 ${flagCount} report${flagCount !== 1 ? "s" : ""}` : "Flag as misinformation"}</span>
         }
       </button>
     </div>

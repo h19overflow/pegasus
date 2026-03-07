@@ -63,7 +63,7 @@ export function AnalyzeButton({ onComplete }: AnalyzeButtonProps) {
       <button
         onClick={handleRunAnalysis}
         disabled={analysisState === "running"}
-        className="flex items-center gap-2 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors min-h-[44px] disabled:opacity-60 disabled:cursor-not-allowed"
+        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[hsl(var(--amber-gold))] text-white text-sm font-semibold hover:bg-[hsl(var(--amber-gold))]/90 transition-colors min-h-[44px] shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {analysisState === "running" ? (
           <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />

@@ -6,10 +6,10 @@ import { ArticleReactions } from "./ArticleReactions";
 
 interface NewsDetailProps {
   article: NewsArticle;
-  userReaction: string | null;
+  userReaction: string | undefined;
   isFlagged: boolean;
   onBack: () => void;
-  onReact: (articleId: string, emoji: string | null) => void;
+  onReact: (articleId: string, emoji: string) => void;
   onFlag: (articleId: string) => void;
 }
 
@@ -34,26 +34,26 @@ function formatFullDate(isoString: string): string {
   });
 }
 
-function MisinfoPanel({ risk, reason }: { risk: number; reason?: string }) {
-  const isLow    = risk <= 30;
-  const isMedium = risk > 30 && risk <= 60;
-  const Icon     = isLow ? ShieldCheck : isMedium ? ShieldAlert : ShieldX;
-  const { bg, border, text, label } = isLow
-    ? { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-800", label: "Low Risk" }
+function MisinfoPanel({ risk, reason }: { risk: number; reason: string }) {
+  const isHigh = risk > 60;
+  const isMedium = risk > 30;
+
+  const Icon = isHigh ? ShieldX : isMedium ? ShieldAlert : ShieldCheck;
+  const label = isHigh ? "High Risk" : isMedium ? "Medium Risk" : "Low Risk";
+  const colorClasses = isHigh
+    ? "border-red-200 bg-red-50 text-red-800"
     : isMedium
-    ? { bg: "bg-amber-50",   border: "border-amber-200",   text: "text-amber-800",   label: "Medium Risk" }
-    : { bg: "bg-red-50",     border: "border-red-200",     text: "text-red-800",     label: "High Risk"   };
+      ? "border-amber-200 bg-amber-50 text-amber-800"
+      : "border-emerald-200 bg-emerald-50 text-emerald-800";
+  const iconColor = isHigh ? "text-red-600" : isMedium ? "text-amber-600" : "text-emerald-600";
 
   return (
-    <div className={`rounded-lg border p-4 ${bg} ${border}`}>
-      <div className={`flex items-center gap-2 ${text}`}>
-        <Icon className="w-4 h-4 shrink-0" />
-        <span className="text-sm font-semibold">Misinformation Assessment — {label}</span>
-        <span className="ml-auto text-xs font-bold opacity-70">{risk}/100</span>
+    <div className={`rounded-lg border p-3 flex items-start gap-3 ${colorClasses}`}>
+      <Icon className={`w-5 h-5 mt-0.5 shrink-0 ${iconColor}`} />
+      <div className="min-w-0">
+        <p className="text-sm font-semibold">{label} — Misinformation Score: {risk}/100</p>
+        <p className="text-xs mt-1 opacity-80">{reason}</p>
       </div>
-      {reason && (
-        <p className={`mt-2 text-xs leading-relaxed ${text} opacity-80`}>{reason}</p>
-      )}
     </div>
   );
 }
@@ -104,6 +104,14 @@ export function NewsDetail({ article, userReaction, isFlagged, onBack, onReact, 
           {/* Title */}
           <h1 className="text-xl font-bold text-foreground leading-tight">{article.title}</h1>
 
+          {/* Misinfo panel */}
+          {article.misinfoRisk != null && (
+            <MisinfoPanel
+              risk={article.misinfoRisk}
+              reason={article.misinfoReason ?? "No analysis available"}
+            />
+          )}
+
           {/* Source info card */}
           <div className="rounded-lg border border-border/50 bg-muted/20 p-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -131,11 +139,6 @@ export function NewsDetail({ article, userReaction, isFlagged, onBack, onReact, 
             </a>
           </div>
 
-          {/* Misinformation assessment panel */}
-          {article.misinfoRisk != null && (
-            <MisinfoPanel risk={article.misinfoRisk} reason={article.misinfoReason} />
-          )}
-
           {/* Excerpt / body */}
           {article.excerpt && (
             <p className="text-sm text-muted-foreground leading-relaxed">{article.excerpt}</p>
@@ -158,13 +161,11 @@ export function NewsDetail({ article, userReaction, isFlagged, onBack, onReact, 
             <ExternalLink className="w-4 h-4" />
           </a>
 
-          {/* Actions bar */}
-          <div className="border-y border-border/50 py-3">
+          {/* Reactions bar */}
+          <div className="flex items-center border-y border-border/50 py-3">
             <ArticleReactions
               articleId={article.id}
-              reactionCounts={article.reactionCounts ?? {}}
               userReaction={userReaction}
-              flagCount={article.flagCount ?? 0}
               isFlagged={isFlagged}
               onReact={onReact}
               onFlag={onFlag}
