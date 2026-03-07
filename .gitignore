@@ -17,6 +17,12 @@ wheels/
 # Worktrees
 .worktrees/
 
+# Claude
+.claude/
+
+# Legacy directory (renamed to frontend/)
+montgomery-navigator/
+
 # OS / Editor files
 .DS_Store
 .vscode/
