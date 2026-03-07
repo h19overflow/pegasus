@@ -44,6 +44,8 @@ build-frontend:
   script:
     - |
       docker build \
+        --build-arg VITE_API_BASE="${BACKEND_URL}" \
+        --build-arg VITE_ANALYSIS_API_BASE="${BACKEND_URL}" \
         -t "${FRONTEND_IMAGE}:${CI_COMMIT_SHORT_SHA}" \
         -t "${FRONTEND_IMAGE}:latest" \
         frontend/
