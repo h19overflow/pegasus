@@ -17,10 +17,10 @@ The frontend is a React + TypeScript + Vite + Tailwind CSS + shadcn/ui app in `f
 
 | Tab | View Key | Purpose | Key Components |
 |-----|----------|---------|----------------|
-| **Profile** | `profile` | Citizen persona dashboard — civic snapshot, benefits, needs, goals, barriers, CV, education, skills | `ProfileView.tsx`, `PersonaSelector.tsx` |
-| **Chat** | `chat` | AI-powered conversational assistant — benefits cliff, medicaid, reentry, job cards | `CommandCenter.tsx` (chat column), `ChatInput`, `MessageBubble` |
-| **Services** | `services` | Interactive map + directory of 8 service categories (health, community, childcare, education, safety, libraries, parks, police) with ArcGIS data | `ServicesView.tsx`, `ServiceDirectory.tsx`, `ServiceMapView.tsx`, `ServiceGuideCards.tsx` |
-| **Career Growth** | `cv` | Job matching, market pulse dashboard, trending skills, upskilling paths, commute estimates | `CvUploadView.tsx`, `JobMatchPanel.tsx`, `MarketPulse.tsx`, `TrendingSkillsBar.tsx` |
+| **Services** | `services` | Interactive map + directory of 8 service categories with ArcGIS data | `ServicesView.tsx`, `ServiceDirectory.tsx`, `ServiceMapView.tsx`, `ServiceGuideCards.tsx` |
+| **News** | `news` | Community news feed with reactions, comments, sentiment, and newsletter | `NewsView.tsx`, `NewsCard.tsx`, `NewsDetail.tsx`, `CommentFeed.tsx` |
+| **Admin** | `admin` | Admin dashboard — AI insights, comment analysis, mayor's brief, citizen view | `AdminDashboard.tsx`, `AIInsightsCard.tsx`, `MayorsBrief.tsx`, `CommentFeed.tsx` |
+| **Profile** | `profile` | Citizen persona dashboard — civic snapshot, benefits, settings | `ProfileView.tsx`, `PersonaSelector.tsx` |
 
 ---
 
@@ -50,7 +50,7 @@ frontend/
 
 Global state via `useReducer` in `appContext.tsx`. All views read from `state` and dispatch actions. Key state shape defined in `AppState` interface in `types.ts`.
 
-- `state.activeView` controls which tab renders (`"chat" | "cv" | "services" | "profile"`)
+- `state.activeView` controls which tab renders (`"cv" | "services" | "profile" | "admin" | "news"`)
 - `state.citizenMeta` holds the active citizen persona (or null)
 - `state.cvData` holds parsed CV data
 - `state.jobMatches`, `state.trendingSkills`, `state.upskillingSummary` drive Career Growth
@@ -58,8 +58,8 @@ Global state via `useReducer` in `appContext.tsx`. All views read from `state` a
 
 ### Data Pillars
 
-1. **ArcGIS REST API** — 31 public endpoints for Montgomery city data (crime, permits, businesses, parks, recreation, payroll, budget). Client in `arcgisService.ts`.
-2. **Bright Data** — Live web scraping for jobs (Indeed, LinkedIn, Glassdoor), government sites (Medicaid, DHR), and news. See `docs/bright-data-integration.md` for full API reference.
+1. **ArcGIS REST API** — 8 public service layers for Montgomery city data (health, community, childcare, education, safety, libraries, parks, police). Client in `arcgisService.ts`.
+2. **Bright Data** — Backend data pipeline for jobs (Indeed, LinkedIn, Glassdoor), government sites (Medicaid, DHR), and news via Web Scraper API, SERP API, and Web Unlocker. Scheduler runs every 15 min; results saved to `public/data/` and broadcast via SSE. See `docs/bright-data-integration.md`.
 3. **Mock Data** — 5 realistic citizen personas in `public/data/mock_citizens.json` with 30+ civic fields each, full CVs, goals, and barriers.
 
 ---
