@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import TopBar from "@/components/app/TopBar";
 import { AppNav, type MobileTab } from "@/components/app/MobileNav";
-import CvUploadView from "@/components/app/cv/CvUploadView";
 import { ServicesView } from "@/components/app/services/ServicesView";
 import ProfileView from "@/components/app/ProfileView";
 import { NewsPage } from "@/components/app/news/NewsPage";
@@ -14,11 +13,10 @@ import {
   buildWelcomeMessage,
   buildUserMessage,
   buildArtifactForResponse,
-  INITIAL_PROCESSING_STEPS,
 } from "@/lib/chatHelpers";
 import type { AppView, Language } from "@/lib/types";
 
-const VALID_VIEWS = new Set<string>(["services", "cv", "profile", "news"]);
+const VALID_VIEWS = new Set<string>(["services", "admin", "profile", "news"]);
 
 export default function CommandCenter() {
   const { state, dispatch } = useApp();
@@ -57,35 +55,16 @@ export default function CommandCenter() {
   }, []);
 
   function handleTabChange(tab: MobileTab) {
+    if (tab === "admin") {
+      navigate("/admin");
+      return;
+    }
     dispatch({ type: "SET_VIEW", view: tab });
   }
 
   async function handleSendMessage(text: string) {
     dispatch({ type: "ADD_MESSAGE", message: buildUserMessage(text) });
     dispatch({ type: "SET_TYPING", isTyping: true });
-    dispatch({ type: "SET_PROCESSING_STEPS", steps: INITIAL_PROCESSING_STEPS });
-
-    setTimeout(() => {
-      dispatch({
-        type: "SET_PROCESSING_STEPS",
-        steps: [
-          { label: "Understanding your situation", status: "completed" },
-          { label: "Checking benefit eligibility rules", status: "in_progress" },
-          { label: "Building your personalized plan", status: "pending" },
-        ],
-      });
-    }, 600);
-
-    setTimeout(() => {
-      dispatch({
-        type: "SET_PROCESSING_STEPS",
-        steps: [
-          { label: "Understanding your situation", status: "completed" },
-          { label: "Checking benefit eligibility rules", status: "completed" },
-          { label: "Building your personalized plan", status: "in_progress" },
-        ],
-      });
-    }, 1200);
 
     const response = await getSmartResponse(text);
 
@@ -105,7 +84,6 @@ export default function CommandCenter() {
     }
 
     dispatch({ type: "SET_TYPING", isTyping: false });
-    dispatch({ type: "SET_PROCESSING_STEPS", steps: [] });
   }
 
   const currentView = state.activeView;
@@ -119,7 +97,6 @@ export default function CommandCenter() {
           {currentView === "services" && (
             <ServicesView onNavigateToChat={handleSendMessage} />
           )}
-          {currentView === "cv" && <CvUploadView />}
           {currentView === "profile" && <ProfileView />}
           {currentView === "news" && <NewsPage />}
         </div>
