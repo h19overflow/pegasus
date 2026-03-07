@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useApp } from "@/lib/appContext";
 import { fetchNewsArticles, fetchNewsComments, filterArticlesByCategory } from "@/lib/newsService";
 import { loadStoredComments } from "@/lib/newsCommentStore";
@@ -88,6 +88,14 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
     dispatch({ type: "TOGGLE_ARTICLE_FLAG", articleId });
   }
 
+  const liveCommentCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const c of state.newsComments) {
+      counts.set(c.articleId, (counts.get(c.articleId) ?? 0) + 1);
+    }
+    return counts;
+  }, [state.newsComments]);
+
   const selectedArticle = state.selectedArticleId
     ? state.newsArticles.find((a) => a.id === state.selectedArticleId) ?? null
     : null;
@@ -112,7 +120,7 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
         (a) => state.flaggedArticleIds.includes(a.id) || (a.misinfoRisk ?? 0) > 60,
       )
     : afterSearch;
-  const visibleArticles = sortArticles(afterFlagged, sortMode);
+  const visibleArticles = sortArticles(afterFlagged, sortMode, state.newsComments);
   const hero = selectHeroArticle(visibleArticles);
   const gridArticles = hero ? visibleArticles.filter((a) => a.id !== hero.id) : visibleArticles;
   const midpoint = Math.ceil(gridArticles.length / 2);
@@ -160,6 +168,7 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
                       userReaction={state.articleReactions[article.id] ?? null}
                       flagCount={article.flagCount ?? 0}
                       isFlagged={state.flaggedArticleIds.includes(article.id)}
+                      commentCount={article.commentCount + (liveCommentCounts.get(article.id) ?? 0)}
                       onSelect={(a) => dispatch({ type: "SET_SELECTED_ARTICLE", articleId: a.id })}
                       onReact={handleReact}
                       onFlag={handleFlag}
@@ -184,6 +193,7 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
                       userReaction={state.articleReactions[article.id] ?? null}
                       flagCount={article.flagCount ?? 0}
                       isFlagged={state.flaggedArticleIds.includes(article.id)}
+                      commentCount={article.commentCount + (liveCommentCounts.get(article.id) ?? 0)}
                       onSelect={(a) => dispatch({ type: "SET_SELECTED_ARTICLE", articleId: a.id })}
                       onReact={handleReact}
                       onFlag={handleFlag}

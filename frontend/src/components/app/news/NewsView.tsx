@@ -1,22 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 import { useApp } from "@/lib/appContext";
-import { fetchNewsArticles, filterArticlesByCategory, sortArticlesByDate } from "@/lib/newsService";
+import { fetchNewsArticles, filterArticlesByCategory } from "@/lib/newsService";
 import { NewsCard } from "./NewsCard";
 import { NewsDetail } from "./NewsDetail";
 import { NewsCategoryTabs } from "./NewsCategoryTabs";
 import { NewsFilterBar } from "./NewsFilterBar";
+import { sortArticles, buildArticleCountsPerCategory } from "./newsletterHelpers";
+import type { SortMode } from "./newsletterHelpers";
 import type { NewsArticle, NewsCategory } from "@/lib/types";
 import { Newspaper } from "lucide-react";
 
-type SortMode = "newest" | "oldest" | "most_liked" | "most_comments";
-
-function buildArticleCountsPerCategory(articles: NewsArticle[]): Record<string, number> {
-  const counts: Record<string, number> = { all: articles.length };
-  for (const article of articles) {
-    counts[article.category] = (counts[article.category] ?? 0) + 1;
-  }
-  return counts;
-}
 
 function formatLastScrapedTimestamp(isoString: string): string {
   const date = new Date(isoString);
@@ -35,16 +28,6 @@ function SkeletonCard() {
   );
 }
 
-function sortArticles(articles: NewsArticle[], sortMode: SortMode): NewsArticle[] {
-  if (sortMode === "most_liked") {
-    return [...articles].sort((a, b) => b.upvotes - a.upvotes);
-  }
-  if (sortMode === "most_comments") {
-    return [...articles].sort((a, b) => b.commentCount - a.commentCount);
-  }
-  const sorted = sortArticlesByDate(articles);
-  return sortMode === "oldest" ? sorted.reverse() : sorted;
-}
 
 function filterBySearch(articles: NewsArticle[], query: string): NewsArticle[] {
   if (!query.trim()) return articles;
@@ -149,8 +132,16 @@ export function NewsView() {
   const afterSentiment = filterBySentiment(afterCategory, sentimentFilter);
   const afterSource = filterBySource(afterSentiment, sourceFilter);
   const afterSearch = filterBySearch(afterSource, searchQuery);
-  const visibleArticles = sortArticles(afterSearch, sortMode);
+  const visibleArticles = sortArticles(afterSearch, sortMode, state.newsComments);
   const articleCounts = buildArticleCountsPerCategory(state.newsArticles);
+
+  const liveCommentCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const c of state.newsComments) {
+      counts.set(c.articleId, (counts.get(c.articleId) ?? 0) + 1);
+    }
+    return counts;
+  }, [state.newsComments]);
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
@@ -227,6 +218,7 @@ export function NewsView() {
                 userReaction={state.articleReactions[article.id] ?? null}
                 flagCount={article.flagCount ?? 0}
                 isFlagged={state.flaggedArticleIds.includes(article.id)}
+                commentCount={article.commentCount + (liveCommentCounts.get(article.id) ?? 0)}
                 onSelect={handleSelectArticle}
                 onReact={handleReact}
                 onFlag={handleFlag}
