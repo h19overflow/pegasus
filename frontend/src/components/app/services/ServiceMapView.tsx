@@ -10,7 +10,6 @@ import { createCategoryMarker, getMarkerColor, getMarkerSymbol } from "@/lib/map
 import { MAP_CATEGORIES } from "./serviceCategoryMeta";
 import { MapPointDetailPanel } from "./MapPointDetailPanel";
 import { NeighborhoodOverlay } from "./NeighborhoodOverlay";
-import { HotspotOverlay } from "./HotspotOverlay";
 import { NewsMapOverlay } from "../news/NewsMapOverlay";
 import { NewsMapToggle } from "../news/NewsMapToggle";
 import { NewsSidebarPanel } from "../news/NewsSidebarPanel";
@@ -95,7 +94,6 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
   );
   const [selectedPoint, setSelectedPoint] = useState<ServicePoint | null>(null);
   const [showNeighborhood, setShowNeighborhood] = useState(false);
-  const [showHotspots, setShowHotspots] = useState(false);
   const [flyTarget, setFlyTarget] = useState<{ lat: number; lng: number; ts: number } | null>(null);
   const [focusedArticle, setFocusedArticle] = useState<{ id: string; ts: number } | null>(null);
 
@@ -105,9 +103,6 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
     if (!cmd) return;
     if (cmd.type === "filter_category" && cmd.category) {
       setActiveCategories(new Set([cmd.category]));
-    }
-    if (cmd.type === "highlight_hotspots") {
-      setShowHotspots(true);
     }
   }, [state.mapCommand]);
 
@@ -188,16 +183,6 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
           >
             {showNeighborhood ? "✕ Hide" : "◉ Show"} Neighborhood Health
           </button>
-          <button
-            onClick={() => setShowHotspots(!showHotspots)}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors shadow-sm ${
-              showHotspots
-                ? "bg-red-600 text-white shadow-red-600/25"
-                : "bg-red-50 text-red-700 border border-red-200 hover:bg-red-100"
-            }`}
-          >
-            {showHotspots ? "✕ Hide" : "🔥 Show"} Predictive Hotspots
-          </button>
           <NewsMapToggle
             active={state.newsMapVisible}
             onToggle={() => dispatch({ type: "TOGGLE_NEWS_MAP" })}
@@ -249,7 +234,6 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
             <FlyToTarget target={flyTarget} />
             <MapCommandHandler visiblePoints={visiblePoints} />
             {showNeighborhood && <NeighborhoodOverlay />}
-            {showHotspots && <HotspotOverlay />}
             {state.newsMapVisible && <NewsMapOverlay selectedArticleId={focusedArticle?.id ?? null} selectionTs={focusedArticle?.ts ?? 0} />}
           </MapContainer>
 
