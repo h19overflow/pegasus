@@ -3,9 +3,13 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import { useApp } from "@/lib/appContext";
 import { fetchNewsArticles } from "@/lib/newsService";
 import { filterGeolocatedArticles } from "@/lib/newsMapMarkers";
-import { NewsMapOverlay } from "./NewsMapOverlay";
+import { filterArticlesByMapCategory, filterByMisinfoRisk } from "@/lib/newsMapUtils";
+import type { ReactionType } from "@/lib/types";
+import { NewsMapMarker } from "./NewsMapMarker";
+import { NewsMapCategoryBar } from "./NewsMapCategoryBar";
 import { NewsSidebarPanel } from "./NewsSidebarPanel";
 import { NewsSentimentLegend } from "./NewsSentimentLegend";
+import type { NewsCategory } from "@/lib/types";
 import "@/lib/leafletSetup";
 
 const MONTGOMERY_CENTER: [number, number] = [32.3668, -86.3];
@@ -24,6 +28,8 @@ export function NewsMapTab() {
   const { state, dispatch } = useApp();
   const [flyTarget, setFlyTarget] = useState<{ lat: number; lng: number; ts: number } | null>(null);
   const [focusedArticle, setFocusedArticle] = useState<{ id: string; ts: number } | null>(null);
+  const [mapCategory, setMapCategory] = useState<NewsCategory>("all");
+  const [showMisinfoOnly, setShowMisinfoOnly] = useState(false);
 
   useEffect(() => {
     if (state.newsArticles.length === 0) {
@@ -41,6 +47,10 @@ export function NewsMapTab() {
     }
   }, []);
 
+  function handleReact(articleId: string, reaction: ReactionType) {
+    dispatch({ type: "SET_ARTICLE_REACTION", articleId, reaction });
+  }
+
   function handleSelectArticle(articleId: string) {
     const article = state.newsArticles.find((a) => a.id === articleId);
     if (article?.location) {
@@ -55,6 +65,8 @@ export function NewsMapTab() {
   }
 
   const geoArticles = filterGeolocatedArticles(state.newsArticles);
+  const afterCategory = filterArticlesByMapCategory(geoArticles, mapCategory);
+  const visibleArticles = filterByMisinfoRisk(afterCategory, showMisinfoOnly);
 
   return (
     <div className="flex-1 flex min-h-0 relative">
@@ -64,12 +76,24 @@ export function NewsMapTab() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <NewsMapOverlay
-            selectedArticleId={focusedArticle?.id ?? null}
-            selectionTs={focusedArticle?.ts ?? 0}
-          />
+          {visibleArticles.map((article) => (
+            <NewsMapMarker
+              key={article.id}
+              article={article}
+              reactionCounts={state.newsReactions[article.id] ?? ({} as Record<ReactionType, number>)}
+              userReaction={state.userReactions[article.id]}
+              onReact={handleReact}
+            />
+          ))}
           <FlyToArticle target={flyTarget} />
         </MapContainer>
+
+        <NewsMapCategoryBar
+          activeCategory={mapCategory}
+          onCategoryChange={setMapCategory}
+          showMisinfoOnly={showMisinfoOnly}
+          onMisinfoToggle={() => setShowMisinfoOnly((prev) => !prev)}
+        />
 
         <NewsSentimentLegend
           articles={geoArticles}
