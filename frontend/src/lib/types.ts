@@ -8,7 +8,8 @@ export type MessageType =
   | "medicaid"
   | "skill-gap"
   | "reentry"
-  | "pdf-preview";
+  | "pdf-preview"
+  | "service-roadmap";
 
 export interface FlowMeta {
   flowId: FlowId;
@@ -48,6 +49,8 @@ export interface ChatMessage {
   profileData?: ProfileData;
   actionItems?: ActionItem[];
   processingSteps?: ProcessingStep[];
+  serviceId?: string;
+  serviceTitle?: string;
 }
 
 export interface Artifact {
@@ -291,6 +294,40 @@ export interface AppState {
   chatBubbleOpen: boolean;
   chatBubbleHasUnread: boolean;
   housingListings: HousingListing[];
+  activeRoadmap: PersonalizedRoadmap | null;
+  roadmapCompletedStepIds: string[];
+}
+
+/* ── Roadmaps ──────────────────────────────────────────────── */
+export interface RoadmapLocation {
+  name: string;
+  address: string;
+  hours: string;
+  phone: string | null;
+}
+
+export interface RoadmapStep {
+  id: string;
+  stepNumber: number;
+  title: string;
+  action: string;
+  documents: string[];
+  location: RoadmapLocation | null;
+  estimatedTime: string;
+  proTip: string | null;
+  canDoOnline: boolean;
+  onlineUrl: string | null;
+}
+
+export interface PersonalizedRoadmap {
+  id: string;
+  serviceId: string;
+  serviceTitle: string;
+  serviceCategory: string;
+  eligibilityNote: string;
+  totalEstimatedTime: string;
+  steps: RoadmapStep[];
+  generatedAt: string;
 }
 
 /* ── Neighborhood Activity ────────────────────────────── */

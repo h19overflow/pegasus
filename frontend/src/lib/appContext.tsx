@@ -25,6 +25,7 @@ import type {
   NewsComment,
   ReactionType,
   HousingListing,
+  PersonalizedRoadmap,
 } from "./types";
 
 type AppAction =
@@ -72,7 +73,10 @@ type AppAction =
   | { type: "TOGGLE_NEWS_MAP" }
   | { type: "SET_NEWS_MAP_MODE"; mode: "pins" | "heat" }
   | { type: "SET_ARTICLE_REACTION"; articleId: string; reaction: ReactionType }
-  | { type: "SET_NEWS_COMMENTS"; comments: NewsComment[] };
+  | { type: "SET_NEWS_COMMENTS"; comments: NewsComment[] }
+  | { type: "SET_ACTIVE_ROADMAP"; roadmap: PersonalizedRoadmap }
+  | { type: "CLEAR_ROADMAP" }
+  | { type: "TOGGLE_ROADMAP_STEP"; stepId: string };
 
 const initialState: AppState = {
   messages: [],
@@ -114,6 +118,8 @@ const initialState: AppState = {
   chatBubbleOpen: false,
   chatBubbleHasUnread: false,
   housingListings: [],
+  activeRoadmap: null,
+  roadmapCompletedStepIds: [],
 };
 
 function applyMessageSideEffects(state: AppState, message: ChatMessage): AppState {
@@ -288,6 +294,20 @@ function appReducer(state: AppState, action: AppAction): AppState {
         ...state,
         newsReactions: { ...state.newsReactions, [action.articleId]: updated },
         userReactions: { ...state.userReactions, [action.articleId]: action.reaction },
+      };
+    }
+    case "SET_ACTIVE_ROADMAP":
+      return { ...state, activeRoadmap: action.roadmap, roadmapCompletedStepIds: [] };
+    case "CLEAR_ROADMAP":
+      return { ...state, activeRoadmap: null, roadmapCompletedStepIds: [] };
+    case "TOGGLE_ROADMAP_STEP": {
+      const ids = state.roadmapCompletedStepIds;
+      const has = ids.includes(action.stepId);
+      return {
+        ...state,
+        roadmapCompletedStepIds: has
+          ? ids.filter((id) => id !== action.stepId)
+          : [...ids, action.stepId],
       };
     }
     default:
