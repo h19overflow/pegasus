@@ -1,7 +1,12 @@
 .git
 .gitignore
 .gitlab-ci.yml
-frontend/
+frontend/*
+!frontend/public/
+frontend/public/*
+!frontend/public/data/
+frontend/public/data/*
+!frontend/public/data/news_feed.json
 montgomery-navigator/
 docs/
 *.md
