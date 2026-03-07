@@ -110,7 +110,7 @@ export function PredictiveHeatmapPanel({ onAskAI }: PredictiveHeatmapPanelProps)
     <Card>
       <CardHeader>
         <CardTitle className="text-base flex items-center gap-2">
-          Predictive Hotspots
+          Areas to Watch
           {criticalCount > 0 && (
             <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-red-100 text-red-700">
               {criticalCount} critical
@@ -125,7 +125,7 @@ export function PredictiveHeatmapPanel({ onAskAI }: PredictiveHeatmapPanelProps)
       </CardHeader>
       <CardContent className="space-y-4">
         {loading ? (
-          <p className="text-sm text-muted-foreground">Loading predictions...</p>
+          <p className="text-sm text-muted-foreground">Loading...</p>
         ) : hotspots.length === 0 ? (
           <p className="text-sm text-muted-foreground">No hotspot data available.</p>
         ) : (
@@ -147,7 +147,7 @@ export function PredictiveHeatmapPanel({ onAskAI }: PredictiveHeatmapPanelProps)
             )}
 
             {trends.length > 0 && (
-              <CollapsibleSection title="Trend Analysis" defaultOpen={false}>
+              <CollapsibleSection title="What's Changing" defaultOpen={false}>
                 <div className="space-y-2">
                   {trends.map((t) => (
                     <TrendRow key={t.category} trend={t} onAskAI={onAskAI} />

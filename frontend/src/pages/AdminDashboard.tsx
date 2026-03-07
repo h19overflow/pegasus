@@ -116,14 +116,16 @@ export default function AdminDashboard() {
           <AnalyzeButton onComplete={() => setAiRefreshTrigger((n) => n + 1)} />
         </section>
 
-        <PredictiveHeatmap onAskAI={askAI} />
-
         <MayorsBrief
           articles={state.newsArticles}
           comments={state.newsComments}
           reactions={mergedReactions}
           onAskAI={askAI}
         />
+
+        <SentimentOverview articles={state.newsArticles} onAskAI={askAI} />
+
+        <PredictiveHeatmap onAskAI={askAI} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <CommentFeed articles={state.newsArticles} onAskAI={askAI} />
@@ -132,8 +134,6 @@ export default function AdminDashboard() {
             onAskAI={askAI}
           />
         </div>
-
-        <SentimentOverview articles={state.newsArticles} onAskAI={askAI} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <HotSpotsPanel neighborhoods={neighborhoods} onAskAI={askAI} />
