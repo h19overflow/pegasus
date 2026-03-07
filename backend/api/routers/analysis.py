@@ -14,6 +14,17 @@ ANALYSIS_PATH = REPO_ROOT / "backend" / "data" / "analysis_results.json"
 _status = {"state": "idle", "message": ""}
 
 
+def _resolve_news_path() -> tuple[object, list[str]]:
+    candidates = [
+        OUTPUT_FILES["news"],
+        REPO_ROOT / "backend" / "data" / "news_feed.json",
+    ]
+    for path in candidates:
+        if path.exists():
+            return path, [str(p) for p in candidates]
+    return candidates[0], [str(p) for p in candidates]
+
+
 @router.post("/analysis/run")
 async def trigger_analysis(background_tasks: BackgroundTasks):
     """Trigger batch comment analysis."""
@@ -28,9 +39,12 @@ async def trigger_analysis(background_tasks: BackgroundTasks):
 
 async def _run_analysis():
     try:
-        news_path = OUTPUT_FILES["news"]
+        news_path, searched_paths = _resolve_news_path()
         if not news_path.exists():
-            _status.update(state="failed", message="No news_feed.json found")
+            _status.update(
+                state="failed",
+                message=f"No news_feed.json found. Searched: {', '.join(searched_paths)}",
+            )
             return
 
         news_data = json.loads(news_path.read_text())

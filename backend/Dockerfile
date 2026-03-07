@@ -11,6 +11,7 @@ RUN uv sync --frozen --no-dev --no-install-project
 
 # Copy application source
 COPY backend/ ./backend/
+COPY frontend/public/data/news_feed.json ./backend/data/news_feed.json
 
 EXPOSE 8080
 
