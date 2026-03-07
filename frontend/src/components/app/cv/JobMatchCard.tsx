@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import type { JobMatch } from "@/lib/types";
 import { JobMatchCardHeader } from "./JobMatchCardHeader";
 import { JobMatchCardDetail } from "./JobMatchCardDetail";
@@ -10,7 +10,7 @@ interface JobMatchCardProps {
   onToggleExpand?: () => void;
 }
 
-const JobMatchCard = ({ job, showMatch = false, isExpanded = false, onToggleExpand }: JobMatchCardProps) => {
+const JobMatchCard = memo(({ job, showMatch = false, isExpanded = false, onToggleExpand }: JobMatchCardProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const topSkills = job.skillSummary ? job.skillSummary.split(", ").slice(0, 3) : [];
 
@@ -49,6 +49,6 @@ const JobMatchCard = ({ job, showMatch = false, isExpanded = false, onToggleExpa
       {isExpanded && <JobMatchCardDetail job={job} showMatch={showMatch} />}
     </div>
   );
-};
+});
 
 export default JobMatchCard;

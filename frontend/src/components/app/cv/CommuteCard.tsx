@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { MapPin, Car, Bus, Footprints } from "lucide-react";
 import type { CommuteEstimate } from "@/lib/types";
 import { TravelMode } from "./TravelMode";
@@ -5,13 +6,13 @@ import { TravelMode } from "./TravelMode";
 interface CommuteCardProps {
   estimate: CommuteEstimate;
   isSelected: boolean;
-  onSelect: () => void;
+  onSelect: (jobId: string) => void;
 }
 
-export function CommuteCard({ estimate, isSelected, onSelect }: CommuteCardProps) {
+export const CommuteCard = memo(function CommuteCard({ estimate, isSelected, onSelect }: CommuteCardProps) {
   return (
     <button
-      onClick={onSelect}
+      onClick={() => onSelect(estimate.jobId)}
       className={`w-full text-left rounded-lg p-3 flex items-center gap-4 transition-colors ${
         isSelected
           ? "bg-primary/5 border border-primary/30"
@@ -38,4 +39,4 @@ export function CommuteCard({ estimate, isSelected, onSelect }: CommuteCardProps
       </div>
     </button>
   );
-}
+});
