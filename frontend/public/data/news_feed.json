@@ -1,5 +1,5 @@
 {
-  "lastScraped": "2026-03-07T14:53:37.275857+00:00",
+  "lastScraped": "2026-03-07T17:13:07.657633+00:00",
   "totalArticles": 259,
   "articles": [
     {
@@ -127,14 +127,16 @@
       "commentCount": 0,
       "sentiment": "neutral",
       "sentimentScore": 30,
-      "misinfoRisk": 0,
+      "misinfoRisk": 72,
       "summary": "Miami man sentenced for installing card skimmers at grocery stores",
       "location": {
         "lat": 32.374903,
         "lng": -86.30714,
         "address": "Montgomery, AL",
         "neighborhood": "Montgomery"
-      }
+      },
+      "misinfoReason": "Article contains unverified claims about the scope of the skimming operation and uses sensationalized language about crime rates.",
+      "flagCount": 8
     },
     {
       "id": "6a21c02f96c4",
@@ -164,7 +166,7 @@
     {
       "id": "22619a2ae7fe",
       "title": "Ten Commandments display bill advances in Alabama House committee",
-      "excerpt": "MONTGOMERY, Ala. – A bill requiring public schools to display the Ten Commandments in classrooms advanced Wednesday without debate in the...",
+      "excerpt": "MONTGOMERY, Ala. \u2013 A bill requiring public schools to display the Ten Commandments in classrooms advanced Wednesday without debate in the...",
       "body": "",
       "source": "Alabama Daily News",
       "sourceUrl": "https://aldailynews.com/ten-commandments-display-bill-advances-in-alabama-house-committee/",
@@ -177,14 +179,16 @@
       "commentCount": 0,
       "sentiment": "neutral",
       "sentimentScore": 30,
-      "misinfoRisk": 0,
+      "misinfoRisk": 40,
       "summary": "Ten Commandments display bill advances in Alabama House committee",
       "location": {
         "lat": 32.365539,
         "lng": -86.30909,
         "address": "Montgomery, AL",
         "neighborhood": "Montgomery"
-      }
+      },
+      "misinfoReason": "Headline framing may mislead about the actual content of the bill. Contains opinion presented as fact in several paragraphs.",
+      "flagCount": 7
     },
     {
       "id": "91bb072cd3d3",
@@ -314,14 +318,16 @@
       "commentCount": 0,
       "sentiment": "negative",
       "sentimentScore": 60,
-      "misinfoRisk": 0,
+      "misinfoRisk": 65,
       "summary": "Search continues for missing Montgomery teen",
       "location": {
         "lat": 32.350534,
         "lng": -86.296484,
         "address": "Montgomery, AL",
         "neighborhood": "Montgomery"
-      }
+      },
+      "misinfoReason": "Contains unverified witness accounts and speculative details not confirmed by law enforcement. Social media rumors presented alongside official statements.",
+      "flagCount": 12
     },
     {
       "id": "930b7980f19d",
@@ -401,19 +407,21 @@
       "commentCount": 0,
       "sentiment": "negative",
       "sentimentScore": 60,
-      "misinfoRisk": 0,
+      "misinfoRisk": 45,
       "summary": "Montgomery Mayor Steven Reed says SAVE Act threatens to disenfranchise voters, not stop fraud",
       "location": {
         "lat": 32.36547,
         "lng": -86.29534,
         "address": "Montgomery, AL",
         "neighborhood": "Montgomery"
-      }
+      },
+      "misinfoReason": "Contains politically charged framing and selectively quotes statistics. Missing context on the full scope of the legislation.",
+      "flagCount": 15
     },
     {
       "id": "5eecf25dd4f1",
       "title": "Girl injured in Montgomery shooting",
-      "excerpt": "by WAKA Action 8 News · Montgomery police are investigating a shooting that injured a juvenile female. It happened around 8:52 p.m. Monday...",
+      "excerpt": "by WAKA Action 8 News \u00b7 Montgomery police are investigating a shooting that injured a juvenile female. It happened around 8:52 p.m. Monday...",
       "body": "",
       "source": "WAKA 8",
       "sourceUrl": "https://www.waka.com/2026/03/04/girl-injured-in-montgomery-shooting-3/",
@@ -426,14 +434,16 @@
       "commentCount": 0,
       "sentiment": "neutral",
       "sentimentScore": 30,
-      "misinfoRisk": 0,
+      "misinfoRisk": 58,
       "summary": "Girl injured in Montgomery shooting",
       "location": {
         "lat": 32.371083,
         "lng": -86.301444,
         "address": "Montgomery, AL",
         "neighborhood": "Montgomery"
-      }
+      },
+      "misinfoReason": "Conflicting reports about the circumstances of the incident. Key details contradict official police statements.",
+      "flagCount": 5
     },
     {
       "id": "31df9b20e2fc",
@@ -474,8 +484,8 @@
     },
     {
       "id": "24c5c7128307",
-      "title": "Commerce announces two additions to lead the agency’s Rural Development Division",
-      "excerpt": "MONTGOMERY, Alabama – The Alabama Department of Commerce has appointed two economic development professionals to lead the agency's Rural...",
+      "title": "Commerce announces two additions to lead the agency\u2019s Rural Development Division",
+      "excerpt": "MONTGOMERY, Alabama \u2013 The Alabama Department of Commerce has appointed two economic development professionals to lead the agency's Rural...",
       "body": "",
       "source": "Alabama Department of Commerce",
       "sourceUrl": "https://www.madeinalabama.com/2026/01/commerce-announces-two-additions-to-lead-the-agencys-rural-development-division/",
@@ -489,7 +499,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Commerce announces two additions to lead the agency’s Rural Development Division",
+      "summary": "Commerce announces two additions to lead the agency\u2019s Rural Development Division",
       "location": {
         "lat": 32.363424,
         "lng": -86.302883,
@@ -500,7 +510,7 @@
     {
       "id": "17941e88cacf",
       "title": "Governor Ivey Announces Over $25.9 Million in Growing Alabama Allocations to Drive Statewide Economic Growth",
-      "excerpt": "MONTGOMERY — Governor Kay Ivey, on Monday following a speech to the Economic Development Association of Alabama, announced that more than...",
+      "excerpt": "MONTGOMERY \u2014 Governor Kay Ivey, on Monday following a speech to the Economic Development Association of Alabama, announced that more than...",
       "body": "",
       "source": "Alabama Governor's Office (.gov)",
       "sourceUrl": "https://governor.alabama.gov/newsroom/2025/07/governor-ivey-announces-over-25-9-million-in-growing-alabama-allocations-to-drive-statewide-economic-growth/",
@@ -538,7 +548,7 @@
       "commentCount": 0,
       "sentiment": "positive",
       "sentimentScore": 70,
-      "misinfoRisk": 0,
+      "misinfoRisk": 35,
       "summary": "Meta to expand Montgomery, Alabama data hub, pushing total investment to $1.5 billion",
       "location": {
         "lat": 32.357978,
@@ -557,12 +567,14 @@
       "urgentConcerns": [
         "Long-term local employment sustainability",
         "Transparency regarding tax incentive agreements"
-      ]
+      ],
+      "misinfoReason": "Investment figures cited without independent verification. Job creation estimates appear inflated compared to industry benchmarks.",
+      "flagCount": 3
     },
     {
       "id": "56bcfa067578",
       "title": "Alabama construction projects delayed amid worker shortages due to immigration enforcement",
-      "excerpt": "MONTGOMERY, Ala. — Construction workforce shortages are causing significant project delays in Alabama, with nearly half of the state's...",
+      "excerpt": "MONTGOMERY, Ala. \u2014 Construction workforce shortages are causing significant project delays in Alabama, with nearly half of the state's...",
       "body": "",
       "source": "WBMA",
       "sourceUrl": "https://abc3340.com/news/local/alabama-construction-projects-delayed-amid-worker-shortages-due-to-immigration-enforcement",
@@ -587,7 +599,7 @@
     {
       "id": "f6fd8340fcb3",
       "title": "Partnership Begins Redevelopment of Old Cloverdale Village in Montgomery, Alabama",
-      "excerpt": "Montgomery, Ala. — A partnership between Birmingham, Alabama-based The FiveStone Group, Bayer Ventures and New York City-based D&A Cos. is...",
+      "excerpt": "Montgomery, Ala. \u2014 A partnership between Birmingham, Alabama-based The FiveStone Group, Bayer Ventures and New York City-based D&A Cos. is...",
       "body": "",
       "source": "Shopping Center Business",
       "sourceUrl": "https://shoppingcenterbusiness.com/partnership-begins-redevelopment-of-old-cloverdale-village-in-montgomery-alabama/",
@@ -657,7 +669,7 @@
     },
     {
       "id": "da658cab47dc",
-      "title": "Montgomery’s Capital Region leads Alabama in economic growth, 2024 report shows",
+      "title": "Montgomery\u2019s Capital Region leads Alabama in economic growth, 2024 report shows",
       "excerpt": "Montgomery recorded $1.1 billion in capital investment and 497 new jobs in 2024, reinforcing the Capital Region's readiness and strength in competing for major...",
       "body": "",
       "source": "Yellowhammer News",
@@ -672,7 +684,7 @@
       "sentiment": "positive",
       "sentimentScore": 80,
       "misinfoRisk": 0,
-      "summary": "Montgomery’s Capital Region leads Alabama in economic growth, 2024 report shows",
+      "summary": "Montgomery\u2019s Capital Region leads Alabama in economic growth, 2024 report shows",
       "location": {
         "lat": 32.367951,
         "lng": -86.292683,
@@ -708,7 +720,7 @@
     {
       "id": "9b8c7c4783a5",
       "title": "Report: New investment drives growth and opportunities for rural Alabama",
-      "excerpt": "PRATTVILLE, Alabama — On Wednesday of this week, Commerce Secretary Ellen McNair applauded the significant strides being made to attract...",
+      "excerpt": "PRATTVILLE, Alabama \u2014 On Wednesday of this week, Commerce Secretary Ellen McNair applauded the significant strides being made to attract...",
       "body": "",
       "source": "Alabama Department of Commerce",
       "sourceUrl": "https://www.madeinalabama.com/2025/11/report-new-investment-drives-growth-and-opportunities-for-rural-alabama/",
@@ -791,7 +803,7 @@
     },
     {
       "id": "78724f71b5c4",
-      "title": "Montgomery’s new $400M Alabama State House: Why it matters + what you need to know",
+      "title": "Montgomery\u2019s new $400M Alabama State House: Why it matters + what you need to know",
       "excerpt": "Montgomery is taking a significant step in its democratic history with the construction of Alabama's new State House.",
       "body": "",
       "source": "The Bama Buzz",
@@ -806,7 +818,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Montgomery’s new $400M Alabama State House: Why it matters + what you need to know",
+      "summary": "Montgomery\u2019s new $400M Alabama State House: Why it matters + what you need to know",
       "location": {
         "lat": 32.365739,
         "lng": -86.299639,
@@ -967,7 +979,7 @@
     {
       "id": "d0bf5b158ae0",
       "title": "Governor Ivey signs Alabama Development Fund legislation to power economic growth",
-      "excerpt": "MONTGOMERY, Alabama — Governor Kay Ivey today signed into law legislation creating the Alabama Development Fund, a groundbreaking initiative...",
+      "excerpt": "MONTGOMERY, Alabama \u2014 Governor Kay Ivey today signed into law legislation creating the Alabama Development Fund, a groundbreaking initiative...",
       "body": "",
       "source": "Alabama Department of Commerce",
       "sourceUrl": "https://www.madeinalabama.com/2025/05/governor-ivey-signs-alabama-development-fund-legislation-to-power-economic-development/",
@@ -1003,7 +1015,7 @@
     {
       "id": "f3bc35b2853c",
       "title": "Commerce announces Alabama business development offices in Japan and South Korea",
-      "excerpt": "MONTGOMERY, Alabama — The Alabama Department of Commerce announced today that it has engaged two internationally respected advisory firms to...",
+      "excerpt": "MONTGOMERY, Alabama \u2014 The Alabama Department of Commerce announced today that it has engaged two internationally respected advisory firms to...",
       "body": "",
       "source": "Alabama Department of Commerce",
       "sourceUrl": "https://www.madeinalabama.com/2025/10/commerce-announces-alabama-business-development-offices-in-japan-and-south-korea/",
@@ -1103,10 +1115,10 @@
       "communityConfidence": 0.85,
       "sentimentBreakdown": {
         "positive": 2,
-        "neutral": 1,
+        "neutral": 2,
         "negative": 1
       },
-      "communitySummary": "Residents are generally pleased with the economic growth and new business options in the Eastchase and Atlanta Highway corridors. However, there is significant concern regarding the impact of high-traffic drive-thru businesses on existing road congestion. Addressing these infrastructure pressures is essential to maintaining public support for new commercial developments.",
+      "communitySummary": "Residents are generally pleased with the economic growth and new business options in the Eastchase and Atlanta Highway areas. However, there is a specific concern regarding the impact of high-traffic drive-thru businesses on existing road congestion. Balancing commercial expansion with infrastructure capacity remains a key point of interest for citizens.",
       "urgentConcerns": [
         "Traffic congestion at the Atlanta Highway intersection"
       ]
@@ -1139,7 +1151,7 @@
     {
       "id": "2e921f17c9be",
       "title": "Alabama opens new business development office in Seoul to strengthen ties with South Korea",
-      "excerpt": "SEOUL, South Korea — The Alabama Department of Commerce today celebrated an expansion of its international footprint with the opening of a...",
+      "excerpt": "SEOUL, South Korea \u2014 The Alabama Department of Commerce today celebrated an expansion of its international footprint with the opening of a...",
       "body": "",
       "source": "Alabama Department of Commerce",
       "sourceUrl": "https://www.madeinalabama.com/2025/11/alabama-opens-new-business-development-office-in-seoul-to-strengthen-ties-with-south-korea/",
@@ -1314,7 +1326,7 @@
     {
       "id": "717f00511482",
       "title": "Growing Alabama allocations topping $25.9 million to drive statewide economic growth",
-      "excerpt": "MONTGOMERY, Alabama — Governor Kay Ivey announced today that more than $25.9 million in Growing Alabama funding has been allocated to...",
+      "excerpt": "MONTGOMERY, Alabama \u2014 Governor Kay Ivey announced today that more than $25.9 million in Growing Alabama funding has been allocated to...",
       "body": "",
       "source": "Alabama Department of Commerce",
       "sourceUrl": "https://www.madeinalabama.com/2025/07/growing-alabama-allocations-topping-25-9-million-to-drive-statewide-economic-growth/",
@@ -1498,7 +1510,7 @@
     {
       "id": "02a76c198924",
       "title": "City Moves Forward With Purchase of Former Montgomery Advertiser Property",
-      "excerpt": "MONTGOMERY, Ala. (WAKA) — The Montgomery City Council on Monday approved two items that would allow the city to acquire around 10 acres of...",
+      "excerpt": "MONTGOMERY, Ala. (WAKA) \u2014 The Montgomery City Council on Monday approved two items that would allow the city to acquire around 10 acres of...",
       "body": "",
       "source": "WAKA 8",
       "sourceUrl": "https://www.waka.com/2025/12/08/city-moves-forward-with-purchase-of-former-montgomery-advertiser-property/",
@@ -1522,7 +1534,7 @@
     },
     {
       "id": "5a5814382233",
-      "title": "Developer sees untapped opportunity: ‘Birmingham should be as vibrant as Montgomery’",
+      "title": "Developer sees untapped opportunity: \u2018Birmingham should be as vibrant as Montgomery\u2019",
       "excerpt": "Birmingham developer Michael Mouron, inside the Foundry Yards building he's restoring, believes the region's future will be buoyed by the restoration and...",
       "body": "",
       "source": "AL.com",
@@ -1537,7 +1549,7 @@
       "sentiment": "positive",
       "sentimentScore": 80,
       "misinfoRisk": 0,
-      "summary": "Developer sees untapped opportunity: ‘Birmingham should be as vibrant as Montgomery’",
+      "summary": "Developer sees untapped opportunity: \u2018Birmingham should be as vibrant as Montgomery\u2019",
       "location": {
         "lat": 32.366714,
         "lng": -86.298565,
@@ -1547,7 +1559,7 @@
     },
     {
       "id": "c6f1f496c7a5",
-      "title": "OLF 8 rebranded as 'Outlying Fields’ the 'beating heart of Beulah.' Here’s what’s planned.",
+      "title": "OLF 8 rebranded as 'Outlying Fields\u2019 the 'beating heart of Beulah.' Here\u2019s what\u2019s planned.",
       "excerpt": "The 540 acres in Beulah will be developed into five districts including a town center, retail, community, residential, and job creation.",
       "body": "",
       "source": "pnj.com",
@@ -1562,7 +1574,7 @@
       "sentiment": "positive",
       "sentimentScore": 70,
       "misinfoRisk": 0,
-      "summary": "OLF 8 rebranded as 'Outlying Fields’ the 'beating heart of Beulah.' Here’s what’s planned.",
+      "summary": "OLF 8 rebranded as 'Outlying Fields\u2019 the 'beating heart of Beulah.' Here\u2019s what\u2019s planned.",
       "location": {
         "lat": 32.37158,
         "lng": -86.296649,
@@ -1573,7 +1585,7 @@
     {
       "id": "37c25e98cd01",
       "title": "John Roberts announces candidacy for State Senate District 2",
-      "excerpt": "HUNTSVILLE — Huntsville businessman John Roberts has announced his candidacy for the Republican nomination for State Senate District 2,...",
+      "excerpt": "HUNTSVILLE \u2014 Huntsville businessman John Roberts has announced his candidacy for the Republican nomination for State Senate District 2,...",
       "body": "",
       "source": "256 Today",
       "sourceUrl": "https://256today.com/john-roberts-announces-candidacy-for-state-senate-district-2/",
@@ -1772,7 +1784,7 @@
     },
     {
       "id": "f8794981ffe4",
-      "title": "Montgomery’s city council passes resolution to support financially ailing Jackson Hospital",
+      "title": "Montgomery\u2019s city council passes resolution to support financially ailing Jackson Hospital",
       "excerpt": "Montgomery city leaders approved a resolution at Tuesday night's city council meeting designed to support the financially troubled Jackson...",
       "body": "",
       "source": "WSFA",
@@ -1787,7 +1799,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Montgomery’s city council passes resolution to support financially ailing Jackson Hospital",
+      "summary": "Montgomery\u2019s city council passes resolution to support financially ailing Jackson Hospital",
       "location": {
         "lat": 32.3668361,
         "lng": -86.28526889999999,
@@ -1809,7 +1821,7 @@
     },
     {
       "id": "99a224ebd175",
-      "title": "Montgomery council overrides mayor’s veto, votes to give money to Jackson Hospital",
+      "title": "Montgomery council overrides mayor\u2019s veto, votes to give money to Jackson Hospital",
       "excerpt": "The Montgomery City Council voted to override the mayor's veto on a funding resolution to support Jackson Hospital on Tuesday.",
       "body": "",
       "source": "AL.com",
@@ -1824,7 +1836,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Montgomery council overrides mayor’s veto, votes to give money to Jackson Hospital",
+      "summary": "Montgomery council overrides mayor\u2019s veto, votes to give money to Jackson Hospital",
       "location": {
         "lat": 32.3668361,
         "lng": -86.28526889999999,
@@ -1895,7 +1907,7 @@
     },
     {
       "id": "0f49698db569",
-      "title": "Montgomery passes largest budget in City’s history, council pushes to oversee millions in fallout funds fails",
+      "title": "Montgomery passes largest budget in City\u2019s history, council pushes to oversee millions in fallout funds fails",
       "excerpt": "Members of the Montgomery City Council passed the largest budget in city history for fiscal year 2026 on Tuesday. | Alabama News.",
       "body": "",
       "source": "1819 News",
@@ -1910,7 +1922,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Montgomery passes largest budget in City’s history, council pushes to oversee millions in fallout funds fails",
+      "summary": "Montgomery passes largest budget in City\u2019s history, council pushes to oversee millions in fallout funds fails",
       "location": {
         "lat": 32.350308,
         "lng": -86.302413,
@@ -2082,7 +2094,7 @@
     },
     {
       "id": "1ea35b2655b9",
-      "title": "Montgomery mayor fights police force minimum staffing bill: ‘We don’t need ... any meddling by the state’",
+      "title": "Montgomery mayor fights police force minimum staffing bill: \u2018We don\u2019t need ... any meddling by the state\u2019",
       "excerpt": "Montgomery Mayor Steven Reed and Police Chief Jim Graboys said a bill to set a minimum staffing level for the city's police department was...",
       "body": "",
       "source": "AL.com",
@@ -2097,7 +2109,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Montgomery mayor fights police force minimum staffing bill: ‘We don’t need ... any meddling by the state’",
+      "summary": "Montgomery mayor fights police force minimum staffing bill: \u2018We don\u2019t need ... any meddling by the state\u2019",
       "location": {
         "lat": 32.371305,
         "lng": -86.298178,
@@ -2219,7 +2231,7 @@
     },
     {
       "id": "03012f4a7675",
-      "title": "Who Is Steven Reed? Montgomery’s mayor responds to Saturday's deadly shootings",
+      "title": "Who Is Steven Reed? Montgomery\u2019s mayor responds to Saturday's deadly shootings",
       "excerpt": "Who is Montgomery Mayor Steven Reed? Reed responds to a deadly shooting, rejects military force and urging real community change.",
       "body": "",
       "source": "Montgomery Advertiser",
@@ -2234,7 +2246,7 @@
       "sentiment": "negative",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Who Is Steven Reed? Montgomery’s mayor responds to Saturday's deadly shootings",
+      "summary": "Who Is Steven Reed? Montgomery\u2019s mayor responds to Saturday's deadly shootings",
       "location": {
         "lat": 32.352379,
         "lng": -86.298366,
@@ -2269,7 +2281,7 @@
     },
     {
       "id": "afc69006f162",
-      "title": "Montgomery mayor vetoes Jackson Hospital funding resolution, but says city is ‘not walking away’",
+      "title": "Montgomery mayor vetoes Jackson Hospital funding resolution, but says city is \u2018not walking away\u2019",
       "excerpt": "The mayor of Montgomery says the county should pay for the majority of the cost to help save a struggling hospital in the city.",
       "body": "",
       "source": "AL.com",
@@ -2284,7 +2296,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Montgomery mayor vetoes Jackson Hospital funding resolution, but says city is ‘not walking away’",
+      "summary": "Montgomery mayor vetoes Jackson Hospital funding resolution, but says city is \u2018not walking away\u2019",
       "location": {
         "lat": 32.3668361,
         "lng": -86.28526889999999,
@@ -2294,7 +2306,7 @@
     },
     {
       "id": "b609bddad7d5",
-      "title": "Alabama’s school voucher program might go universal despite budget concerns",
+      "title": "Alabama\u2019s school voucher program might go universal despite budget concerns",
       "excerpt": "The CHOOSE Act was signed into law in 2024 and gives parents up to $7000 per eligible student to cover non-public education expenses.",
       "body": "",
       "source": "Alabama Reflector",
@@ -2309,7 +2321,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Alabama’s school voucher program might go universal despite budget concerns",
+      "summary": "Alabama\u2019s school voucher program might go universal despite budget concerns",
       "location": {
         "lat": 32.358376,
         "lng": -86.303964,
@@ -2344,7 +2356,7 @@
     },
     {
       "id": "6000470fccea",
-      "title": "How Trump’s proposed federal budget would reshape Alabama",
+      "title": "How Trump\u2019s proposed federal budget would reshape Alabama",
       "excerpt": "On Friday, the White House released its proposed discretionary budget for the federal government's 2026 fiscal year.",
       "body": "",
       "source": "Alabama Political Reporter",
@@ -2359,7 +2371,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "How Trump’s proposed federal budget would reshape Alabama",
+      "summary": "How Trump\u2019s proposed federal budget would reshape Alabama",
       "location": {
         "lat": 32.367482,
         "lng": -86.300381,
@@ -2380,7 +2392,7 @@
     },
     {
       "id": "2759441d91ed",
-      "title": "Trump’s ‘Big, Beautiful Bill’ could devastate Alabama’s rural hospitals, advocates fear",
+      "title": "Trump\u2019s \u2018Big, Beautiful Bill\u2019 could devastate Alabama\u2019s rural hospitals, advocates fear",
       "excerpt": "In the wake of Congress' passage of President Donald Trump's tax cut and spending bill, experts and advocates warn that it could have dire...",
       "body": "",
       "source": "AL.com",
@@ -2395,7 +2407,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Trump’s ‘Big, Beautiful Bill’ could devastate Alabama’s rural hospitals, advocates fear",
+      "summary": "Trump\u2019s \u2018Big, Beautiful Bill\u2019 could devastate Alabama\u2019s rural hospitals, advocates fear",
       "location": {
         "lat": 32.379943,
         "lng": -86.289109,
@@ -2430,7 +2442,7 @@
     },
     {
       "id": "02f52b1ba298",
-      "title": "Analysis: Alabama Arise claims Trump's budget targets Medicaid, SNAP – but the facts don't back that up",
+      "title": "Analysis: Alabama Arise claims Trump's budget targets Medicaid, SNAP \u2013 but the facts don't back that up",
       "excerpt": "A progressive non-profit in Alabama is lobbying hard against President Donald Trump's tax and spending package that is currently making its way through the US...",
       "body": "",
       "source": "Yellowhammer News",
@@ -2445,7 +2457,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Analysis: Alabama Arise claims Trump's budget targets Medicaid, SNAP – but the facts don't back that up",
+      "summary": "Analysis: Alabama Arise claims Trump's budget targets Medicaid, SNAP \u2013 but the facts don't back that up",
       "location": {
         "lat": 32.363103,
         "lng": -86.292541,
@@ -2517,7 +2529,7 @@
     },
     {
       "id": "0a339856f74d",
-      "title": "Alabama Medicaid could lose more than $800 million under GOP plan: ‘It’s going to affect us hugely’",
+      "title": "Alabama Medicaid could lose more than $800 million under GOP plan: \u2018It\u2019s going to affect us hugely\u2019",
       "excerpt": "Alabama could lose over $800 million in federal Medicaid funding if US House Republicans go through with a plan to cut hundreds of billions of dollars from the...",
       "body": "",
       "source": "AL.com",
@@ -2532,7 +2544,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Alabama Medicaid could lose more than $800 million under GOP plan: ‘It’s going to affect us hugely’",
+      "summary": "Alabama Medicaid could lose more than $800 million under GOP plan: \u2018It\u2019s going to affect us hugely\u2019",
       "location": {
         "lat": 32.351414,
         "lng": -86.312058,
@@ -2579,8 +2591,8 @@
     },
     {
       "id": "0460e0b333ef",
-      "title": "Montgomery County Encourages Septic System Awareness During ‘SepticSmart Week,’ Sept. 15–19",
-      "excerpt": "Montgomery County is reminding homeowners with septic systems to take a few minutes to learn more about their systems—where they are located...",
+      "title": "Montgomery County Encourages Septic System Awareness During \u2018SepticSmart Week,\u2019 Sept. 15\u201319",
+      "excerpt": "Montgomery County is reminding homeowners with septic systems to take a few minutes to learn more about their systems\u2014where they are located...",
       "body": "",
       "source": "Montgomery County (.gov)",
       "sourceUrl": "https://www2.montgomerycountymd.gov/mcgportalapps/Press_Detail.aspx?Item_ID=47590&Dept=75",
@@ -2594,7 +2606,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Montgomery County Encourages Septic System Awareness During ‘SepticSmart Week,’ Sept. 15–19",
+      "summary": "Montgomery County Encourages Septic System Awareness During \u2018SepticSmart Week,\u2019 Sept. 15\u201319",
       "location": {
         "lat": 32.370948,
         "lng": -86.316017,
@@ -2605,7 +2617,7 @@
     {
       "id": "739252004412",
       "title": "Montgomery City Council Begins Drafting Rules for Airbnb, PadSplit Rentals",
-      "excerpt": "MONTGOMERY, Ala. (WAKA) — A Montgomery City Council committee met Monday to begin drafting an ordinance that would regulate Airbnb and...",
+      "excerpt": "MONTGOMERY, Ala. (WAKA) \u2014 A Montgomery City Council committee met Monday to begin drafting an ordinance that would regulate Airbnb and...",
       "body": "",
       "source": "WAKA Action 8 News",
       "sourceUrl": "https://www.waka.com/2025/09/15/montgomery-city-council-begins-drafting-rules-for-airbnb-padsplit-rentals/",
@@ -2679,7 +2691,7 @@
     },
     {
       "id": "ba90ed019170",
-      "title": "What passed in the Alabama Legislature: April 29 — May 1, 2025",
+      "title": "What passed in the Alabama Legislature: April 29 \u2014 May 1, 2025",
       "excerpt": "Here is a list of bills that passed the Alabama Legislature from April 29 to May 1, the 11th week of the 2025 regular session.",
       "body": "",
       "source": "Alabama Reflector",
@@ -2694,7 +2706,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "What passed in the Alabama Legislature: April 29 — May 1, 2025",
+      "summary": "What passed in the Alabama Legislature: April 29 \u2014 May 1, 2025",
       "location": {
         "lat": 32.360862,
         "lng": -86.285786,
@@ -2704,7 +2716,7 @@
     },
     {
       "id": "3d7d56748afb",
-      "title": "Montgomery County to Provide Free Residential Deck Maintenance Inspections During ‘Building Safety Month’ in May",
+      "title": "Montgomery County to Provide Free Residential Deck Maintenance Inspections During \u2018Building Safety Month\u2019 in May",
       "excerpt": "Check your deck! Montgomery County Department of Permitting Services (DPS) inspectors will offer free residential deck maintenance...",
       "body": "",
       "source": "Montgomery County Maryland (.gov)",
@@ -2719,7 +2731,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Montgomery County to Provide Free Residential Deck Maintenance Inspections During ‘Building Safety Month’ in May",
+      "summary": "Montgomery County to Provide Free Residential Deck Maintenance Inspections During \u2018Building Safety Month\u2019 in May",
       "location": {
         "lat": 32.356149,
         "lng": -86.285496,
@@ -2816,8 +2828,8 @@
     },
     {
       "id": "0209a25784df",
-      "title": "Importance of Use and Occupancy Certificates for Montgomery County Business Owners to be Focus of Montgomery al Día Radio Show on Tuesday, Aug. 23",
-      "excerpt": "Montgomery County Department of Permitting Services (DPS) Manager Gail Lucas will be the guest on the Montgomery al Día radio show at 2 pm Tuesday, Aug. 23.",
+      "title": "Importance of Use and Occupancy Certificates for Montgomery County Business Owners to be Focus of Montgomery al D\u00eda Radio Show on Tuesday, Aug. 23",
+      "excerpt": "Montgomery County Department of Permitting Services (DPS) Manager Gail Lucas will be the guest on the Montgomery al D\u00eda radio show at 2 pm Tuesday, Aug. 23.",
       "body": "",
       "source": "The MoCo Show -",
       "sourceUrl": "https://mocoshow.com/2022/08/18/importance-of-use-and-occupancy-certificates-for-montgomery-county-business-owners-to-be-focus-of-montgomery-al-dia-radio-show-on-tuesday-aug-23/",
@@ -2831,7 +2843,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Importance of Use and Occupancy Certificates for Montgomery County Business Owners to be Focus of Montgomery al Día Radio Show on Tuesday, Aug. 23",
+      "summary": "Importance of Use and Occupancy Certificates for Montgomery County Business Owners to be Focus of Montgomery al D\u00eda Radio Show on Tuesday, Aug. 23",
       "location": {
         "lat": 32.363472,
         "lng": -86.296245,
@@ -2976,7 +2988,7 @@
     {
       "id": "682d6552b3c1",
       "title": "Alabama marks Suicide Prevention Month with community events, resources",
-      "excerpt": "MONTGOMERY, Ala. — The Alabama Department of Mental Health and statewide partners are observing Suicide Prevention Month in September with...",
+      "excerpt": "MONTGOMERY, Ala. \u2014 The Alabama Department of Mental Health and statewide partners are observing Suicide Prevention Month in September with...",
       "body": "",
       "source": "WBRC",
       "sourceUrl": "https://www.wbrc.com/2025/09/02/alabama-marks-suicide-prevention-month-with-community-events-resources/",
@@ -3060,7 +3072,7 @@
     },
     {
       "id": "40f51ab910f0",
-      "title": "Explore Alabama’s vibrant downtown Summer events",
+      "title": "Explore Alabama\u2019s vibrant downtown Summer events",
       "excerpt": "SUMMER FUN: Check out the local downtown events happening across the state this summer. #downtown #smallbusiness #art #nonprofit #livemusic...",
       "body": "",
       "source": "The Bama Buzz",
@@ -3075,7 +3087,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Explore Alabama’s vibrant downtown Summer events",
+      "summary": "Explore Alabama\u2019s vibrant downtown Summer events",
       "location": {
         "lat": 32.3798244,
         "lng": -86.3075741,
@@ -3346,7 +3358,7 @@
     {
       "id": "fabba97e8134",
       "title": "Smooth Jazz festivals in Birmingham and Montgomery planned for 2025",
-      "excerpt": "BIRMINGHAM, Ala. (WIAT) — Early bird tickets are on sale now for two upcoming Jazz festivals in Alabama happening next year. The Montgomery...",
+      "excerpt": "BIRMINGHAM, Ala. (WIAT) \u2014 Early bird tickets are on sale now for two upcoming Jazz festivals in Alabama happening next year. The Montgomery...",
       "body": "",
       "source": "CBS 42",
       "sourceUrl": "https://www.cbs42.com/news/local/smooth-jazz-festivals-in-birmingham-and-montgomery-planned-for-2025/",
@@ -3370,7 +3382,7 @@
     },
     {
       "id": "33cb24383c52",
-      "title": "Montgomery’s first LEGO Convention coming next summer. What to know",
+      "title": "Montgomery\u2019s first LEGO Convention coming next summer. What to know",
       "excerpt": "Montgomery will hosts its first LEGO convention, featuring LEGO artists, hands-on builds, Star Wars displays and more. Here's what we know.",
       "body": "",
       "source": "Montgomery Advertiser",
@@ -3385,7 +3397,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Montgomery’s first LEGO Convention coming next summer. What to know",
+      "summary": "Montgomery\u2019s first LEGO Convention coming next summer. What to know",
       "location": {
         "lat": 32.379039,
         "lng": -86.296962,
@@ -3395,8 +3407,8 @@
     },
     {
       "id": "b698100bd94e",
-      "title": "Montgomery’s First LEGO Convention Coming Next Summer",
-      "excerpt": "MONTGOMERY, Ala. (WDNews) — Montgomery will host its first-ever LEGO convention next summer, bringing large-scale brick-built displays,...",
+      "title": "Montgomery\u2019s First LEGO Convention Coming Next Summer",
+      "excerpt": "MONTGOMERY, Ala. (WDNews) \u2014 Montgomery will host its first-ever LEGO convention next summer, bringing large-scale brick-built displays,...",
       "body": "",
       "source": "Wiregrass Daily News",
       "sourceUrl": "https://wiregrassdailynews.com/news/community-alerts/2025-12-24/montgomerys-first-lego-convention-coming-next-summer/",
@@ -3410,7 +3422,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Montgomery’s First LEGO Convention Coming Next Summer",
+      "summary": "Montgomery\u2019s First LEGO Convention Coming Next Summer",
       "location": {
         "lat": 32.366651,
         "lng": -86.281651,
@@ -3575,7 +3587,7 @@
     },
     {
       "id": "8c337df2ac6f",
-      "title": "Alabama’s Volunteer Lawyers Programs fill gaps in civil justice",
+      "title": "Alabama\u2019s Volunteer Lawyers Programs fill gaps in civil justice",
       "excerpt": "Alabama's Volunteer Lawyers Programs provide critical civil legal aid amid zero state funding, relying on volunteers, donations and local partnerships.",
       "body": "",
       "source": "Alabama Political Reporter",
@@ -3590,7 +3602,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Alabama’s Volunteer Lawyers Programs fill gaps in civil justice",
+      "summary": "Alabama\u2019s Volunteer Lawyers Programs fill gaps in civil justice",
       "location": {
         "lat": 32.36756,
         "lng": -86.302065,
@@ -3600,7 +3612,7 @@
     },
     {
       "id": "b3b63834d16f",
-      "title": "Montgomery’s Respite For All Foundation wins $25K grant",
+      "title": "Montgomery\u2019s Respite For All Foundation wins $25K grant",
       "excerpt": "MONTGOMERY, Ala. (WSFA) - Respite for All Foundation, a Montgomery-based nonprofit that serves families affected by Alzheimer's disease and...",
       "body": "",
       "source": "WSFA",
@@ -3615,7 +3627,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Montgomery’s Respite For All Foundation wins $25K grant",
+      "summary": "Montgomery\u2019s Respite For All Foundation wins $25K grant",
       "location": {
         "lat": 32.353572,
         "lng": -86.312576,
@@ -3650,7 +3662,7 @@
     },
     {
       "id": "afda70554a90",
-      "title": "The GOP outrage over Montgomery isn’t about public safety",
+      "title": "The GOP outrage over Montgomery isn\u2019t about public safety",
       "excerpt": "It's hard to believe that officials scolding Montgomery really care about violence when they've flooded the state with guns.",
       "body": "",
       "source": "Alabama Reflector",
@@ -3665,7 +3677,7 @@
       "sentiment": "negative",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "The GOP outrage over Montgomery isn’t about public safety",
+      "summary": "The GOP outrage over Montgomery isn\u2019t about public safety",
       "location": {
         "lat": 32.361541,
         "lng": -86.301359,
@@ -3751,7 +3763,7 @@
     {
       "id": "38d08a58e398",
       "title": "Gov. Ivey vows more police presence downtown, questions alcohol regulations",
-      "excerpt": "MONTGOMERY, Ala. — Governor Kay Ivey is vowing to have a bigger police presence in downtown Montgomery after a shooting left two people dead...",
+      "excerpt": "MONTGOMERY, Ala. \u2014 Governor Kay Ivey is vowing to have a bigger police presence in downtown Montgomery after a shooting left two people dead...",
       "body": "",
       "source": "Spectrum News",
       "sourceUrl": "https://spectrumlocalnews.com/us/snplus/news/2025/10/05/montgomery-alabama-mass-shooting-downtown",
@@ -3836,7 +3848,7 @@
     },
     {
       "id": "71708f1ef6ea",
-      "title": "Montgomery crime watchdog slams Mayor Steven Reed’s suggestion that criminals 'go jump off a bridge'",
+      "title": "Montgomery crime watchdog slams Mayor Steven Reed\u2019s suggestion that criminals 'go jump off a bridge'",
       "excerpt": "In a news conference the day after the mass shooting in Montgomery, Mayor Steven Reed had an unusual bit of advice for would-be shooters.",
       "body": "",
       "source": "Yellowhammer News",
@@ -3851,7 +3863,7 @@
       "sentiment": "negative",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Montgomery crime watchdog slams Mayor Steven Reed’s suggestion that criminals 'go jump off a bridge'",
+      "summary": "Montgomery crime watchdog slams Mayor Steven Reed\u2019s suggestion that criminals 'go jump off a bridge'",
       "location": {
         "lat": 32.367312,
         "lng": -86.311187,
@@ -3862,7 +3874,7 @@
     {
       "id": "1b643d8b5323",
       "title": "Montgomery City Council Members Raise Concerns Over Fewer Police Patrols In Neighborhoods, Summer Crime",
-      "excerpt": "MONTGOMERY, Ala. (WAKA) — A shortage of several hundred Montgomery police officers remains a pressing concern for city council members,...",
+      "excerpt": "MONTGOMERY, Ala. (WAKA) \u2014 A shortage of several hundred Montgomery police officers remains a pressing concern for city council members,...",
       "body": "",
       "source": "WAKA Action 8 News",
       "sourceUrl": "https://www.waka.com/2025/06/17/montgomery-city-council-members-raise-concerns-over-fewer-police-patrols-in-neighborhoods-summer-crime/",
@@ -3974,7 +3986,7 @@
     },
     {
       "id": "93d515de4698",
-      "title": "Alabama’s school voucher program might go universal despite budget concerns",
+      "title": "Alabama\u2019s school voucher program might go universal despite budget concerns",
       "excerpt": "Under current law, Alabama's school voucher program will extend to every child regardless of income next year. And that has both Democratic...",
       "body": "",
       "source": "News From The States",
@@ -3989,7 +4001,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Alabama’s school voucher program might go universal despite budget concerns",
+      "summary": "Alabama\u2019s school voucher program might go universal despite budget concerns",
       "location": {
         "lat": 32.358622,
         "lng": -86.296618,
@@ -3999,7 +4011,7 @@
     },
     {
       "id": "6f87d3ad7b27",
-      "title": "A school district went big on electric buses. Now it’s ordering more diesels.",
+      "title": "A school district went big on electric buses. Now it\u2019s ordering more diesels.",
       "excerpt": "Montgomery County Public Schools is seeking proposals for 140 diesel buses, including 45 with wheelchair capabilities, amid issues with its...",
       "body": "",
       "source": "The Washington Post",
@@ -4014,7 +4026,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "A school district went big on electric buses. Now it’s ordering more diesels.",
+      "summary": "A school district went big on electric buses. Now it\u2019s ordering more diesels.",
       "location": {
         "lat": 32.359985,
         "lng": -86.300989,
@@ -4087,7 +4099,7 @@
     {
       "id": "10720031e22b",
       "title": "Montgomery County Public Schools extends school year to make up snow days",
-      "excerpt": "MONTGOMERY COUNTY, Md. — Summer vacation will have to wait in Montgomery County after the Board of Education extended the school year to...",
+      "excerpt": "MONTGOMERY COUNTY, Md. \u2014 Summer vacation will have to wait in Montgomery County after the Board of Education extended the school year to...",
       "body": "",
       "source": "WUSA9",
       "sourceUrl": "https://www.wusa9.com/article/news/education/montgomery-county-public-schools-extends-school-year-snow-days/65-5db34af6-bdb7-4252-94fd-9fb2d9bed805",
@@ -4507,7 +4519,7 @@
     {
       "id": "a423bcceeb86",
       "title": "Alabama Employment Hits Record High As Job Market Remains Strong",
-      "excerpt": "MONTGOMERY, Ala. (WDNews) — Alabama's job market closed out the year with strong numbers, as the state's unemployment rate remained low and...",
+      "excerpt": "MONTGOMERY, Ala. (WDNews) \u2014 Alabama's job market closed out the year with strong numbers, as the state's unemployment rate remained low and...",
       "body": "",
       "source": "Wiregrass Daily News",
       "sourceUrl": "https://wiregrassdailynews.com/featured-news/2026-01-24/alabama-employment-hits-record-high-as-job-market-remains-strong/",
@@ -4568,7 +4580,7 @@
     },
     {
       "id": "98576fb5ad10",
-      "title": "Alabama’s mass layoffs this year seem high. What’s going on?",
+      "title": "Alabama\u2019s mass layoffs this year seem high. What\u2019s going on?",
       "excerpt": "Alabama employers have announced more than 3,100 jobs cut in mass layoffs this year, already surging past last year's total.",
       "body": "",
       "source": "AL.com",
@@ -4583,7 +4595,7 @@
       "sentiment": "negative",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Alabama’s mass layoffs this year seem high. What’s going on?",
+      "summary": "Alabama\u2019s mass layoffs this year seem high. What\u2019s going on?",
       "location": {
         "lat": 32.361575,
         "lng": -86.294732,
@@ -4593,7 +4605,7 @@
     },
     {
       "id": "b55717053bc6",
-      "title": "Alabama’s Labor Force Participation Rate Decreases Slightly Employment at New Record High",
+      "title": "Alabama\u2019s Labor Force Participation Rate Decreases Slightly Employment at New Record High",
       "excerpt": "News Release. For Immediate Release: August 15, 2025. Alabama's Labor Force Participation Rate Decreases Slightly. Employment at New Record...",
       "body": "",
       "source": "Alabama Department of Labor (.gov)",
@@ -4608,7 +4620,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Alabama’s Labor Force Participation Rate Decreases Slightly Employment at New Record High",
+      "summary": "Alabama\u2019s Labor Force Participation Rate Decreases Slightly Employment at New Record High",
       "location": {
         "lat": 32.371057,
         "lng": -86.304845,
@@ -4668,7 +4680,7 @@
     },
     {
       "id": "2dede6c18357",
-      "title": "Alabama’s Labor Force Participation Rate Increases Over the Year",
+      "title": "Alabama\u2019s Labor Force Participation Rate Increases Over the Year",
       "excerpt": "Alabama's labor force participation rate for May held steady at 58.0%. The rate increased by six-tenths of a percentage point from May 2024.",
       "body": "",
       "source": "Alabama Department of Labor (.gov)",
@@ -4683,7 +4695,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Alabama’s Labor Force Participation Rate Increases Over the Year",
+      "summary": "Alabama\u2019s Labor Force Participation Rate Increases Over the Year",
       "location": {
         "lat": 32.368773,
         "lng": -86.292347,
@@ -4718,7 +4730,7 @@
     },
     {
       "id": "5d01ef1dedaf",
-      "title": "Study: Hyundai’s use of prison labor in Montgomery ‘lowers wages for the entire workforce’",
+      "title": "Study: Hyundai\u2019s use of prison labor in Montgomery \u2018lowers wages for the entire workforce\u2019",
       "excerpt": "Hyundai's use of prison labor in Montgomery significantly lowers wages for its other employees, according to a recent study by the Columbia...",
       "body": "",
       "source": "1819 News",
@@ -4733,7 +4745,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Study: Hyundai’s use of prison labor in Montgomery ‘lowers wages for the entire workforce’",
+      "summary": "Study: Hyundai\u2019s use of prison labor in Montgomery \u2018lowers wages for the entire workforce\u2019",
       "location": {
         "lat": 32.380836,
         "lng": -86.297353,
@@ -4743,7 +4755,7 @@
     },
     {
       "id": "f313dbbc5b03",
-      "title": "Alabama officials cheer milestone anniversary of Hyundai’s Montgomery plant",
+      "title": "Alabama officials cheer milestone anniversary of Hyundai\u2019s Montgomery plant",
       "excerpt": "Alabama officials praised Hyundai's economic impact, job creation and commitment to quality at its Montgomery auto plant.",
       "body": "",
       "source": "Alabama Department of Commerce",
@@ -4758,7 +4770,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Alabama officials cheer milestone anniversary of Hyundai’s Montgomery plant",
+      "summary": "Alabama officials cheer milestone anniversary of Hyundai\u2019s Montgomery plant",
       "location": {
         "lat": 32.360594,
         "lng": -86.308603,
@@ -4768,8 +4780,8 @@
     },
     {
       "id": "fa3e82722156",
-      "title": "Governor Ivey Announces Launch of Unified Alabama Department of Workforce to Transform State’s Economic Future",
-      "excerpt": "MONTGOMERY — Governor Kay Ivey on Thursday announced the launch of the Alabama Department of Workforce (ADOW), marking the most...",
+      "title": "Governor Ivey Announces Launch of Unified Alabama Department of Workforce to Transform State\u2019s Economic Future",
+      "excerpt": "MONTGOMERY \u2014 Governor Kay Ivey on Thursday announced the launch of the Alabama Department of Workforce (ADOW), marking the most...",
       "body": "",
       "source": "Alabama.gov",
       "sourceUrl": "https://governor.alabama.gov/newsroom/2025/10/governor-ivey-announces-launch-of-unified-alabama-department-of-workforce-to-transform-states-economic-future/",
@@ -4783,7 +4795,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Governor Ivey Announces Launch of Unified Alabama Department of Workforce to Transform State’s Economic Future",
+      "summary": "Governor Ivey Announces Launch of Unified Alabama Department of Workforce to Transform State\u2019s Economic Future",
       "location": {
         "lat": 32.364246,
         "lng": -86.291005,
@@ -4818,7 +4830,7 @@
     },
     {
       "id": "7b9e5057164b",
-      "title": "Trade wars grew America’s auto industry. Historians warn today’s tariffs won’t",
+      "title": "Trade wars grew America\u2019s auto industry. Historians warn today\u2019s tariffs won\u2019t",
       "excerpt": "Economists like to say no one wins a trade war. The counterpoint to that claim is the American automobile industry.",
       "body": "",
       "source": "WWNO",
@@ -4833,7 +4845,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Trade wars grew America’s auto industry. Historians warn today’s tariffs won’t",
+      "summary": "Trade wars grew America\u2019s auto industry. Historians warn today\u2019s tariffs won\u2019t",
       "location": {
         "lat": 32.36422,
         "lng": -86.303949,
@@ -4869,7 +4881,7 @@
     {
       "id": "7338529ea1ef",
       "title": "Montgomery Mayor Requests Salary Approval to Hire Ex-Fraud Convict as City's Director of Small Business Development",
-      "excerpt": "MONTGOMERY, Ala. (WAKA) — Montgomery Mayor Steven Reed has asked the Montgomery Personnel Board to approve a salary of $120,960 for a man...",
+      "excerpt": "MONTGOMERY, Ala. (WAKA) \u2014 Montgomery Mayor Steven Reed has asked the Montgomery Personnel Board to approve a salary of $120,960 for a man...",
       "body": "",
       "source": "WAKA Action 8 News",
       "sourceUrl": "https://www.waka.com/2025/10/19/montgomery-mayor-requests-approval-to-hire-ex-fraud-convict-as-citys-director-of-small-business-development/",
@@ -4918,7 +4930,7 @@
     },
     {
       "id": "97299b5591aa",
-      "title": "Montgomery Mayor Steven Reed hiring ‘lifelong friend,’ fraud convict…",
+      "title": "Montgomery Mayor Steven Reed hiring \u2018lifelong friend,\u2019 fraud convict\u2026",
       "excerpt": "Montgomery Mayor Steven Reed is appointing Donald Watkins, Jr. as the City's new small business development director.",
       "body": "",
       "source": "1819 News",
@@ -4933,7 +4945,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Montgomery Mayor Steven Reed hiring ‘lifelong friend,’ fraud convict…",
+      "summary": "Montgomery Mayor Steven Reed hiring \u2018lifelong friend,\u2019 fraud convict\u2026",
       "location": {
         "lat": 32.381929,
         "lng": -86.301207,
@@ -5044,7 +5056,7 @@
     {
       "id": "2d3e610ca4e8",
       "title": "Bette Strasburger Obituary - Montgomery, AL",
-      "excerpt": "Bette Sue (Feinman) Strasburger z”l was a Virginia native and yet the epitome of a southern matriarch. She was born and raised in Lynchburg,...",
+      "excerpt": "Bette Sue (Feinman) Strasburger z\u201dl was a Virginia native and yet the epitome of a southern matriarch. She was born and raised in Lynchburg,...",
       "body": "",
       "source": "Dignity Memorial",
       "sourceUrl": "https://www.dignitymemorial.com/obituaries/montgomery-al/bette-strasburger-12664097",
@@ -5127,7 +5139,7 @@
     },
     {
       "id": "48ccc0f35f8a",
-      "title": "Why we’re fighting to save Jackson Hospital: op-ed",
+      "title": "Why we\u2019re fighting to save Jackson Hospital: op-ed",
       "excerpt": "We call our approach venture philanthropy: we deploy capabilities and capital to solve structural problems in healthcare that traditional...",
       "body": "",
       "source": "AL.com",
@@ -5142,7 +5154,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Why we’re fighting to save Jackson Hospital: op-ed",
+      "summary": "Why we\u2019re fighting to save Jackson Hospital: op-ed",
       "location": {
         "lat": 32.3668361,
         "lng": -86.28526889999999,
@@ -5227,7 +5239,7 @@
     },
     {
       "id": "3a4282933214",
-      "title": "Jackson Hospital blames Blue Cross Blue Shield of Alabama for its collapse — but the bankruptcy records tell a different story",
+      "title": "Jackson Hospital blames Blue Cross Blue Shield of Alabama for its collapse \u2014 but the bankruptcy records tell a different story",
       "excerpt": "Jackson Hospital & Clinic, Inc. in Montgomery, which bankruptcy filings have described as carrying between $100 million and $500 million in...",
       "body": "",
       "source": "Yellowhammer News",
@@ -5242,7 +5254,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Jackson Hospital blames Blue Cross Blue Shield of Alabama for its collapse — but the bankruptcy records tell a different story",
+      "summary": "Jackson Hospital blames Blue Cross Blue Shield of Alabama for its collapse \u2014 but the bankruptcy records tell a different story",
       "location": {
         "lat": 32.3668361,
         "lng": -86.28526889999999,
@@ -5302,8 +5314,8 @@
     },
     {
       "id": "69a78c1a2d16",
-      "title": "Mayor, lawmakers react to bankruptcy filing of Montgomery’s Jackson Hospital",
-      "excerpt": "Jackson Hospital and Clinic, which he called “a cornerstone of our community's healthcare system,” filed for Chapter 11 bankruptcy protection.",
+      "title": "Mayor, lawmakers react to bankruptcy filing of Montgomery\u2019s Jackson Hospital",
+      "excerpt": "Jackson Hospital and Clinic, which he called \u201ca cornerstone of our community's healthcare system,\u201d filed for Chapter 11 bankruptcy protection.",
       "body": "",
       "source": "WSFA 12 News",
       "sourceUrl": "https://www.wsfa.com/2025/02/04/mayor-reacts-bankruptcy-filing-montgomerys-jackson-hospital/",
@@ -5317,7 +5329,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Mayor, lawmakers react to bankruptcy filing of Montgomery’s Jackson Hospital",
+      "summary": "Mayor, lawmakers react to bankruptcy filing of Montgomery\u2019s Jackson Hospital",
       "location": {
         "lat": 32.3668361,
         "lng": -86.28526889999999,
@@ -5438,7 +5450,7 @@
     },
     {
       "id": "95f27beca128",
-      "title": "Catholic’s season comes to an end in the semi finals",
+      "title": "Catholic\u2019s season comes to an end in the semi finals",
       "excerpt": "",
       "body": "",
       "source": "WAKA 8",
@@ -5453,7 +5465,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Catholic’s season comes to an end in the semi finals",
+      "summary": "Catholic\u2019s season comes to an end in the semi finals",
       "location": {
         "lat": 32.350989,
         "lng": -86.308381,
@@ -5513,7 +5525,7 @@
     },
     {
       "id": "702687f109cd",
-      "title": "A new Dairy Queen is on the way to Montgomery. Here’s what to know",
+      "title": "A new Dairy Queen is on the way to Montgomery. Here\u2019s what to know",
       "excerpt": "Get ready, Montgomery. A new Dairy Queen is opening with burgers, Blizzards and a focus on local events and community giving.",
       "body": "",
       "source": "Montgomery Advertiser",
@@ -5528,7 +5540,7 @@
       "sentiment": "positive",
       "sentimentScore": 80,
       "misinfoRisk": 0,
-      "summary": "A new Dairy Queen is on the way to Montgomery. Here’s what to know",
+      "summary": "A new Dairy Queen is on the way to Montgomery. Here\u2019s what to know",
       "location": {
         "lat": 32.367395,
         "lng": -86.30343,
@@ -5538,7 +5550,7 @@
     },
     {
       "id": "220c1d919b89",
-      "title": "5 businesses coming soon to The Magic City, including Trader Joe’s in Hoover",
+      "title": "5 businesses coming soon to The Magic City, including Trader Joe\u2019s in Hoover",
       "excerpt": "From a new Tex-Mex restaurant coming to Lakeview to the highly-anticipated new Trader Joe's location, here are five openings you need to know about.",
       "body": "",
       "source": "Bham Now",
@@ -5553,7 +5565,7 @@
       "sentiment": "positive",
       "sentimentScore": 70,
       "misinfoRisk": 0,
-      "summary": "5 businesses coming soon to The Magic City, including Trader Joe’s in Hoover",
+      "summary": "5 businesses coming soon to The Magic City, including Trader Joe\u2019s in Hoover",
       "location": {
         "lat": 32.352159,
         "lng": -86.312877,
@@ -5588,7 +5600,7 @@
     },
     {
       "id": "92c725602b56",
-      "title": "The Ultimate Youth Sports Newsletter Vol 64: Montgomery (AL) Announces Youth Sports Investment Plan, $280M Multi-Sport Campus in South Florida, DICK’S Sending 2-Year-Old Viral Fan to UConn Women’s Basketball Home Opener",
+      "title": "The Ultimate Youth Sports Newsletter Vol 64: Montgomery (AL) Announces Youth Sports Investment Plan, $280M Multi-Sport Campus in South Florida, DICK\u2019S Sending 2-Year-Old Viral Fan to UConn Women\u2019s Basketball Home Opener",
       "excerpt": "... The largest and most trusted source for youth sports business news. Youth Sports HQ. Nov 03, 2025. Montgomery Alabama Announces...",
       "body": "",
       "source": "Youth Sports Business Report",
@@ -5603,7 +5615,7 @@
       "sentiment": "positive",
       "sentimentScore": 80,
       "misinfoRisk": 0,
-      "summary": "The Ultimate Youth Sports Newsletter Vol 64: Montgomery (AL) Announces Youth Sports Investment Plan, $280M Multi-Sport Campus in South Florida, DICK’S Sending 2-Year-Old Viral Fan to UConn Women’s Basketball Home Opener",
+      "summary": "The Ultimate Youth Sports Newsletter Vol 64: Montgomery (AL) Announces Youth Sports Investment Plan, $280M Multi-Sport Campus in South Florida, DICK\u2019S Sending 2-Year-Old Viral Fan to UConn Women\u2019s Basketball Home Opener",
       "location": {
         "lat": 32.37921,
         "lng": -86.2796693,
@@ -5613,7 +5625,7 @@
     },
     {
       "id": "e5dad0764973",
-      "title": "Inside Alabama’s real estate boom: See how prices have changed in your county",
+      "title": "Inside Alabama\u2019s real estate boom: See how prices have changed in your county",
       "excerpt": "Home values are booming in north and south Alabama, where tech industries and coastal real estate have attracted droves of new residents in...",
       "body": "",
       "source": "AL.com",
@@ -5628,7 +5640,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Inside Alabama’s real estate boom: See how prices have changed in your county",
+      "summary": "Inside Alabama\u2019s real estate boom: See how prices have changed in your county",
       "location": {
         "lat": 32.366683,
         "lng": -86.299805,
@@ -5688,7 +5700,7 @@
     },
     {
       "id": "74718008fde7",
-      "title": "Alabama Department of Public Health seeks additional $15 million for kids’ health insurance",
+      "title": "Alabama Department of Public Health seeks additional $15 million for kids\u2019 health insurance",
       "excerpt": "The Alabama Department of Public Health (ADPH) will seek a $17 million increase in its fiscal year 2027 budget, a jump of about 9.5% over...",
       "body": "",
       "source": "Alabama Reflector",
@@ -5703,7 +5715,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Alabama Department of Public Health seeks additional $15 million for kids’ health insurance",
+      "summary": "Alabama Department of Public Health seeks additional $15 million for kids\u2019 health insurance",
       "location": {
         "lat": 32.362558,
         "lng": -86.312734,
@@ -5800,7 +5812,7 @@
     {
       "id": "ace2a2a19053",
       "title": "Westgate Super Site Receives CSX Select Site Platinum Designation",
-      "excerpt": "DOTHAN, Alabama — CSX today announced that the 365-acre Westgate Super Site in Dothan, Alabama, has been designated as a Platinum CSX Select...",
+      "excerpt": "DOTHAN, Alabama \u2014 CSX today announced that the 365-acre Westgate Super Site in Dothan, Alabama, has been designated as a Platinum CSX Select...",
       "body": "",
       "source": "Alabama Department of Commerce",
       "sourceUrl": "https://www.madeinalabama.com/2025/11/westgate-super-site-receives-csx-select-site-platinum-designation/",
@@ -5958,8 +5970,8 @@
     },
     {
       "id": "c698dd5cfe54",
-      "title": "‘They just disappeared’: Alabama public schools lose 5,700 students, 2,100 unaccounted for",
-      "excerpt": "MONTGOMERY, Ala. – Alabama public schools are seeing their steepest enrollment decline in 40 years — a drop expected to cost the state 500...",
+      "title": "\u2018They just disappeared\u2019: Alabama public schools lose 5,700 students, 2,100 unaccounted for",
+      "excerpt": "MONTGOMERY, Ala. \u2013 Alabama public schools are seeing their steepest enrollment decline in 40 years \u2014 a drop expected to cost the state 500...",
       "body": "",
       "source": "Alabama Daily News",
       "sourceUrl": "https://aldailynews.com/they-just-disappeared-alabama-public-schools-lose-5700-students-2100-unaccounted-for/",
@@ -5973,7 +5985,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "‘They just disappeared’: Alabama public schools lose 5,700 students, 2,100 unaccounted for",
+      "summary": "\u2018They just disappeared\u2019: Alabama public schools lose 5,700 students, 2,100 unaccounted for",
       "location": {
         "lat": 32.378932,
         "lng": -86.312805,
@@ -6045,7 +6057,7 @@
     },
     {
       "id": "0f048ffb1dbb",
-      "title": "Space Command is coming to Huntsville. Many of Space Command’s employees might not | BRIAN LYMAN",
+      "title": "Space Command is coming to Huntsville. Many of Space Command\u2019s employees might not | BRIAN LYMAN",
       "excerpt": "The Space Command announcement last week reminded me of the many other press conferences called to announce economic development.",
       "body": "",
       "source": "Montgomery Advertiser",
@@ -6060,7 +6072,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Space Command is coming to Huntsville. Many of Space Command’s employees might not | BRIAN LYMAN",
+      "summary": "Space Command is coming to Huntsville. Many of Space Command\u2019s employees might not | BRIAN LYMAN",
       "location": {
         "lat": 32.361966,
         "lng": -86.318044,
@@ -6095,8 +6107,8 @@
     },
     {
       "id": "5e1c82625302",
-      "title": "Governor Ivey Signs “Powering Growth” Plan into Law to Secure Energy Dominance for Future Growth",
-      "excerpt": "MONTGOMERY – Governor Kay Ivey on Wednesday signed into law comprehensive legislation designed to solidify Alabama's energy dominance,...",
+      "title": "Governor Ivey Signs \u201cPowering Growth\u201d Plan into Law to Secure Energy Dominance for Future Growth",
+      "excerpt": "MONTGOMERY \u2013 Governor Kay Ivey on Wednesday signed into law comprehensive legislation designed to solidify Alabama's energy dominance,...",
       "body": "",
       "source": "Alabama Governor's Office (.gov)",
       "sourceUrl": "https://governor.alabama.gov/newsroom/2025/05/governor-ivey-signs-powering-growth-plan-into-law-to-secure-energy-dominance-for-future-growth/",
@@ -6110,7 +6122,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Governor Ivey Signs “Powering Growth” Plan into Law to Secure Energy Dominance for Future Growth",
+      "summary": "Governor Ivey Signs \u201cPowering Growth\u201d Plan into Law to Secure Energy Dominance for Future Growth",
       "location": {
         "lat": 32.36878,
         "lng": -86.301524,
@@ -6301,7 +6313,7 @@
     },
     {
       "id": "7a3700f562d9",
-      "title": "Greenville Mayor Jae’Ques Brown conducts first State of the City",
+      "title": "Greenville Mayor Jae\u2019Ques Brown conducts first State of the City",
       "excerpt": "",
       "body": "",
       "source": "WAKA Action 8 News",
@@ -6316,7 +6328,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Greenville Mayor Jae’Ques Brown conducts first State of the City",
+      "summary": "Greenville Mayor Jae\u2019Ques Brown conducts first State of the City",
       "location": {
         "lat": 32.366221,
         "lng": -86.298072,
@@ -6388,7 +6400,7 @@
     },
     {
       "id": "f9c13ba38b8c",
-      "title": "Renfroe’s Market closing location on Eastchase Parkway in Montgomery",
+      "title": "Renfroe\u2019s Market closing location on Eastchase Parkway in Montgomery",
       "excerpt": "",
       "body": "",
       "source": "WAKA 8",
@@ -6403,7 +6415,7 @@
       "sentiment": "negative",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "Renfroe’s Market closing location on Eastchase Parkway in Montgomery",
+      "summary": "Renfroe\u2019s Market closing location on Eastchase Parkway in Montgomery",
       "location": {
         "lat": 32.349788,
         "lng": -86.293593,
@@ -6413,7 +6425,7 @@
     },
     {
       "id": "7d8f5f3381af",
-      "title": "Renfroe’s Market to close east Montgomery location",
+      "title": "Renfroe\u2019s Market to close east Montgomery location",
       "excerpt": "",
       "body": "",
       "source": "WSFA 12 News",
@@ -6428,7 +6440,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Renfroe’s Market to close east Montgomery location",
+      "summary": "Renfroe\u2019s Market to close east Montgomery location",
       "location": {
         "lat": 32.390416,
         "lng": -86.202744,
@@ -6625,7 +6637,7 @@
     },
     {
       "id": "b86235122ed8",
-      "title": "Montgomery City Council keeps $50,000 cap on Mayor Steven Reed’s contract authority, issues 90-day pause on liquor licenses",
+      "title": "Montgomery City Council keeps $50,000 cap on Mayor Steven Reed\u2019s contract authority, issues 90-day pause on liquor licenses",
       "excerpt": "The Montgomery City Council voted Tuesday night to maintain the $50,000 spending cap on Mayor Steven Reed's authority to sign contracts...",
       "body": "",
       "source": "Yellowhammer News",
@@ -6640,7 +6652,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Montgomery City Council keeps $50,000 cap on Mayor Steven Reed’s contract authority, issues 90-day pause on liquor licenses",
+      "summary": "Montgomery City Council keeps $50,000 cap on Mayor Steven Reed\u2019s contract authority, issues 90-day pause on liquor licenses",
       "location": {
         "lat": 32.367838,
         "lng": -86.301625,
@@ -6676,7 +6688,7 @@
     {
       "id": "dfcf78807df1",
       "title": "Bessemer changes its laws to accommodate data centers despite stiff opposition",
-      "excerpt": "Despite vocal opposition from residents, local and state environmental groups and the NAACP, the entire council—save one absent member—voted...",
+      "excerpt": "Despite vocal opposition from residents, local and state environmental groups and the NAACP, the entire council\u2014save one absent member\u2014voted...",
       "body": "",
       "source": "Alabama Reflector",
       "sourceUrl": "https://alabamareflector.com/2025/10/12/bessemer-changes-its-laws-to-accommodate-data-centers-despite-stiff-opposition/",
@@ -6750,7 +6762,7 @@
     },
     {
       "id": "fd55fbe24505",
-      "title": "Montgomery Public Schools teacher placed on administrative leave…",
+      "title": "Montgomery Public Schools teacher placed on administrative leave\u2026",
       "excerpt": "A Montgomery Capitol Heights Middle School teacher was placed on administrative leave recently after posting a TikTok video mocking the...",
       "body": "",
       "source": "1819 News",
@@ -6765,7 +6777,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Montgomery Public Schools teacher placed on administrative leave…",
+      "summary": "Montgomery Public Schools teacher placed on administrative leave\u2026",
       "location": {
         "lat": 32.3821513,
         "lng": -86.2806064,
@@ -6788,8 +6800,8 @@
     },
     {
       "id": "1e75ab26862e",
-      "title": "‘Working for Alabama’ package aims to supercharge state’s economic growth",
-      "excerpt": "MONTGOMERY, Alabama — Governor Kay Ivey today signed the “Working for Alabama” legislative package into law, with the goal of transforming...",
+      "title": "\u2018Working for Alabama\u2019 package aims to supercharge state\u2019s economic growth",
+      "excerpt": "MONTGOMERY, Alabama \u2014 Governor Kay Ivey today signed the \u201cWorking for Alabama\u201d legislative package into law, with the goal of transforming...",
       "body": "",
       "source": "Alabama Department of Commerce",
       "sourceUrl": "https://www.madeinalabama.com/2024/05/working-for-alabama-package-aims-to-supercharge-alabamas-economic-growth/",
@@ -6803,7 +6815,7 @@
       "sentiment": "positive",
       "sentimentScore": 60,
       "misinfoRisk": 0,
-      "summary": "‘Working for Alabama’ package aims to supercharge state’s economic growth",
+      "summary": "\u2018Working for Alabama\u2019 package aims to supercharge state\u2019s economic growth",
       "location": {
         "lat": 32.370927,
         "lng": -86.290556,
@@ -6988,8 +7000,8 @@
     },
     {
       "id": "6807ac0087c3",
-      "title": "Governor Ivey Highlights Alabama’s Zero Tolerance for Crime, Provides Update on ALEA Enforcement Efforts in Montgomery Ahead of Holiday Season",
-      "excerpt": "MONTGOMERY – Governor Kay Ivey and the Alabama Law Enforcement Agency (ALEA) on Friday announced the successful completion of ALEA's initial...",
+      "title": "Governor Ivey Highlights Alabama\u2019s Zero Tolerance for Crime, Provides Update on ALEA Enforcement Efforts in Montgomery Ahead of Holiday Season",
+      "excerpt": "MONTGOMERY \u2013 Governor Kay Ivey and the Alabama Law Enforcement Agency (ALEA) on Friday announced the successful completion of ALEA's initial...",
       "body": "",
       "source": "State of Alabama (.gov)",
       "sourceUrl": "https://governor.alabama.gov/newsroom/2025/11/governor-ivey-highlights-alabamas-zero-tolerance-for-crime-provides-update-on-alea-enforcement-efforts-in-montgomery-ahead-of-holiday-season/",
@@ -7003,7 +7015,7 @@
       "sentiment": "neutral",
       "sentimentScore": 30,
       "misinfoRisk": 0,
-      "summary": "Governor Ivey Highlights Alabama’s Zero Tolerance for Crime, Provides Update on ALEA Enforcement Efforts in Montgomery Ahead of Holiday Season",
+      "summary": "Governor Ivey Highlights Alabama\u2019s Zero Tolerance for Crime, Provides Update on ALEA Enforcement Efforts in Montgomery Ahead of Holiday Season",
       "location": {
         "lat": 32.365742,
         "lng": -86.302915,
