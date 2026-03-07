@@ -51,6 +51,8 @@ export interface ChatMessage {
   mapAction?: MapCommand;
   hotspots?: PredictionHotspot[];
   serviceCards?: ServiceCardData[];
+  serviceId?: string;
+  serviceTitle?: string;
 }
 
 export interface Artifact {
@@ -269,6 +271,38 @@ export interface CitizenMeta {
   civicData: CitizenCivicData;
 }
 
+/* ── Roadmap ──────────────────────────────────────────── */
+export interface RoadmapLocation {
+  name: string;
+  address: string;
+  hours?: string;
+  phone?: string | null;
+}
+
+export interface RoadmapStep {
+  id: string;
+  stepNumber: number;
+  title: string;
+  action: string;
+  documents: string[];
+  location?: RoadmapLocation | null;
+  estimatedTime: string;
+  proTip?: string | null;
+  canDoOnline: boolean;
+  onlineUrl?: string | null;
+}
+
+export interface PersonalizedRoadmap {
+  id: string;
+  serviceId: string;
+  serviceTitle: string;
+  serviceCategory: string;
+  eligibilityNote: string;
+  totalEstimatedTime: string;
+  steps: RoadmapStep[];
+  generatedAt: string;
+}
+
 export interface AppState {
   messages: ChatMessage[];
   language: Language;
@@ -313,6 +347,8 @@ export interface AppState {
   mapCommand: MapCommand | null;
   guidePendingMessage: string | null;
   housingListings: HousingListing[];
+  activeRoadmap: PersonalizedRoadmap | null;
+  roadmapCompletedStepIds: string[];
 }
 
 /* ── Neighborhood Activity ────────────────────────────── */
