@@ -8,6 +8,7 @@ import Splash from "./pages/Splash";
 import CommandCenter from "./pages/CommandCenter";
 import AdminDashboard from "./pages/AdminDashboard";
 import MayorChat from "./pages/MayorChat";
+import Notifications from "./pages/Notifications";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
         <AppProvider>
           <Routes>
             <Route path="/" element={<Splash />} />
+            <Route path="/notifications" element={<Notifications />} />
             <Route path="/app" element={<Navigate to="/app/services" replace />} />
             <Route path="/app/:view" element={<CommandCenter />} />
             <Route path="/chat" element={<Navigate to="/app/services" replace />} />

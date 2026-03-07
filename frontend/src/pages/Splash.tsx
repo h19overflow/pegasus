@@ -7,11 +7,19 @@ import {
   MessageSquare,
   Newspaper,
   Users,
+  Bell,
 } from "lucide-react";
 import capitolDome from "@/assets/capitol-dome.png";
 import skyline from "@/assets/montgomery-skyline.png";
 
-const FEATURES = [
+interface Feature {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  route?: string;
+}
+
+const FEATURES: Feature[] = [
   {
     icon: Shield,
     title: "Benefits Navigation",
@@ -47,6 +55,13 @@ const FEATURES = [
     title: "Built for Everyone",
     description:
       "Bilingual support (EN/ES), persona-based profiles for different life situations, and accessibility-first design.",
+  },
+  {
+    icon: Bell,
+    title: "Subscribe for Notifications",
+    description:
+      "Get real-time updates on job opportunities, benefits changes, community events, and important city services.",
+    route: "/notifications",
   },
 ];
 
@@ -97,13 +112,15 @@ function FeatureCard({
   icon: Icon,
   title,
   description,
+  onClick,
 }: {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
+  onClick?: () => void;
 }) {
-  return (
-    <div className="flex gap-4 p-5 rounded-xl bg-white border border-border/60 shadow-sm hover:shadow-md transition-shadow">
+  const content = (
+    <>
       <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
         <Icon className="w-5 h-5 text-primary" />
       </div>
@@ -111,11 +128,30 @@ function FeatureCard({
         <h3 className="font-semibold text-foreground text-[15px] mb-1">{title}</h3>
         <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
       </div>
+    </>
+  );
+
+  if (onClick) {
+    return (
+      <button
+        onClick={onClick}
+        className="flex gap-4 p-5 rounded-xl bg-white border border-border/60 shadow-sm hover:shadow-md hover:border-primary/40 transition-all text-left w-full cursor-pointer"
+      >
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <div className="flex gap-4 p-5 rounded-xl bg-white border border-border/60 shadow-sm hover:shadow-md transition-shadow">
+      {content}
     </div>
   );
 }
 
 function FeaturesSection() {
+  const navigate = useNavigate();
+
   return (
     <section className="bg-background py-16 md:py-24 px-6">
       <div className="max-w-4xl mx-auto">
@@ -131,7 +167,13 @@ function FeaturesSection() {
 
         <div className="grid sm:grid-cols-2 gap-4">
           {FEATURES.map((feature) => (
-            <FeatureCard key={feature.title} {...feature} />
+            <FeatureCard
+              key={feature.title}
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
+              onClick={feature.route ? () => navigate(feature.route!) : undefined}
+            />
           ))}
         </div>
       </div>
