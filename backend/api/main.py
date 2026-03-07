@@ -11,7 +11,7 @@ load_dotenv()
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.api.routers import analysis, chat, comments, stream, webhooks
+from backend.api.routers import analysis, chat, comments, roadmap, stream, webhooks
 
 
 @asynccontextmanager
@@ -51,6 +51,7 @@ app.add_middleware(
 app.include_router(analysis.router, prefix="/api")
 app.include_router(chat.router, prefix="/api")
 app.include_router(comments.router, prefix="/api")
+app.include_router(roadmap.router, prefix="/api")
 app.include_router(webhooks.router, prefix="/api")
 app.include_router(stream.router, prefix="/api")
 

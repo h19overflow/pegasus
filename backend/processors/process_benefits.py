@@ -15,11 +15,13 @@ def parse_income_table(markdown: str) -> dict[str, int]:
     | Household of 2 | $2,229 |
     """
     limits: dict[str, int] = {}
-    pattern = r"\|?\s*(?:Household\s+(?:of\s+)?)?(\d+)\s*\|?\s*\$?([\d,]+)"
+    pattern = r"\|?\s*(?:Household\s+(?:of\s+)?)?(\d+)\s*\|?\s*\$?([\d,]*)"
     for match in re.finditer(pattern, markdown):
         size = match.group(1)
-        amount = int(match.group(2).replace(",", ""))
-        limits[size] = amount
+        raw = match.group(2).replace(",", "").strip()
+        if not raw or not raw.isdigit():
+            continue
+        limits[size] = int(raw)
     return limits
 
 

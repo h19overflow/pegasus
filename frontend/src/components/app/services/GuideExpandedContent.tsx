@@ -1,12 +1,17 @@
+import { useState } from "react";
 import {
-  ExternalLink,
-  Phone,
-  MapPin,
-  FileText,
   CheckCircle2,
   ClipboardList,
+  ExternalLink,
+  FileText,
+  Loader2,
+  Map,
+  MapPin,
+  Phone,
 } from "lucide-react";
 import type { ServiceGuide } from "@/lib/govServices";
+import { useApp } from "@/lib/appContext";
+import type { PersonalizedRoadmap } from "@/lib/types";
 
 export function GuideExpandedContent({
   guide,
@@ -15,6 +20,41 @@ export function GuideExpandedContent({
   guide: ServiceGuide;
   onNavigateToChat: (msg: string) => void;
 }) {
+  const { state, dispatch } = useApp();
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  async function handleBuildRoadmap() {
+    setIsGenerating(true);
+
+    try {
+      const body: Record<string, unknown> = { serviceId: guide.id };
+      if (state.citizenMeta) {
+        body.citizen = state.citizenMeta;
+      }
+
+      const response = await fetch("/api/roadmap/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        const detail = await response.json().catch(() => null);
+        throw new Error(detail?.detail ?? `HTTP ${response.status}`);
+      }
+
+      const roadmap = (await response.json()) as PersonalizedRoadmap;
+      dispatch({ type: "SET_ACTIVE_ROADMAP", roadmap });
+    } catch (error) {
+      console.error("[GuideExpandedContent] Failed to generate roadmap", error);
+      onNavigateToChat(
+        `Help me apply for ${guide.title}. I want to check eligibility and understand the steps.`,
+      );
+    } finally {
+      setIsGenerating(false);
+    }
+  }
+
   return (
     <div className="px-3 pb-3 space-y-3 border-t border-border/20 pt-2.5">
       <p className="text-xs text-muted-foreground leading-relaxed">{guide.description}</p>
@@ -70,12 +110,21 @@ export function GuideExpandedContent({
           Visit Website
         </a>
         <button
-          onClick={() => onNavigateToChat(
-            `Help me apply for ${guide.title}. I want to check eligibility and understand the steps.`
-          )}
-          className="flex-1 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors"
+          onClick={handleBuildRoadmap}
+          disabled={isGenerating}
+          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors disabled:opacity-60"
         >
-          Help Me Apply
+          {isGenerating ? (
+            <>
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              Building...
+            </>
+          ) : (
+            <>
+              <Map className="w-3.5 h-3.5" />
+              Details &rarr;
+            </>
+          )}
         </button>
       </div>
     </div>

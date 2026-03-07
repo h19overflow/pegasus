@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ServiceDirectory from "./ServiceDirectory";
 import ServiceDetailView from "./ServiceDetailView";
 import ServiceMapView from "./ServiceMapView";
+import { ServiceRoadmapView } from "./ServiceRoadmapView";
 import { useApp } from "@/lib/appContext";
 import type { ServiceCategory } from "@/lib/types";
 
@@ -12,7 +13,7 @@ interface ServicesViewProps {
 }
 
 export function ServicesView({ onNavigateToChat }: ServicesViewProps) {
-  const { state } = useApp();
+  const { state, dispatch } = useApp();
   const [mode, setMode] = useState<ServicesMode>("directory");
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(null);
 
@@ -33,31 +34,46 @@ export function ServicesView({ onNavigateToChat }: ServicesViewProps) {
     setMode("directory");
   }
 
-  if (mode === "detail" && selectedCategory) {
-    return (
-      <ServiceDetailView
-        category={selectedCategory}
-        onBack={handleBackToDirectory}
-        onNavigateToChat={onNavigateToChat}
-      />
-    );
-  }
-
-  if (mode === "map") {
-    return (
-      <ServiceMapView
-        onBack={() => setMode("directory")}
-        onSelectCategory={handleSelectCategory}
-        onNavigateToChat={onNavigateToChat}
-      />
-    );
+  function handleCloseRoadmap() {
+    dispatch({ type: "CLEAR_ROADMAP" });
   }
 
   return (
-    <ServiceDirectory
-      onSelectCategory={handleSelectCategory}
-      onShowMap={() => setMode("map")}
-      onNavigateToChat={onNavigateToChat}
-    />
+    <div className="relative flex h-full flex-col">
+      {mode === "detail" && selectedCategory ? (
+        <ServiceDetailView
+          category={selectedCategory}
+          onBack={handleBackToDirectory}
+          onNavigateToChat={onNavigateToChat}
+        />
+      ) : mode === "map" ? (
+        <ServiceMapView
+          onBack={() => setMode("directory")}
+          onSelectCategory={handleSelectCategory}
+          onNavigateToChat={onNavigateToChat}
+        />
+      ) : (
+        <ServiceDirectory
+          onSelectCategory={handleSelectCategory}
+          onShowMap={() => setMode("map")}
+          onNavigateToChat={onNavigateToChat}
+        />
+      )}
+
+      {state.activeRoadmap && (
+        <div
+          className="absolute inset-0 z-50 flex items-end justify-center bg-black/50 backdrop-blur-sm sm:items-center"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              handleCloseRoadmap();
+            }
+          }}
+        >
+          <div className="flex max-h-[85%] w-full flex-col overflow-hidden bg-background shadow-2xl animate-in slide-in-from-bottom-4 duration-200 sm:max-w-lg sm:rounded-2xl sm:zoom-in-95">
+            <ServiceRoadmapView />
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

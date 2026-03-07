@@ -7,6 +7,7 @@ import MedicaidCard from "@/components/app/cards/MedicaidCard";
 import SkillGapCard from "@/components/app/cards/SkillGapCard";
 import ReentryCard from "@/components/app/cards/ReentryCard";
 import PdfPreviewCard from "@/components/app/cards/PdfPreviewCard";
+import ChatRoadmapCard from "@/components/app/cards/ChatRoadmapCard";
 
 interface MessageBubbleProps {
   message: ChatMessage;
@@ -42,6 +43,7 @@ const MessageBubble = ({ message, onChipClick }: MessageBubbleProps) => {
           {message.type === "skill-gap" && <SkillGapCard />}
           {message.type === "reentry" && <ReentryCard />}
           {message.type === "pdf-preview" && <PdfPreviewCard />}
+          {message.type === "service-roadmap" && <ChatRoadmapCard message={message} />}
         </div>
       </div>
 

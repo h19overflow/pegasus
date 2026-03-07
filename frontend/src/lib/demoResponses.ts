@@ -140,6 +140,61 @@ export function getDemoResponse(userMessage: string): ChatMessage {
   }
 
   if (
+    lower.includes("list the services") ||
+    lower.includes("list services") ||
+    lower.includes("what services")
+  ) {
+    return {
+      id: Date.now().toString(),
+      role: "assistant",
+      content: "Here are some of the key services I can help you build a step-by-step roadmap for:",
+      type: "text",
+      chips: [
+        "Roadmap for SNAP",
+        "Roadmap for Medicaid",
+        "Roadmap for Childcare Subsidy",
+        "Roadmap for LIHEAP",
+        "Roadmap for Section 8 Housing",
+      ],
+    };
+  }
+
+  if (
+    lower.includes("roadmap of") ||
+    lower.includes("roadmap for") ||
+    lower.includes("build a roadmap")
+  ) {
+    let serviceId = "svc-snap-al";
+    let serviceTitle = "SNAP (Food Stamps)";
+
+    if (lower.includes("medicaid")) {
+      serviceId = "svc-medicaid-al";
+      serviceTitle = "Alabama Medicaid";
+    } else if (lower.includes("childcare") || lower.includes("daycare")) {
+      serviceId = "svc-childcare-subsidy";
+      serviceTitle = "Childcare Subsidy Program";
+    } else if (lower.includes("liheap") || lower.includes("energy") || lower.includes("utility")) {
+      serviceId = "svc-liheap";
+      serviceTitle = "LIHEAP (Energy Assistance)";
+    } else if (lower.includes("housing") || lower.includes("section 8")) {
+      serviceId = "svc-mha-housing";
+      serviceTitle = "Section 8 Public Housing";
+    } else if (lower.includes("career") || lower.includes("jobs") || lower.includes("workforce")) {
+      serviceId = "svc-career-center";
+      serviceTitle = "Montgomery Career Center";
+    }
+
+    return {
+      id: Date.now().toString(),
+      role: "assistant",
+      content: `I can generate a step-by-step roadmap for ${serviceTitle}. I will pull the official requirements and give you a checklist of what to do.`,
+      type: "service-roadmap",
+      serviceId,
+      serviceTitle,
+    };
+  }
+
+  if (
     lower.includes("benefits") ||
     lower.includes("check my") ||
     lower.includes("eligible") ||
