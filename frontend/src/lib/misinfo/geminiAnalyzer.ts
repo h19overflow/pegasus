@@ -21,16 +21,11 @@ export class GeminiError extends Error {
 }
 
 function getApiKey(): string {
-  const fromEnv = (import.meta.env.VITE_GEMINI_API_KEY as string) ?? "";
-  const fromStorage =
-    typeof localStorage !== "undefined"
-      ? (localStorage.getItem("gemini_api_key") ?? "")
-      : "";
-  const key = fromEnv || fromStorage;
+  // WARNING: Client-side API keys are visible in browser. Use server-side proxy for production.
+  const key = (import.meta.env.VITE_GEMINI_API_KEY as string) ?? "";
   if (!key)
     throw new GeminiError(
-      "Gemini API key not found. Add VITE_GEMINI_API_KEY to .env " +
-        "or run: localStorage.setItem('gemini_api_key', '<key>')",
+      "Gemini API key not found. Set VITE_GEMINI_API_KEY in your .env file.",
     );
   return key;
 }
