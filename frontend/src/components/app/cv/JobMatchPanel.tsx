@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { useApp } from "@/lib/appContext";
 import TrendingSkillsBar from "./TrendingSkillsBar";
@@ -33,7 +33,36 @@ const JobMatchPanel = () => {
     hasCv,
   });
 
-  const activeFilterCount = countActiveFilters(filters);
+  const activeFilterCount = useMemo(() => countActiveFilters(filters), [filters]);
+
+  const handleFilterByIndustry = useCallback((industry: string) => {
+    setFilters((prev) => ({ ...prev, industry }));
+    if (industry) scrollToResults();
+  }, [scrollToResults]);
+
+  const handleFilterByRole = useCallback((role: string) => {
+    setFilters((prev) => ({ ...prev, titleKeyword: role }));
+    if (role) scrollToResults();
+  }, [scrollToResults]);
+
+  const handleFilterBySeniority = useCallback((level: string) => {
+    setFilters((prev) => {
+      const next = new Set(prev.seniority);
+      if (next.has(level)) next.delete(level);
+      else { next.clear(); next.add(level); }
+      return { ...prev, seniority: next };
+    });
+    scrollToResults();
+  }, [scrollToResults]);
+
+  const handleToggleExpand = useCallback((jobId: string) => {
+    setExpandedJobId((prev) => prev === jobId ? null : jobId);
+  }, []);
+
+  const handleFilterBySkill = useCallback((skill: string) => {
+    setFilters((prev) => ({ ...prev, skill }));
+    if (skill) scrollToResults();
+  }, [scrollToResults]);
 
   if (state.jobsLoading) {
     return (
@@ -90,24 +119,16 @@ const JobMatchPanel = () => {
           jobs={state.jobListings}
           activeIndustry={filters.industry}
           activeRole={filters.titleKeyword}
-          onFilterByIndustry={(industry) => { setFilters((prev) => ({ ...prev, industry })); if (industry) scrollToResults(); }}
-          onFilterByRole={(role) => { setFilters((prev) => ({ ...prev, titleKeyword: role })); if (role) scrollToResults(); }}
-          onFilterBySeniority={(level) => {
-            setFilters((prev) => {
-              const next = new Set(prev.seniority);
-              if (next.has(level)) next.delete(level);
-              else { next.clear(); next.add(level); }
-              return { ...prev, seniority: next };
-            });
-            scrollToResults();
-          }}
+          onFilterByIndustry={handleFilterByIndustry}
+          onFilterByRole={handleFilterByRole}
+          onFilterBySeniority={handleFilterBySeniority}
         />
       )}
       {state.trendingSkills.length > 0 && (
         <TrendingSkillsBar
           skills={state.trendingSkills}
           activeSkill={filters.skill}
-          onFilterBySkill={(skill) => { setFilters((prev) => ({ ...prev, skill })); if (skill) scrollToResults(); }}
+          onFilterBySkill={handleFilterBySkill}
         />
       )}
 
@@ -123,7 +144,7 @@ const JobMatchPanel = () => {
         jobs={displayJobs}
         hasCv={hasCv}
         expandedJobId={expandedJobId}
-        onToggleExpand={(jobId) => setExpandedJobId(expandedJobId === jobId ? null : jobId)}
+        onToggleExpand={handleToggleExpand}
         resultsRef={resultsRef}
       />
     </div>

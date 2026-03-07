@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, MessageCircle } from "lucide-react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import type { ServiceCategory, ServicePoint } from "@/lib/types";
 import { useApp } from "@/lib/appContext";
@@ -13,6 +12,7 @@ import { FlyToPoint } from "./map/FlyToPoint";
 import { MapCommandHandler } from "./map/MapCommandHandler";
 import { CategoryFilterBar } from "./map/CategoryFilterBar";
 import { ServiceMapDetail } from "./map/ServiceMapDetail";
+import { ServiceMapViewHeader } from "./map/ServiceMapViewHeader";
 
 const MONTGOMERY_CENTER: [number, number] = [32.3668, -86.3];
 
@@ -28,7 +28,6 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
     new Set(MAP_CATEGORIES.map((c) => c.id)),
   );
   const [selectedPoint, setSelectedPoint] = useState<ServicePoint | null>(null);
-  const [showNeighborhood, setShowNeighborhood] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
 
   // Auto-open guide panel when a "More details" message arrives
@@ -73,28 +72,12 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
 
   return (
     <div className="flex flex-col h-full">
-      <div className="shrink-0 px-6 py-4 border-b border-border/30 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <button onClick={onBack} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors">
-            <ArrowLeft className="w-4 h-4" />Back
-          </button>
-          <h1 className="text-base font-bold text-foreground">All Services Map</h1>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="text-xs text-muted-foreground">{visiblePoints.length} locations</span>
-          <button
-            onClick={() => setGuideOpen((prev) => !prev)}
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-              guideOpen
-                ? "bg-primary text-primary-foreground"
-                : "bg-muted text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <MessageCircle className="w-3.5 h-3.5" />
-            Guide
-          </button>
-        </div>
-      </div>
+      <ServiceMapViewHeader
+        visiblePointCount={visiblePoints.length}
+        guideOpen={guideOpen}
+        onBack={onBack}
+        onToggleGuide={() => setGuideOpen((prev) => !prev)}
+      />
 
       <CategoryFilterBar
         activeCategories={activeCategories}
@@ -125,7 +108,7 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
             ))}
             <FlyToPoint lat={selectedPoint?.lat ?? null} lng={selectedPoint?.lng ?? null} />
             <MapCommandHandler visiblePoints={visiblePoints} />
-            {showNeighborhood && <NeighborhoodOverlay />}
+            <NeighborhoodOverlay />
           </MapContainer>
 
           <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-sm z-[1000] flex flex-wrap gap-x-4 gap-y-1">
