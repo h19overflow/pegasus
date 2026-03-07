@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft, Map } from "lucide-react";
+import { Map } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import capitolDome from "@/assets/capitol-dome.png";
 import { AIInsightsCard } from "@/components/app/admin/AIInsightsCard";
 import { AdminChatBubble } from "@/components/app/admin/AdminChatBubble";
 import { AnalyzeButton } from "@/components/app/admin/AnalyzeButton";
@@ -24,6 +25,34 @@ function buildGreeting(): string {
   return "Good evening, Mayor";
 }
 
+function AdminHeader() {
+  return (
+    <header className="sticky top-0 z-[1001] bg-white border-t-[3px] border-[hsl(var(--amber-gold))] border-b border-border/40">
+      <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+            <img src={capitolDome} alt="" className="w-5 h-5 object-contain" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-secondary font-bold text-[15px] leading-tight tracking-tight">
+              MyMontgomery
+            </span>
+            <span className="text-[hsl(var(--amber-gold))] text-[10px] leading-tight font-bold uppercase tracking-[0.12em]">
+              Admin Dashboard
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">
+            {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
+          </span>
+        </div>
+      </div>
+    </header>
+  );
+}
+
 export default function AdminDashboard() {
   const { state, dispatch } = useApp();
   const navigate = useNavigate();
@@ -32,13 +61,11 @@ export default function AdminDashboard() {
   const [chatQuestion, setChatQuestion] = useState<string | undefined>();
   const questionCounterRef = useRef(0);
 
-  // Append a counter so repeated identical questions still trigger the effect
   const askAI = useCallback((question: string) => {
     questionCounterRef.current += 1;
     setChatQuestion(`${question}##${questionCounterRef.current}`);
   }, []);
 
-  // Strip the counter before passing to the chat bubble
   const cleanQuestion = chatQuestion?.replace(/##\d+$/, "");
 
   useEffect(() => {
@@ -60,29 +87,27 @@ export default function AdminDashboard() {
 
   return (
     <div className={`min-h-screen bg-background transition-[margin] duration-200 ${chatIsOpen ? "mr-[520px]" : ""}`}>
-      <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center gap-3">
-        <button
-          onClick={() => navigate("/app/services")}
-          className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors min-h-[44px] px-2"
-        >
-          <ArrowLeft className="w-4 h-4" aria-hidden="true" />
-          Back to App
-        </button>
-        <h1 className="text-lg font-semibold text-foreground">Admin Dashboard</h1>
-      </header>
+      <AdminHeader />
 
-      <main className="max-w-6xl mx-auto px-4 py-6 space-y-6">
+      <main className="max-w-6xl mx-auto px-6 py-6 space-y-6">
         <OnboardingBanner />
 
-        <section className="space-y-3">
+        {/* Greeting + Actions */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="h-px w-8 bg-[hsl(var(--amber-gold))]" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[hsl(var(--amber-gold))]">
+              Montgomery, Alabama
+            </span>
+          </div>
           <div className="flex items-center justify-between gap-3 flex-wrap">
-            <h2 className="text-2xl font-bold text-foreground">{buildGreeting()}</h2>
+            <h2 className="text-2xl font-bold text-secondary tracking-tight">{buildGreeting()}</h2>
             <button
               onClick={() => {
                 dispatch({ type: "SET_SELECTED_ARTICLE", articleId: null });
                 navigate("/app/services");
               }}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-md border border-border bg-background text-sm font-medium text-foreground hover:bg-muted transition-colors min-h-[44px]"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border/40 bg-white text-sm font-medium text-secondary hover:shadow-sm hover:text-primary transition-all"
             >
               <Map className="w-4 h-4" aria-hidden="true" />
               View Map

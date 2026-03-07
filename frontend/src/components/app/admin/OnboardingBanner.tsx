@@ -21,11 +21,11 @@ export function OnboardingBanner() {
   }
 
   return (
-    <div className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3 space-y-2">
+    <div className="rounded-xl border border-[hsl(var(--amber-gold))]/20 bg-[hsl(var(--amber-gold))]/5 px-4 py-3 space-y-2 magnolia-bg">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <HelpCircle className="w-4 h-4 text-primary" />
-          <span className="text-sm font-semibold text-foreground">Quick Tips</span>
+          <HelpCircle className="w-4 h-4 text-[hsl(var(--amber-gold))]" />
+          <span className="text-sm font-semibold text-secondary">Quick Tips</span>
         </div>
         <button
           onClick={handleDismiss}
@@ -38,7 +38,7 @@ export function OnboardingBanner() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {TIPS.map(({ icon: Icon, text }) => (
           <div key={text} className="flex items-start gap-2">
-            <Icon className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
+            <Icon className="w-3.5 h-3.5 text-[hsl(var(--amber-gold))] mt-0.5 shrink-0" />
             <span className="text-xs text-muted-foreground leading-snug">{text}</span>
           </div>
         ))}
