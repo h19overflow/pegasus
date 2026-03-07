@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import TopBar from "@/components/app/TopBar";
 import { AppNav, type MobileTab } from "@/components/app/MobileNav";
 import { ServicesView } from "@/components/app/services/ServicesView";
@@ -23,6 +23,7 @@ export default function CommandCenter() {
   useDataStream();
   const { view: urlView } = useParams<{ view: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const lang: Language = "EN";
 
   const hasSyncedRef = useRef(false);
@@ -38,15 +39,20 @@ export default function CommandCenter() {
       navigate(`/app/${state.activeView}`, { replace: true });
       hasSyncedRef.current = true;
     }
-  }, [urlView]);
+  }, [urlView, state.activeView, dispatch, navigate]);
 
   // Sync state → URL only after initial mount sync is done
   useEffect(() => {
     if (!hasSyncedRef.current) return;
-    if (state.activeView !== urlView && VALID_VIEWS.has(state.activeView)) {
+    const expectedPath = `/app/${state.activeView}`;
+    if (
+      state.activeView !== urlView
+      && VALID_VIEWS.has(state.activeView)
+      && location.pathname !== expectedPath
+    ) {
       navigate(`/app/${state.activeView}`, { replace: true });
     }
-  }, [state.activeView]);
+  }, [state.activeView, urlView, location.pathname, navigate]);
 
   useEffect(() => {
     if (state.messages.length === 0) {
@@ -59,7 +65,7 @@ export default function CommandCenter() {
       navigate("/admin");
       return;
     }
-    dispatch({ type: "SET_VIEW", view: tab });
+    navigate(`/app/${tab}`);
   }
 
   async function handleSendMessage(text: string) {
