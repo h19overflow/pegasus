@@ -29,19 +29,12 @@ export default function CommandCenter() {
   const navigate = useNavigate();
   const [lang, setLang] = useState<Language>("EN");
 
-  // Sync URL → state on mount and URL changes
+  // Keep state.activeView in sync with the URL (for sidebar highlights etc.)
   useEffect(() => {
     if (urlView && VALID_VIEWS.has(urlView) && urlView !== state.activeView) {
       dispatch({ type: "SET_VIEW", view: urlView as AppView });
     }
   }, [urlView]);
-
-  // Sync state → URL when view changes via sidebar/buttons
-  useEffect(() => {
-    if (state.activeView !== urlView) {
-      navigate(`/app/${state.activeView}`, { replace: true });
-    }
-  }, [state.activeView]);
 
   useEffect(() => {
     if (state.messages.length === 0) {
@@ -55,7 +48,7 @@ export default function CommandCenter() {
   }
 
   function handleMobileTabChange(tab: MobileTab) {
-    dispatch({ type: "SET_VIEW", view: tab });
+    navigate(`/app/${tab}`);
   }
 
   async function handleSendMessage(text: string) {
@@ -100,7 +93,7 @@ export default function CommandCenter() {
     }, 1800);
   }
 
-  const currentView = state.activeView;
+  const currentView = (urlView && VALID_VIEWS.has(urlView) ? urlView : "services") as AppView;
 
   return (
     <div className="h-screen flex flex-col bg-background">
@@ -108,7 +101,7 @@ export default function CommandCenter() {
         lang={lang}
         onLangChange={handleLanguageChange}
         isProfileActive={currentView === "profile"}
-        onProfileClick={() => dispatch({ type: "SET_VIEW", view: "profile" })}
+        onProfileClick={() => navigate("/app/profile")}
       />
 
       <div className="flex-1 flex min-h-0 overflow-hidden">

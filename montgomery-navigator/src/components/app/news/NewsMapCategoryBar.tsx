@@ -1,4 +1,4 @@
-import { NEWS_MAP_CATEGORIES, computeMisinfoScore } from "@/lib/newsMapUtils";
+import { NEWS_MAP_CATEGORIES } from "@/lib/newsMapUtils";
 import type { NewsArticle } from "@/lib/types";
 
 interface NewsMapCategoryBarProps {
@@ -15,7 +15,7 @@ export function NewsMapCategoryBar({
   misinfoOnly, onMisinfoToggle, flaggedArticleIds,
 }: NewsMapCategoryBarProps) {
   const misinfoCount = articles.filter(
-    (a) => computeMisinfoScore(a, flaggedArticleIds) > 50
+    (a) => flaggedArticleIds.includes(a.id) || (a.misinfoRisk != null && a.misinfoRisk > 30)
   ).length;
 
   return (
@@ -48,8 +48,8 @@ export function NewsMapCategoryBar({
         className={[
           "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border transition-all",
           misinfoOnly
-            ? "bg-red-50 text-red-700 border-red-300"
-            : "bg-muted/30 text-muted-foreground border-transparent opacity-60 hover:opacity-100",
+            ? "bg-primary/10 text-primary border-primary/30"
+            : "bg-muted/30 text-muted-foreground border-transparent opacity-50",
         ].join(" ")}
       >
         <span>🚩</span>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useApp } from "@/lib/appContext";
 import { fetchNewsArticles, filterArticlesByCategory, sortArticlesByDate } from "@/lib/newsService";
 import { NewsCard } from "./NewsCard";
@@ -11,8 +11,40 @@ import { Map, Newspaper, RefreshCw } from "lucide-react";
 import { scrapeLatestNews } from "@/integrations/brightdata/newsScraper";
 import { BrightDataError } from "@/integrations/brightdata/brightdataClient";
 import { runMisinfoAnalysis } from "@/integrations/misinfo/misinfoService";
+import { NEWS_MAP_CATEGORIES } from "@/lib/newsMapUtils";
 
 type SortMode = "newest" | "oldest" | "most_liked";
+const NEWS_CACHE_KEY = "montgomeryai_news_articles";
+const NEWS_LAST_SCRAPED_KEY = "montgomeryai_news_last_scraped";
+
+function loadCachedNewsArticles(): NewsArticle[] {
+  if (typeof localStorage === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(NEWS_CACHE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed as NewsArticle[] : [];
+  } catch {
+    return [];
+  }
+}
+
+function loadCachedLastScraped(): string | null {
+  if (typeof localStorage === "undefined") return null;
+  return localStorage.getItem(NEWS_LAST_SCRAPED_KEY);
+}
+
+function persistNewsCache(articles: NewsArticle[], scrapedAt: string | null): void {
+  if (typeof localStorage === "undefined") return;
+  try {
+    localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify(articles));
+    if (scrapedAt) {
+      localStorage.setItem(NEWS_LAST_SCRAPED_KEY, scrapedAt);
+    }
+  } catch {
+    // no-op: ignore storage quota / private mode failures
+  }
+}
 
 function buildArticleCountsPerCategory(articles: NewsArticle[]): Record<string, number> {
   const counts: Record<string, number> = { all: articles.length };
@@ -70,11 +102,12 @@ function filterBySentiment(articles: NewsArticle[], sentiment: string): NewsArti
 
 function filterByFlagged(articles: NewsArticle[], flaggedOnly: boolean, flaggedIds: string[]): NewsArticle[] {
   if (!flaggedOnly) return articles;
-  return articles.filter((a) => flaggedIds.includes(a.id) || (a.misinfoRisk != null && a.misinfoRisk > 60));
+  return articles.filter((a) => flaggedIds.includes(a.id) || (a.misinfoRisk != null && a.misinfoRisk > 30));
 }
 
 export function NewsView() {
   const { state, dispatch } = useApp();
+  const analyzedArticleIdsRef = useRef<Set<string>>(new Set());
   const [viewMode, setViewMode] = useState<"feed" | "map">("feed");
   const [lastScraped, setLastScraped] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -84,20 +117,36 @@ export function NewsView() {
   const [sortMode, setSortMode] = useState<SortMode>("newest");
   const [sourceFilter, setSourceFilter] = useState("");
   const [sentimentFilter, setSentimentFilter] = useState<"" | "positive" | "negative" | "neutral">("");
+  const [mapActiveCategories, setMapActiveCategories] = useState<Set<string>>(
+    () => new Set(NEWS_MAP_CATEGORIES.map((category) => category.id)),
+  );
+  const [mapMisinfoOnly, setMapMisinfoOnly] = useState(false);
 
   async function loadArticles() {
     dispatch({ type: "SET_NEWS_LOADING", loading: true });
     try {
-      const articles = await fetchNewsArticles();
+      const cachedArticles = loadCachedNewsArticles();
+      const articles = cachedArticles.length > 0 ? cachedArticles : await fetchNewsArticles();
       dispatch({ type: "SET_NEWS_ARTICLES", articles });
-      runMisinfoAnalysis(articles, (scores) =>
-        dispatch({ type: "UPDATE_MISINFO_SCORES", scores }),
-      );
 
       if (!lastScraped) {
-        const response = await fetch("/data/news_feed.json");
-        const data = await response.json();
-        if (data.lastScraped) setLastScraped(data.lastScraped);
+        const cachedScraped = loadCachedLastScraped();
+        if (cachedScraped) {
+          setLastScraped(cachedScraped);
+        } else {
+          const response = await fetch("/data/news_feed.json");
+          const data = await response.json();
+          if (data.lastScraped) {
+            setLastScraped(data.lastScraped);
+          } else {
+            // Fall back to the most recent scrapedAt across all articles
+            const latest = articles.reduce<string | null>(
+              (max, a) => (!max || a.scrapedAt > max ? a.scrapedAt : max),
+              null,
+            );
+            if (latest) setLastScraped(latest);
+          }
+        }
       }
     } catch (error) {
       console.error("[NewsView] Failed to load news articles", error);
@@ -107,6 +156,23 @@ export function NewsView() {
   }
 
   useEffect(() => { loadArticles(); }, []);
+
+  useEffect(() => {
+    const pending = state.newsArticles.filter(
+      (article) => article.misinfoRisk == null && !analyzedArticleIdsRef.current.has(article.id),
+    );
+    if (pending.length === 0) return;
+
+    pending.forEach((article) => analyzedArticleIdsRef.current.add(article.id));
+    runMisinfoAnalysis(pending, (scores) =>
+      dispatch({ type: "UPDATE_MISINFO_SCORES", scores }),
+    );
+  }, [dispatch, state.newsArticles]);
+
+  useEffect(() => {
+    if (state.newsArticles.length === 0) return;
+    persistNewsCache(state.newsArticles, lastScraped);
+  }, [lastScraped, state.newsArticles]);
 
   function handleCategoryChange(category: NewsCategory) {
     dispatch({ type: "SET_NEWS_CATEGORY", category });
@@ -128,20 +194,30 @@ export function NewsView() {
     dispatch({ type: "TOGGLE_ARTICLE_FLAG", articleId });
   }
 
+  function handleMapCategoryToggle(categoryId: string) {
+    setMapActiveCategories((previous) => {
+      const next = new Set(previous);
+      if (next.has(categoryId)) {
+        next.delete(categoryId);
+      } else {
+        next.add(categoryId);
+      }
+      return next;
+    });
+  }
+
+  function handleMapMisinfoToggle() {
+    setMapMisinfoOnly((previous) => !previous);
+  }
+
   async function handleRefresh() {
     setRefreshing(true);
     setRefreshError(null);
     try {
       const fresh = await scrapeLatestNews();
-      // Merge: fresh articles first, then existing ones not already in fresh
-      const freshIds = new Set(fresh.map((a) => a.sourceUrl || a.title));
-      const kept = state.newsArticles.filter((a) => !freshIds.has(a.sourceUrl || a.title));
-      const merged = [...fresh, ...kept];
-      dispatch({ type: "SET_NEWS_ARTICLES", articles: merged });
+      // User-triggered refresh should fully reload the feed with fresh results.
+      dispatch({ type: "SET_NEWS_ARTICLES", articles: fresh });
       setLastScraped(new Date().toISOString());
-      runMisinfoAnalysis(merged, (scores) =>
-        dispatch({ type: "UPDATE_MISINFO_SCORES", scores }),
-      );
     } catch (err) {
       const msg = err instanceof BrightDataError ? err.message : "Refresh failed. Check your API key.";
       setRefreshError(msg);
@@ -180,6 +256,10 @@ export function NewsView() {
       <NewsMapView
         articles={state.newsArticles}
         flaggedArticleIds={state.flaggedArticleIds}
+        activeCategories={mapActiveCategories}
+        misinfoOnly={mapMisinfoOnly}
+        onToggleCategory={handleMapCategoryToggle}
+        onToggleMisinfoOnly={handleMapMisinfoToggle}
         onBack={() => setViewMode("feed")}
         onSelectArticle={handleSelectArticle}
       />
@@ -205,7 +285,7 @@ export function NewsView() {
             <Newspaper className="w-5 h-5 text-primary" />
             <h2 className="text-base font-semibold text-foreground">Montgomery News</h2>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-start gap-2">
             <button
               onClick={() => setViewMode("map")}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border/50 bg-white text-sm font-medium text-foreground hover:shadow-md transition-all"
@@ -213,26 +293,27 @@ export function NewsView() {
               <Map className="w-4 h-4 text-primary" />
               View on map
             </button>
-            <button
-              onClick={handleRefresh}
-              disabled={refreshing}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border/50 bg-white text-sm font-medium text-foreground hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <RefreshCw className={`w-4 h-4 text-primary ${refreshing ? "animate-spin" : ""}`} />
-              {refreshing ? "Refreshing…" : "Refresh news"}
-            </button>
+            <div className="flex flex-col items-end gap-1 min-h-[16px]">
+              <button
+                onClick={handleRefresh}
+                disabled={refreshing}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border/50 bg-white text-sm font-medium text-foreground hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <RefreshCw className={`w-4 h-4 text-primary ${refreshing ? "animate-spin" : ""}`} />
+                {refreshing ? "Refreshing…" : "Refresh news"}
+              </button>
+              {lastScraped && !refreshError && (
+                <span className="text-[11px] text-muted-foreground">
+                  Updated {formatLastScrapedTimestamp(lastScraped)}
+                </span>
+              )}
+              {refreshError && (
+                <span className="text-[11px] text-destructive leading-tight text-right max-w-[220px]">
+                  {refreshError}
+                </span>
+              )}
+            </div>
           </div>
-        </div>
-        {/* Timestamp + error — lives below the button row */}
-        <div className="flex items-center gap-3 min-h-[16px]">
-          {lastScraped && !refreshError && (
-            <span className="text-[11px] text-muted-foreground">
-              Updated {formatLastScrapedTimestamp(lastScraped)}
-            </span>
-          )}
-          {refreshError && (
-            <span className="text-[11px] text-destructive leading-tight">{refreshError}</span>
-          )}
         </div>
 
         {/* Category tabs */}

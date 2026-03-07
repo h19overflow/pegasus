@@ -106,7 +106,7 @@ export function NewsFilterBar({
               : "bg-white text-muted-foreground hover:bg-muted/50"
           }`}
         >
-          🚩 Flagged only
+          🚩 Misinformation
         </button>
       </div>
     </div>

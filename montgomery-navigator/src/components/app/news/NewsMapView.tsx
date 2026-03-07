@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "@/lib/leafletSetup";
@@ -15,27 +14,32 @@ import type { NewsArticle } from "@/lib/types";
 interface NewsMapViewProps {
   articles: NewsArticle[];
   flaggedArticleIds: string[];
+  activeCategories: Set<string>;
+  misinfoOnly: boolean;
+  onToggleCategory: (id: string) => void;
+  onToggleMisinfoOnly: () => void;
   onBack: () => void;
   onSelectArticle: (article: NewsArticle) => void;
 }
 
-export function NewsMapView({ articles, flaggedArticleIds, onBack, onSelectArticle }: NewsMapViewProps) {
-  const [activeCategories, setActiveCategories] = useState<Set<string>>(
-    new Set(NEWS_MAP_CATEGORIES.map((c) => c.id)),
-  );
-  const [misinfoOnly, setMisinfoOnly] = useState(false);
+export function NewsMapView({
+  articles,
+  flaggedArticleIds,
+  activeCategories,
+  misinfoOnly,
+  onToggleCategory,
+  onToggleMisinfoOnly,
+  onBack,
+  onSelectArticle,
+}: NewsMapViewProps) {
 
-  function toggleCategory(id: string) {
-    setActiveCategories((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) { next.delete(id); } else { next.add(id); }
-      return next;
-    });
+  function isMisinfoArticle(a: (typeof articles)[0]) {
+    return flaggedArticleIds.includes(a.id) || (a.misinfoRisk != null && a.misinfoRisk > 30);
   }
 
   const visibleArticles = articles.filter((a) => {
     if (!activeCategories.has(a.category)) return false;
-    if (misinfoOnly && computeMisinfoScore(a, flaggedArticleIds) <= 50) return false;
+    if (misinfoOnly && !isMisinfoArticle(a)) return false;
     return true;
   });
 
@@ -63,9 +67,9 @@ export function NewsMapView({ articles, flaggedArticleIds, onBack, onSelectArtic
       <NewsMapCategoryBar
         articles={articles}
         activeCategories={activeCategories}
-        onToggle={toggleCategory}
+        onToggle={onToggleCategory}
         misinfoOnly={misinfoOnly}
-        onMisinfoToggle={() => setMisinfoOnly((v) => !v)}
+        onMisinfoToggle={onToggleMisinfoOnly}
         flaggedArticleIds={flaggedArticleIds}
       />
 
