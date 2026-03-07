@@ -1,9 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import TopBar from "@/components/app/TopBar";
-import { FlowSidebar } from "@/components/app/FlowSidebar";
-import ContextPanel from "@/components/app/ContextPanel";
-import MobileNav, { type MobileTab } from "@/components/app/MobileNav";
+import { AppNav, type MobileTab } from "@/components/app/MobileNav";
 import CvUploadView from "@/components/app/cv/CvUploadView";
 import { ServicesView } from "@/components/app/services/ServicesView";
 import ProfileView from "@/components/app/ProfileView";
@@ -11,7 +9,6 @@ import { NewsPage } from "@/components/app/news/NewsPage";
 import FloatingChatBubble from "@/components/app/FloatingChatBubble";
 import { useApp } from "@/lib/appContext";
 import { useDataStream } from "@/lib/useDataStream";
-import { getDemoResponse } from "@/lib/demoResponses";
 import { getSmartResponse } from "@/lib/aiChatService";
 import {
   buildWelcomeMessage,
@@ -28,7 +25,7 @@ export default function CommandCenter() {
   useDataStream();
   const { view: urlView } = useParams<{ view: string }>();
   const navigate = useNavigate();
-  const [lang, setLang] = useState<Language>("EN");
+  const lang: Language = "EN";
 
   const hasSyncedRef = useRef(false);
 
@@ -59,12 +56,7 @@ export default function CommandCenter() {
     }
   }, []);
 
-  function handleLanguageChange(newLang: Language) {
-    setLang(newLang);
-    dispatch({ type: "SET_LANGUAGE", language: newLang });
-  }
-
-  function handleMobileTabChange(tab: MobileTab) {
+  function handleTabChange(tab: MobileTab) {
     dispatch({ type: "SET_VIEW", view: tab });
   }
 
@@ -95,12 +87,10 @@ export default function CommandCenter() {
       });
     }, 1200);
 
-    // Try AI backend first, fall back to demo responses
     const response = await getSmartResponse(text);
 
     dispatch({ type: "ADD_MESSAGE", message: response });
 
-    // If the AI response has a map action, dispatch it and switch to services view
     if (response.mapAction) {
       dispatch({ type: "SET_MAP_COMMAND", command: response.mapAction });
       if (state.activeView !== "services") {
@@ -122,18 +112,9 @@ export default function CommandCenter() {
 
   return (
     <div className="h-screen flex flex-col bg-background">
-      <TopBar
-        lang={lang}
-        onLangChange={handleLanguageChange}
-        isProfileActive={currentView === "profile"}
-        onProfileClick={() => dispatch({ type: "SET_VIEW", view: "profile" })}
-      />
+      <TopBar />
 
       <div className="flex-1 flex min-h-0 overflow-hidden">
-        <div className="hidden lg:flex h-full">
-          <FlowSidebar onQuickAction={handleSendMessage} />
-        </div>
-
         <div className="flex-1 flex flex-col min-w-0 min-h-0">
           {currentView === "services" && (
             <ServicesView onNavigateToChat={handleSendMessage} />
@@ -141,25 +122,16 @@ export default function CommandCenter() {
           {currentView === "cv" && <CvUploadView />}
           {currentView === "profile" && <ProfileView />}
           {currentView === "news" && <NewsPage />}
-
         </div>
-
-        {currentView === "services" && (
-          <div className="hidden lg:flex h-full">
-            <ContextPanel onNavigateToChat={handleSendMessage} />
-          </div>
-        )}
       </div>
 
-      <MobileNav
+      <AppNav
         activeTab={currentView as MobileTab}
-        onTabChange={handleMobileTabChange}
+        onTabChange={handleTabChange}
         actionItemCount={state.actionItems.filter((i) => !i.completed).length}
       />
 
-      {currentView !== "services" && (
-        <FloatingChatBubble onSendMessage={handleSendMessage} />
-      )}
+      <FloatingChatBubble onSendMessage={handleSendMessage} />
     </div>
   );
 }
