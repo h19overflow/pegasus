@@ -9,6 +9,8 @@ import "@/lib/leafletSetup";
 import { createCategoryMarker, getMarkerColor, getMarkerSymbol } from "@/lib/mapMarkers";
 import { MAP_CATEGORIES } from "./serviceCategoryMeta";
 import { MapPointDetailPanel } from "./MapPointDetailPanel";
+import { NeighborhoodOverlay } from "./NeighborhoodOverlay";
+import { HotspotOverlay } from "./HotspotOverlay";
 import { NewsMapOverlay } from "../news/NewsMapOverlay";
 import { NewsMapToggle } from "../news/NewsMapToggle";
 import { NewsSidebarPanel } from "../news/NewsSidebarPanel";
@@ -16,7 +18,6 @@ import { filterGeolocatedArticles } from "@/lib/newsMapMarkers";
 import { fetchNewsArticles } from "@/lib/newsService";
 
 const MONTGOMERY_CENTER: [number, number] = [32.3668, -86.3];
-
 
 function FlyToPoint({ lat, lng }: { lat: number | null; lng: number | null }) {
   const map = useMap();
@@ -43,6 +44,44 @@ function FlyToTarget({ target }: { target: { lat: number; lng: number; ts: numbe
   return null;
 }
 
+/** Listens for map commands dispatched from the chat and executes them. */
+function MapCommandHandler({ visiblePoints }: { visiblePoints: ServicePoint[] }) {
+  const map = useMap();
+  const { state, dispatch } = useApp();
+  const prevCmdRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const cmd = state.mapCommand;
+    if (!cmd || cmd.id === prevCmdRef.current) return;
+    prevCmdRef.current = cmd.id;
+
+    switch (cmd.type) {
+      case "zoom_to":
+        if (cmd.lat != null && cmd.lng != null) {
+          map.flyTo([cmd.lat, cmd.lng], cmd.zoom ?? 14, { duration: 0.8 });
+        }
+        break;
+      case "filter_category":
+        if (cmd.lat != null && cmd.lng != null) {
+          map.flyTo([cmd.lat, cmd.lng], cmd.zoom ?? 14, { duration: 0.8 });
+        } else if (visiblePoints.length > 0) {
+          const bounds = L.latLngBounds(visiblePoints.map((p) => [p.lat, p.lng] as [number, number]));
+          map.flyToBounds(bounds, { padding: [40, 40], duration: 0.8, maxZoom: 14 });
+        }
+        break;
+      case "highlight_hotspots":
+        break;
+      case "clear":
+        map.flyTo(MONTGOMERY_CENTER, 12, { duration: 0.6 });
+        break;
+    }
+
+    setTimeout(() => dispatch({ type: "CLEAR_MAP_COMMAND" }), 300);
+  }, [state.mapCommand, map, dispatch, visiblePoints]);
+
+  return null;
+}
+
 interface ServiceMapViewProps {
   onBack: () => void;
   onSelectCategory: (category: ServiceCategory) => void;
@@ -55,10 +94,24 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
     new Set(MAP_CATEGORIES.map((c) => c.id)),
   );
   const [selectedPoint, setSelectedPoint] = useState<ServicePoint | null>(null);
+  const [showNeighborhood, setShowNeighborhood] = useState(false);
+  const [showHotspots, setShowHotspots] = useState(false);
   const [flyTarget, setFlyTarget] = useState<{ lat: number; lng: number; ts: number } | null>(null);
   const [focusedArticle, setFocusedArticle] = useState<{ id: string; ts: number } | null>(null);
 
-  // Sync global selectedArticleId → local focusedArticle (for cross-page navigation)
+  // Listen for filter_category map commands (chat -> map)
+  useEffect(() => {
+    const cmd = state.mapCommand;
+    if (!cmd) return;
+    if (cmd.type === "filter_category" && cmd.category) {
+      setActiveCategories(new Set([cmd.category]));
+    }
+    if (cmd.type === "highlight_hotspots") {
+      setShowHotspots(true);
+    }
+  }, [state.mapCommand]);
+
+  // Sync global selectedArticleId -> local focusedArticle (for cross-page navigation)
   useEffect(() => {
     if (state.selectedArticleId) {
       setFocusedArticle({ id: state.selectedArticleId, ts: Date.now() });
@@ -125,6 +178,26 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
           <h1 className="text-base font-bold text-foreground">All Services Map</h1>
         </div>
         <div className="flex items-center gap-3">
+          <button
+            onClick={() => setShowNeighborhood(!showNeighborhood)}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors shadow-sm ${
+              showNeighborhood
+                ? "bg-primary text-white shadow-primary/25"
+                : "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
+            }`}
+          >
+            {showNeighborhood ? "✕ Hide" : "◉ Show"} Neighborhood Health
+          </button>
+          <button
+            onClick={() => setShowHotspots(!showHotspots)}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors shadow-sm ${
+              showHotspots
+                ? "bg-red-600 text-white shadow-red-600/25"
+                : "bg-red-50 text-red-700 border border-red-200 hover:bg-red-100"
+            }`}
+          >
+            {showHotspots ? "✕ Hide" : "🔥 Show"} Predictive Hotspots
+          </button>
           <NewsMapToggle
             active={state.newsMapVisible}
             onToggle={() => dispatch({ type: "TOGGLE_NEWS_MAP" })}
@@ -174,6 +247,9 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
             ))}
             <FlyToPoint lat={selectedPoint?.lat ?? null} lng={selectedPoint?.lng ?? null} />
             <FlyToTarget target={flyTarget} />
+            <MapCommandHandler visiblePoints={visiblePoints} />
+            {showNeighborhood && <NeighborhoodOverlay />}
+            {showHotspots && <HotspotOverlay />}
             {state.newsMapVisible && <NewsMapOverlay selectedArticleId={focusedArticle?.id ?? null} selectionTs={focusedArticle?.ts ?? 0} />}
           </MapContainer>
 

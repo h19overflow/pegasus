@@ -23,6 +23,7 @@ import type {
   NewsArticle,
   NewsCategory,
   NewsComment,
+  MapCommand,
   ReactionType,
   HousingListing,
 } from "./types";
@@ -72,7 +73,9 @@ type AppAction =
   | { type: "TOGGLE_NEWS_MAP" }
   | { type: "SET_NEWS_MAP_MODE"; mode: "pins" | "heat" }
   | { type: "SET_ARTICLE_REACTION"; articleId: string; reaction: ReactionType }
-  | { type: "SET_NEWS_COMMENTS"; comments: NewsComment[] };
+  | { type: "SET_NEWS_COMMENTS"; comments: NewsComment[] }
+  | { type: "SET_MAP_COMMAND"; command: MapCommand }
+  | { type: "CLEAR_MAP_COMMAND" };
 
 const initialState: AppState = {
   messages: [],
@@ -113,6 +116,7 @@ const initialState: AppState = {
   userReactions: {},
   chatBubbleOpen: false,
   chatBubbleHasUnread: false,
+  mapCommand: null,
   housingListings: [],
 };
 
@@ -290,6 +294,10 @@ function appReducer(state: AppState, action: AppAction): AppState {
         userReactions: { ...state.userReactions, [action.articleId]: action.reaction },
       };
     }
+    case "SET_MAP_COMMAND":
+      return { ...state, mapCommand: action.command };
+    case "CLEAR_MAP_COMMAND":
+      return { ...state, mapCommand: null };
     default:
       return state;
   }

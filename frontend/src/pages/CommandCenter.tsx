@@ -11,6 +11,7 @@ import FloatingChatBubble from "@/components/app/FloatingChatBubble";
 import { useApp } from "@/lib/appContext";
 import { useDataStream } from "@/lib/useDataStream";
 import { getDemoResponse } from "@/lib/demoResponses";
+import { getSmartResponse } from "@/lib/aiChatService";
 import {
   buildWelcomeMessage,
   buildUserMessage,
@@ -93,19 +94,27 @@ export default function CommandCenter() {
       });
     }, 1200);
 
-    setTimeout(() => {
-      const response = getDemoResponse(text);
-      dispatch({ type: "ADD_MESSAGE", message: response });
+    // Try AI backend first, fall back to demo responses
+    const response = await getSmartResponse(text);
 
-      const artifact = buildArtifactForResponse(response.id, response.type);
-      if (artifact) {
-        dispatch({ type: "ADD_ARTIFACT", artifact });
-        dispatch({ type: "SET_ACTIVE_ARTIFACT", id: artifact.id });
+    dispatch({ type: "ADD_MESSAGE", message: response });
+
+    // If the AI response has a map action, dispatch it and switch to services view
+    if (response.mapAction) {
+      dispatch({ type: "SET_MAP_COMMAND", command: response.mapAction });
+      if (state.activeView !== "services") {
+        dispatch({ type: "SET_VIEW", view: "services" });
       }
+    }
 
-      dispatch({ type: "SET_TYPING", isTyping: false });
-      dispatch({ type: "SET_PROCESSING_STEPS", steps: [] });
-    }, 1800);
+    const artifact = buildArtifactForResponse(response.id, response.type);
+    if (artifact) {
+      dispatch({ type: "ADD_ARTIFACT", artifact });
+      dispatch({ type: "SET_ACTIVE_ARTIFACT", id: artifact.id });
+    }
+
+    dispatch({ type: "SET_TYPING", isTyping: false });
+    dispatch({ type: "SET_PROCESSING_STEPS", steps: [] });
   }
 
   const currentView = state.activeView;

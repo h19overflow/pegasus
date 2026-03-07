@@ -16,6 +16,13 @@ wheels/
 
 # Worktrees
 .worktrees/
-MEMORY.md.claude/worktrees/
-.claude/agent-memory-local/
+
+# Claude
 .claude/
+
+# Legacy directory (renamed to frontend/)
+montgomery-navigator/
+
+# OS / Editor files
+.DS_Store
+.vscode/

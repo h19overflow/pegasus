@@ -16,6 +16,13 @@ export function ServicesView({ onNavigateToChat }: ServicesViewProps) {
   const [mode, setMode] = useState<ServicesMode>("directory");
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(null);
 
+  // Auto-switch to map mode when a map command arrives (chat → map)
+  useEffect(() => {
+    if (state.mapCommand && mode !== "map") {
+      setMode("map");
+    }
+  }, [state.mapCommand]);
+
   // Auto-switch to map when an article is selected (e.g. from admin chat)
   useEffect(() => {
     if (state.selectedArticleId && mode !== "map") {

@@ -48,6 +48,8 @@ export interface ChatMessage {
   profileData?: ProfileData;
   actionItems?: ActionItem[];
   processingSteps?: ProcessingStep[];
+  mapAction?: MapCommand;
+  hotspots?: PredictionHotspot[];
 }
 
 export interface Artifact {
@@ -290,6 +292,7 @@ export interface AppState {
   userReactions: Record<string, ReactionType>;
   chatBubbleOpen: boolean;
   chatBubbleHasUnread: boolean;
+  mapCommand: MapCommand | null;
   housingListings: HousingListing[];
 }
 
@@ -351,6 +354,73 @@ export interface NewsComment {
   avatarColor: string;
   content: string;
   createdAt: string;
+}
+
+/* ── Map Commands (chat → map interaction) ──────────────── */
+export type MapCommandType = "filter_category" | "zoom_to" | "highlight_hotspots" | "clear";
+
+export interface MapCommand {
+  id: string;
+  type: MapCommandType;
+  category?: ServiceCategory;
+  lat?: number;
+  lng?: number;
+  zoom?: number;
+  label?: string;
+  hotspots?: PredictionHotspot[];
+}
+
+/* ── AI Chat (backend response) ─────────────────────────── */
+export type CivicIntent =
+  | "report_issue"
+  | "find_service"
+  | "city_events"
+  | "traffic_or_disruption_reason"
+  | "neighborhood_summary"
+  | "suggest_next_step"
+  | "new_resident"
+  | "job_loss_support"
+  | "trending_issues"
+  | "public_safety"
+  | "general";
+
+export interface AiChatResponse {
+  intent: CivicIntent;
+  answer: string;
+  confidence: number;
+  extracted_entities: Record<string, string | null>;
+  follow_up_question: string | null;
+  suggested_actions: { label: string; action_type: string; url?: string }[];
+  source_items: { title: string; description: string; url?: string; category?: string }[];
+  map_highlights: { lat: number; lng: number; label: string; category?: string }[];
+  chips: string[];
+  answer_summary: string | null;
+  reasoning_notes: string | null;
+  warnings: string[];
+  source_count: number;
+}
+
+/* ── Predictive Analysis ────────────────────────────────── */
+export interface PredictionHotspot {
+  area_id: string;
+  neighborhood: string;
+  category: string;
+  hotspot_score: number;
+  risk_level: "low" | "medium" | "high" | "critical";
+  drivers: { factor: string; value: number; weight: number; contribution: number }[];
+  trend_direction: "rising" | "falling" | "stable";
+  recommended_label_for_ui: string;
+  explanation: string;
+}
+
+export interface PredictionTrend {
+  category: string;
+  current_volume: number;
+  previous_volume: number;
+  growth_rate: number;
+  trend_direction: "rising" | "falling" | "stable";
+  top_neighborhoods: string[];
+  explanation: string;
 }
 
 /* ── Housing ──────────────────────────────────────────────── */
