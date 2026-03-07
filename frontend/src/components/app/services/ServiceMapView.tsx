@@ -1,69 +1,20 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, MessageCircle } from "lucide-react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import L from "leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import type { ServiceCategory, ServicePoint } from "@/lib/types";
 import { useApp } from "@/lib/appContext";
 import { fetchServicePoints } from "@/lib/arcgisService";
 import "@/lib/leafletSetup";
 import { createCategoryMarker, getMarkerColor, getMarkerSymbol } from "@/lib/mapMarkers";
 import { MAP_CATEGORIES } from "./serviceCategoryMeta";
-import { MapPointDetailPanel } from "./MapPointDetailPanel";
 import { NeighborhoodOverlay } from "./NeighborhoodOverlay";
 import { ServiceGuideChat } from "./ServiceGuideChat";
+import { FlyToPoint } from "./map/FlyToPoint";
+import { MapCommandHandler } from "./map/MapCommandHandler";
+import { CategoryFilterBar } from "./map/CategoryFilterBar";
+import { ServiceMapDetail } from "./map/ServiceMapDetail";
 
 const MONTGOMERY_CENTER: [number, number] = [32.3668, -86.3];
-
-function FlyToPoint({ lat, lng }: { lat: number | null; lng: number | null }) {
-  const map = useMap();
-  const prevRef = useRef<string | null>(null);
-  useEffect(() => {
-    const key = `${lat},${lng}`;
-    if (lat !== null && lng !== null && key !== prevRef.current) {
-      map.flyTo([lat, lng], 15, { duration: 0.6 });
-      prevRef.current = key;
-    }
-  }, [lat, lng, map]);
-  return null;
-}
-
-/** Listens for map commands dispatched from the chat and executes them. */
-function MapCommandHandler({ visiblePoints }: { visiblePoints: ServicePoint[] }) {
-  const map = useMap();
-  const { state, dispatch } = useApp();
-  const prevCmdRef = useRef<string | null>(null);
-
-  useEffect(() => {
-    const cmd = state.mapCommand;
-    if (!cmd || cmd.id === prevCmdRef.current) return;
-    prevCmdRef.current = cmd.id;
-
-    switch (cmd.type) {
-      case "zoom_to":
-        if (cmd.lat != null && cmd.lng != null) {
-          map.flyTo([cmd.lat, cmd.lng], cmd.zoom ?? 14, { duration: 0.8 });
-        }
-        break;
-      case "filter_category":
-        if (cmd.lat != null && cmd.lng != null) {
-          map.flyTo([cmd.lat, cmd.lng], cmd.zoom ?? 14, { duration: 0.8 });
-        } else if (visiblePoints.length > 0) {
-          const bounds = L.latLngBounds(visiblePoints.map((p) => [p.lat, p.lng] as [number, number]));
-          map.flyToBounds(bounds, { padding: [40, 40], duration: 0.8, maxZoom: 14 });
-        }
-        break;
-      case "highlight_hotspots":
-        break;
-      case "clear":
-        map.flyTo(MONTGOMERY_CENTER, 12, { duration: 0.6 });
-        break;
-    }
-
-    setTimeout(() => dispatch({ type: "CLEAR_MAP_COMMAND" }), 300);
-  }, [state.mapCommand, map, dispatch, visiblePoints]);
-
-  return null;
-}
 
 interface ServiceMapViewProps {
   onBack: () => void;
@@ -145,20 +96,11 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
         </div>
       </div>
 
-      <div className="shrink-0 flex flex-wrap gap-2 px-6 py-3 border-b border-border/20">
-          {MAP_CATEGORIES.map(({ id, label, icon: Icon, color }) => {
-            const active = activeCategories.has(id);
-            const count = state.servicePoints.filter((p) => p.category === id).length;
-            return (
-              <button key={id} onClick={() => toggleCategory(id)}
-                className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium border transition-all ${active ? color : "bg-muted/30 text-muted-foreground border-transparent opacity-50"}`}
-              >
-                <Icon className="h-3.5 w-3.5" />{label}
-                {count > 0 && <span className="text-[10px] opacity-70">{count}</span>}
-              </button>
-            );
-          })}
-      </div>
+      <CategoryFilterBar
+        activeCategories={activeCategories}
+        servicePoints={state.servicePoints}
+        onToggleCategory={toggleCategory}
+      />
 
       <div className="flex-1 flex min-h-0">
         <div className="flex-1 relative">
@@ -199,15 +141,13 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
         </div>
 
         {selectedPoint && (
-          <div className="w-[340px] shrink-0 border-l border-border/30 overflow-y-auto bg-white">
-            <MapPointDetailPanel
-              point={selectedPoint}
-              categories={MAP_CATEGORIES}
-              onClose={() => setSelectedPoint(null)}
-              onNavigateToChat={onNavigateToChat}
-              onViewCategory={() => onSelectCategory(selectedPoint.category)}
-            />
-          </div>
+          <ServiceMapDetail
+            point={selectedPoint}
+            categories={MAP_CATEGORIES}
+            onClose={() => setSelectedPoint(null)}
+            onNavigateToChat={onNavigateToChat}
+            onViewCategory={() => onSelectCategory(selectedPoint.category)}
+          />
         )}
 
         {guideOpen && (
