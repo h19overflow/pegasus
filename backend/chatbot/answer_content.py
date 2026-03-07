@@ -1,4 +1,4 @@
-"""Answer builders for events, services, traffic, job loss, and public safety."""
+"""Answer builders for all per-intent civic chat responses."""
 
 from __future__ import annotations
 
@@ -266,3 +266,5 @@ def answer_public_safety(lower: str, entities: dict, sources: list) -> str:
         "For emergencies, call 911. For non-emergencies, call Montgomery PD at 334-625-2831.",
     ])
     return "\n".join(lines)
+
+
