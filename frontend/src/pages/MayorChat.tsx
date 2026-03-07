@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { readSseStream } from "@/lib/sseClient";
 import { getToolLabel } from "@/lib/toolLabels";
+import { API_BASE } from "@/lib/apiConfig";
 import { UserBubble, AssistantBubble, SuggestionChips, ToolCallChip } from "@/components/app/admin/ChatBubbles";
 
 interface ChatHistoryEntry {
@@ -41,7 +42,7 @@ export default function MayorChat() {
 
     try {
       await readSseStream(
-        "/api/chat",
+        `${API_BASE}/api/chat`,
         { message, history },
         (token) => setHistory((prev) => appendTokenToLastEntry(prev, token)),
         (toolName) => setActiveToolLabel(getToolLabel(toolName)),

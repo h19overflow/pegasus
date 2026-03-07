@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useApp } from "./appContext";
 import { connectSseStream, type SseMessage } from "./sseClient";
+import { API_BASE } from "./apiConfig";
 import { parseFeatureToJob, type GeoJsonFeature } from "./jobService";
 import { refreshNewsArticles, fetchNewsArticles } from "./newsService";
 import type { NewsArticle, HousingListing } from "./types";
@@ -57,7 +58,7 @@ export function useDataStream(): { isConnected: boolean } {
 
   useEffect(() => {
     const cleanup = connectSseStream({
-      url: "/api/stream",
+      url: `${API_BASE}/api/stream`,
       onStatusChange: setIsConnected,
       onMessage: (msg: SseMessage) => {
         handleSseMessage(msg, dispatchRef.current);

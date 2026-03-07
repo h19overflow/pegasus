@@ -1,4 +1,5 @@
 import type { NewsArticle, NewsCategory, NewsComment } from "./types";
+import { API_BASE } from "./apiConfig";
 
 interface NewsFeedResponse {
   lastScraped: string;
@@ -37,7 +38,7 @@ export async function fetchNewsArticles(): Promise<NewsArticle[]> {
 
 export async function fetchNewsComments(): Promise<NewsComment[]> {
   try {
-    const response = await fetch("/api/comments");
+    const response = await fetch(`${API_BASE}/api/comments`);
     if (!response.ok) return [];
     const data = await response.json();
     return (data.comments ?? []) as NewsComment[];

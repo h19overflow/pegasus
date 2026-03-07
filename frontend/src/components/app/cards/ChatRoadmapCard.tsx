@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowRight, Loader2, Map } from "lucide-react";
 import { useApp } from "@/lib/appContext";
 import type { ChatMessage, PersonalizedRoadmap } from "@/lib/types";
+import { API_BASE } from "@/lib/apiConfig";
 
 interface ChatRoadmapCardProps {
   message: ChatMessage;
@@ -26,7 +27,7 @@ export default function ChatRoadmapCard({ message }: ChatRoadmapCardProps) {
         body.citizen = state.citizenMeta;
       }
 
-      const response = await fetch("/api/roadmap/generate", {
+      const response = await fetch(`${API_BASE}/api/roadmap/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

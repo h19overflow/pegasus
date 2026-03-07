@@ -31,13 +31,7 @@ async def lifespan(application: FastAPI):
         scraper_task.cancel()
 
 
-ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://localhost:5173",
-    "http://localhost:8080",
-    "http://localhost:8081",
-    "http://localhost:8082",
-]
+ALLOWED_ORIGINS = ["*"]
 
 app = FastAPI(title="MontgomeryAI", lifespan=lifespan)
 app.add_middleware(

@@ -5,6 +5,7 @@
  */
 
 import type { PredictionHotspot, PredictionTrend } from "./types";
+import { API_BASE } from "./apiConfig";
 
 interface HotspotsResponse {
   hotspots: PredictionHotspot[];
@@ -19,7 +20,7 @@ interface TrendsResponse {
 
 export async function fetchHotspots(): Promise<HotspotsResponse | null> {
   try {
-    const response = await fetch("/api/predictions/hotspots");
+    const response = await fetch(`${API_BASE}/api/predictions/hotspots`);
     if (!response.ok) return null;
     return (await response.json()) as HotspotsResponse;
   } catch {
@@ -29,7 +30,7 @@ export async function fetchHotspots(): Promise<HotspotsResponse | null> {
 
 export async function fetchTrends(): Promise<TrendsResponse | null> {
   try {
-    const response = await fetch("/api/predictions/trends");
+    const response = await fetch(`${API_BASE}/api/predictions/trends`);
     if (!response.ok) return null;
     return (await response.json()) as TrendsResponse;
   } catch {

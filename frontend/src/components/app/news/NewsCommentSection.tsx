@@ -4,6 +4,7 @@ import type { NewsComment } from "@/lib/types";
 import { useApp } from "@/lib/appContext";
 import { saveComment } from "@/lib/newsCommentStore";
 import { formatRelativeTime } from "@/lib/newsService";
+import { API_BASE } from "@/lib/apiConfig";
 
 interface NewsCommentSectionProps {
   articleId: string;
@@ -34,7 +35,7 @@ export function NewsCommentSection({ articleId }: NewsCommentSectionProps) {
     dispatch({ type: "ADD_NEWS_COMMENT", comment });
     saveComment(comment);
     // Fire-and-forget: sync comment to backend for AI analysis
-    fetch("/api/comments", {
+    fetch(`${API_BASE}/api/comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(comment),

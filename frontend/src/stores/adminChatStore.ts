@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 import { getToolLabel } from "@/lib/toolLabels";
 import { readSseStream } from "@/lib/sseClient";
+import { API_BASE } from "@/lib/apiConfig";
 
 export interface ChatMessage {
   id: string;
@@ -51,7 +52,7 @@ export const useAdminChatStore = create<AdminChatState>((set, get) => ({
 
     try {
       await readSseStream(
-        "/api/chat",
+        `${API_BASE}/api/chat`,
         { message: text, history },
         (token) => {
           set((state) => ({

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import type { ServiceGuide } from "@/lib/govServices";
 import { useApp } from "@/lib/appContext";
+import { API_BASE } from "@/lib/apiConfig";
 
 export function GuideExpandedContent({
   guide,
@@ -29,7 +30,7 @@ export function GuideExpandedContent({
     try {
       const body: Record<string, unknown> = { serviceId: guide.id };
       if (state.citizenMeta) body.citizen = state.citizenMeta;
-      const response = await fetch("/api/roadmap/generate", {
+      const response = await fetch(`${API_BASE}/api/roadmap/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

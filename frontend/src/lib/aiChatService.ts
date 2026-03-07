@@ -8,6 +8,7 @@
 
 import type { AiChatResponse, ChatMessage, MapCommand, ServiceCardData } from "./types";
 import { getDemoResponse } from "./demoResponses";
+import { API_BASE } from "./apiConfig";
 
 interface ChatRequestBody {
   message: string;
@@ -32,7 +33,7 @@ export async function sendChatMessage(
       conversation_id: conversationId || _conversationId,
     };
 
-    const response = await fetch("/api/citizen-chat", {
+    const response = await fetch(`${API_BASE}/api/citizen-chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
