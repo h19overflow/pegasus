@@ -16,7 +16,7 @@ export function getDemoResponse(userMessage: string): ChatMessage {
     return {
       id: Date.now().toString(),
       role: "assistant",
-      content: "I ran the full picture for you. Here's what this job actually means for your household:",
+      content: "I ran the full picture for you. Here's what this job actually means for your household:\n\n- **Net income change** after benefits adjustment\n- **Healthcare gap** analysis during transition\n- **Childcare impact** on your take-home pay\n\nLet's walk through each one so you can make the best decision.",
       type: "benefits-cliff",
       chips: ["What bridge programs help?", "How do I negotiate $18/hr?", "Walk me through applying"],
       flowMeta: {
@@ -51,7 +51,7 @@ export function getDemoResponse(userMessage: string): ChatMessage {
     return {
       id: Date.now().toString(),
       role: "assistant",
-      content: "",
+      content: "Here are your **immediate options** for healthcare coverage:\n\n- **CHIP** — covers children under 19 in your household\n- **QMB (Medicare Savings)** — helps pay Medicare premiums & copays\n- **Sliding-scale clinics** — low-cost visits based on income\n\nI recommend starting with CHIP this week since it has the fastest turnaround.",
       type: "medicaid",
       chips: ["Tell me more about QMB", "Help me apply for CHIP", "Find sliding-scale clinics near me"],
       flowMeta: {
@@ -86,7 +86,7 @@ export function getDemoResponse(userMessage: string): ChatMessage {
     return {
       id: Date.now().toString(),
       role: "assistant",
-      content: "",
+      content: "Based on your experience, here's a path to **higher-paying roles**:\n\n1. **Quality Control Cert** — 6-week AIDT program, free for AL residents\n2. **Line Lead position** — $18-22/hr, your current plant is hiring\n3. **WIOA funding** — covers training costs + provides a stipend\n\nThe fastest move is registering for the next AIDT orientation session.",
       type: "skill-gap",
       chips: ["Walk me through WIOA application", "Tell me about AIDT programs"],
       flowMeta: {
@@ -120,7 +120,7 @@ export function getDemoResponse(userMessage: string): ChatMessage {
     return {
       id: Date.now().toString(),
       role: "assistant",
-      content: "",
+      content: "Welcome back — here's what's available to you in Montgomery:\n\n- **Healthcare**: Apply for Medicaid at the DHR office on S. Ripley St.\n- **Employment**: AIDT has a reentry orientation with job placement\n- **Legal**: File a Certificate of Relief to expand job eligibility\n- **Reentry-friendly employers**: 12 local companies actively hiring\n\nLet's start with the most urgent need first.",
       type: "reentry",
       chips: ["Help me apply for Medicaid now", "Which employers hire returning citizens?"],
       flowMeta: {
@@ -149,7 +149,7 @@ export function getDemoResponse(userMessage: string): ChatMessage {
     return {
       id: Date.now().toString(),
       role: "assistant",
-      content: "Based on what you've told me, here's a summary of programs you may qualify for:",
+      content: "Based on your profile, you may qualify for:\n\n- **SNAP** — food assistance ($680/mo for household of 4)\n- **Medicaid** — full healthcare coverage\n- **LIHEAP** — utility bill assistance (up to $600/yr)\n- **DHR Childcare** — subsidized childcare for working parents\n\nI've prepared a full eligibility report below.",
       type: "pdf-preview",
       chips: ["Download my full report", "What should I apply for first?"],
       flowMeta: {
@@ -180,7 +180,7 @@ export function getDemoResponse(userMessage: string): ChatMessage {
     return {
       id: Date.now().toString(),
       role: "assistant",
-      content: "I understand — let me look at the full picture for you. Here are some jobs with benefits that could work for a single parent in Montgomery:",
+      content: "Here are **cliff-safe jobs** that work for single parents in Montgomery:\n\n- **Baptist Health** — Medical Assistant, $16/hr + full benefits\n- **MGMW** — Customer Service, $15/hr + childcare stipend\n- **Hyundai** — Assembly (evening shift), $19/hr + overtime\n\nAll three keep you **above the benefits cliff** so you won't lose SNAP or Medicaid.",
       type: "job-card",
       chips: ["Show me the cliff analysis", "What childcare help is available?", "Are there evening shift jobs?"],
       flowMeta: {
@@ -204,11 +204,21 @@ export function getDemoResponse(userMessage: string): ChatMessage {
     };
   }
 
+  if (lower.includes("health") || lower.includes("clinic") || lower.includes("doctor") || lower.includes("dental")) {
+    return {
+      id: Date.now().toString(),
+      role: "assistant",
+      content: "Here are **health clinics** near you in Montgomery:\n\n- **Family Health Center** — 2045 Fairview Ave\n  - Walk-ins accepted, sliding-scale fees\n  - Phone: (334) 272-7902\n- **Baptist Health Clinic** — 301 Brown Springs Rd\n  - Primary care + dental, accepts Medicaid\n  - Phone: (334) 273-4400\n- **Central Alabama Veterans** — 215 Perry Hill Rd\n  - Veterans only, no copay for service-connected\n  - Phone: (334) 272-4670\n\nWould you like me to show these on the map?",
+      type: "text",
+      chips: ["Show on map", "Which accept walk-ins?", "Find dental clinics"],
+    };
+  }
+
   if (lower.includes("form") || lower.includes("help with") || lower.includes("apply") || lower.includes("document")) {
     return {
       id: Date.now().toString(),
       role: "assistant",
-      content: "I can walk you through any application form step by step. Which program are you trying to apply for? I know the forms for SNAP, Medicaid, CHIP, LIHEAP, WIOA training assistance, and City of Montgomery services.",
+      content: "I can walk you through any application **step by step**. Which program are you applying for?\n\n- **SNAP** — food assistance\n- **Medicaid** — healthcare coverage\n- **CHIP** — children's health insurance\n- **LIHEAP** — utility bill help\n- **WIOA** — job training funding\n\nJust pick one and I'll guide you through it.",
       type: "text",
       chips: ["SNAP application", "Medicaid renewal", "WIOA training funding"],
     };
@@ -218,7 +228,7 @@ export function getDemoResponse(userMessage: string): ChatMessage {
     return {
       id: Date.now().toString(),
       role: "assistant",
-      content: "Welcome to Montgomery! Let me help you get settled. Here's what I can help with right away: finding a job, checking benefit eligibility, connecting to city services, and navigating healthcare options. What's your most pressing need?",
+      content: "**Welcome to Montgomery!** Here's what I can help you with right away:\n\n1. **Find a job** — local openings matched to your skills\n2. **Check benefits** — see what programs you qualify for\n3. **City services** — connect to transit, utilities, and more\n4. **Healthcare** — find clinics and coverage options\n\nWhat's your most pressing need?",
       type: "text",
       chips: ["I need a job", "Where do I sign up for benefits?", "Healthcare options"],
       flowMeta: {
@@ -235,7 +245,7 @@ export function getDemoResponse(userMessage: string): ChatMessage {
     return {
       id: Date.now().toString(),
       role: "assistant",
-      content: "Great question. Alabama has several bridge programs that help you transition off benefits without losing ground. The Transitional Medicaid program extends your coverage for up to 12 months after you start working. Alabama's SNAP transitional benefits give you 5 extra months. And DHR childcare subsidies continue through the transition period. I can walk you through each one.",
+      content: "Alabama has several **bridge programs** to protect you during the transition:\n\n- **Transitional Medicaid** — extends coverage for up to 12 months after you start working\n- **SNAP Transitional Benefits** — 5 extra months of food assistance\n- **DHR Childcare Subsidy** — continues through the transition period\n\nThese ensure you don't lose ground while your income increases. Want me to walk you through applying for any of these?",
       type: "text",
       chips: ["Apply for Transitional Medicaid", "Tell me about SNAP transition", "Check my childcare subsidy"],
     };
@@ -244,7 +254,7 @@ export function getDemoResponse(userMessage: string): ChatMessage {
   return {
     id: Date.now().toString(),
     role: "assistant",
-    content: "I hear you. Let me help you figure this out. Could you tell me a bit more about your current situation? For example: Are you working right now? Do you receive any benefits like SNAP or Medicaid? And what's the biggest challenge you're facing today?",
+    content: "I'm here to help! Tell me a bit about what you need, and I'll find the right resources for you in Montgomery.\n\nHere are some things I can help with:",
     type: "text",
     chips: [
       "I just got a job offer — will I lose my benefits?",
