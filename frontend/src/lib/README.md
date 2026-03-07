@@ -483,32 +483,34 @@ const filtered = filterArticlesByCategory(sorted, "health");
 frontend/src/lib/
 ├── appContext.tsx              # Context provider & useApp hook
 ├── types.ts                    # AppState, AppAction types
+├── useDataStream.ts           # SSE connection & dispatch
+├── sseClient.ts               # EventSource + ReadableStream
+├── newsService.ts             # News API integration
+├── aiChatService.ts           # Chat API & fallback
+├── arcgisService.ts           # Service points from ArcGIS
+├── jobMatcher.ts              # Job matching engine
+├── jobMatcherHelpers.ts       # Skill normalization
+├── jobService.ts              # Job listing utilities
+├── chatHelpers.ts             # Message builders
+├── apiConfig.ts               # API base URL config
+├── citizenProfiles.ts         # Mock citizen data loader
+├── newsCommentStore.ts        # LocalStorage comment persistence
 ├── context/
-│   ├── reducer.ts              # Main reducer (delegates to slices)
-│   ├── types.ts                # AppAction type union
-│   ├── initialState.ts         # Default AppState
+│   ├── reducer.ts             # Main reducer (delegates to slices)
+│   ├── types.ts               # AppAction type union
+│   ├── initialState.ts        # Default AppState
 │   └── slices/
-│       ├── chatSlice.ts        # Chat + AI response handling
-│       ├── cvSlice.ts          # CV upload & analysis
-│       ├── jobsSlice.ts        # Job listings & matches
-│       ├── newsSlice.ts        # News articles & reactions
-│       ├── roadmapSlice.ts     # Skill roadmaps
-│       ├── servicesSlice.ts    # Service directory & map
-│       └── uiSlice.ts          # Active view
-├── hooks/
-│   └── useDataStream.ts        # SSE connection & dispatch
-├── services/
-│   ├── sseClient.ts            # EventSource + ReadableStream
-│   ├── newsService.ts          # News API integration
-│   ├── aiChatService.ts        # Chat API & fallback
-│   ├── arcgisService.ts        # Service points from ArcGIS
-│   ├── jobMatcher.ts           # Job matching engine
-│   └── jobService.ts           # Job listing utilities
-├── helpers/
-│   ├── jobMatcherHelpers.ts    # Skill normalization
-│   ├── chatHelpers.ts          # Message builders
-│   └── ...
-└── apiConfig.ts                # API base URL config
+│       ├── chatSlice.ts       # Chat + AI response handling
+│       ├── cvSlice.ts         # CV upload & analysis
+│       ├── jobsSlice.ts       # Job listings & matches
+│       ├── newsSlice.ts       # News articles & reactions
+│       ├── roadmapSlice.ts    # Skill roadmaps
+│       ├── servicesSlice.ts   # Service directory & map
+│       └── uiSlice.ts         # Active view
+├── misinfo/                   # Misinformation scoring
+├── types/                     # Extended TypeScript interfaces
+├── demoResponses/             # Fallback demo data
+└── mockJobData/               # Mock job listings for dev
 ```
 
 ---

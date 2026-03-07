@@ -128,7 +128,7 @@ Visual progress indicator for multi-step flows.
 
 ## Feature Modules
 
-### `/services` (32 files)
+### `/services` (37 files)
 
 **Service Directory & Map Interface**
 
@@ -210,7 +210,7 @@ Skill development roadmap displayed as an interactive checklist.
 
 ---
 
-### `/news` (24 files)
+### `/news` (28 files)
 
 **Community News Feed & Sentiment**
 
@@ -266,13 +266,13 @@ Geospatial view of articles on ArcGIS map.
 
 ---
 
-### `/cv` (32 files)
+### `/cv` (36 files)
 
 **CV Upload, Parsing & Job Matching**
 
 Interface for uploading resumes and viewing personalized job recommendations.
 
-#### CvUploadForm.tsx
+#### CvUploadView.tsx
 
 File upload and CV parsing.
 
@@ -318,7 +318,7 @@ Displays transit estimates for a job-to-home route.
 
 **Performance**: Wrapped with `React.memo` to prevent re-render on parent updates.
 
-#### UpskillingSummary.tsx
+#### UpskillingPanel.tsx
 
 Recommended learning paths to close skill gaps.
 
@@ -330,19 +330,23 @@ Recommended learning paths to close skill gaps.
 
 ---
 
-### `/admin` (19 files)
+### `/admin` (22 files)
 
-**Moderation & System Tools**
+**Admin Dashboard & Analytics**
 
-Admin panel for content moderation, analytics, and system diagnostics.
+Admin panel for AI insights, comment analysis, sentiment overview, and predictive analytics.
 
-**Key Views**:
-- **ModerationQueue**: Review flagged articles and comments.
-- **UserMetrics**: Traffic, engagement, retention.
-- **SystemHealth**: API health, error rates, queue depth.
-- **ConfigPanel**: Manage feature flags, API keys, thresholds.
-
-**Access Control**: Only visible to admin role.
+**Key Components**:
+- **AIInsightsCard**: AI-generated insights summary with detail drilldown.
+- **MayorsBrief**: Daily brief for city officials.
+- **CommentFeed**: Moderated comment stream with analysis.
+- **SentimentOverview**: Aggregated sentiment across news articles.
+- **PredictiveHeatmap / PredictiveHeatmapPanel**: Complaint hotspot visualization.
+- **HotSpotsPanel / HotspotOverlay**: Risk area display.
+- **MisinfoOverlay**: Misinformation detection overlay.
+- **AnalyzeButton**: Trigger batch sentiment analysis.
+- **ExportControls**: Export data to CSV/PDF.
+- **AdminChatBubble / ChatBubbles / ChatResponseCards**: Admin chat interface.
 
 ---
 
@@ -354,12 +358,14 @@ Shared UI blocks used across features.
 
 | Component | Purpose |
 |-----------|---------|
-| `ServiceCard.tsx` | Service directory item (name, category, CTA). |
 | `JobCard.tsx` | Job listing card (title, company, match score). |
-| `ArticleCard.tsx` | News article item (headline, image, reactions). |
-| `CommuteCard.tsx` | Transit estimate card. |
-| `SkillCard.tsx` | Skill badge (name, demand %, learn link). |
-| `RoadmapStepCard.tsx` | Single roadmap step. |
+| `SkillGapCard.tsx` | Skill gap badge (name, demand %, learn link). |
+| `ChatRoadmapCard.tsx` | Roadmap step displayed in chat. |
+| `BenefitsCliffCard.tsx` | Benefits cliff warning card. |
+| `MedicaidCard.tsx` | Medicaid eligibility card. |
+| `ReentryCard.tsx` | Re-entry support card. |
+| `PdfPreviewCard.tsx` | PDF document preview card. |
+| `PredictiveInsightCard.tsx` | Predictive insight summary. |
 
 All cards:
 - Accept click handlers for interaction.
@@ -372,17 +378,17 @@ All cards:
 
 **Chat Bubble UI**
 
-- `ChatBubble.tsx` — Container & frame.
-- `ChatContent.tsx` — Message list & input.
+- `CollapsedBubble.tsx` — Collapsed state with unread badge.
+- `ExpandedPanel.tsx` — Expanded panel with message list & input.
 
 ---
 
 ### `/personas` (2 files)
 
-**Persona Selection & Onboarding**
+**Persona Display**
 
-- `PersonaSelector.tsx` — Choose primary use case (job seeker, student, admin).
-- `PersonaFlow.tsx` — Onboarding steps for selected persona.
+- `PersonaCard.tsx` — Persona summary card with role and civic profile.
+- `PersonaDetail.tsx` — Expanded persona view with full civic data.
 
 ---
 
