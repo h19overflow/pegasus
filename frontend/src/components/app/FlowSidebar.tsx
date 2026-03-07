@@ -25,12 +25,12 @@ const NAV_ITEMS: {
 ];
 
 export function FlowSidebar({ onQuickAction }: FlowSidebarProps) {
-  const { state, dispatch } = useApp();
+  const { state } = useApp();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(true);
 
   function handleViewSelect(view: AppView) {
-    dispatch({ type: "SET_VIEW", view });
+    navigate(`/app/${view}`, { replace: true });
   }
 
   if (collapsed) {

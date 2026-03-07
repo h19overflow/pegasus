@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, Loader2, Map } from "lucide-react";
 import { useApp } from "@/lib/appContext";
 import type { ChatMessage, PersonalizedRoadmap } from "@/lib/types";
@@ -9,6 +10,7 @@ interface ChatRoadmapCardProps {
 
 export default function ChatRoadmapCard({ message }: ChatRoadmapCardProps) {
   const { state, dispatch } = useApp();
+  const navigate = useNavigate();
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -39,7 +41,7 @@ export default function ChatRoadmapCard({ message }: ChatRoadmapCardProps) {
 
       const roadmap = (await response.json()) as PersonalizedRoadmap;
       dispatch({ type: "SET_CHAT_BUBBLE_OPEN", open: false });
-      dispatch({ type: "SET_VIEW", view: "services" });
+      navigate("/app/services", { replace: true });
       dispatch({ type: "SET_ACTIVE_ROADMAP", roadmap });
     } catch (err) {
       console.error("[ChatRoadmapCard] Failed to generate roadmap", err);

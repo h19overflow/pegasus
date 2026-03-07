@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useCallback, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import TopBar from "@/components/app/TopBar";
 import { AppNav, type MobileTab } from "@/components/app/MobileNav";
@@ -25,28 +25,33 @@ export default function CommandCenter() {
   const navigate = useNavigate();
   const lang: Language = "EN";
 
-  const hasSyncedRef = useRef(false);
+  // Derive the current view from the URL (single source of truth)
+  const currentView: AppView =
+    urlView && VALID_VIEWS.has(urlView) ? (urlView as AppView) : "services";
 
-  // URL is the source of truth on mount. After mount, state changes drive the URL.
+  // Keep state.activeView in sync with URL (one-way: URL → state)
   useEffect(() => {
-    if (urlView && VALID_VIEWS.has(urlView)) {
-      if (urlView !== state.activeView) {
-        dispatch({ type: "SET_VIEW", view: urlView as AppView });
-      }
-      hasSyncedRef.current = true;
-    } else {
-      navigate(`/app/${state.activeView}`, { replace: true });
-      hasSyncedRef.current = true;
+    if (currentView !== state.activeView) {
+      dispatch({ type: "SET_VIEW", view: currentView });
+    }
+  }, [currentView]);
+
+  // Redirect invalid URLs to the default view
+  useEffect(() => {
+    if (!urlView || !VALID_VIEWS.has(urlView)) {
+      navigate("/app/services", { replace: true });
     }
   }, [urlView]);
 
-  // Sync state → URL only after initial mount sync is done
-  useEffect(() => {
-    if (!hasSyncedRef.current) return;
-    if (state.activeView !== urlView && VALID_VIEWS.has(state.activeView)) {
-      navigate(`/app/${state.activeView}`, { replace: true });
-    }
-  }, [state.activeView]);
+  // Navigate to a view by updating the URL (which then drives state)
+  const navigateToView = useCallback(
+    (view: AppView) => {
+      if (view !== currentView) {
+        navigate(`/app/${view}`, { replace: true });
+      }
+    },
+    [currentView, navigate],
+  );
 
   useEffect(() => {
     if (state.messages.length === 0) {
@@ -59,34 +64,51 @@ export default function CommandCenter() {
       navigate("/admin");
       return;
     }
-    dispatch({ type: "SET_VIEW", view: tab });
+    navigateToView(tab);
   }
 
-  async function handleSendMessage(text: string) {
-    dispatch({ type: "ADD_MESSAGE", message: buildUserMessage(text) });
-    dispatch({ type: "SET_TYPING", isTyping: true });
+  const handleSendMessage = useCallback(
+    async (text: string) => {
+      dispatch({ type: "ADD_MESSAGE", message: buildUserMessage(text) });
+      dispatch({ type: "SET_TYPING", isTyping: true });
 
-    const response = await getSmartResponse(text);
+      const response = await getSmartResponse(text);
 
-    dispatch({ type: "ADD_MESSAGE", message: response });
+      dispatch({ type: "ADD_MESSAGE", message: response });
 
-    if (response.mapAction) {
-      dispatch({ type: "SET_MAP_COMMAND", command: response.mapAction });
-      if (state.activeView !== "services") {
-        dispatch({ type: "SET_VIEW", view: "services" });
+      if (response.mapAction) {
+        dispatch({ type: "SET_MAP_COMMAND", command: response.mapAction });
+        navigateToView("services");
       }
+
+      const artifact = buildArtifactForResponse(response.id, response.type);
+      if (artifact) {
+        dispatch({ type: "ADD_ARTIFACT", artifact });
+        dispatch({ type: "SET_ACTIVE_ARTIFACT", id: artifact.id });
+      }
+
+      dispatch({ type: "SET_TYPING", isTyping: false });
+    },
+    [dispatch, navigateToView],
+  );
+
+  const activeView = useMemo(() => {
+    switch (currentView) {
+      case "services":
+        return <ServicesView onNavigateToChat={handleSendMessage} />;
+      case "profile":
+        return <ProfileView />;
+      case "news":
+        return <NewsPage />;
+      default:
+        return null;
     }
+  }, [currentView, handleSendMessage]);
 
-    const artifact = buildArtifactForResponse(response.id, response.type);
-    if (artifact) {
-      dispatch({ type: "ADD_ARTIFACT", artifact });
-      dispatch({ type: "SET_ACTIVE_ARTIFACT", id: artifact.id });
-    }
-
-    dispatch({ type: "SET_TYPING", isTyping: false });
-  }
-
-  const currentView = state.activeView;
+  const actionItemCount = useMemo(
+    () => state.actionItems.filter((i) => !i.completed).length,
+    [state.actionItems],
+  );
 
   return (
     <div className="h-screen flex flex-col bg-background">
@@ -94,18 +116,14 @@ export default function CommandCenter() {
 
       <div className="flex-1 flex min-h-0 overflow-hidden">
         <div className="flex-1 flex flex-col min-w-0 min-h-0">
-          {currentView === "services" && (
-            <ServicesView onNavigateToChat={handleSendMessage} />
-          )}
-          {currentView === "profile" && <ProfileView />}
-          {currentView === "news" && <NewsPage />}
+          {activeView}
         </div>
       </div>
 
       <AppNav
         activeTab={currentView as MobileTab}
         onTabChange={handleTabChange}
-        actionItemCount={state.actionItems.filter((i) => !i.completed).length}
+        actionItemCount={actionItemCount}
       />
 
       <FloatingChatBubble onSendMessage={handleSendMessage} />

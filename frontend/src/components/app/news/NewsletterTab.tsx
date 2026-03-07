@@ -49,9 +49,15 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
     if (state.newsArticles.length === 0 && !state.newsLoading) {
       dispatch({ type: "SET_NEWS_LOADING", loading: true });
       fetchNewsArticles()
-        .then((articles) => dispatch({ type: "SET_NEWS_ARTICLES", articles }))
-        .catch((err) => console.error("[NewsletterTab] Failed to load articles", err))
-        .finally(() => dispatch({ type: "SET_NEWS_LOADING", loading: false }));
+        .then((articles) => {
+          // Batch: set articles and clear loading in one render cycle
+          dispatch({ type: "SET_NEWS_ARTICLES", articles });
+          dispatch({ type: "SET_NEWS_LOADING", loading: false });
+        })
+        .catch((err) => {
+          console.error("[NewsletterTab] Failed to load articles", err);
+          dispatch({ type: "SET_NEWS_LOADING", loading: false });
+        });
     }
 
     if (state.newsComments.length === 0) {

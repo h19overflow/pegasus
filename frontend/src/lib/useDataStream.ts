@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useApp } from "./appContext";
 import { connectSseStream, type SseMessage } from "./sseClient";
 import { parseFeatureToJob, type GeoJsonFeature } from "./jobService";
@@ -49,24 +49,20 @@ function parseFeatureToHousingListing(feature: HousingGeoJsonFeature): HousingLi
  * Connects to the backend SSE stream and dispatches
  * MERGE_* actions as live data arrives.
  */
-export function useDataStream(): { isConnected: boolean } {
+export function useDataStream(): void {
   const { dispatch } = useApp();
-  const [isConnected, setIsConnected] = useState(false);
   const dispatchRef = useRef(dispatch);
   dispatchRef.current = dispatch;
 
   useEffect(() => {
     const cleanup = connectSseStream({
       url: "/api/stream",
-      onStatusChange: setIsConnected,
       onMessage: (msg: SseMessage) => {
         handleSseMessage(msg, dispatchRef.current);
       },
     });
     return cleanup;
   }, []);
-
-  return { isConnected };
 }
 
 function handleSseMessage(
