@@ -5,6 +5,7 @@ stages:
 variables:
   GCP_PROJECT_ID: "pegasus-489513"
   GCP_REGION: "us-central1"
+  BACKEND_URL: "https://pegasus-backend-844382079357.us-central1.run.app"
   REGISTRY: "us-central1-docker.pkg.dev"
   BACKEND_IMAGE: "us-central1-docker.pkg.dev/pegasus-489513/pegasus/backend"
   FRONTEND_IMAGE: "us-central1-docker.pkg.dev/pegasus-489513/pegasus/frontend"
@@ -87,8 +88,7 @@ deploy-frontend:
     - gcloud auth activate-service-account --key-file=/tmp/sa-key.json
     - gcloud config set project "$GCP_PROJECT_ID"
   script:
-    # Resolve the backend Cloud Run URL dynamically so nginx can proxy to it
-    - BACKEND_URL=$(gcloud run services describe "$BACKEND_SERVICE" --region "$GCP_REGION" --format "value(status.url)")
+    # Use the fixed backend Cloud Run URL so nginx always proxies to the expected service
     - |
       gcloud run deploy "$FRONTEND_SERVICE" \
         --image "${FRONTEND_IMAGE}:${CI_COMMIT_SHORT_SHA}" \
