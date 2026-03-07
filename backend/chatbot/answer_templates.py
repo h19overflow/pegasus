@@ -9,8 +9,10 @@ import logging
 
 from backend.models import CivicIntent
 from backend.chatbot.answer_content import (
-    answer_events, answer_find_service, answer_traffic,
-    answer_job_loss, answer_public_safety,
+    answer_events, answer_find_service,
+)
+from backend.chatbot.answer_content_civic import (
+    answer_traffic, answer_job_loss, answer_public_safety,
 )
 from backend.chatbot.answer_content_misc import (
     answer_report_issue, answer_new_resident,
