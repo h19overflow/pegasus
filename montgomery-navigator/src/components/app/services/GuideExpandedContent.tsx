@@ -122,7 +122,7 @@ export function GuideExpandedContent({
           {isGenerating ? (
             <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Building...</>
           ) : (
-            <><Map className="w-3.5 h-3.5" /> Build My Roadmap &rarr;</>
+            <><Map className="w-3.5 h-3.5" /> Details &rarr;</>
           )}
         </button>
       </div>

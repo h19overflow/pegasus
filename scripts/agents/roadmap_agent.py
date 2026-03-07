@@ -147,71 +147,74 @@ def _call_gemini(citizen: "CitizenMeta | None", guide: dict) -> dict:
 
     Temperature 0.1 — factual, deterministic output, not creativity.
     """
-    import google.generativeai as genai
+    from google import genai
+    from google.genai import types
 
     # Lazy init — only configure when called, not at import time
-    genai.configure(api_key=require_env("GEMINI_API_KEY"))
-    model = genai.GenerativeModel("gemini-2.5-flash")
+    client = genai.Client(api_key=require_env("GEMINI_API_KEY"))
+    model_id = "gemini-2.0-flash"
+
+    system_instruction = """You are CivicPath, a expert civic navigator for Montgomery, Alabama.
+Your mission is to transform dry, bureaucratic government service documentation into clear, 
+actionable, and personalized step-by-step roadmaps for residents.
+
+## GUIDING PRINCIPLES
+1. PLAIN ENGLISH: Strip away all legal/bureaucratic jargon. Speak like a helpful neighbor.
+2. GROUNDING: Only use facts provided in the "Official Service Documentation". Never invent rules.
+3. LOCAL PRECISION: Always use specific Montgomery office names, addresses, and hours. 
+4. THIN DATA HANDLING: If the documentation is missing steps or mentions "call for details", 
+   your roadmap MUST include a first step instructing the user to contact the provider 
+   to confirm requirements. Never return an empty list of steps.
+
+## OUTPUT FORMAT
+Always return a valid JSON object matching the requested schema. No markdown, no conversational filler."""
 
     if citizen is None:
         # ── Generic path: no citizen profile ─────────────────────────────────
-        prompt = f"""You are CivicPath, a civic navigator for Montgomery, Alabama.
-Convert this government service documentation into a clear, step-by-step roadmap
-that any Montgomery resident can follow. Write in plain English.
+        prompt = f"""Convert this government service documentation into a clear, 
+step-by-step roadmap that any Montgomery resident can follow.
 
-## OFFICIAL SERVICE DOCUMENTATION (ground truth — do not contradict this)
+## OFFICIAL SERVICE DOCUMENTATION
 {_format_guide_for_prompt(guide)}
 
 ## YOUR TASK
-For each step in "HOW TO APPLY", write a clear guide that:
-1. Uses plain English — no bureaucratic jargon
-2. Names the exact Montgomery office, address, and hours — never write "local office"
-3. Lists all documents from the documentation that may be needed for this step
-4. Adds a pro_tip only for real Montgomery-specific warnings (not generic advice)
-5. Sets can_do_online: true only if the step genuinely can be completed online
+For each step in "HOW TO APPLY", write a clear guide. 
+If "HOW TO APPLY" is empty or has zero steps, create a roadmap that starts with 
+"Contact {guide['title']} to begin" and provide the office contact details.
 
-## STRICT RULES
-- Return ONLY valid JSON matching the schema — no markdown, no explanation
-- Never invent facts not in the documentation above
-- If unsure about office hours, write: "Call {guide.get('phone', 'the office')} to confirm"
-- eligibility_note MUST summarize who qualifies based on the official criteria
-
-## OUTPUT SCHEMA
-{_OUTPUT_SCHEMA}"""
+## JSON SCHEMA REQUIREMENT
+Return a JSON object with:
+- "eligibility_note": Summarize who qualifies based on official criteria.
+- "total_estimated_time": Realistic total (e.g., '3–4 weeks').
+- "steps": List of objects with [step_number, title, action, documents, location, estimated_time, pro_tip (Montgomery-specific), can_do_online, online_url]."""
     else:
         # ── Personalized path: citizen profile provided ────────────────────────
-        prompt = f"""You are CivicPath, a civic navigator for Montgomery, Alabama.
-Transform this generic government service application process into a PERSONALIZED
-roadmap for one specific citizen. Every instruction must speak directly to their situation.
+        prompt = f"""Transform this application process into a PERSONALIZED roadmap 
+for the citizen described below. Every instruction must speak directly to their situation.
 
 ## CITIZEN PROFILE
 {_build_citizen_summary(citizen)}
 
-## OFFICIAL SERVICE DOCUMENTATION (ground truth — do not contradict this)
+## OFFICIAL SERVICE DOCUMENTATION
 {_format_guide_for_prompt(guide)}
 
 ## YOUR TASK
-For each step in "HOW TO APPLY", write a personalized version that:
-1. Uses plain English — no bureaucratic language
-2. References THIS citizen's specific situation (their income source, housing, family)
-3. Names the exact Montgomery office, address, and hours — never write "local office"
-4. Only lists documents relevant to THIS citizen (skip children's docs if no children,
-   skip veteran docs if not a veteran, skip citizenship docs if US citizen)
-5. Adds a pro_tip only for real Montgomery-specific warnings (not generic advice)
-6. Sets can_do_online: true only if the step genuinely can be completed online
+1. Analyze the citizen's profile against the official requirements.
+2. Filter the "DOCUMENTS NEEDED" to only those this specific citizen would need.
+3. Rewrite the application steps in a first-person "You need to..." style.
+4. If "HOW TO APPLY" is empty, guide them on how to contact the office for their specific case.
 
-## STRICT RULES
-- Return ONLY valid JSON matching the schema — no markdown, no explanation
-- Never invent facts not in the documentation above
-- If unsure about office hours, write: "Call {guide.get('phone', 'the office')} to confirm"
-- eligibility_note MUST be specific to this citizen, not a generic eligibility statement
+## JSON SCHEMA REQUIREMENT
+Return a JSON object with:
+- "eligibility_note": Explain why THIS specific citizen (referencing their income/family/status) qualifies.
+- "total_estimated_time": Realistic total.
+- "steps": List of objects with [step_number, title, action, documents, location, estimated_time, pro_tip, can_do_online, online_url]."""
 
-## OUTPUT SCHEMA
-{_OUTPUT_SCHEMA}"""
-
-    response = model.generate_content(
-        prompt,
-        generation_config=genai.GenerationConfig(
+    response = client.models.generate_content(
+        model=model_id,
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            system_instruction=system_instruction,
             temperature=0.1,
             response_mime_type="application/json",
         ),
@@ -221,6 +224,10 @@ For each step in "HOW TO APPLY", write a personalized version that:
     # Strip markdown fences — Gemini sometimes adds them despite response_mime_type
     raw = re.sub(r"^```(?:json)?\s*", "", raw)
     raw = re.sub(r"\s*```$", "", raw)
+
+    # Repair trailing commas in arrays/objects (Gemini 2.0 common quirk)
+    raw = re.sub(r",\s*([\]}])", r"\1", raw)
+
     return json.loads(raw)
 
 
@@ -239,7 +246,13 @@ def _build_roadmap_model(
     steps = []
     for i, raw_step in enumerate(gemini_output.get("steps", [])):
         loc_data = raw_step.get("location")
-        location = RoadmapLocation(**loc_data) if loc_data else None
+        # Robust handling: only pass to RoadmapLocation if it's a non-empty dict
+        location = None
+        if isinstance(loc_data, dict) and loc_data:
+            try:
+                location = RoadmapLocation(**loc_data)
+            except Exception as e:
+                logger.warning("Invalid location data in step %d: %s", i+1, e)
 
         steps.append(RoadmapStep(
             id=f"step-{i + 1}-{guide['id']}",
