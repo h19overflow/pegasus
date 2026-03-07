@@ -24,9 +24,7 @@ def parse_news_results(body: dict, category: str) -> list[dict]:
     articles = []
     now = datetime.now(timezone.utc).isoformat()
 
-    news_items = body.get("news", [])
-    if not news_items:
-        news_items = body.get("organic", []) or body.get("results", [])
+    news_items = body.get("news") or body.get("organic") or body.get("results") or []
 
     for item in news_items:
         title = item.get("title", "")
