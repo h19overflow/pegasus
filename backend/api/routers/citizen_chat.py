@@ -18,16 +18,13 @@ class CitizenChatRequest(BaseModel):
 @router.post("/citizen-chat")
 async def citizen_chat(request: CitizenChatRequest) -> JSONResponse:
     """AI civic chatbot endpoint for citizen queries."""
-    from backend.models import ChatRequest
-    from backend.chatbot.responder import handle_chat
+    from backend.agents.citizen.agent import handle_citizen_chat
 
-    chat_req = ChatRequest(
+    response = await handle_citizen_chat(
         message=request.message,
         conversation_id=request.conversation_id,
-        context=request.context,
     )
-    response = await handle_chat(chat_req)
-    return JSONResponse(response.to_dict())
+    return JSONResponse(response)
 
 
 @router.get("/predictions/hotspots")
