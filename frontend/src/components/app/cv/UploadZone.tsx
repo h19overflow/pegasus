@@ -2,35 +2,9 @@ import { useRef, useState } from "react";
 import { Upload, CheckCircle } from "lucide-react";
 import { useApp } from "@/lib/appContext";
 import { MOCK_CV_DATA } from "@/lib/mockCvData";
+import { ANALYSIS_STEPS, AnalyzingSteps } from "./AnalysisProgress";
 
 type UploadState = "idle" | "dragging" | "uploading" | "analyzing" | "complete";
-
-const ANALYSIS_STEPS = [
-  { label: "Extracting personal info", completeAfterMs: 500 },
-  { label: "Analyzing work experience", completeAfterMs: 1000 },
-  { label: "Mapping skills", completeAfterMs: 1500 },
-];
-
-const StepRow = ({ label, completed }: { label: string; completed: boolean }) => (
-  <div className="flex items-center gap-2">
-    {completed ? (
-      <span className="text-green-500 text-xs font-bold">✓</span>
-    ) : (
-      <div className="w-3 h-3 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-    )}
-    <span className={`text-sm ${completed ? "text-muted-foreground" : "text-foreground"}`}>
-      {label}
-    </span>
-  </div>
-);
-
-const AnalyzingSteps = ({ completedCount }: { completedCount: number }) => (
-  <div className="space-y-2 mt-4">
-    {ANALYSIS_STEPS.map((step, index) => (
-      <StepRow key={step.label} label={step.label} completed={index < completedCount} />
-    ))}
-  </div>
-);
 
 const formatFileSize = (bytes: number): string => {
   if (bytes < 1024) return `${bytes} B`;
@@ -84,9 +58,7 @@ export default function UploadZone({ compact = false }: { compact?: boolean }) {
   };
 
   const handleDragLeave = () => setUploadState("idle");
-
   const handleZoneClick = () => fileInputRef.current?.click();
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleFileSelected(event.target.files?.[0]);
   };
