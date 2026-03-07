@@ -24,11 +24,15 @@ function FlyToArticle({ target }: { target: { lat: number; lng: number; ts: numb
   return null;
 }
 
-export function NewsMapTab() {
+interface NewsMapTabProps {
+  onBack?: () => void;
+}
+
+export function NewsMapTab({ onBack }: NewsMapTabProps) {
   const { state, dispatch } = useApp();
   const [flyTarget, setFlyTarget] = useState<{ lat: number; lng: number; ts: number } | null>(null);
   const [focusedArticle, setFocusedArticle] = useState<{ id: string; ts: number } | null>(null);
-  const [mapCategory, setMapCategory] = useState<NewsCategory>("all");
+  const [mapCategory, setMapCategory] = useState<NewsCategory>(state.newsCategory);
   const [showMisinfoOnly, setShowMisinfoOnly] = useState(false);
 
   useEffect(() => {
@@ -93,6 +97,7 @@ export function NewsMapTab() {
           onCategoryChange={setMapCategory}
           showMisinfoOnly={showMisinfoOnly}
           onMisinfoToggle={() => setShowMisinfoOnly((prev) => !prev)}
+          onBack={onBack}
         />
 
         <NewsSentimentLegend
