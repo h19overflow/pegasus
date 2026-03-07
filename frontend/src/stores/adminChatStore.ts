@@ -14,6 +14,8 @@ type StreamState = "idle" | "streaming";
 interface AdminChatState {
   messages: ChatMessage[];
   streamState: StreamState;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
   sendMessage: (text: string) => Promise<void>;
   clearMessages: () => void;
 }
@@ -27,6 +29,8 @@ function generateId(): string {
 export const useAdminChatStore = create<AdminChatState>((set, get) => ({
   messages: [],
   streamState: "idle",
+  isOpen: false,
+  setIsOpen: (open) => set({ isOpen: open }),
 
   sendMessage: async (text: string) => {
     if (get().streamState === "streaming") return;

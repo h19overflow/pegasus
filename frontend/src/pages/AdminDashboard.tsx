@@ -7,6 +7,7 @@ import { AnalyzeButton } from "@/components/app/admin/AnalyzeButton";
 import { OnboardingBanner } from "@/components/app/admin/OnboardingBanner";
 import { CommentFeed } from "@/components/app/admin/CommentFeed";
 import { HotSpotsPanel } from "@/components/app/admin/HotSpotsPanel";
+import { PredictiveHeatmap } from "@/components/app/admin/PredictiveHeatmap";
 import { PredictiveHeatmapPanel } from "@/components/app/admin/PredictiveHeatmapPanel";
 import { MayorsBrief } from "@/components/app/admin/MayorsBrief";
 import { SentimentOverview } from "@/components/app/admin/SentimentOverview";
@@ -14,6 +15,7 @@ import { useApp } from "@/lib/appContext";
 import { computeNeighborhoodActivity } from "@/lib/newsAggregations";
 import { fetchNewsArticles, fetchNewsComments } from "@/lib/newsService";
 import { loadStoredReactions } from "@/lib/newsReactionStore";
+import { useAdminChatStore } from "@/stores/adminChatStore";
 
 function buildGreeting(): string {
   const hour = new Date().getHours();
@@ -25,6 +27,7 @@ function buildGreeting(): string {
 export default function AdminDashboard() {
   const { state, dispatch } = useApp();
   const navigate = useNavigate();
+  const chatIsOpen = useAdminChatStore((s) => s.isOpen);
   const [aiRefreshTrigger, setAiRefreshTrigger] = useState(0);
   const [chatQuestion, setChatQuestion] = useState<string | undefined>();
   const questionCounterRef = useRef(0);
@@ -56,7 +59,7 @@ export default function AdminDashboard() {
   const neighborhoods = computeNeighborhoodActivity(state.newsArticles, mergedReactions, state.newsComments);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`min-h-screen bg-background transition-[margin] duration-200 ${chatIsOpen ? "mr-[520px]" : ""}`}>
       <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center gap-3">
         <button
           onClick={() => navigate("/app/services")}
@@ -88,6 +91,8 @@ export default function AdminDashboard() {
           <AnalyzeButton onComplete={() => setAiRefreshTrigger((n) => n + 1)} />
         </section>
 
+        <PredictiveHeatmap onAskAI={askAI} />
+
         <MayorsBrief
           articles={state.newsArticles}
           comments={state.newsComments}
@@ -107,7 +112,7 @@ export default function AdminDashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <HotSpotsPanel neighborhoods={neighborhoods} onAskAI={askAI} />
-          <PredictiveHeatmapPanel />
+          <PredictiveHeatmapPanel onAskAI={askAI} />
         </div>
       </main>
 

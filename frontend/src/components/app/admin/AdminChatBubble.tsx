@@ -38,8 +38,7 @@ function ChatInput({ onSend }: { onSend: (text: string) => void }) {
 }
 
 export function AdminChatBubble({ initialQuestion }: AdminChatBubbleProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const { messages, streamState, sendMessage, clearMessages } = useAdminChatStore();
+  const { messages, streamState, sendMessage, clearMessages, isOpen, setIsOpen } = useAdminChatStore();
   const scrollRef = useRef<HTMLDivElement>(null);
   const lastSentQuestionRef = useRef<string | null>(null);
 
@@ -57,19 +56,7 @@ export function AdminChatBubble({ initialQuestion }: AdminChatBubbleProps) {
     }
   }, [initialQuestion, sendMessage, streamState]);
 
-  // Floating trigger button
-  if (!isOpen) {
-    return (
-      <button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105 min-h-[48px]"
-        aria-label="Open AI Analyst"
-      >
-        <MessageSquare className="w-5 h-5" />
-        <span className="text-sm font-medium">AI Analyst</span>
-      </button>
-    );
-  }
+  if (!isOpen) return null;
 
   // Right sidebar panel
   return (
