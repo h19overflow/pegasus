@@ -16,9 +16,12 @@ webhook_server.py calls generate_personalized_roadmap() and handles HTTP.
 import json
 import re
 import logging
+import hashlib
 from datetime import datetime, timezone
 from functools import lru_cache
 from pathlib import Path
+
+from scripts.redis_client import cache
 
 from scripts.config import require_env
 from scripts.models.roadmap import (
@@ -283,6 +286,20 @@ def _build_roadmap_model(
 
 # ── Public API ────────────────────────────────────────────────────────────────
 
+def _get_cache_key(service_id: str, citizen: "CitizenMeta | None") -> str:
+    """
+    Generate a unique cache key based on service and citizen profile.
+    Uses MD5 hash of the citizen data to ensure profile changes bust the cache.
+    """
+    if not citizen:
+        return f"roadmap:generic:{service_id}"
+    
+    # Hash the citizen data for a compact, stable key
+    citizen_json = citizen.model_dump_json(by_alias=True)
+    citizen_hash = hashlib.md5(citizen_json.encode()).hexdigest()
+    return f"roadmap:pers:{service_id}:{citizen_hash}"
+
+
 def generate_personalized_roadmap(
     citizen: "CitizenMeta | None",
     service_id: str,
@@ -298,8 +315,18 @@ def generate_personalized_roadmap(
     Raises RuntimeError if Gemini call fails (caller handles graceful fallback).
     """
     citizen_id = citizen.id if citizen else "generic"
-    logger.info("Generating roadmap: citizen=%s service=%s", citizen_id, service_id)
+    cache_key = _get_cache_key(service_id, citizen)
 
+    # 1. Check Cache
+    cached_data = cache.fetch(cache_key)
+    if cached_data:
+        try:
+            logger.info("Cache HIT for %s", cache_key)
+            return PersonalizedRoadmap(**cached_data)
+        except Exception as e:
+            logger.warning("Cache data not available: %s", e)
+
+    logger.info("Cache MISS for %s. Generating roadmap...", cache_key)
     guide = _get_service(service_id)
     logger.info("Retrieved: %s (%d steps)", guide["title"], len(guide.get("how_to_apply", [])))
 
@@ -310,5 +337,14 @@ def generate_personalized_roadmap(
         raise RuntimeError(f"Gemini generation failed: {e}") from e
 
     roadmap = _build_roadmap_model(gemini_output, guide, citizen)
+    
+    # 2. Store in Cache
+    try:
+        ttl = int(require_env("ROADMAP_CACHE_TTL"))
+        cache.store(cache_key, roadmap.model_dump(by_alias=True), ttl=ttl)
+        logger.info("Cached roadmap for %s (TTL: %d)", cache_key, ttl)
+    except Exception as e:
+        logger.warning("Cache write failed: %s", e)
+
     logger.info("Built roadmap with %d steps", len(roadmap.steps))
     return roadmap
