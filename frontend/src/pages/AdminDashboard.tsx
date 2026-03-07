@@ -7,6 +7,7 @@ import { AnalyzeButton } from "@/components/app/admin/AnalyzeButton";
 import { OnboardingBanner } from "@/components/app/admin/OnboardingBanner";
 import { CommentFeed } from "@/components/app/admin/CommentFeed";
 import { HotSpotsPanel } from "@/components/app/admin/HotSpotsPanel";
+import { PredictiveHeatmapPanel } from "@/components/app/admin/PredictiveHeatmapPanel";
 import { MayorsBrief } from "@/components/app/admin/MayorsBrief";
 import { SentimentOverview } from "@/components/app/admin/SentimentOverview";
 import { useApp } from "@/lib/appContext";
@@ -104,7 +105,10 @@ export default function AdminDashboard() {
 
         <SentimentOverview articles={state.newsArticles} onAskAI={askAI} />
 
-        <HotSpotsPanel neighborhoods={neighborhoods} onAskAI={askAI} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <HotSpotsPanel neighborhoods={neighborhoods} onAskAI={askAI} />
+          <PredictiveHeatmapPanel />
+        </div>
       </main>
 
       <AdminChatBubble initialQuestion={cleanQuestion} />

@@ -1,0 +1,14 @@
+.git
+.gitignore
+.gitlab-ci.yml
+frontend/
+montgomery-navigator/
+docs/
+*.md
+.env
+.env.*
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/

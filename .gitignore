@@ -1,3 +1,7 @@
+# GCP service account keys — never commit these
+*-key.json
+sa-key.json
+
 # Python-generated files
 __pycache__/
 *.py[oc]
@@ -16,6 +20,13 @@ wheels/
 
 # Worktrees
 .worktrees/
-MEMORY.md.claude/worktrees/
-.claude/agent-memory-local/
+
+# Claude
 .claude/
+
+# Legacy directory (renamed to frontend/)
+montgomery-navigator/
+
+# OS / Editor files
+.DS_Store
+.vscode/

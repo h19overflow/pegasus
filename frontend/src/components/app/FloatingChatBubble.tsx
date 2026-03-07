@@ -49,7 +49,7 @@ function CollapsedBubble({
       onPointerMove={isMobile ? undefined : dragHandlers.handlePointerMove}
       onPointerUp={isMobile ? undefined : dragHandlers.handlePointerUp}
       onClick={handleClick}
-      className="fixed z-50 animate-bubble-in cursor-pointer select-none touch-none"
+      className="fixed z-[9999] animate-bubble-in cursor-pointer select-none touch-none"
       style={
         isMobile
           ? { bottom: 80, right: 16 }
@@ -102,7 +102,7 @@ function ExpandedPanel({
   return (
     <div
       className={`
-        fixed z-50 animate-bubble-in
+        fixed z-[9999] animate-bubble-in
         ${isMobile
           ? "h-[75vh] w-full rounded-t-2xl"
           : "w-[440px] h-[600px] rounded-2xl"
@@ -165,8 +165,7 @@ export default function FloatingChatBubble({ onSendMessage }: FloatingChatBubble
   const { position, ref, wasDragged, handlePointerDown, handlePointerMove, handlePointerUp } =
     useDraggable({ disabled: isMobile });
 
-  // Hide on services view (has its own guide)
-  if (state.activeView === "services") return null;
+  // Show on all views — AI chatbot is available everywhere
 
   const handleToggle = () => dispatch({ type: "TOGGLE_CHAT_BUBBLE" });
   const handleMinimize = () => dispatch({ type: "SET_CHAT_BUBBLE_OPEN", open: false });
@@ -177,7 +176,7 @@ export default function FloatingChatBubble({ onSendMessage }: FloatingChatBubble
         {/* Backdrop on mobile */}
         {isMobile && (
           <div
-            className="fixed inset-0 z-40 bg-black/30"
+            className="fixed inset-0 z-[9998] bg-black/30"
             onClick={handleMinimize}
           />
         )}
