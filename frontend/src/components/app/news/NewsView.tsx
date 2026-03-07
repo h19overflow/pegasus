@@ -1,21 +1,16 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useApp } from "@/lib/appContext";
-import { fetchNewsArticles, filterArticlesByCategory } from "@/lib/newsService";
+import { fetchNewsArticles } from "@/lib/newsService";
 import { NewsCard } from "./NewsCard";
 import { NewsDetail } from "./NewsDetail";
 import { NewsCategoryTabs } from "./NewsCategoryTabs";
 import { NewsFilterBar } from "./NewsFilterBar";
-import { sortArticles, buildArticleCountsPerCategory } from "./newsletterHelpers";
-import type { SortMode } from "./newsletterHelpers";
+import { buildArticleCountsPerCategory } from "./newsletterHelpers";
+import { formatLastScrapedTimestamp } from "./newsViewHelpers";
+import { useArticleFiltering } from "./useArticleFiltering";
 import type { NewsArticle, NewsCategory } from "@/lib/types";
 import { Newspaper } from "lucide-react";
 
-
-function formatLastScrapedTimestamp(isoString: string): string {
-  const date = new Date(isoString);
-  if (isNaN(date.getTime())) return isoString;
-  return date.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
-}
 
 function SkeletonCard() {
   return (
@@ -29,34 +24,21 @@ function SkeletonCard() {
 }
 
 
-function filterBySearch(articles: NewsArticle[], query: string): NewsArticle[] {
-  if (!query.trim()) return articles;
-  const q = query.toLowerCase();
-  return articles.filter(
-    (a) =>
-      a.title.toLowerCase().includes(q) ||
-      a.excerpt.toLowerCase().includes(q) ||
-      a.source.toLowerCase().includes(q),
-  );
-}
-
-function filterBySource(articles: NewsArticle[], source: string): NewsArticle[] {
-  if (!source) return articles;
-  return articles.filter((a) => a.source === source);
-}
-
-function filterBySentiment(articles: NewsArticle[], sentiment: string): NewsArticle[] {
-  if (!sentiment) return articles;
-  return articles.filter((a) => a.sentiment === sentiment);
-}
-
 export function NewsView() {
   const { state, dispatch } = useApp();
   const [lastScraped, setLastScraped] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sortMode, setSortMode] = useState<SortMode>("newest");
-  const [sourceFilter, setSourceFilter] = useState("");
-  const [sentimentFilter, setSentimentFilter] = useState<"" | "positive" | "negative" | "neutral">("");
+
+  const {
+    searchQuery, setSearchQuery,
+    sortMode, setSortMode,
+    sourceFilter, setSourceFilter,
+    sentimentFilter, setSentimentFilter,
+    clearFilters,
+    visibleArticles,
+    uniqueSources,
+    liveCommentCounts,
+    hasActiveFilters,
+  } = useArticleFiltering(state.newsArticles, state.newsCategory, state.newsComments);
 
   async function loadArticles() {
     dispatch({ type: "SET_NEWS_LOADING", loading: true });
@@ -103,13 +85,6 @@ export function NewsView() {
     dispatch({ type: "TOGGLE_ARTICLE_FLAG", articleId });
   }
 
-  // Unique sources for dropdown
-  const uniqueSources = useMemo(() => {
-    const sources = new Set(state.newsArticles.map((a) => a.source).filter(Boolean));
-    return [...sources].sort();
-  }, [state.newsArticles]);
-
-  // Article detail view
   const selectedArticle = state.selectedArticleId
     ? state.newsArticles.find((a) => a.id === state.selectedArticleId)
     : null;
@@ -127,27 +102,12 @@ export function NewsView() {
     );
   }
 
-  // Apply filters + sort
-  const afterCategory = filterArticlesByCategory(state.newsArticles, state.newsCategory);
-  const afterSentiment = filterBySentiment(afterCategory, sentimentFilter);
-  const afterSource = filterBySource(afterSentiment, sourceFilter);
-  const afterSearch = filterBySearch(afterSource, searchQuery);
-  const visibleArticles = sortArticles(afterSearch, sortMode, state.newsComments);
   const articleCounts = buildArticleCountsPerCategory(state.newsArticles);
-
-  const liveCommentCounts = useMemo(() => {
-    const counts = new Map<string, number>();
-    for (const c of state.newsComments) {
-      counts.set(c.articleId, (counts.get(c.articleId) ?? 0) + 1);
-    }
-    return counts;
-  }, [state.newsComments]);
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Header */}
       <div className="shrink-0 border-b border-border/50 bg-white px-5 py-4 space-y-3">
-        {/* Title row */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Newspaper className="w-5 h-5 text-primary" />
@@ -160,7 +120,6 @@ export function NewsView() {
           )}
         </div>
 
-        {/* Category tabs */}
         <NewsCategoryTabs
           activeCategory={state.newsCategory}
           onCategoryChange={handleCategoryChange}
@@ -187,9 +146,9 @@ export function NewsView() {
           {searchQuery && ` matching "${searchQuery}"`}
           {sourceFilter && ` from ${sourceFilter}`}
         </span>
-        {(searchQuery || sourceFilter || sentimentFilter) && (
+        {hasActiveFilters && (
           <button
-            onClick={() => { setSearchQuery(""); setSourceFilter(""); setSentimentFilter(""); }}
+            onClick={clearFilters}
             className="text-xs text-primary hover:underline"
           >
             Clear filters
