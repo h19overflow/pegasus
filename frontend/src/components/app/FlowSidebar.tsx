@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   TrendingUp,
   Layers,
+  Newspaper,
   PanelLeftClose,
   PanelLeftOpen,
   Shield,
@@ -20,6 +21,7 @@ const NAV_ITEMS: {
 }[] = [
   { label: "Services", view: "services", icon: Layers },
   { label: "Career Growth", view: "cv", icon: TrendingUp },
+  { label: "News", view: "news", icon: Newspaper },
 ];
 
 export function FlowSidebar({ onQuickAction }: FlowSidebarProps) {
