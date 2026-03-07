@@ -26,6 +26,7 @@ import type {
   MapCommand,
   ReactionType,
   HousingListing,
+  PersonalizedRoadmap,
 } from "./types";
 
 type AppAction =
@@ -80,7 +81,10 @@ type AppAction =
   | { type: "SET_MAP_COMMAND"; command: MapCommand }
   | { type: "CLEAR_MAP_COMMAND" }
   | { type: "SEND_GUIDE_MESSAGE"; message: string }
-  | { type: "CLEAR_GUIDE_PENDING" };
+  | { type: "CLEAR_GUIDE_PENDING" }
+  | { type: "SET_ACTIVE_ROADMAP"; roadmap: PersonalizedRoadmap }
+  | { type: "CLEAR_ROADMAP" }
+  | { type: "TOGGLE_ROADMAP_STEP"; stepId: string };
 
 const initialState: AppState = {
   messages: [],
@@ -126,6 +130,8 @@ const initialState: AppState = {
   mapCommand: null,
   guidePendingMessage: null,
   housingListings: [],
+  activeRoadmap: null,
+  roadmapCompletedStepIds: [],
 };
 
 function applyMessageSideEffects(state: AppState, message: ChatMessage): AppState {
@@ -343,6 +349,20 @@ function appReducer(state: AppState, action: AppAction): AppState {
       return { ...state, guidePendingMessage: action.message };
     case "CLEAR_GUIDE_PENDING":
       return { ...state, guidePendingMessage: null };
+    case "SET_ACTIVE_ROADMAP":
+      return { ...state, activeRoadmap: action.roadmap, roadmapCompletedStepIds: [] };
+    case "CLEAR_ROADMAP":
+      return { ...state, activeRoadmap: null, roadmapCompletedStepIds: [] };
+    case "TOGGLE_ROADMAP_STEP": {
+      const stepId = action.stepId;
+      const wasCompleted = state.roadmapCompletedStepIds.includes(stepId);
+      return {
+        ...state,
+        roadmapCompletedStepIds: wasCompleted
+          ? state.roadmapCompletedStepIds.filter((id) => id !== stepId)
+          : [...state.roadmapCompletedStepIds, stepId],
+      };
+    }
     default:
       return state;
   }
