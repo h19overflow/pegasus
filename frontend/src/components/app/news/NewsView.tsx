@@ -10,11 +10,6 @@ import { Newspaper } from "lucide-react";
 
 type SortMode = "newest" | "oldest" | "most_liked" | "most_comments";
 
-function isArticleLiked(likedIds: string[], articleId: string): boolean {
-  if (!likedIds || !Array.isArray(likedIds)) return false;
-  return likedIds.includes(articleId);
-}
-
 function buildArticleCountsPerCategory(articles: NewsArticle[]): Record<string, number> {
   const counts: Record<string, number> = { all: articles.length };
   for (const article of articles) {
@@ -125,10 +120,6 @@ export function NewsView() {
     dispatch({ type: "TOGGLE_ARTICLE_FLAG", articleId });
   }
 
-  function handleToggleLike(articleId: string) {
-    dispatch({ type: "TOGGLE_ARTICLE_LIKE", articleId });
-  }
-
   // Unique sources for dropdown
   const uniqueSources = useMemo(() => {
     const sources = new Set(state.newsArticles.map((a) => a.source).filter(Boolean));
@@ -144,9 +135,11 @@ export function NewsView() {
     return (
       <NewsDetail
         article={selectedArticle}
-        isLiked={isArticleLiked(state.likedArticleIds, selectedArticle.id)}
+        userReaction={state.articleReactions[selectedArticle.id] ?? null}
+        isFlagged={state.flaggedArticleIds.includes(selectedArticle.id)}
         onBack={handleBackToFeed}
-        onLike={handleToggleLike}
+        onReact={handleReact}
+        onFlag={handleFlag}
       />
     );
   }

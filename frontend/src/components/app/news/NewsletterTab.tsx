@@ -75,8 +75,13 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
     });
   }, [state.newsArticles]);
 
-  function handleReact(articleId: string, emoji: string) {
-    dispatch({ type: "SET_EMOJI_REACTION", articleId, emoji });
+  function handleReact(articleId: string, emoji: string | null) {
+    if (emoji === null) {
+      const current = state.articleReactions[articleId];
+      if (current) dispatch({ type: "SET_EMOJI_REACTION", articleId, emoji: current });
+    } else {
+      dispatch({ type: "SET_EMOJI_REACTION", articleId, emoji });
+    }
   }
 
   function handleFlag(articleId: string) {
@@ -91,7 +96,7 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
     return (
       <NewsDetail
         article={selectedArticle}
-        userReaction={state.articleReactions[selectedArticle.id]}
+        userReaction={state.articleReactions[selectedArticle.id] ?? null}
         isFlagged={state.flaggedArticleIds.includes(selectedArticle.id)}
         onBack={() => dispatch({ type: "SET_SELECTED_ARTICLE", articleId: null })}
         onReact={handleReact}
@@ -151,7 +156,9 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
                     <NewsCard
                       key={article.id}
                       article={article}
-                      userReaction={state.articleReactions[article.id]}
+                      reactionCounts={article.reactionCounts ?? {}}
+                      userReaction={state.articleReactions[article.id] ?? null}
+                      flagCount={article.flagCount ?? 0}
                       isFlagged={state.flaggedArticleIds.includes(article.id)}
                       onSelect={(a) => dispatch({ type: "SET_SELECTED_ARTICLE", articleId: a.id })}
                       onReact={handleReact}
@@ -173,7 +180,9 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
                     <NewsCard
                       key={article.id}
                       article={article}
-                      userReaction={state.articleReactions[article.id]}
+                      reactionCounts={article.reactionCounts ?? {}}
+                      userReaction={state.articleReactions[article.id] ?? null}
+                      flagCount={article.flagCount ?? 0}
                       isFlagged={state.flaggedArticleIds.includes(article.id)}
                       onSelect={(a) => dispatch({ type: "SET_SELECTED_ARTICLE", articleId: a.id })}
                       onReact={handleReact}
