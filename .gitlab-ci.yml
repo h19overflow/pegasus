@@ -100,7 +100,7 @@ deploy-frontend:
         --port 8080 \
         --set-env-vars "BACKEND_URL=${BACKEND_URL}" \
         --min-instances 0 \
-        --max-instances 10 \
+        --max-instances 20 \
         --memory 256Mi \
         --cpu 1
   needs:
