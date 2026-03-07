@@ -3,6 +3,10 @@ import { CircleMarker, Popup } from "react-leaflet";
 import { fetchHotspots } from "@/lib/predictiveService";
 import type { PredictionHotspot } from "@/lib/types";
 
+interface HotspotOverlayProps {
+  onAskAI?: (question: string) => void;
+}
+
 // Approximate lat/lng for Montgomery neighborhoods
 const NEIGHBORHOOD_COORDS: Record<string, [number, number]> = {
   "Capitol Heights": [32.373, -86.305],
@@ -26,7 +30,51 @@ const RISK_COLORS: Record<string, string> = {
   low: "#16a34a",
 };
 
-export function HotspotOverlay() {
+function PopupContent({ hotspot, onAskAI }: { hotspot: PredictionHotspot; onAskAI?: (q: string) => void }) {
+  const color = RISK_COLORS[hotspot.risk_level] || "#888";
+
+  return (
+    <div style={{ minWidth: 200, fontFamily: "system-ui, sans-serif" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+        <span style={{ fontSize: 18, fontWeight: 800, color }}>
+          {Math.round(hotspot.hotspot_score)}
+        </span>
+        <span style={{ fontSize: 11, color: "#666" }}>/ 100</span>
+        <span style={{
+          marginLeft: "auto", fontSize: 10, fontWeight: 600,
+          padding: "2px 6px", borderRadius: 4,
+          background: `${color}18`, color,
+          textTransform: "uppercase",
+        }}>
+          {hotspot.risk_level}
+        </span>
+      </div>
+      <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2 }}>
+        {hotspot.neighborhood}
+      </div>
+      <div style={{ fontSize: 11, color: "#666", marginBottom: 6 }}>
+        {hotspot.category} · {hotspot.trend_direction}
+      </div>
+      <div style={{ fontSize: 11, color: "#444", lineHeight: 1.4, marginBottom: 8 }}>
+        {hotspot.explanation}
+      </div>
+      {onAskAI && (
+        <button
+          onClick={() => onAskAI(`Tell me about the ${hotspot.risk_level} risk hotspot in ${hotspot.neighborhood} for ${hotspot.category}. What's driving the score of ${Math.round(hotspot.hotspot_score)} and what should we do about it?`)}
+          style={{
+            width: "100%", padding: "6px 10px", fontSize: 11, fontWeight: 600,
+            background: "#f0f0ff", color: "#4338ca", border: "1px solid #c7d2fe",
+            borderRadius: 6, cursor: "pointer",
+          }}
+        >
+          Ask AI Analyst
+        </button>
+      )}
+    </div>
+  );
+}
+
+export function HotspotOverlay({ onAskAI }: HotspotOverlayProps) {
   const [hotspots, setHotspots] = useState<PredictionHotspot[]>([]);
 
   useEffect(() => {
@@ -59,31 +107,7 @@ export function HotspotOverlay() {
             }}
           >
             <Popup>
-              <div style={{ minWidth: 200, fontFamily: "system-ui, sans-serif" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                  <span style={{ fontSize: 18, fontWeight: 800, color }}>
-                    {Math.round(h.hotspot_score)}
-                  </span>
-                  <span style={{ fontSize: 11, color: "#666" }}>/ 100</span>
-                  <span style={{
-                    marginLeft: "auto", fontSize: 10, fontWeight: 600,
-                    padding: "2px 6px", borderRadius: 4,
-                    background: `${color}18`, color,
-                    textTransform: "uppercase",
-                  }}>
-                    {h.risk_level}
-                  </span>
-                </div>
-                <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2 }}>
-                  {h.neighborhood}
-                </div>
-                <div style={{ fontSize: 11, color: "#666", marginBottom: 6 }}>
-                  {h.category} · {h.trend_direction}
-                </div>
-                <div style={{ fontSize: 11, color: "#444", lineHeight: 1.4 }}>
-                  {h.explanation}
-                </div>
-              </div>
+              <PopupContent hotspot={h} onAskAI={onAskAI} />
             </Popup>
           </CircleMarker>
         );

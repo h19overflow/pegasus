@@ -1,6 +1,7 @@
 import { MapPin, Phone, Clock, Navigation } from "lucide-react";
 import { Heart } from "lucide-react";
 import type { ServiceCategory, ServicePoint } from "@/lib/types";
+import { useApp } from "@/lib/appContext";
 
 interface MapCategoryEntry {
   id: ServiceCategory;
@@ -25,6 +26,7 @@ export function MapPointDetailPanel({
   onNavigateToChat,
   onViewCategory,
 }: MapPointDetailPanelProps) {
+  const { dispatch } = useApp();
   const catMeta = categories.find((c) => c.id === point.category);
   const Icon = catMeta?.icon ?? Heart;
 
@@ -77,12 +79,13 @@ export function MapPointDetailPanel({
           Directions
         </a>
         <button
-          onClick={() => onNavigateToChat(
-            `I want to visit ${point.name}. Help me understand what they offer and how to prepare.`
-          )}
+          onClick={() => dispatch({
+            type: "SEND_GUIDE_MESSAGE",
+            message: `Tell me about "${point.name}"${point.address ? ` at ${point.address}` : ""} in Montgomery Alabama. What services do they offer, hours, phone, and what should I bring?`,
+          })}
           className="flex-1 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
         >
-          Help me prepare
+          More details
         </button>
       </div>
     </div>

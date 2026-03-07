@@ -2,18 +2,22 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { Send, Compass, MapPin } from "lucide-react";
 import { useApp } from "@/lib/appContext";
 import { generateGuideResponse, generatePinGuideResponse } from "@/lib/guideResponses";
+import { getSmartResponse } from "@/lib/aiChatService";
+import { ServiceCard } from "./ServiceCard";
 import type { GuideMessage } from "@/lib/types";
 
 function GuideBubble({
   message,
   onPinClick,
+  onChipClick,
 }: {
   message: GuideMessage;
   onPinClick: (pinId: string) => void;
+  onChipClick: (text: string) => void;
 }) {
   const isUser = message.role === "user";
   return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
+    <div className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}>
       <div
         className={`max-w-[85%] rounded-lg px-3 py-2 text-xs leading-relaxed ${
           isUser
@@ -47,6 +51,26 @@ function GuideBubble({
           </div>
         )}
       </div>
+      {!isUser && message.serviceCards && message.serviceCards.length > 0 && (
+        <div className="mt-2 max-w-[90%] space-y-2">
+          {message.serviceCards.map((card, i) => (
+            <ServiceCard key={`${card.title}-${i}`} card={card} />
+          ))}
+        </div>
+      )}
+      {!isUser && message.chips && message.chips.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mt-1.5 max-w-[85%]">
+          {message.chips.map((chip) => (
+            <button
+              key={chip}
+              onClick={() => onChipClick(chip)}
+              className="text-[10px] px-2.5 py-1 rounded-full border border-border/60 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            >
+              {chip}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -123,7 +147,16 @@ export function ServiceGuideChat({ hideHeader = false }: { hideHeader?: boolean 
     }, 600);
   }, [state.selectedPin]);
 
-  function handleSend(text: string) {
+  // Consume pending guide message (from "More details" button)
+  useEffect(() => {
+    if (state.guidePendingMessage) {
+      const msg = state.guidePendingMessage;
+      dispatch({ type: "CLEAR_GUIDE_PENDING" });
+      handleSend(msg);
+    }
+  }, [state.guidePendingMessage]);
+
+  async function handleSend(text: string) {
     if (!text.trim()) return;
     const userMsg: GuideMessage = {
       id: `guide-user-${Date.now()}`,
@@ -134,20 +167,21 @@ export function ServiceGuideChat({ hideHeader = false }: { hideHeader?: boolean 
     dispatch({ type: "SET_GUIDE_TYPING", typing: true });
     setInput("");
 
-    setTimeout(() => {
-      const response = generateGuideResponse(text, state.servicePoints);
-      dispatch({ type: "ADD_GUIDE_MESSAGE", message: response });
-      dispatch({ type: "SET_GUIDE_TYPING", typing: false });
+    const chatResponse = await getSmartResponse(text);
+    const guideResponse: GuideMessage = {
+      id: `guide-ai-${Date.now()}`,
+      role: "assistant",
+      content: chatResponse.content,
+      chips: chatResponse.chips,
+      serviceCards: chatResponse.serviceCards,
+    };
+    dispatch({ type: "ADD_GUIDE_MESSAGE", message: guideResponse });
+    dispatch({ type: "SET_GUIDE_TYPING", typing: false });
 
-      if (response.pinIds && response.pinIds.length > 0) {
-        const firstPin = state.servicePoints.find(
-          (p) => p.id === response.pinIds![0]
-        );
-        if (firstPin) {
-          dispatch({ type: "SET_SELECTED_PIN", pin: firstPin });
-        }
-      }
-    }, 800);
+    // If AI returned a map action, dispatch it
+    if (chatResponse.mapAction) {
+      dispatch({ type: "SET_MAP_COMMAND", command: chatResponse.mapAction });
+    }
   }
 
   function handlePinClick(pinId: string) {
@@ -184,7 +218,7 @@ export function ServiceGuideChat({ hideHeader = false }: { hideHeader?: boolean 
 
       <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto px-3 py-3 space-y-2.5">
         {state.guideMessages.map((msg) => (
-          <GuideBubble key={msg.id} message={msg} onPinClick={handlePinClick} />
+          <GuideBubble key={msg.id} message={msg} onPinClick={handlePinClick} onChipClick={handleSend} />
         ))}
         {state.guideTyping && <TypingDots />}
 

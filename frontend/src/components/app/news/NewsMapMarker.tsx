@@ -1,76 +1,56 @@
-import { useState } from "react";
-import { Marker, Tooltip } from "react-leaflet";
-import { createNewsMarker, computeMisinfoScore, getArticleLatLng } from "@/lib/newsMapUtils";
-import type { NewsArticle } from "@/lib/types";
+import { Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import type { NewsArticle, ReactionType } from "@/lib/types";
+import { getCategoryEmoji, getSentimentColor, isHighMisinfoRisk } from "@/lib/newsMapUtils";
+import { NewsPopupCard } from "./NewsPopupCard";
 import "./news-map.css";
 
 interface NewsMapMarkerProps {
   article: NewsArticle;
-  flaggedIds: string[];
-  onSelect: (article: NewsArticle) => void;
+  reactionCounts: Record<ReactionType, number>;
+  userReaction: ReactionType | undefined;
+  onReact: (articleId: string, reaction: ReactionType) => void;
 }
 
-function truncate(text: string, max: number): string {
-  return text.length > max ? text.slice(0, max) + "…" : text;
-}
+function buildMarkerIcon(article: NewsArticle): L.DivIcon {
+  const emoji = getCategoryEmoji(article.category);
+  const borderColor = getSentimentColor(article.sentiment ?? "neutral");
+  const hasMisinfo = isHighMisinfoRisk(article);
 
-function TooltipContent({ article }: { article: NewsArticle }) {
-  const [imgFailed, setImgFailed] = useState(false);
-  const blurb = article.summary || article.excerpt || "";
-  const showImage = !!article.imageUrl && !imgFailed;
+  const pulseRing = hasMisinfo
+    ? `<div class="news-map-pulse-ring"></div>`
+    : "";
 
-  return (
-    <div style={{ width: 240, background: "white", borderRadius: 10, overflow: "hidden", fontFamily: "inherit" }}>
-      {showImage && (
-        <img
-          src={article.imageUrl!}
-          alt=""
-          onError={() => setImgFailed(true)}
-          style={{ width: "100%", height: 110, objectFit: "cover", display: "block" }}
-        />
-      )}
-      <div style={{ padding: "10px 12px 10px" }}>
-        <p style={{
-          fontWeight: 700, fontSize: 12, lineHeight: 1.4,
-          whiteSpace: "normal", wordBreak: "break-word", marginBottom: 4,
-        }}>
-          {article.title}
-        </p>
-        {blurb && (
-          <p style={{
-            fontSize: 11, color: "#555", lineHeight: 1.4, marginBottom: 6,
-            whiteSpace: "normal", wordBreak: "break-word",
-          }}>
-            {truncate(blurb, 100)}
-          </p>
-        )}
-        <p style={{ fontSize: 10, color: "#999", whiteSpace: "normal" }}>
-          {article.source} · {article.publishedAt}
-        </p>
+  return L.divIcon({
+    className: "news-map-marker-wrapper",
+    html: `
+      <div class="news-map-marker" style="border-color: ${borderColor}">
+        ${emoji}
+        ${pulseRing}
       </div>
-    </div>
-  );
+    `,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -18],
+  });
 }
 
-export function NewsMapMarker({ article, flaggedIds, onSelect }: NewsMapMarkerProps) {
-  const position     = getArticleLatLng(article);
-  const misinfoScore = computeMisinfoScore(article, flaggedIds);
-  const icon         = createNewsMarker(article.category, article.sentiment ?? "neutral", misinfoScore);
+export function NewsMapMarker({ article, reactionCounts, userReaction, onReact }: NewsMapMarkerProps) {
+  if (!article.location) return null;
 
   return (
     <Marker
-      position={position}
-      icon={icon}
-      eventHandlers={{ click: () => onSelect(article) }}
+      position={[article.location.lat, article.location.lng]}
+      icon={buildMarkerIcon(article)}
     >
-      <Tooltip
-        direction="top"
-        offset={[0, -14]}
-        opacity={1}
-        className="news-map-tooltip"
-      >
-        <TooltipContent article={article} />
-      </Tooltip>
+      <Popup maxWidth={300} minWidth={260} className="news-map-popup">
+        <NewsPopupCard
+          article={article}
+          reactionCounts={reactionCounts}
+          userReaction={userReaction}
+          onReact={onReact}
+        />
+      </Popup>
     </Marker>
   );
 }

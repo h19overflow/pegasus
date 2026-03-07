@@ -13,23 +13,13 @@ export default defineConfig(({ mode }) => ({
     },
     proxy: {
       "/api": {
-        target: "http://localhost:8082",
+        target: "http://127.0.0.1:8082",
         changeOrigin: true,
       },
-      // Proxy OpenAI API to avoid CORS — key never crosses origins.
-      "/openai-api": {
-        target: "https://api.openai.com",
+      "/gemini-api": {
+        target: "https://generativelanguage.googleapis.com",
         changeOrigin: true,
-        secure: true,
-        rewrite: (p) => p.replace(/^\/openai-api/, ""),
-      },
-      // Proxy Bright Data REST API to avoid CORS in the browser.
-      // The API key stays server-side in the proxy request.
-      "/brightdata-api": {
-        target: "https://api.brightdata.com",
-        changeOrigin: true,
-        secure: true,
-        rewrite: (p) => p.replace(/^\/brightdata-api/, ""),
+        rewrite: (path: string) => path.replace(/^\/gemini-api/, ""),
       },
     },
   },

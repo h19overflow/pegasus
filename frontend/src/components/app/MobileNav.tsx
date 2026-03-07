@@ -1,8 +1,8 @@
-import { Layers, TrendingUp } from "lucide-react";
+import { Layers, TrendingUp, Newspaper, UserCircle } from "lucide-react";
 
-export type MobileTab = "services" | "cv";
+export type MobileTab = "services" | "cv" | "news" | "profile";
 
-interface MobileNavProps {
+interface AppNavProps {
   activeTab: MobileTab;
   onTabChange: (tab: MobileTab) => void;
   actionItemCount: number;
@@ -22,14 +22,16 @@ const BadgeDot = ({ count }: { count: number }) => {
   );
 };
 
-const MobileNav = ({ activeTab, onTabChange, actionItemCount }: MobileNavProps) => {
+export const AppNav = ({ activeTab, onTabChange, actionItemCount }: AppNavProps) => {
   const tabs: TabConfig[] = [
     { id: "services", label: "Services", icon: Layers, badgeCount: actionItemCount },
+    { id: "news", label: "News", icon: Newspaper },
     { id: "cv", label: "Career", icon: TrendingUp },
+    { id: "profile", label: "Profile", icon: UserCircle },
   ];
 
   return (
-    <nav className="lg:hidden flex items-center justify-around border-t bg-background px-2 py-2">
+    <nav className="flex items-center justify-around border-t bg-background px-2 py-2 relative z-50">
       {tabs.map(({ id, label, icon: Icon, badgeCount = 0 }) => (
         <button
           key={id}
@@ -51,4 +53,4 @@ const MobileNav = ({ activeTab, onTabChange, actionItemCount }: MobileNavProps) 
   );
 };
 
-export default MobileNav;
+export default AppNav;

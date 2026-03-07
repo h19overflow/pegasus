@@ -1,27 +1,60 @@
-/* Scoped override for news map tooltips only.
-   Leaflet sets white-space:nowrap on all .leaflet-tooltip elements;
-   this class resets that just for our news bubbles. */
-.leaflet-tooltip.news-map-tooltip {
-  white-space: normal;
-  max-width: 240px;
+/* News map marker styles */
+.news-map-marker-wrapper {
+  background: none !important;
+  border: none !important;
+}
+
+.news-map-marker {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #eab308;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Pulsing red ring for high misinfo risk articles */
+.news-map-pulse-ring {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #ef4444;
+  animation: news-pulse 2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes news-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* Popup styling */
+.news-map-popup .leaflet-popup-content-wrapper {
   padding: 0;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
   overflow: hidden;
-  background: transparent;
 }
 
-.leaflet-tooltip.news-map-tooltip::before {
-  /* keep the default arrow but let it sit flush */
-  border-top-color: white;
-}
-
-/* Pulsing misinfo ring on news map markers */
-@keyframes misinfo-ring-pulse {
-  0%, 100% { transform: scale(1);    opacity: 0.75; }
-  50%       { transform: scale(1.22); opacity: 0.25; }
-}
-.misinfo-pulse {
-  animation: misinfo-ring-pulse 1.8s ease-in-out infinite;
+.news-map-popup .leaflet-popup-content {
+  margin: 0;
+  width: auto !important;
 }

@@ -1,5 +1,4 @@
 import { createContext, useContext, useReducer, type ReactNode } from "react";
-import { IS_DEMO_MODE } from "./appMode";
 import type {
   AppState,
   ChatMessage,
@@ -27,6 +26,7 @@ import type {
   MapCommand,
   ReactionType,
   HousingListing,
+  PersonalizedRoadmap,
 } from "./types";
 
 type AppAction =
@@ -70,26 +70,26 @@ type AppAction =
   | { type: "MARK_CHAT_READ" }
   | { type: "MERGE_JOB_LISTINGS"; listings: JobListing[] }
   | { type: "MERGE_NEWS_ARTICLES"; articles: NewsArticle[] }
-  | { type: "UPDATE_MISINFO_SCORES"; scores: Array<{ articleId: string; risk: number; reason: string }> }
-  | { type: "SET_ARTICLE_REACTION"; articleId: string; emoji: string | null }
   | { type: "MERGE_HOUSING_LISTINGS"; listings: HousingListing[] }
   | { type: "TOGGLE_NEWS_MAP" }
   | { type: "SET_NEWS_MAP_MODE"; mode: "pins" | "heat" }
   | { type: "SET_ARTICLE_REACTION"; articleId: string; reaction: ReactionType }
+  | { type: "SET_EMOJI_REACTION"; articleId: string; emoji: string }
   | { type: "TOGGLE_ARTICLE_FLAG"; articleId: string }
+  | { type: "UPDATE_MISINFO_SCORES"; scores: { articleId: string; risk: number; reason: string }[] }
   | { type: "SET_NEWS_COMMENTS"; comments: NewsComment[] }
   | { type: "SET_MAP_COMMAND"; command: MapCommand }
-  | { type: "CLEAR_MAP_COMMAND" };
-
-function getInitialView(): AppView {
-  const match = window.location.pathname.match(/\/app\/(services|cv|profile|news|admin)/);
-  return (match?.[1] as AppView) ?? "services";
-}
+  | { type: "CLEAR_MAP_COMMAND" }
+  | { type: "SEND_GUIDE_MESSAGE"; message: string }
+  | { type: "CLEAR_GUIDE_PENDING" }
+  | { type: "SET_ACTIVE_ROADMAP"; roadmap: PersonalizedRoadmap }
+  | { type: "CLEAR_ROADMAP" }
+  | { type: "TOGGLE_ROADMAP_STEP"; stepId: string };
 
 const initialState: AppState = {
   messages: [],
   language: "EN",
-  activeView: getInitialView(),
+  activeView: "services",
   activeFlow: null,
   profile: {},
   artifacts: [],
@@ -118,17 +118,20 @@ const initialState: AppState = {
   newsCategory: "all" as NewsCategory,
   newsComments: [],
   likedArticleIds: [],
-  articleReactions: {},
-  flaggedArticleIds: [],
   selectedArticleId: null,
   newsMapVisible: false,
   newsMapMode: "pins" as const,
   newsReactions: {},
   userReactions: {},
+  articleReactions: {},
+  flaggedArticleIds: [],
   chatBubbleOpen: false,
   chatBubbleHasUnread: false,
   mapCommand: null,
+  guidePendingMessage: null,
   housingListings: [],
+  activeRoadmap: null,
+  roadmapCompletedStepIds: [],
 };
 
 function applyMessageSideEffects(state: AppState, message: ChatMessage): AppState {
@@ -280,45 +283,6 @@ function appReducer(state: AppState, action: AppAction): AppState {
       const fresh = action.articles.filter((a) => !existingIds.has(a.id));
       return { ...state, newsArticles: [...fresh, ...state.newsArticles] };
     }
-    case "UPDATE_MISINFO_SCORES": {
-      const scoreMap = new Map(action.scores.map((s) => [s.articleId, s]));
-      return {
-        ...state,
-        newsArticles: state.newsArticles.map((a) => {
-          const s = scoreMap.get(a.id);
-          return s ? { ...a, misinfoRisk: s.risk, misinfoReason: s.reason } : a;
-        }),
-      };
-    }
-    case "TOGGLE_ARTICLE_FLAG": {
-      if (IS_DEMO_MODE) {
-        // Demo: every click increments — no unflag
-        return {
-          ...state,
-          flaggedArticleIds: state.flaggedArticleIds.includes(action.articleId)
-            ? state.flaggedArticleIds
-            : [...state.flaggedArticleIds, action.articleId],
-          newsArticles: state.newsArticles.map((a) =>
-            a.id === action.articleId
-              ? { ...a, flagCount: (a.flagCount ?? 0) + 1 }
-              : a
-          ),
-        };
-      }
-      // Live: one flag per user, toggleable
-      const wasFlagged = state.flaggedArticleIds.includes(action.articleId);
-      return {
-        ...state,
-        flaggedArticleIds: wasFlagged
-          ? state.flaggedArticleIds.filter((id) => id !== action.articleId)
-          : [...state.flaggedArticleIds, action.articleId],
-        newsArticles: state.newsArticles.map((a) =>
-          a.id === action.articleId
-            ? { ...a, flagCount: Math.max(0, (a.flagCount ?? 0) + (wasFlagged ? -1 : 1)) }
-            : a
-        ),
-      };
-    }
     case "MERGE_HOUSING_LISTINGS": {
       const existingIds = new Set(state.housingListings.map((h) => h.id));
       const fresh = action.listings.filter((h) => !existingIds.has(h.id));
@@ -331,46 +295,74 @@ function appReducer(state: AppState, action: AppAction): AppState {
     case "SET_NEWS_COMMENTS":
       return { ...state, newsComments: action.comments };
     case "SET_ARTICLE_REACTION": {
-      if ("emoji" in action) {
-        const prevEmoji = state.articleReactions[action.articleId];
-        const nextArticleReactions = { ...state.articleReactions };
-        if (action.emoji === null) {
-          delete nextArticleReactions[action.articleId];
-        } else {
-          nextArticleReactions[action.articleId] = action.emoji;
-        }
-
-        return {
-          ...state,
-          articleReactions: nextArticleReactions,
-          newsArticles: state.newsArticles.map((article) => {
-            if (article.id !== action.articleId) return article;
-            const counts = { ...(article.reactionCounts ?? {}) };
-            if (prevEmoji) counts[prevEmoji] = Math.max(0, (counts[prevEmoji] ?? 1) - 1);
-            if (action.emoji) counts[action.emoji] = (counts[action.emoji] ?? 0) + 1;
-            return { ...article, reactionCounts: counts };
-          }),
-        };
+      const prev = state.newsReactions[action.articleId] ?? {};
+      const oldReaction = state.userReactions[action.articleId];
+      const updated = { ...prev };
+      if (oldReaction) {
+        updated[oldReaction] = Math.max((updated[oldReaction] ?? 0) - 1, 0);
       }
-
-      const currentCounts = state.newsReactions[action.articleId] ?? {};
-      const previousReaction = state.userReactions[action.articleId];
-      const updatedCounts = { ...currentCounts };
-      if (previousReaction) {
-        updatedCounts[previousReaction] = Math.max((updatedCounts[previousReaction] ?? 0) - 1, 0);
-      }
-      updatedCounts[action.reaction] = (updatedCounts[action.reaction] ?? 0) + 1;
-
+      updated[action.reaction] = (updated[action.reaction] ?? 0) + 1;
       return {
         ...state,
-        newsReactions: { ...state.newsReactions, [action.articleId]: updatedCounts },
+        newsReactions: { ...state.newsReactions, [action.articleId]: updated },
         userReactions: { ...state.userReactions, [action.articleId]: action.reaction },
       };
     }
+    case "SET_EMOJI_REACTION": {
+      const prev = state.articleReactions[action.articleId];
+      if (prev === action.emoji) {
+        const { [action.articleId]: _, ...rest } = state.articleReactions;
+        return { ...state, articleReactions: rest };
+      }
+      return {
+        ...state,
+        articleReactions: { ...state.articleReactions, [action.articleId]: action.emoji },
+      };
+    }
+    case "TOGGLE_ARTICLE_FLAG": {
+      const wasFlagged = state.flaggedArticleIds.includes(action.articleId);
+      return {
+        ...state,
+        flaggedArticleIds: wasFlagged
+          ? state.flaggedArticleIds.filter((id) => id !== action.articleId)
+          : [...state.flaggedArticleIds, action.articleId],
+        newsArticles: state.newsArticles.map((a) =>
+          a.id === action.articleId
+            ? { ...a, flagCount: (a.flagCount ?? 0) + (wasFlagged ? -1 : 1) }
+            : a,
+        ),
+      };
+    }
+    case "UPDATE_MISINFO_SCORES":
+      return {
+        ...state,
+        newsArticles: state.newsArticles.map((a) => {
+          const score = action.scores.find((s) => s.articleId === a.id);
+          return score ? { ...a, misinfoRisk: score.risk, misinfoReason: score.reason } : a;
+        }),
+      };
     case "SET_MAP_COMMAND":
       return { ...state, mapCommand: action.command };
     case "CLEAR_MAP_COMMAND":
       return { ...state, mapCommand: null };
+    case "SEND_GUIDE_MESSAGE":
+      return { ...state, guidePendingMessage: action.message };
+    case "CLEAR_GUIDE_PENDING":
+      return { ...state, guidePendingMessage: null };
+    case "SET_ACTIVE_ROADMAP":
+      return { ...state, activeRoadmap: action.roadmap, roadmapCompletedStepIds: [] };
+    case "CLEAR_ROADMAP":
+      return { ...state, activeRoadmap: null, roadmapCompletedStepIds: [] };
+    case "TOGGLE_ROADMAP_STEP": {
+      const stepId = action.stepId;
+      const wasCompleted = state.roadmapCompletedStepIds.includes(stepId);
+      return {
+        ...state,
+        roadmapCompletedStepIds: wasCompleted
+          ? state.roadmapCompletedStepIds.filter((id) => id !== stepId)
+          : [...state.roadmapCompletedStepIds, stepId],
+      };
+    }
     default:
       return state;
   }

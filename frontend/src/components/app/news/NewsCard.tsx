@@ -5,52 +5,43 @@ import { ArticleReactions } from "./ArticleReactions";
 
 interface NewsCardProps {
   article: NewsArticle;
+  reactionCounts: Record<string, number>;
   userReaction: string | null;
+  flagCount: number;
   isFlagged: boolean;
   onSelect: (article: NewsArticle) => void;
   onReact: (articleId: string, emoji: string | null) => void;
   onFlag: (articleId: string) => void;
 }
 
-const CATEGORY_STYLES: Record<string, string> = {
-  general: "bg-slate-100 text-slate-700 border-slate-200",
-  development: "bg-blue-50 text-blue-700 border-blue-200",
-  government: "bg-amber-50 text-amber-700 border-amber-200",
-  community: "bg-emerald-50 text-emerald-700 border-emerald-200",
-  events: "bg-purple-50 text-purple-700 border-purple-200",
+const CATEGORY_COLORS: Record<string, string> = {
+  general: "bg-slate-500",
+  development: "bg-blue-500",
+  government: "bg-[hsl(var(--amber-gold))]",
+  community: "bg-emerald-500",
+  events: "bg-purple-500",
 };
 
-function categoryStyle(category: string): string {
-  return CATEGORY_STYLES[category] ?? CATEGORY_STYLES.general;
-}
-
-const SENTIMENT_STYLES: Record<string, string> = {
-  positive: "bg-emerald-50 text-emerald-700 border-emerald-200",
-  neutral: "bg-gray-100 text-gray-600 border-gray-200",
-  negative: "bg-rose-50 text-rose-700 border-rose-200",
+const CATEGORY_BADGE: Record<string, string> = {
+  general: "text-slate-600",
+  development: "text-blue-600",
+  government: "text-[hsl(var(--amber-gold))]",
+  community: "text-emerald-600",
+  events: "text-purple-600",
 };
 
-function sentimentStyle(sentiment: string): string {
-  return SENTIMENT_STYLES[sentiment] ?? SENTIMENT_STYLES.neutral;
+const SENTIMENT_DOTS: Record<string, string> = {
+  positive: "bg-emerald-500",
+  neutral: "bg-gray-400",
+  negative: "bg-rose-500",
+};
+
+function accentColor(category: string): string {
+  return CATEGORY_COLORS[category] ?? CATEGORY_COLORS.general;
 }
 
-// ── Misinfo risk badge ─────────────────────────────────────────────────────
-function misinfoLevel(risk: number): { label: string; cls: string; icon: string } {
-  if (risk <= 30) return { label: "Low risk",    icon: "✓", cls: "bg-emerald-50 text-emerald-700 border-emerald-200" };
-  if (risk <= 60) return { label: "Medium risk", icon: "⚠", cls: "bg-amber-50  text-amber-700  border-amber-200"   };
-  return             { label: "High risk",   icon: "🚩", cls: "bg-red-50    text-red-700    border-red-200"     };
-}
-
-function MisinfoRiskBadge({ risk, reason }: { risk: number; reason?: string }) {
-  const { label, icon, cls } = misinfoLevel(risk);
-  return (
-    <span
-      title={reason ?? label}
-      className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded border cursor-help ${cls}`}
-    >
-      {icon} {label}
-    </span>
-  );
+function badgeColor(category: string): string {
+  return CATEGORY_BADGE[category] ?? CATEGORY_BADGE.general;
 }
 
 function formatScrapedDate(isoString: string): string {
@@ -59,18 +50,40 @@ function formatScrapedDate(isoString: string): string {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
-export function NewsCard({ article, userReaction, isFlagged, onSelect, onReact, onFlag }: NewsCardProps) {
+function MisinfoRiskBadge({ risk }: { risk: number }) {
+  if (risk > 60) {
+    return (
+      <span className="text-[10px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded bg-red-50 text-red-600 border border-red-200">
+        High Risk
+      </span>
+    );
+  }
+  if (risk > 30) {
+    return (
+      <span className="text-[10px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded bg-amber-50 text-amber-600 border border-amber-200">
+        Med Risk
+      </span>
+    );
+  }
+  return null;
+}
+
+export function NewsCard({ article, reactionCounts, userReaction, flagCount, isFlagged, onSelect, onReact, onFlag }: NewsCardProps) {
   const scrapedDate = formatScrapedDate(article.scrapedAt);
 
   return (
     <div
-      className="w-full text-left group rounded-xl border border-border bg-background
-                 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden cursor-pointer"
+      className="group relative w-full text-left rounded-2xl bg-white border border-border/40
+                 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 overflow-hidden cursor-pointer magnolia-bg"
       onClick={() => onSelect(article)}
     >
-      <div className="flex flex-col sm:flex-row gap-0">
+      {/* Left accent stripe */}
+      <div className={`absolute left-0 top-0 bottom-0 w-1 ${accentColor(article.category)} rounded-l-2xl`} />
+
+      <div className="flex flex-col sm:flex-row">
+        {/* Image */}
         {article.imageUrl && (
-          <div className="sm:w-36 sm:shrink-0 h-40 sm:h-auto overflow-hidden bg-muted">
+          <div className="sm:w-36 sm:shrink-0 h-36 sm:h-auto overflow-hidden bg-muted">
             <img
               src={article.imageUrl}
               alt=""
@@ -79,82 +92,79 @@ export function NewsCard({ article, userReaction, isFlagged, onSelect, onReact, 
           </div>
         )}
 
-        <div className="flex flex-col gap-2 p-4 flex-1 min-w-0">
-          {/* Meta row: category + time + source */}
+        <div className="flex flex-col gap-2 p-4 pl-5 flex-1 min-w-0">
+          {/* Top line: category + sentiment dot + time */}
           <div className="flex items-center gap-2 flex-wrap">
-            <span className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded border ${categoryStyle(article.category)}`}>
+            <span className={`text-[10px] font-bold uppercase tracking-wider ${badgeColor(article.category)}`}>
               {article.category}
             </span>
             {article.sentiment && (
-              <span className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded border ${sentimentStyle(article.sentiment)}`}>
-                {article.sentiment}
-              </span>
+              <span className={`w-1.5 h-1.5 rounded-full ${SENTIMENT_DOTS[article.sentiment] ?? SENTIMENT_DOTS.neutral}`} />
             )}
-            {article.misinfoRisk != null && (
-              <MisinfoRiskBadge risk={article.misinfoRisk} reason={article.misinfoReason} />
+            {article.misinfoRisk != null && article.misinfoRisk > 30 && (
+              <MisinfoRiskBadge risk={article.misinfoRisk} />
             )}
-            <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
+            <span className="flex items-center gap-1 text-[11px] text-muted-foreground ml-auto">
               <Clock className="w-3 h-3" />
               {formatRelativeTime(article.publishedAt)}
             </span>
-            {article.source && (
-              <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
-                <Globe className="w-3 h-3" />
-                {article.source}
-              </span>
-            )}
           </div>
 
           {/* Title */}
-          <h3 className="text-sm font-bold text-foreground leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+          <h3 className="text-sm font-bold text-secondary leading-snug line-clamp-2 group-hover:text-primary transition-colors">
             {article.title}
           </h3>
 
-          {/* Excerpt or summary fallback */}
+          {/* Excerpt */}
           {(article.excerpt || article.summary) && (
-            <p className="text-xs text-muted-foreground line-clamp-3 leading-relaxed">
+            <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
               {article.excerpt || article.summary}
             </p>
           )}
 
-          {/* Footer: source link + actions + scraped date */}
-          <div className="flex flex-col gap-1.5 mt-auto pt-1">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <a
-                  href={article.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="flex items-center gap-1 text-[11px] text-primary/80 hover:text-primary font-medium transition-colors"
-                >
-                  Read full article
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-                {scrapedDate && (
-                  <span className="text-[10px] text-muted-foreground/60">
-                    Scraped {scrapedDate}
-                  </span>
-                )}
-              </div>
+          {/* Footer */}
+          <div className="flex items-center justify-between mt-auto pt-2 border-t border-border/20 flex-wrap gap-2">
+            <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
+              {article.source && (
+                <span className="flex items-center gap-1">
+                  <Globe className="w-3 h-3" />
+                  {article.source}
+                </span>
+              )}
+              <a
+                href={article.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="flex items-center gap-1 text-primary/70 hover:text-primary font-medium transition-colors"
+              >
+                Read
+                <ExternalLink className="w-3 h-3" />
+              </a>
+              {scrapedDate && (
+                <span className="text-[10px] text-muted-foreground/50">{scrapedDate}</span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
+              <ArticleReactions
+                articleId={article.id}
+                reactionCounts={reactionCounts}
+                userReaction={userReaction}
+                flagCount={flagCount}
+                isFlagged={isFlagged}
+                onReact={onReact}
+                onFlag={onFlag}
+                compact
+              />
               <button
                 onClick={(e) => { e.stopPropagation(); onSelect(article); }}
-                className="flex items-center gap-1 text-[11px] text-muted-foreground rounded-full px-2 py-0.5 hover:text-primary hover:bg-primary/5 transition-colors"
+                className="flex items-center gap-1 rounded-full px-2 py-0.5 hover:text-primary hover:bg-primary/5 transition-colors"
               >
                 <MessageCircle className="w-3 h-3" />
                 {article.commentCount}
               </button>
             </div>
-            <ArticleReactions
-              articleId={article.id}
-              reactionCounts={article.reactionCounts ?? {}}
-              userReaction={userReaction}
-              flagCount={article.flagCount ?? 0}
-              isFlagged={isFlagged}
-              onReact={onReact}
-              onFlag={onFlag}
-              compact
-            />
           </div>
         </div>
       </div>

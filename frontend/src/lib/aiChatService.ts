@@ -6,7 +6,7 @@
  * Maintains a session-level conversation_id for context memory.
  */
 
-import type { AiChatResponse, ChatMessage } from "./types";
+import type { AiChatResponse, ChatMessage, MapCommand, ServiceCardData } from "./types";
 import { getDemoResponse } from "./demoResponses";
 
 interface ChatRequestBody {
@@ -54,12 +54,24 @@ export function aiResponseToChatMessage(ai: AiChatResponse): ChatMessage {
     content += `\n\n${ai.follow_up_question}`;
   }
 
+  const mapAction: MapCommand | undefined =
+    ai.map_commands && ai.map_commands.length > 0
+      ? ai.map_commands[0]
+      : undefined;
+
+  const serviceCards: ServiceCardData[] | undefined =
+    ai.source_items && ai.source_items.length > 0
+      ? ai.source_items
+      : undefined;
+
   return {
     id: Date.now().toString(),
     role: "assistant",
     content,
     type: "text",
     chips: ai.chips.length > 0 ? ai.chips : undefined,
+    mapAction,
+    serviceCards,
   };
 }
 

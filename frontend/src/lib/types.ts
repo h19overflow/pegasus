@@ -1,6 +1,6 @@
 export type FlowId = "U1" | "U2" | "U3" | "U4" | "U5" | "U6";
 export type Language = "EN" | "ES";
-export type AppView = "cv" | "services" | "profile" | "news" | "admin";
+export type AppView = "cv" | "services" | "profile" | "admin" | "news";
 export type MessageType =
   | "text"
   | "benefits-cliff"
@@ -50,6 +50,9 @@ export interface ChatMessage {
   processingSteps?: ProcessingStep[];
   mapAction?: MapCommand;
   hotspots?: PredictionHotspot[];
+  serviceCards?: ServiceCardData[];
+  serviceId?: string;
+  serviceTitle?: string;
 }
 
 export interface Artifact {
@@ -116,11 +119,26 @@ export interface CivicAction {
   distance?: string;
 }
 
+export interface ServiceCardData {
+  title: string;
+  description: string | null;
+  category: string | null;
+  phone: string | null;
+  address: string | null;
+  url: string | null;
+  hours: string | null;
+  wait_time: string | null;
+  what_to_bring: string[];
+  programs: string[];
+}
+
 export interface GuideMessage {
   id: string;
   role: "user" | "assistant";
   content: string;
   pinIds?: string[];
+  chips?: string[];
+  serviceCards?: ServiceCardData[];
 }
 
 export interface JobSkills {
@@ -253,6 +271,38 @@ export interface CitizenMeta {
   civicData: CitizenCivicData;
 }
 
+/* ── Roadmap ──────────────────────────────────────────── */
+export interface RoadmapLocation {
+  name: string;
+  address: string;
+  hours?: string;
+  phone?: string | null;
+}
+
+export interface RoadmapStep {
+  id: string;
+  stepNumber: number;
+  title: string;
+  action: string;
+  documents: string[];
+  location?: RoadmapLocation | null;
+  estimatedTime: string;
+  proTip?: string | null;
+  canDoOnline: boolean;
+  onlineUrl?: string | null;
+}
+
+export interface PersonalizedRoadmap {
+  id: string;
+  serviceId: string;
+  serviceTitle: string;
+  serviceCategory: string;
+  eligibilityNote: string;
+  totalEstimatedTime: string;
+  steps: RoadmapStep[];
+  generatedAt: string;
+}
+
 export interface AppState {
   messages: ChatMessage[];
   language: Language;
@@ -285,17 +335,20 @@ export interface AppState {
   newsCategory: NewsCategory;
   newsComments: NewsComment[];
   likedArticleIds: string[];
-  articleReactions: Record<string, string>;
-  flaggedArticleIds: string[];
   selectedArticleId: string | null;
   newsMapVisible: boolean;
   newsMapMode: "pins" | "heat";
   newsReactions: Record<string, Record<ReactionType, number>>;
   userReactions: Record<string, ReactionType>;
+  articleReactions: Record<string, string>;
+  flaggedArticleIds: string[];
   chatBubbleOpen: boolean;
   chatBubbleHasUnread: boolean;
   mapCommand: MapCommand | null;
+  guidePendingMessage: string | null;
   housingListings: HousingListing[];
+  activeRoadmap: PersonalizedRoadmap | null;
+  roadmapCompletedStepIds: string[];
 }
 
 /* ── Neighborhood Activity ────────────────────────────── */
@@ -396,8 +449,9 @@ export interface AiChatResponse {
   extracted_entities: Record<string, string | null>;
   follow_up_question: string | null;
   suggested_actions: { label: string; action_type: string; url?: string }[];
-  source_items: { title: string; description: string; url?: string; category?: string }[];
+  source_items: ServiceCardData[];
   map_highlights: { lat: number; lng: number; label: string; category?: string }[];
+  map_commands?: MapCommand[];
   chips: string[];
   answer_summary: string | null;
   reasoning_notes: string | null;
