@@ -1,9 +1,9 @@
 {
-  "analyzed_at": "2026-03-07T14:53:37.259284+00:00",
+  "analyzed_at": "2026-03-07T17:13:07.646659+00:00",
   "model_version": "gemini-3.1-flash-lite-preview",
   "prompt_version": "v1.0",
   "total_articles": 55,
-  "total_comments": 168,
+  "total_comments": 169,
   "articles": [
     {
       "article_id": "4274413fe29f",
@@ -569,7 +569,7 @@
       "article_confidence": 0.85,
       "sentiment_breakdown": {
         "positive": 2,
-        "neutral": 1,
+        "neutral": 2,
         "negative": 1
       },
       "comments": [
@@ -588,7 +588,7 @@
           "sentiment": "neutral",
           "confidence": 0.9,
           "topics": [
-            "consumer choice"
+            "consumer preference"
           ],
           "flagged": false
         },
@@ -610,6 +610,15 @@
             "urban planning"
           ],
           "flagged": false
+        },
+        {
+          "comment_id": "cmt-1772903461050",
+          "sentiment": "positive",
+          "confidence": 0.8,
+          "topics": [
+            "consumer preference"
+          ],
+          "flagged": false
         }
       ],
       "topic_clusters": [
@@ -617,20 +626,20 @@
         "traffic congestion",
         "urban planning"
       ],
-      "admin_summary": "Residents are generally pleased with the economic growth and new business options in the Eastchase and Atlanta Highway corridors. However, there is significant concern regarding the impact of high-traffic drive-thru businesses on existing road congestion. Addressing these infrastructure pressures is essential to maintaining public support for new commercial developments.",
+      "admin_summary": "Residents are generally pleased with the economic growth and new business options in the Eastchase and Atlanta Highway areas. However, there is a specific concern regarding the impact of high-traffic drive-thru businesses on existing road congestion. Balancing commercial expansion with infrastructure capacity remains a key point of interest for citizens.",
       "urgent_concerns": [
         "Traffic congestion at the Atlanta Highway intersection"
       ],
       "recommendations": [
         {
-          "action": "Conduct a traffic impact study for the Atlanta Highway corridor.",
+          "action": "Conduct a traffic impact study at the Atlanta Highway intersection.",
           "priority": "high",
-          "rationale": "One of four comments explicitly identified the intersection as a 'nightmare,' indicating that current traffic management may be insufficient for new commercial density."
+          "rationale": "One of five comments explicitly identified the new drive-thru as a contributor to existing traffic nightmares, indicating a potential safety and congestion issue."
         },
         {
           "action": "Review zoning and site plan approval processes for high-volume drive-thru businesses.",
           "priority": "medium",
-          "rationale": "Citizen feedback suggests that residents are concerned about poor planning decisions regarding traffic flow, necessitating a more rigorous review of future site plans."
+          "rationale": "Citizen feedback suggests that residents are concerned about the long-term impact of commercial planning on local traffic flow."
         }
       ]
     },

@@ -1679,6 +1679,16 @@
       "avatarColor": "#6b7280",
       "content": "Seems legit",
       "createdAt": "2026-03-07T13:29:49.811Z"
+    },
+    {
+      "id": "cmt-1772903461050",
+      "articleId": "013ba6547784",
+      "citizenId": "guest",
+      "citizenName": "Resident",
+      "avatarInitials": "R",
+      "avatarColor": "#6b7280",
+      "content": "Nice coff",
+      "createdAt": "2026-03-07T17:11:01.050Z"
     }
   ]
 }

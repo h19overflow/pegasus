@@ -1,6 +1,6 @@
-import { Layers, TrendingUp, Newspaper, UserCircle } from "lucide-react";
+import { Layers, LayoutDashboard, Newspaper, UserCircle } from "lucide-react";
 
-export type MobileTab = "services" | "cv" | "news" | "profile";
+export type MobileTab = "services" | "admin" | "news" | "profile";
 
 interface AppNavProps {
   activeTab: MobileTab;
@@ -26,7 +26,7 @@ export const AppNav = ({ activeTab, onTabChange, actionItemCount }: AppNavProps)
   const tabs: TabConfig[] = [
     { id: "services", label: "Services", icon: Layers, badgeCount: actionItemCount },
     { id: "news", label: "News", icon: Newspaper },
-    { id: "cv", label: "Career", icon: TrendingUp },
+    { id: "admin", label: "Admin", icon: LayoutDashboard },
     { id: "profile", label: "Profile", icon: UserCircle },
   ];
 

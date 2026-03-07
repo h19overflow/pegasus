@@ -19,7 +19,7 @@ function GuideBubble({
   return (
     <div className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}>
       <div
-        className={`max-w-[85%] rounded-lg px-3 py-2 text-xs leading-relaxed ${
+        className={`max-w-[85%] rounded-lg px-3 py-2 text-xs leading-relaxed overflow-hidden break-words ${
           isUser
             ? "bg-primary text-primary-foreground"
             : "bg-muted text-foreground"
@@ -52,7 +52,7 @@ function GuideBubble({
         )}
       </div>
       {!isUser && message.serviceCards && message.serviceCards.length > 0 && (
-        <div className="mt-2 max-w-[90%] space-y-2">
+        <div className="mt-2 max-w-[90%] space-y-2 overflow-hidden">
           {message.serviceCards.map((card, i) => (
             <ServiceCard key={`${card.title}-${i}`} card={card} />
           ))}

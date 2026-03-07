@@ -5,10 +5,9 @@ import { loadStoredComments } from "@/lib/newsCommentStore";
 import { runMisinfoAnalysis } from "@/lib/misinfo/misinfoService";
 import { NewsCard } from "./NewsCard";
 import { NewsDetail } from "./NewsDetail";
-import { HeroArticle } from "./HeroArticle";
 import { NewsletterHeader } from "./NewsletterHeader";
 import { NewsMapPreview } from "./NewsMapPreview";
-import { buildArticleCountsPerCategory, sortArticles, filterBySearch, selectHeroArticle } from "./newsletterHelpers";
+import { buildArticleCountsPerCategory, sortArticles, filterBySearch } from "./newsletterHelpers";
 import type { SortMode } from "./newsletterHelpers";
 import { MapPin, Newspaper } from "lucide-react";
 
@@ -23,10 +22,6 @@ async function loadNewsComments(dispatch: (action: { type: string; comments: imp
   if (merged.length > 0) {
     dispatch({ type: "SET_NEWS_COMMENTS", comments: merged });
   }
-}
-
-function SkeletonHero() {
-  return <div className="animate-pulse rounded-2xl bg-muted h-[280px] w-full" />;
 }
 
 function SkeletonCard() {
@@ -121,9 +116,6 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
       )
     : afterSearch;
   const visibleArticles = sortArticles(afterFlagged, sortMode, state.newsComments);
-  const hero = selectHeroArticle(visibleArticles);
-  const gridArticles = hero ? visibleArticles.filter((a) => a.id !== hero.id) : visibleArticles;
-  const midpoint = Math.ceil(gridArticles.length / 2);
   const isLoading = state.newsLoading && state.newsArticles.length === 0;
 
   return (
@@ -142,8 +134,8 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
       <div className="flex-1 overflow-y-auto">
         {isLoading ? (
           <div className="p-5 space-y-4">
-            <SkeletonHero />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="animate-pulse rounded-2xl bg-muted h-[160px] w-full" />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
             </div>
           </div>
@@ -154,52 +146,31 @@ export function NewsletterTab({ onShowMap }: NewsletterTabProps) {
           </div>
         ) : (
           <div className="p-5 space-y-5">
-            {hero && (
-              <HeroArticle article={hero} onSelect={(a) => dispatch({ type: "SET_SELECTED_ARTICLE", articleId: a.id })} />
+            {onShowMap && (
+              <div className="flex flex-col gap-1.5">
+                <NewsMapPreview onShowMap={onShowMap} />
+                <p className="flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground/70 font-medium">
+                  <MapPin className="w-3 h-3" />
+                  Tap the map to explore news locations
+                </p>
+              </div>
             )}
-            {gridArticles.length > 0 && (
+            {visibleArticles.length > 0 && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-4">
-                  {gridArticles.slice(0, midpoint).map((article) => (
-                    <NewsCard
-                      key={article.id}
-                      article={article}
-                      reactionCounts={article.reactionCounts ?? {}}
-                      userReaction={state.articleReactions[article.id] ?? null}
-                      flagCount={article.flagCount ?? 0}
-                      isFlagged={state.flaggedArticleIds.includes(article.id)}
-                      commentCount={article.commentCount + (liveCommentCounts.get(article.id) ?? 0)}
-                      onSelect={(a) => dispatch({ type: "SET_SELECTED_ARTICLE", articleId: a.id })}
-                      onReact={handleReact}
-                      onFlag={handleFlag}
-                    />
-                  ))}
-                </div>
-                <div className="flex flex-col gap-4">
-                  {onShowMap && (
-                    <div className="flex flex-col gap-1.5">
-                      <NewsMapPreview onShowMap={onShowMap} />
-                      <p className="flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground/70 font-medium">
-                        <MapPin className="w-3 h-3" />
-                        Tap the map to explore news locations
-                      </p>
-                    </div>
-                  )}
-                  {gridArticles.slice(midpoint).map((article) => (
-                    <NewsCard
-                      key={article.id}
-                      article={article}
-                      reactionCounts={article.reactionCounts ?? {}}
-                      userReaction={state.articleReactions[article.id] ?? null}
-                      flagCount={article.flagCount ?? 0}
-                      isFlagged={state.flaggedArticleIds.includes(article.id)}
-                      commentCount={article.commentCount + (liveCommentCounts.get(article.id) ?? 0)}
-                      onSelect={(a) => dispatch({ type: "SET_SELECTED_ARTICLE", articleId: a.id })}
-                      onReact={handleReact}
-                      onFlag={handleFlag}
-                    />
-                  ))}
-                </div>
+                {visibleArticles.map((article) => (
+                  <NewsCard
+                    key={article.id}
+                    article={article}
+                    reactionCounts={article.reactionCounts ?? {}}
+                    userReaction={state.articleReactions[article.id] ?? null}
+                    flagCount={article.flagCount ?? 0}
+                    isFlagged={state.flaggedArticleIds.includes(article.id)}
+                    commentCount={article.commentCount + (liveCommentCounts.get(article.id) ?? 0)}
+                    onSelect={(a) => dispatch({ type: "SET_SELECTED_ARTICLE", articleId: a.id })}
+                    onReact={handleReact}
+                    onFlag={handleFlag}
+                  />
+                ))}
               </div>
             )}
           </div>

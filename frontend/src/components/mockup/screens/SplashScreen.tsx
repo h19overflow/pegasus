@@ -1,4 +1,4 @@
-import capitolDome from "@/assets/capitol-dome.png";
+import citysenseLogo from "@/assets/citysense-logo.png";
 import skyline from "@/assets/montgomery-skyline.png";
 
 const SplashScreen = () => (
@@ -13,8 +13,8 @@ const SplashScreen = () => (
 
     {/* Center content */}
     <div className="flex flex-col items-center gap-6 flex-1 justify-center px-8">
-      <img src={capitolDome} alt="Capitol Dome" className="w-24 h-24 object-contain brightness-200" />
-      <h1 className="text-primary-foreground text-3xl font-bold tracking-tight">MontgomeryAI</h1>
+      <img src={citysenseLogo} alt="CitySense" className="w-24 h-24 object-contain" />
+      <h1 className="text-primary-foreground text-3xl font-bold tracking-tight">CitySense</h1>
       <p className="text-primary-foreground/80 text-base text-center leading-relaxed">
         Your life. Your benefits. Your career.<br />
         Montgomery, AL.
