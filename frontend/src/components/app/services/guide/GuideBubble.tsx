@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { MapPin } from "lucide-react";
 import { ServiceCard } from "../ServiceCard";
 import type { GuideMessage } from "@/lib/types";
@@ -8,15 +9,19 @@ interface GuideBubbleProps {
   onChipClick: (text: string) => void;
 }
 
+function renderBoldSegments(line: string): ReactNode {
+  const parts = line.split(/\*\*(.+?)\*\*/g);
+  return parts.map((part, i) =>
+    i % 2 === 1 ? <strong key={i}>{part}</strong> : part
+  );
+}
+
 function renderMessageLine(line: string, index: number) {
   if (line === "---") return <hr key={index} className="my-2 border-border/40" />;
-  const bold = line.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   return (
-    <p
-      key={index}
-      className={line === "" ? "h-1.5" : ""}
-      dangerouslySetInnerHTML={{ __html: bold }}
-    />
+    <p key={index} className={line === "" ? "h-1.5" : ""}>
+      {renderBoldSegments(line)}
+    </p>
   );
 }
 
