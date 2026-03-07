@@ -5,10 +5,12 @@ import { ArticleReactions } from "./ArticleReactions";
 
 interface NewsCardProps {
   article: NewsArticle;
-  userReaction: string | undefined;
+  reactionCounts: Record<string, number>;
+  userReaction: string | null;
+  flagCount: number;
   isFlagged: boolean;
   onSelect: (article: NewsArticle) => void;
-  onReact: (articleId: string, emoji: string) => void;
+  onReact: (articleId: string, emoji: string | null) => void;
   onFlag: (articleId: string) => void;
 }
 
@@ -66,7 +68,7 @@ function MisinfoRiskBadge({ risk }: { risk: number }) {
   return null;
 }
 
-export function NewsCard({ article, userReaction, isFlagged, onSelect, onReact, onFlag }: NewsCardProps) {
+export function NewsCard({ article, reactionCounts, userReaction, flagCount, isFlagged, onSelect, onReact, onFlag }: NewsCardProps) {
   const scrapedDate = formatScrapedDate(article.scrapedAt);
 
   return (
@@ -147,10 +149,13 @@ export function NewsCard({ article, userReaction, isFlagged, onSelect, onReact, 
             <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
               <ArticleReactions
                 articleId={article.id}
+                reactionCounts={reactionCounts}
                 userReaction={userReaction}
+                flagCount={flagCount}
                 isFlagged={isFlagged}
                 onReact={onReact}
                 onFlag={onFlag}
+                compact
               />
               <button
                 onClick={(e) => { e.stopPropagation(); onSelect(article); }}
