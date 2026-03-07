@@ -73,6 +73,9 @@ type AppAction =
   | { type: "TOGGLE_NEWS_MAP" }
   | { type: "SET_NEWS_MAP_MODE"; mode: "pins" | "heat" }
   | { type: "SET_ARTICLE_REACTION"; articleId: string; reaction: ReactionType }
+  | { type: "SET_EMOJI_REACTION"; articleId: string; emoji: string }
+  | { type: "TOGGLE_ARTICLE_FLAG"; articleId: string }
+  | { type: "UPDATE_MISINFO_SCORES"; scores: { articleId: string; risk: number; reason: string }[] }
   | { type: "SET_NEWS_COMMENTS"; comments: NewsComment[] }
   | { type: "SET_MAP_COMMAND"; command: MapCommand }
   | { type: "CLEAR_MAP_COMMAND" }
@@ -116,6 +119,8 @@ const initialState: AppState = {
   newsMapMode: "pins" as const,
   newsReactions: {},
   userReactions: {},
+  articleReactions: {},
+  flaggedArticleIds: [],
   chatBubbleOpen: false,
   chatBubbleHasUnread: false,
   mapCommand: null,
@@ -297,6 +302,39 @@ function appReducer(state: AppState, action: AppAction): AppState {
         userReactions: { ...state.userReactions, [action.articleId]: action.reaction },
       };
     }
+    case "SET_EMOJI_REACTION": {
+      const prev = state.articleReactions[action.articleId];
+      if (prev === action.emoji) {
+        const { [action.articleId]: _, ...rest } = state.articleReactions;
+        return { ...state, articleReactions: rest };
+      }
+      return {
+        ...state,
+        articleReactions: { ...state.articleReactions, [action.articleId]: action.emoji },
+      };
+    }
+    case "TOGGLE_ARTICLE_FLAG": {
+      const wasFlagged = state.flaggedArticleIds.includes(action.articleId);
+      return {
+        ...state,
+        flaggedArticleIds: wasFlagged
+          ? state.flaggedArticleIds.filter((id) => id !== action.articleId)
+          : [...state.flaggedArticleIds, action.articleId],
+        newsArticles: state.newsArticles.map((a) =>
+          a.id === action.articleId
+            ? { ...a, flagCount: (a.flagCount ?? 0) + (wasFlagged ? -1 : 1) }
+            : a,
+        ),
+      };
+    }
+    case "UPDATE_MISINFO_SCORES":
+      return {
+        ...state,
+        newsArticles: state.newsArticles.map((a) => {
+          const score = action.scores.find((s) => s.articleId === a.id);
+          return score ? { ...a, misinfoRisk: score.risk, misinfoReason: score.reason } : a;
+        }),
+      };
     case "SET_MAP_COMMAND":
       return { ...state, mapCommand: action.command };
     case "CLEAR_MAP_COMMAND":

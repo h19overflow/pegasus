@@ -306,6 +306,8 @@ export interface AppState {
   newsMapMode: "pins" | "heat";
   newsReactions: Record<string, Record<ReactionType, number>>;
   userReactions: Record<string, ReactionType>;
+  articleReactions: Record<string, string>;
+  flaggedArticleIds: string[];
   chatBubbleOpen: boolean;
   chatBubbleHasUnread: boolean;
   mapCommand: MapCommand | null;
@@ -354,6 +356,9 @@ export interface NewsArticle {
   sentimentScore?: number;
   summary?: string;
   misinfoRisk?: number;
+  misinfoReason?: string;
+  reactionCounts?: Record<string, number>;
+  flagCount?: number;
   location?: NewsLocation | null;
   communitySentiment?: "positive" | "negative" | "neutral";
   communityConfidence?: number;
