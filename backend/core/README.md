@@ -1,258 +1,388 @@
-# Core Module
+# Core Infrastructure Layer
 
-The core module provides the foundational building blocks for Pegasus: API clients for external services, scraping pipeline orchestration, data enrichment rules, and real-time event broadcasting.
+Core modules that power data collection, processing, and real-time delivery in Pegasus. This layer orchestrates scraping, sentiment analysis, and live event broadcasting to the frontend.
 
 ## Overview
 
-Four main concerns are handled here:
-
-1. **External APIs** — Bright Data scraper and search clients for jobs, news, housing, and SERP queries
-2. **Pipeline Orchestration** — Async scheduler that triggers scrapers on interval and feeds results through processors
-3. **Data Transformation** — Payloads, eligibility rules, and sentiment analysis rules for enriching raw data
-4. **Real-time Broadcasting** — SSE event queue for pushing live data to connected frontend clients
-
-## Architecture
-
-```mermaid
-graph TD
-    Schedule["Scheduler (scrape_scheduler)"]:::schedule
-
-    Jobs["Jobs Scraper"]:::external
-    News["News Scraper<br/>(SERP + Web Unlocker)"]:::external
-    Housing["Housing Scraper<br/>(Zillow)"]:::external
-    Benefits["Benefits Scraper"]:::external
-
-    BrightData["Bright Data Client<br/>(trigger → poll → fetch)"]:::api
-    GeoService["Civic Services<br/>(geocoding + GeoJSON)"]:::transform
-    BGrowth["Business Growth<br/>(ArcGIS query)"]:::transform
-
-    Sentiment["Sentiment Rules<br/>(keyword-based scoring)"]:::transform
-    Payloads["Payloads<br/>(job keywords, news queries)"]:::config
-
-    Broadcast["SSE Broadcaster<br/>(queues + async gen)"]:::broadcast
-    Frontend["Frontend<br/>(receives live events)"]:::consumer
-
-    Processors["Processors Layer<br/>(process_jobs, process_news, etc)"]:::hidden
-
-    Schedule -->|runs| Jobs
-    Schedule -->|runs| News
-    Schedule -->|runs| Housing
-    Schedule -->|runs| Benefits
-
-    Jobs --> BrightData
-    News --> BrightData
-    Housing --> BrightData
-    Benefits --> BrightData
-
-    Jobs --> Payloads
-    News --> Payloads
-
-    News --> Sentiment
-    News --> GeoService
-    Benefits --> GeoService
-
-    Jobs --> Processors
-    News --> Processors
-    Housing --> Processors
-    Benefits --> Processors
-
-    Processors --> Broadcast
-    Broadcast --> Frontend
-
-    classDef schedule fill:#4A90E2,stroke:#333,stroke-width:2px,color:#fff
-    classDef external fill:#F5A623,stroke:#333,stroke-width:2px,color:#fff
-    classDef api fill:#50E3C2,stroke:#333,stroke-width:2px,color:#fff
-    classDef transform fill:#BD10E0,stroke:#333,stroke-width:2px,color:#fff
-    classDef config fill:#7ED321,stroke:#333,stroke-width:2px,color:#333
-    classDef broadcast fill:#9B59B6,stroke:#333,stroke-width:2px,color:#fff
-    classDef consumer fill:#E74C3C,stroke:#333,stroke-width:2px,color:#fff
-    classDef hidden fill:#ccc,stroke:#333,stroke-width:1px,color:#333,opacity:0.6
-```
-
-## Files
-
-| File | Purpose |
-|------|---------|
-| `bright_data_client.py` | Official Bright Data SDK wrapper — Web Scraper API (trigger/poll), SERP search, and single-page fetcher |
-| `scrape_scheduler.py` | Async scheduler that runs jobs, news, housing, and benefits scrapers on interval in thread pool |
-| `payloads.py` | Job keywords, news queries, benefit targets, and skill categories that drive scraping |
-| `sentiment_rules.py` | Keyword lists and patterns for sentiment scoring and clickbait detection on news articles |
-| `build_business_growth.py` | CLI script that queries Montgomery ArcGIS Construction Permits and aggregates into `business_growth.json` |
-| `build_civic_services_geojson.py` | CLI script that geocodes civic services (benefits, healthcare, food) and builds searchable GeoJSON |
-| `sse_broadcaster.py` | In-memory SSE event queue — clients register, broadcast_event pushes to all queues |
-| `__init__.py` | Empty module initialization |
-
-## Key Concepts
-
-### Bright Data Client (`bright_data_client.py`)
-
-Wraps the official `brightdata` SDK with three workflows:
-
-- **Web Scraper API**: `trigger_and_collect()` → trigger a dataset, poll until snapshot ready, download results
-- **SERP API**: `serp_search()` and `serp_maps_search()` → Google News and Maps via WebUnlocker
-- **Page Fetcher**: `fetch_with_unlocker()` → single URL crawl to markdown/HTML
-
-All functions use `_run_async()` to safely execute async code from sync contexts (thread pool calls).
-
-### Scrape Scheduler (`scrape_scheduler.py`)
-
-Runs on startup and repeats every `SCRAPE_INTERVAL_SECONDS` (default 900s / 15 min):
-
-1. Spawns 4 streams in parallel (jobs, news, housing, benefits)
-2. Each runs synchronously in a thread to avoid blocking the event loop
-3. Results are processed, saved to disk, and broadcast via SSE to all connected clients
-
-#### Community Sentiment Analysis Flow
-
-After each news scrape, the scheduler chains AI comment analysis to determine how citizens feel about news topics. This produces a **two-layer sentiment model**:
-
-- **Pin color** = article sentiment (rule-based keyword scoring, unchanged)
-- **Community badge** = AI-analyzed comment sentiment (only on articles with comments)
-
-```
-Citizen posts comment → POST /api/comments → exported_comments.json
-                                                ↓
-Scrape cycle completes → save_news_articles() → _run_comment_analysis()
-                                                ↓
-                                run_batch_analysis(articles_with_comments, comments)
-                                  (Gemini LLM via LangChain structured output)
-                                                ↓
-                                merge results → news_feed.json gets community fields:
-                                  communitySentiment, communityConfidence,
-                                  sentimentBreakdown, communitySummary, urgentConcerns
-                                                ↓
-                                broadcast SSE "news_sentiment"
-                                  → frontend re-fetches news_feed.json
-                                  → map re-renders with community badges
-```
-
-Key design decisions:
-
-- **localStorage stays the UX source of truth** — the `POST /api/comments` is fire-and-forget so commenting never feels slow
-- **Analysis runs after each scrape**, not after each comment — batching is cheaper and avoids hammering the LLM
-- **Existing `sentiment` field is untouched** — the new `communitySentiment` fields sit alongside it so nothing breaks
-- **`asyncio.run()` is safe** from the ThreadPoolExecutor thread (no running event loop in that context)
-
-### Payloads (`payloads.py`)
-
-Data-heavy constants that feed the scraping pipelines:
-
-- `JOB_SCRAPERS`: 3 job boards × 10–15 keywords each = diverse discovery
-- `NEWS_QUERIES`: 22 search queries across 5 categories (general, development, government, events, community)
-- `BENEFITS_TARGETS`: URLs for live benefit page scraping
-- `SKILL_CATEGORIES`: Job skill taxonomy (education, technical, healthcare, soft skills, etc.)
-
-### Sentiment & Enrichment (`sentiment_rules.py`)
-
-Rule-based scoring on article metadata:
-
-- `score_sentiment()` → counts positive/negative keywords → returns (label, confidence)
-- `score_misinfo_risk()` → matches clickbait regex patterns → 0–100 risk score
-- `build_summary()` → strips "BREAKING:", "ALERT:", etc. from titles
-
-### GeoJSON Builders
-
-**`build_civic_services_geojson.py`** — Geocodes 30+ services (benefits, healthcare, food, government, housing) using Nominatim with rate limiting, outputs `civic_services.geojson`.
-
-**`build_business_growth.py`** — Queries Montgomery ArcGIS Construction Permits layer, aggregates by month and type, saves `business_growth.json` with 6-month trends and commercial ratio.
-
-### SSE Broadcaster (`sse_broadcaster.py`)
-
-Maintains in-memory registry of connected client queues. `broadcast_event()` is non-blocking:
-
-```python
-def broadcast_event(event_type: str, data: list | dict) -> None:
-    payload = json.dumps({"type": event_type, "data": data})
-    for queue in _client_queues:
-        queue.put_nowait(payload)  # drop if queue full
-```
-
-Clients consume via `stream_events(queue)` async generator.
-
-## Usage
-
-### Running the Scheduler
-
-```python
-from backend.core.scrape_scheduler import start_scheduled_scraping
-import asyncio
-
-asyncio.run(start_scheduled_scraping())
-```
-
-Typically run as a background task in the FastAPI app.
-
-### Scraping Manually
-
-```python
-from backend.core.bright_data_client import trigger_and_collect
-from backend.core.payloads import JOB_SCRAPERS
-
-scraper = JOB_SCRAPERS[0]  # Indeed
-results = trigger_and_collect(
-    dataset_id=scraper["dataset_id"],
-    payload=scraper["payload"],
-    params=scraper["params"],
-)
-```
-
-### Building Civic Services GeoJSON
-
-```bash
-python backend/core/build_civic_services_geojson.py
-```
-
-Output: `scripts/civic_services.geojson`
-
-### Building Business Growth Data
-
-```bash
-python backend/core/build_business_growth.py
-# or with --dry-run to print JSON instead of writing
-python backend/core/build_business_growth.py --dry-run
-```
-
-Output: `frontend/public/data/business_growth.json`
-
-### Broadcasting Events
-
-```python
-from backend.core.sse_broadcaster import broadcast_event, create_client_queue
-
-# Client connects
-queue = create_client_queue()
-
-# Data arrives
-broadcast_event("jobs", feature_list)
-
-# Frontend receives via SSE stream
-async for event in stream_events(queue):
-    yield event
-```
-
-## Error Handling
-
-- **Bright Data client** — returns `None` or `[]` on failure; logs errors
-- **Scheduler** — logs failures per stream, continues on next interval
-- **GeoJSON builders** — logs missing coordinates; skips ungeocodable services
-- **SSE broadcaster** — drops events for slow clients (queue full)
-
-## Configuration
-
-Environment variables:
-
-- `SCRAPE_INTERVAL` — Seconds between scrape runs (default: 900)
-- `BRIGHTDATA_API_KEY` — Retrieved from `backend.config.get_api_key()`
-- `SERP_ZONE` — Bright Data SERP zone ID
-- `DATASETS` — Dict of dataset IDs (from `backend.config.DATASETS`)
-
-## Dependencies
-
-- `brightdata>=0.4` — Official Bright Data SDK
-- `requests` — HTTP client for fallback SERP queries
-- `asyncio` — Async concurrency
-- Standard library: `json`, `re`, `urllib`, `logging`
+The core layer manages four critical functions:
+
+1. **Data Collection** — Bright Data API integration for web scraping, SERP searches, and page fetching
+2. **Scheduling** — Background task runner that triggers scrapes every 15 minutes for jobs, news, housing, and benefits
+3. **Real-Time Delivery** — Server-Sent Events (SSE) broadcaster that pushes live data updates to connected frontend clients
+4. **Sentiment Analysis** — Rule-based keyword matching for news article sentiment and misinformation risk scoring
+
+## Module Reference
+
+| Module | Purpose | Key Functions |
+|--------|---------|---|
+| `bright_data_client.py` | Bright Data SDK wrapper for web scraping & SERP searches | `trigger_and_collect()`, `trigger_scraper()`, `poll_snapshot()`, `fetch_with_unlocker()`, `serp_search()`, `serp_maps_search()` |
+| `scrape_scheduler.py` | Background scheduler — runs all scrape streams on startup & every 15 min | `start_scheduled_scraping()`, `run_all_streams()`, `_run_jobs_scrape()`, `_run_news_scrape()`, `_run_housing_scrape()`, `_run_benefits_scrape()` |
+| `sse_broadcaster.py` | In-memory SSE queue manager for pushing real-time events to frontend | `create_client_queue()`, `broadcast_event()`, `broadcast_event_threadsafe()`, `stream_events()` |
+| `sentiment_rules.py` | Rule-based sentiment & misinformation scoring for news articles | `score_sentiment()`, `score_misinfo_risk()`, `build_summary()` |
+| `redis_client.py` | Optional Redis caching for roadmap generation (fails open) | `RedisCache` singleton with `fetch()`, `store()`, `delete()` methods |
+| `exceptions.py` | Application error hierarchy — base exception + domain-specific types | `AppException`, `ValidationError`, `NotFoundError`, `ConflictError`, `AuthError`, `ExternalServiceError` |
 
 ---
 
-See `backend/processors/` and `backend/triggers/` for downstream processing pipelines.
+## Architecture
+
+### Bright Data Client
+
+Thin wrapper around the Bright Data SDK for three scraping modes:
+
+```mermaid
+graph TD
+    A["Bright Data Client"]:::api
+    A -->|Web Scraper API| B["trigger_and_collect<br/>Sync trigger + poll"]
+    A -->|Web Scraper API| C["trigger_scraper<br/>Async trigger only"]
+    A -->|Web Scraper API| D["poll_snapshot<br/>Poll existing job"]
+    A -->|Page Fetcher| E["fetch_with_unlocker<br/>Single URL crawl"]
+    A -->|SERP API| F["serp_search<br/>Google search"]
+    A -->|SERP API| G["serp_maps_search<br/>Google Maps search"]
+
+    B -->|SDK BrightdataEngine| H["Bright Data<br/>Platform"]
+    C -->|SDK BrightdataEngine| H
+    D -->|SDK BrightdataEngine| H
+    E -->|SDK crawl_single_url| H
+    F -->|WebUnlocker + SERP zone| H
+    G -->|WebUnlocker + SERP zone| H
+
+    H -->|Results| I["List of dicts<br/>with raw data"]
+
+    classDef api fill:#F5A623,stroke:#333,stroke-width:2px,color:#000
+    classDef service fill:#BD10E0,stroke:#333,stroke-width:2px,color:#fff
+```
+
+**Key Design:**
+
+- Uses SDK `BrightdataEngine.trigger()` for Web Scraper API (dataset-based scraping)
+- Falls back to `WebUnlocker` for SERP queries with configurable zones
+- Synchronous `_run_async()` wrapper converts async SDK calls to sync (needed for ThreadPoolExecutor context)
+- Thread-safe and handles both JSON and HTML SERP responses
+
+**Configuration** (from `config.py:39-46`):
+
+```python
+DATASETS = {
+    "indeed": "gd_l4dx9j9sscpvs7no2",
+    "linkedin": "gd_lpfll7v5hcqtkxl6l",
+    "glassdoor_jobs": "gd_lpfbbndm1xnopbrcr0",
+    "glassdoor_reviews": "gd_l7j1po0921hbu0ri1z",
+    "zillow": "gd_lfqkr8wm13ixtbd8f5",
+    "crawl": "gd_m6gjtfmeh43we6cqc",
+}
+```
+
+### Scrape Scheduler
+
+Background task runner that orchestrates all data collection streams. Runs inside the webhook FastAPI server as an async task.
+
+```mermaid
+sequenceDiagram
+    participant Startup as App Startup
+    participant Scheduler as Scrape Scheduler
+    participant ThreadPool as ThreadPoolExecutor
+    participant BrightData as Bright Data API
+    participant Processors as Processors
+    participant SSE as SSE Broadcaster
+    participant Frontend as Frontend
+
+    Startup->>Scheduler: start_scheduled_scraping()
+    Scheduler->>Scheduler: Trigger all 4 streams immediately
+
+    loop Every 15 minutes (900s)
+        Scheduler->>ThreadPool: Submit 4 async tasks
+
+        par Jobs Stream
+            ThreadPool->>BrightData: trigger_and_collect(jobs dataset)
+            BrightData-->>ThreadPool: Raw job listings
+            ThreadPool->>Processors: process_jobs()
+            Processors->>Processors: Validate, geocode, deduplicate
+            Processors->>SSE: broadcast_event("jobs", features)
+        and News Stream
+            ThreadPool->>BrightData: serp_search() for news
+            BrightData-->>ThreadPool: SERP results
+            ThreadPool->>Processors: enrich_article(), geocode_articles()
+            Processors->>Processors: Deduplicate, analyze sentiment
+            Processors->>SSE: broadcast_event("news", articles)
+        and Housing Stream
+            ThreadPool->>BrightData: trigger_and_collect(zillow dataset)
+            BrightData-->>ThreadPool: Zillow listings
+            ThreadPool->>Processors: process_zillow_listings()
+            Processors->>SSE: broadcast_event("housing", features)
+        and Benefits Stream
+            ThreadPool->>BrightData: fetch_with_unlocker(benefit URLs)
+            BrightData-->>ThreadPool: Scraped pages
+            ThreadPool->>Processors: parse benefit pages
+            Processors->>SSE: broadcast_event("benefits", services)
+        end
+
+        SSE->>Frontend: Push live GeoJSON + metadata
+        Scheduler->>Scheduler: Sleep 15 minutes
+    end
+```
+
+**Key Characteristics:**
+
+- Runs on startup and repeats every 900 seconds (configurable via `SCRAPE_INTERVAL`)
+- Uses `ThreadPoolExecutor` with 2 workers to avoid blocking the async event loop
+- Each stream (jobs, news, housing, benefits) runs in parallel
+- Results flow through a standard pipeline: raw data → validation → geocoding → deduplication → database save → SSE broadcast
+- Handles comment analysis as a chained task after news is processed
+- Logs structured timestamps and item counts for observability
+
+**Configuration** (from `scrape_scheduler.py:24`):
+
+```python
+SCRAPE_INTERVAL_SECONDS = int(os.environ.get("SCRAPE_INTERVAL", "900"))
+```
+
+---
+
+### SSE Broadcaster
+
+In-memory queue-based system for pushing real-time updates to connected frontend clients.
+
+```mermaid
+graph TD
+    A["Frontend<br/>Connect"]:::ui -->|SSE /events| B["create_client_queue()"]
+    B -->|Register queue| C["Global _client_queues<br/>set of asyncio.Queue"]
+    B -->|Capture| D["_event_loop<br/>running loop ref"]
+
+    E["Scrape Result<br/>in ThreadPool"]:::service -->|broadcast_event_threadsafe| F["Check _event_loop"]
+    F -->|Is running?| G["call_soon_threadsafe()"]
+    G -->|Schedule on loop| H["_put_to_all_queues()"]
+    H -->|put_nowait| C
+    C -->|Async generator| I["stream_events()"]
+    I -->|JSON SSE format| J["data: {type, data}<br/>-- newline --"]
+    J -->|Network push| A
+
+    K["Frontend Disconnect"]:::ui -->|Connection close| L["remove_client_queue()"]
+    L -->|Unregister| C
+
+    classDef ui fill:#50E3C2,stroke:#333,stroke-width:2px
+    classDef service fill:#BD10E0,stroke:#333,stroke-width:2px
+```
+
+**Key Characteristics:**
+
+- **Thread-safe broadcasts** — `broadcast_event_threadsafe()` uses `call_soon_threadsafe()` to schedule queue writes on the event loop
+- **Async context** — All queues live in one set; new clients register when they connect
+- **Fire-and-forget** — If a client's queue is full, events are dropped (slow clients don't block fast ones)
+- **SSE format** — Payload is JSON: `{"type": "jobs", "data": [...]}`
+- **No persistence** — Clients must be connected at broadcast time to receive events
+
+**Data Flow:**
+
+1. Frontend opens EventSource connection → `/api/stream`
+2. `create_client_queue()` registers new queue
+3. Scrape scheduler runs in ThreadPool
+4. Results call `broadcast_event_threadsafe("jobs", [...])`
+5. Callback queues event on the async event loop
+6. `stream_events()` generator yields SSE-formatted data
+7. Frontend receives `"data: {...}\n\n"` and parses JSON
+
+---
+
+### Sentiment Rules
+
+Rule-based keyword and pattern matching for news article classification.
+
+**Sentiment Scoring** (`score_sentiment()`):
+
+```
+Input: title, excerpt
+  ↓
+Count positive keywords: growth, improve, invest, new, grant, award, ...
+Count negative keywords: shooting, murder, crime, arrest, fire, fraud, ...
+  ↓
+If positive > negative:
+  confidence = 50 + (positive - negative) * 10
+  label = "positive"
+Elif negative > positive:
+  confidence = 50 + (negative - positive) * 10
+  label = "negative"
+Else:
+  label = "neutral", confidence = 30
+  ↓
+Output: (label, confidence_0_to_100)
+```
+
+**Misinformation Risk** (`score_misinfo_risk()`):
+
+Pattern matches on title:
+
+- `(?i)\b(shocking|unbelievable|you won't believe|exposed|breaking)\b` → +25
+- `(?i)^LIVE:` → +25
+- `(?i)\b(ALERT|URGENT|JUST IN)\b` → +25
+- `(?i)\b(secret|conspiracy|coverup|cover-up)\b` → +25
+- `(?i)!\s*!+` → +25
+- `(?i)\b(they don't want you to know)\b` → +25
+
+Sum = 0–150, clamped to 0–100
+
+**Summary Building** (`build_summary()`):
+
+Strips known prefixes (LIVE:, BREAKING:, ALERT:, etc.) for cleaner display.
+
+---
+
+## Configuration
+
+Central config file: `backend/config.py`
+
+### Credentials (Environment Variables)
+
+```python
+BRIGHTDATA_API_KEY          # Required — Bright Data API key
+BRIGHTDATA_SERP_ZONE        # Optional — SERP zone (default: "serp_api1")
+BRIGHTDATA_UNLOCKER_ZONE    # Optional — Web Unlocker zone (default: "web_unlocker1")
+WEBHOOK_SECRET              # Optional — Webhook signature validation
+REDIS_URL                   # Optional — Redis connection for caching
+```
+
+### Paths
+
+```python
+REPO_ROOT                   # Project root directory
+PUBLIC_DATA                 # frontend/public/data (frontend-visible GeoJSON)
+SCRIPTS_DATA                # backend/data (intermediate & historical data)
+RAW_DIR                     # backend/data/raw (raw scraper output)
+
+OUTPUT_FILES = {
+    "jobs": "frontend/public/data/jobs.geojson",
+    "jobs_history": "backend/data/jobs_history.jsonl",
+    "news": "frontend/public/data/news_feed.json",
+    "benefits": "frontend/public/data/gov_services.json",
+    "housing": "frontend/public/data/housing.geojson",
+}
+```
+
+---
+
+## Error Handling
+
+Exceptions are defined in `backend/core/exceptions.py`:
+
+```python
+AppException(code, message, details, status_code)
+├── ValidationError(message, details) → 422
+├── NotFoundError(message, details) → 404
+├── ConflictError(message, details) → 409
+├── AuthError(message, details) → 401
+└── ExternalServiceError(message, details) → 502
+```
+
+**Usage Pattern:**
+
+```python
+try:
+    result = trigger_scraper(dataset_id, payload)
+except ExternalServiceError as e:
+    logger.error("Scrape failed: %s", e.message)
+    # Fallback or retry logic
+```
+
+---
+
+## Redis Caching
+
+Optional, fail-safe caching for roadmap generation.
+
+**Behavior:**
+
+- If `REDIS_URL` unset → caching disabled
+- If connection fails → logs warning, continues without cache
+- Singleton pattern — one client instance per process
+
+**Methods:**
+
+```python
+from backend.core.redis_client import cache
+
+# Fetch
+data = cache.fetch("roadmap:2026-03")  # dict or None
+
+# Store (with 24h TTL by default)
+cache.store("roadmap:2026-03", {"features": [...]}, ttl=86400)
+
+# Delete
+cache.delete("roadmap:2026-03")
+
+# Check availability
+if cache.is_available():
+    print("Redis is connected")
+```
+
+---
+
+## Integration Points
+
+### With Processors
+
+Each scrape stream calls processor modules to validate, enrich, and save data:
+
+- **Jobs**: `backend.processors.process_jobs` → geocode → save to jobs.geojson
+- **News**: `backend.processors.process_news` → enrich + geocode → deduplicate → save + sentiment analysis
+- **Housing**: `backend.processors.process_housing` → validate Zillow listings → save to housing.geojson
+- **Benefits**: `backend.processors.process_benefits` → merge with fallback services → save to gov_services.json
+
+### With API
+
+The FastAPI app (`backend/api/main.py`) starts the scheduler on startup:
+
+```python
+async def lifespan(app):
+    # Startup
+    asyncio.create_task(start_scheduled_scraping())
+    yield
+    # Shutdown
+```
+
+And exposes the SSE endpoint:
+
+```python
+@router.get("/stream")
+async def stream_events(queue: asyncio.Queue = Depends(get_sse_queue)):
+    return StreamingResponse(stream_events(queue), media_type="text/event-stream")
+```
+
+---
+
+## Workflow Example: News Scrape
+
+1. **Trigger** — `_run_news_scrape()` called by scheduler
+2. **Discover** — `discover_articles()` uses `serp_search("Montgomery Alabama news")` to find articles
+3. **Fetch Full Text** — Top 10 articles downloaded via `fetch_with_unlocker(article_url)`
+4. **Enrich** — `enrich_article()` applies sentiment rules, checks metadata
+5. **Geocode** — `geocode_articles()` extracts location entities
+6. **Deduplicate** — Merge with existing articles, remove duplicates by title/URL
+7. **Save** — Articles written to `frontend/public/data/news_feed.json`
+8. **Broadcast** — `broadcast_event_threadsafe("news", articles)` → frontend receives via SSE
+9. **Analyze Comments** — If comments exist, trigger AI sentiment analysis on articles with community feedback
+
+---
+
+## Testing
+
+Tests for core modules located in `backend/tests/`:
+
+- `test_bright_data_client.py` — Mock SDK calls, validate trigger/poll/fetch
+- `test_sse_broadcaster.py` — Queue registration, broadcast ordering, thread-safety
+- `test_sentiment_rules.py` — Keyword matching, score normalization
+- `test_scrape_scheduler.py` — Stream execution, error handling, item counts
+
+Run tests:
+
+```bash
+pytest backend/tests/test_*.py -v
+```
+
+---
+
+## References
+
+- [Bright Data SDK Docs](https://github.com/bright-data/sdk)
+- [FastAPI Streaming Responses](https://fastapi.tiangolo.com/advanced/custom-response/#streaming-responses)
+- [SSE Format (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
+- `backend/payloads.py` — Scraper payload definitions and job categories
