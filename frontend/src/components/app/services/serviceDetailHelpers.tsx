@@ -1,4 +1,4 @@
-import { MapPin, Phone, Clock, ExternalLink, Navigation, ChevronDown, ChevronUp } from "lucide-react";
+import { MapPin, Phone, Clock, ExternalLink, Navigation, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
 import type { ServicePoint } from "@/lib/types";
 
 const INTERNAL_FIELDS = new Set([
@@ -43,13 +43,16 @@ export function ServiceLocationCard({
 }) {
   return (
     <div
-      className={`rounded-xl border transition-all ${
-        isSelected ? "border-primary/30 bg-primary/[0.02] shadow-sm" : "border-border/40 hover:border-border"
+      className={`relative rounded-xl border overflow-hidden transition-all magnolia-bg ${
+        isSelected ? "border-primary/30 shadow-sm" : "border-border/40 hover:border-border"
       }`}
     >
-      <button onClick={onSelect} className="w-full text-left p-4">
+      {/* Left accent stripe */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl" style={{ backgroundColor: categoryColor }} />
+
+      <button onClick={onSelect} className="w-full text-left p-4 pl-5">
         <div className="flex items-start justify-between">
-          <h4 className="text-sm font-semibold text-foreground leading-snug pr-2">{point.name}</h4>
+          <h4 className="text-sm font-bold text-secondary leading-snug pr-2">{point.name}</h4>
           {isSelected ? (
             <ChevronUp className="w-4 h-4 text-muted-foreground shrink-0 mt-0.5" />
           ) : (
@@ -89,7 +92,7 @@ function LocationExpandedDetails({
     .slice(0, 6);
 
   return (
-    <div className="px-4 pb-4 space-y-3 border-t border-border/20 pt-3">
+    <div className="px-4 pb-4 pl-5 space-y-3 border-t border-border/20 pt-3">
       {point.hours && (
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <Clock className="w-3 h-3 shrink-0" /><span>{point.hours}</span>
@@ -112,7 +115,7 @@ function LocationExpandedDetails({
           ))}
         </div>
       )}
-      <div className="flex gap-2 pt-1">
+      <div className="flex gap-2 pt-2">
         <a
           href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(point.address || `${point.lat},${point.lng}`)}`}
           target="_blank" rel="noopener noreferrer"
@@ -122,8 +125,9 @@ function LocationExpandedDetails({
         </a>
         <button
           onClick={() => onNavigateToChat(`I want to visit ${point.name}. Help me understand what they offer and how to prepare.`)}
-          className="flex-1 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors"
+          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[hsl(var(--amber-gold))] text-white text-xs font-semibold hover:bg-[hsl(var(--amber-gold))]/90 transition-colors shadow-sm"
         >
+          <Sparkles className="w-3.5 h-3.5" />
           Help me prepare
         </button>
       </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, MessageCircle } from "lucide-react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import type { ServiceCategory, ServicePoint } from "@/lib/types";
@@ -10,6 +10,7 @@ import { createCategoryMarker, getMarkerColor, getMarkerSymbol } from "@/lib/map
 import { MAP_CATEGORIES } from "./serviceCategoryMeta";
 import { MapPointDetailPanel } from "./MapPointDetailPanel";
 import { NeighborhoodOverlay } from "./NeighborhoodOverlay";
+import { ServiceGuideChat } from "./ServiceGuideChat";
 
 const MONTGOMERY_CENTER: [number, number] = [32.3668, -86.3];
 
@@ -77,6 +78,14 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
   );
   const [selectedPoint, setSelectedPoint] = useState<ServicePoint | null>(null);
   const [showNeighborhood, setShowNeighborhood] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
+
+  // Auto-open guide panel when a "More details" message arrives
+  useEffect(() => {
+    if (state.guidePendingMessage && !guideOpen) {
+      setGuideOpen(true);
+    }
+  }, [state.guidePendingMessage]);
 
   // Listen for filter_category map commands (chat -> map)
   useEffect(() => {
@@ -122,6 +131,17 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
         </div>
         <div className="flex items-center gap-3">
           <span className="text-xs text-muted-foreground">{visiblePoints.length} locations</span>
+          <button
+            onClick={() => setGuideOpen((prev) => !prev)}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              guideOpen
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <MessageCircle className="w-3.5 h-3.5" />
+            Guide
+          </button>
         </div>
       </div>
 
@@ -187,6 +207,12 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
               onNavigateToChat={onNavigateToChat}
               onViewCategory={() => onSelectCategory(selectedPoint.category)}
             />
+          </div>
+        )}
+
+        {guideOpen && (
+          <div className="w-[340px] shrink-0 border-l border-border/30 bg-white">
+            <ServiceGuideChat />
           </div>
         )}
       </div>
