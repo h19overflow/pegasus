@@ -10,11 +10,6 @@ import { createCategoryMarker, getMarkerColor, getMarkerSymbol } from "@/lib/map
 import { MAP_CATEGORIES } from "./serviceCategoryMeta";
 import { MapPointDetailPanel } from "./MapPointDetailPanel";
 import { NeighborhoodOverlay } from "./NeighborhoodOverlay";
-import { NewsMapOverlay } from "../news/NewsMapOverlay";
-import { NewsMapToggle } from "../news/NewsMapToggle";
-import { NewsSidebarPanel } from "../news/NewsSidebarPanel";
-import { filterGeolocatedArticles } from "@/lib/newsMapMarkers";
-import { fetchNewsArticles } from "@/lib/newsService";
 
 const MONTGOMERY_CENTER: [number, number] = [32.3668, -86.3];
 
@@ -28,18 +23,6 @@ function FlyToPoint({ lat, lng }: { lat: number | null; lng: number | null }) {
       prevRef.current = key;
     }
   }, [lat, lng, map]);
-  return null;
-}
-
-function FlyToTarget({ target }: { target: { lat: number; lng: number; ts: number } | null }) {
-  const map = useMap();
-  const prevTs = useRef<number>(0);
-  useEffect(() => {
-    if (target && target.ts !== prevTs.current) {
-      map.flyTo([target.lat, target.lng], 15, { duration: 0.6 });
-      prevTs.current = target.ts;
-    }
-  }, [target, map]);
   return null;
 }
 
@@ -94,8 +77,6 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
   );
   const [selectedPoint, setSelectedPoint] = useState<ServicePoint | null>(null);
   const [showNeighborhood, setShowNeighborhood] = useState(false);
-  const [flyTarget, setFlyTarget] = useState<{ lat: number; lng: number; ts: number } | null>(null);
-  const [focusedArticle, setFocusedArticle] = useState<{ id: string; ts: number } | null>(null);
 
   // Listen for filter_category map commands (chat -> map)
   useEffect(() => {
@@ -105,15 +86,6 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
       setActiveCategories(new Set([cmd.category]));
     }
   }, [state.mapCommand]);
-
-  // Sync global selectedArticleId -> local focusedArticle (for cross-page navigation)
-  useEffect(() => {
-    if (state.selectedArticleId) {
-      setFocusedArticle({ id: state.selectedArticleId, ts: Date.now() });
-      if (!state.newsMapVisible) dispatch({ type: "TOGGLE_NEWS_MAP" });
-      dispatch({ type: "SET_SELECTED_ARTICLE", articleId: null });
-    }
-  }, [state.selectedArticleId]);
 
   useEffect(() => {
     async function loadAll() {
@@ -127,29 +99,6 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
     loadAll();
   }, []);
 
-  useEffect(() => {
-    if (state.newsArticles.length === 0) {
-      fetchNewsArticles().then((articles) => {
-        if (articles.length > 0) {
-          dispatch({ type: "SET_NEWS_ARTICLES", articles });
-        }
-      });
-    }
-  }, []);
-
-  function handleZoomToNeighborhood(lat: number, lng: number) {
-    setFlyTarget({ lat, lng, ts: Date.now() });
-  }
-
-  function handleSelectArticle(articleId: string) {
-    const article = state.newsArticles.find((a) => a.id === articleId);
-    if (article?.location) {
-      const ts = Date.now();
-      setFlyTarget({ lat: article.location.lat, lng: article.location.lng, ts });
-      setFocusedArticle({ id: articleId, ts });
-    }
-  }
-
   function toggleCategory(id: ServiceCategory) {
     setActiveCategories((prev) => {
       const next = new Set(prev);
@@ -161,7 +110,6 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
   const visiblePoints = state.servicePoints.filter(
     (p) => activeCategories.has(p.category) && !Number.isNaN(p.lat) && !Number.isNaN(p.lng),
   );
-  const geolocatedNewsCount = filterGeolocatedArticles(state.newsArticles).length;
 
   return (
     <div className="flex flex-col h-full">
@@ -173,27 +121,11 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
           <h1 className="text-base font-bold text-foreground">All Services Map</h1>
         </div>
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => setShowNeighborhood(!showNeighborhood)}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors shadow-sm ${
-              showNeighborhood
-                ? "bg-primary text-white shadow-primary/25"
-                : "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
-            }`}
-          >
-            {showNeighborhood ? "✕ Hide" : "◉ Show"} Neighborhood Health
-          </button>
-          <NewsMapToggle
-            active={state.newsMapVisible}
-            onToggle={() => dispatch({ type: "TOGGLE_NEWS_MAP" })}
-            articleCount={geolocatedNewsCount}
-          />
           <span className="text-xs text-muted-foreground">{visiblePoints.length} locations</span>
         </div>
       </div>
 
-      {!state.newsMapVisible && (
-        <div className="shrink-0 flex flex-wrap gap-2 px-6 py-3 border-b border-border/20">
+      <div className="shrink-0 flex flex-wrap gap-2 px-6 py-3 border-b border-border/20">
           {MAP_CATEGORIES.map(({ id, label, icon: Icon, color }) => {
             const active = activeCategories.has(id);
             const count = state.servicePoints.filter((p) => p.category === id).length;
@@ -206,8 +138,7 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
               </button>
             );
           })}
-        </div>
-      )}
+      </div>
 
       <div className="flex-1 flex min-h-0">
         <div className="flex-1 relative">
@@ -216,7 +147,7 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {!state.newsMapVisible && visiblePoints.map((point) => (
+            {visiblePoints.map((point) => (
               <Marker key={point.id} position={[point.lat, point.lng]}
                 icon={createCategoryMarker(point.category)}
                 eventHandlers={{ click: () => setSelectedPoint(point) }}
@@ -231,36 +162,20 @@ export default function ServiceMapView({ onBack, onSelectCategory, onNavigateToC
               </Marker>
             ))}
             <FlyToPoint lat={selectedPoint?.lat ?? null} lng={selectedPoint?.lng ?? null} />
-            <FlyToTarget target={flyTarget} />
             <MapCommandHandler visiblePoints={visiblePoints} />
             {showNeighborhood && <NeighborhoodOverlay />}
-            {state.newsMapVisible && <NewsMapOverlay selectedArticleId={focusedArticle?.id ?? null} selectionTs={focusedArticle?.ts ?? 0} />}
           </MapContainer>
 
-          {!state.newsMapVisible && (
-            <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-sm z-[1000] flex flex-wrap gap-x-4 gap-y-1">
-              {MAP_CATEGORIES.filter((c) => activeCategories.has(c.id)).map(({ id, label }) => (
-                <div key={id} className="flex items-center gap-1.5">
-                  <span className="text-xs">{getMarkerSymbol(id)}</span>
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: getMarkerColor(id) }} />
-                  <span className="text-[10px] text-muted-foreground">{label}</span>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-sm z-[1000] flex flex-wrap gap-x-4 gap-y-1">
+            {MAP_CATEGORIES.filter((c) => activeCategories.has(c.id)).map(({ id, label }) => (
+              <div key={id} className="flex items-center gap-1.5">
+                <span className="text-xs">{getMarkerSymbol(id)}</span>
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: getMarkerColor(id) }} />
+                <span className="text-[10px] text-muted-foreground">{label}</span>
+              </div>
+            ))}
+          </div>
 
-          {state.newsMapVisible && (
-            <NewsSidebarPanel
-              articles={filterGeolocatedArticles(state.newsArticles)}
-              reactionCounts={state.newsReactions}
-              comments={state.newsComments}
-              mode={state.newsMapMode}
-              onModeChange={(mode) => dispatch({ type: "SET_NEWS_MAP_MODE", mode })}
-              onZoomToNeighborhood={handleZoomToNeighborhood}
-              onSelectArticle={handleSelectArticle}
-              focusedArticleId={focusedArticle?.id ?? null}
-            />
-          )}
         </div>
 
         {selectedPoint && (
