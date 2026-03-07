@@ -16,6 +16,11 @@ export default defineConfig(({ mode }) => ({
         target: "http://127.0.0.1:8082",
         changeOrigin: true,
       },
+      "/gemini-api": {
+        target: "https://generativelanguage.googleapis.com",
+        changeOrigin: true,
+        rewrite: (path: string) => path.replace(/^\/gemini-api/, ""),
+      },
     },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
