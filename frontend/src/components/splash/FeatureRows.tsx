@@ -1,7 +1,6 @@
 import {
   MapPin,
   MessageSquare,
-  Newspaper,
   LayoutDashboard,
   Shield,
   TrendingUp,
@@ -31,14 +30,14 @@ function FeatureRow({
   preview: React.ReactNode;
 }) {
   return (
-    <div className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} gap-8 md:gap-12 items-center`}>
+    <div className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} gap-8 md:gap-16 items-center`}>
       <div className="flex-1 space-y-4">
-        <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary/10 text-primary">
+        <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-primary/20 bg-primary/8 text-primary">
           {badge}
         </span>
-        <h3 className="text-xl md:text-2xl font-bold text-foreground">{title}</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-foreground">{title}</h3>
         <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
-        <div className="space-y-2 pt-2">
+        <div className="space-y-2.5 pt-2">
           {highlights.map(({ icon: Icon, text }) => (
             <div key={text} className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
@@ -61,7 +60,7 @@ export function FeaturesSection({
 }) {
   return (
     <section className="bg-muted/30 py-16 md:py-20 px-6">
-      <div className="max-w-5xl mx-auto space-y-12">
+      <div className="max-w-5xl mx-auto space-y-14">
         <FeatureRow
           reverse={false}
           badge="For Citizens"
@@ -75,7 +74,7 @@ export function FeaturesSection({
           preview={<ServicesPreview onSelectService={onSelectService} />}
         />
 
-        <div className="border-t border-border/40" />
+        <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
         <FeatureRow
           reverse={true}
@@ -90,7 +89,7 @@ export function FeaturesSection({
           preview={<NewsPreview />}
         />
 
-        <div className="border-t border-border/40" />
+        <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
         <FeatureRow
           reverse={false}
