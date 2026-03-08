@@ -16,13 +16,13 @@ class CitizenChatRequest(BaseModel):
 
 
 @router.post("/citizen-chat")
-async def citizen_chat(request: CitizenChatRequest) -> JSONResponse:
+async def citizen_chat(body: CitizenChatRequest) -> JSONResponse:
     """AI civic chatbot endpoint for citizen queries."""
     from backend.agents.citizen.agent import handle_citizen_chat
 
     response = await handle_citizen_chat(
-        message=request.message,
-        conversation_id=request.conversation_id,
+        message=body.message,
+        conversation_id=body.conversation_id,
     )
     return JSONResponse(response)
 
