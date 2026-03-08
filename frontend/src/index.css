@@ -6,9 +6,9 @@
 
 @layer base {
   :root {
-    /* Government-Inspired Palette — Navy / Cool White */
-    --background: 0 0% 98%; /* #FAFAFA */
-    --foreground: 0 0% 11%; /* #1b1b1b */
+    /* Stitch-aligned Palette */
+    --background: 210 20% 97%; /* #f6f7f8 */
+    --foreground: 218 22% 16%; /* #1f2937 */
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 11%;
@@ -16,16 +16,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 11%;
 
-    --primary: 213 59% 30%; /* #1a4480 Navy */
+    --primary: 214 55% 23%; /* #1a355b */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 218 51% 20%; /* #162e51 Dark Navy */
+    --secondary: 215 55% 40%; /* #2d5a9e */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 94%; /* #F0F0F0 */
-    --muted-foreground: 213 4% 47%; /* #71767a */
+    --muted: 210 20% 94%; /* #edf1f4 */
+    --muted-foreground: 215 14% 43%; /* #64748b */
 
-    --accent: 37 63% 47%; /* #C8882A Amber Gold */
+    --accent: 173 78% 40%; /* #14b8a6 */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 3 71% 53%; /* #d83933 */
@@ -34,14 +34,14 @@
     --success: 153 42% 30%; /* #2D6A4F Pine Green */
     --success-foreground: 0 0% 100%;
 
-    --border: 204 6% 87%; /* #DFE1E2 */
-    --input: 0 0% 94%; /* #F0F0F0 */
-    --ring: 213 59% 30%;
+    --border: 214 20% 88%; /* #d8dee8 */
+    --input: 214 27% 95%; /* #eef2f7 */
+    --ring: 214 55% 23%;
 
     --radius: 0.5rem;
 
     /* Montgomery-specific tokens */
-    --montgomery-blue: 213 59% 30%;
+    --montgomery-blue: 214 55% 23%;
     --amber-gold: 37 63% 47%;
     --charcoal: 0 0% 11%;
     --pine-green: 153 42% 30%;
@@ -88,6 +88,26 @@
 
   .pt-safe {
     padding-top: max(env(safe-area-inset-top, 0px), 44px);
+  }
+
+  .stitch-shell {
+    @apply min-h-screen bg-background text-foreground;
+  }
+
+  .stitch-topbar {
+    @apply sticky top-0 z-50 border-b border-border/70 bg-white/85 backdrop-blur-md;
+  }
+
+  .stitch-panel {
+    @apply rounded-xl border border-border/70 bg-card shadow-sm;
+  }
+
+  .stitch-title {
+    @apply text-primary font-extrabold tracking-tight;
+  }
+
+  .stitch-subtle {
+    @apply text-muted-foreground;
   }
 }
 

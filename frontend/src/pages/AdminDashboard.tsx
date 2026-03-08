@@ -29,8 +29,8 @@ function AdminHeader() {
   const navigate = useNavigate();
 
   return (
-    <header className="sticky top-0 z-[1001] bg-white border-t-[3px] border-[hsl(var(--amber-gold))] border-b border-border/40">
-      <div className="w-full px-5 md:px-6 py-3 flex items-center justify-between">
+    <header className="stitch-topbar z-[1001]">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate("/")}
@@ -39,11 +39,11 @@ function AdminHeader() {
           >
             <img src={citysenseLogo} alt="CitySense" className="w-8 h-8 object-contain" />
             <div className="flex flex-col">
-              <span className="text-secondary font-bold text-[15px] leading-tight tracking-tight">
+              <span className="text-primary font-bold text-[15px] leading-tight tracking-tight">
                 CitySense
               </span>
-              <span className="text-[hsl(var(--amber-gold))] text-[10px] leading-tight font-bold uppercase tracking-[0.12em]">
-                Admin Dashboard
+              <span className="text-secondary text-[10px] leading-tight font-bold uppercase tracking-[0.12em]">
+                Operations Console
               </span>
             </div>
           </button>
@@ -55,7 +55,7 @@ function AdminHeader() {
           </span>
           <button
             onClick={() => navigate("/app/news")}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/40 bg-white text-xs font-medium text-secondary hover:shadow-sm hover:text-primary transition-all"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/70 bg-white text-xs font-medium text-secondary hover:bg-muted transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
             Citizen View
@@ -144,7 +144,7 @@ export default function AdminDashboard() {
     <div className={`min-h-screen bg-background transition-[margin] duration-200 ${chatIsOpen ? "mr-[520px]" : ""}`}>
       <AdminHeader />
 
-      <main className="w-full px-5 md:px-6 py-5 md:py-6 space-y-6">
+      <main className="max-w-7xl mx-auto w-full px-4 md:px-6 py-5 md:py-6 space-y-6">
         <OnboardingBanner />
 
         {/* Greeting + Actions */}

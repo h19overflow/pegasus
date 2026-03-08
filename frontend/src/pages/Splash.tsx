@@ -7,6 +7,27 @@ import { ValueSection } from "@/components/splash/ValueSection";
 
 const HERO_CHIPS = ["8 Service Categories", "Live News Feed", "AI-Powered Insights"];
 
+function LandingHeader({ onOpenCitizen, onOpenAdmin }: { onOpenCitizen: () => void; onOpenAdmin: () => void }) {
+  return (
+    <header className="stitch-topbar">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <img src={citysenseLogo} alt="CitySense" className="w-8 h-8 object-contain" />
+          <span className="text-xl font-extrabold text-primary tracking-tight">CitySense</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <button onClick={onOpenCitizen} className="hidden sm:inline-flex px-3 py-1.5 rounded-lg text-sm font-semibold text-muted-foreground hover:bg-muted hover:text-primary transition-colors">
+            Explore as Citizen
+          </button>
+          <button onClick={onOpenAdmin} className="inline-flex px-3.5 py-2 rounded-lg text-sm font-semibold bg-primary text-white hover:bg-primary/90 transition-colors">
+            Admin Dashboard
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
 function HeroButtons({ onGetStarted }: { onGetStarted: () => void }) {
   return (
     <div className="flex items-center justify-center gap-4 flex-wrap">
@@ -30,16 +51,16 @@ function HeroButtons({ onGetStarted }: { onGetStarted: () => void }) {
 
 function HeroSection({ onGetStarted }: { onGetStarted: () => void }) {
   return (
-    <section className="relative bg-gradient-to-br from-[#060f1e] via-secondary to-[#0d1b35] overflow-hidden">
+    <section className="relative bg-gradient-to-br from-primary via-secondary to-[#1b3f72] overflow-hidden">
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-primary/20 blur-[90px] pointer-events-none" />
-      <div className="max-w-5xl mx-auto px-6 pt-20 pb-36 md:pt-28 md:pb-48 text-center relative z-10">
+      <div className="max-w-5xl mx-auto px-6 pt-16 pb-32 md:pt-22 md:pb-40 text-center relative z-10">
         <div className="inline-flex items-center justify-center p-2.5 rounded-full ring-1 ring-white/10 bg-white/5 mb-8">
           <img src={citysenseLogo} alt="CitySense" className="w-20 h-20 object-contain" />
         </div>
         <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4">
           CitySense
         </h1>
-        <p className="text-[hsl(var(--amber-gold))] text-sm font-bold uppercase tracking-[0.2em] mb-6">
+        <p className="text-accent text-sm font-bold uppercase tracking-[0.2em] mb-6">
           Montgomery, Alabama
         </p>
         <p className="text-white/65 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8">
@@ -49,8 +70,8 @@ function HeroSection({ onGetStarted }: { onGetStarted: () => void }) {
         </p>
         <div className="flex items-center justify-center gap-2.5 flex-wrap mb-10">
           {HERO_CHIPS.map((chip) => (
-            <span key={chip} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/8 border border-white/12 text-white/60 text-xs font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--amber-gold))]" />
+            <span key={chip} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white/70 text-xs font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
               {chip}
             </span>
           ))}
@@ -68,11 +89,11 @@ function HeroSection({ onGetStarted }: { onGetStarted: () => void }) {
 function NotificationSection() {
   const navigate = useNavigate();
   return (
-    <section className="bg-muted/20 py-16 md:py-20 px-6">
+    <section className="bg-muted/30 py-16 md:py-20 px-6">
       <div className="max-w-3xl mx-auto">
-        <div className="rounded-3xl border border-[hsl(var(--amber-gold))]/25 bg-gradient-to-br from-[hsl(var(--amber-gold))]/5 to-transparent p-8 md:p-10 text-center shadow-sm">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[hsl(var(--amber-gold))]/15 to-[hsl(var(--amber-gold))]/5 border border-[hsl(var(--amber-gold))]/20 flex items-center justify-center mx-auto mb-5">
-            <Bell className="w-8 h-8 text-[hsl(var(--amber-gold))]" />
+        <div className="rounded-2xl border border-border/70 bg-card p-8 md:p-10 text-center shadow-sm">
+          <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-5">
+            <Bell className="w-8 h-8 text-primary" />
           </div>
           <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Stay in the loop</h3>
           <p className="text-muted-foreground text-sm max-w-md mx-auto mb-6 leading-relaxed">
@@ -94,10 +115,10 @@ function NotificationSection() {
 
 function CTASection({ onGetStarted }: { onGetStarted: () => void }) {
   return (
-    <section className="relative bg-gradient-to-br from-[#060f1e] via-secondary to-[#0d1b35] py-20 px-6 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-primary via-secondary to-[#1b3f72] py-20 px-6 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 rounded-full bg-primary/15 blur-[60px] pointer-events-none" />
       <div className="max-w-3xl mx-auto text-center relative z-10">
-        <p className="text-[hsl(var(--amber-gold))] text-xs font-bold uppercase tracking-[0.2em] mb-4">Ready to explore?</p>
+        <p className="text-accent text-xs font-bold uppercase tracking-[0.2em] mb-4">Ready to explore?</p>
         <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">Montgomery is at your fingertips.</h2>
         <p className="text-white/60 text-base mb-10 max-w-lg mx-auto">
           No account needed. Start browsing services, news, and city data right away.
@@ -139,7 +160,8 @@ export default function Splash() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="stitch-shell">
+      <LandingHeader onOpenCitizen={() => navigate("/app")} onOpenAdmin={() => navigate("/admin")} />
       <HeroSection onGetStarted={() => navigate("/app")} />
       <ValueSection onFindServices={openServices} onStayInformed={openNews} onGetAnswers={openAnswers} />
       <FeaturesSection onSelectService={openServiceCategory} />
