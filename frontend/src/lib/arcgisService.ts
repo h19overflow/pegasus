@@ -100,10 +100,23 @@ export async function fetchServicePoints(
     `${BASE_URL}/${config.path}/query?` +
     `where=1%3D1&outFields=*&outSR=4326&f=geojson`;
 
-  const response = await fetch(url);
-  if (!response.ok) return [];
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10_000);
 
-  const data = await response.json();
+  let data: { features?: GeoJSON.Feature[] } = {};
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeout);
+    if (!response.ok) return [];
+    data = await response.json();
+  } catch (error) {
+    clearTimeout(timeout);
+    if (error instanceof DOMException && error.name === "AbortError") {
+      console.warn("ArcGIS request timed out:", url);
+      return [];
+    }
+    throw error;
+  }
   if (!data.features) return [];
 
   const points: ServicePoint[] = data.features

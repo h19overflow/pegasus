@@ -29,11 +29,15 @@ export default function ServiceDirectory({
 
   useEffect(() => {
     async function preloadAllCategories() {
+      const allPoints = [];
       for (const cat of CATEGORY_CARDS) {
         const alreadyLoaded = state.servicePoints.some((p) => p.category === cat.id);
         if (alreadyLoaded) continue;
         const points = await fetchServicePoints(cat.id);
-        if (points.length > 0) dispatch({ type: "ADD_SERVICE_POINTS", points });
+        allPoints.push(...points);
+      }
+      if (allPoints.length > 0) {
+        dispatch({ type: "ADD_SERVICE_POINTS", points: allPoints });
       }
     }
     preloadAllCategories();

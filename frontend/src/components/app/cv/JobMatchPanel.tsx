@@ -1,28 +1,20 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { useApp } from "@/lib/appContext";
-import { matchJobsToProfile, computeTrendingSkills, jobMatchesSkillFilter } from "@/lib/jobMatcher";
-import { fetchJobListings } from "@/lib/jobService";
-import type { JobMatch } from "@/lib/types";
-import JobMatchCard from "./JobMatchCard";
 import TrendingSkillsBar from "./TrendingSkillsBar";
-import MarketPulse, { extractTitleKeyword } from "./MarketPulse";
+import MarketPulse from "./MarketPulse";
 import JobFilters, {
   createDefaultFilters,
   countActiveFilters,
   type JobFilterState,
 } from "./JobFilters";
+import { useJobFiltering } from "./job-match/useJobFiltering";
+import { JobResultsList } from "./job-match/JobResultsList";
 
 const SOURCE_FILTERS = ["All", "Indeed", "LinkedIn"] as const;
 
-function parseSalaryMinimum(salary: string): number {
-  const match = salary.match(/\$?([\d,.]+)/);
-  if (!match) return 0;
-  return parseFloat(match[1].replace(/,/g, ""));
-}
-
 const JobMatchPanel = () => {
-  const { state, dispatch } = useApp();
+  const { state } = useApp();
   const [sourceFilter, setSourceFilter] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState<JobFilterState>(createDefaultFilters);
@@ -34,65 +26,43 @@ const JobMatchPanel = () => {
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
   }, []);
 
-  // Load live scraped jobs on mount
-  useEffect(() => {
-    if (state.jobListings.length > 0) return;
-    dispatch({ type: "SET_JOBS_LOADING", loading: true });
-    fetchJobListings().then((listings) => {
-      dispatch({ type: "SET_JOB_LISTINGS", listings });
-      dispatch({ type: "SET_TRENDING_SKILLS", skills: computeTrendingSkills(listings) });
-      dispatch({ type: "SET_JOBS_LOADING", loading: false });
+  const { displayJobs, industries, matchedCount } = useJobFiltering({
+    sourceFilter,
+    searchQuery,
+    filters,
+    hasCv,
+  });
+
+  const activeFilterCount = useMemo(() => countActiveFilters(filters), [filters]);
+
+  const handleFilterByIndustry = useCallback((industry: string) => {
+    setFilters((prev) => ({ ...prev, industry }));
+    if (industry) scrollToResults();
+  }, [scrollToResults]);
+
+  const handleFilterByRole = useCallback((role: string) => {
+    setFilters((prev) => ({ ...prev, titleKeyword: role }));
+    if (role) scrollToResults();
+  }, [scrollToResults]);
+
+  const handleFilterBySeniority = useCallback((level: string) => {
+    setFilters((prev) => {
+      const next = new Set(prev.seniority);
+      if (next.has(level)) next.delete(level);
+      else { next.clear(); next.add(level); }
+      return { ...prev, seniority: next };
     });
+    scrollToResults();
+  }, [scrollToResults]);
+
+  const handleToggleExpand = useCallback((jobId: string) => {
+    setExpandedJobId((prev) => prev === jobId ? null : jobId);
   }, []);
 
-  // Recompute matches when CV changes
-  useEffect(() => {
-    if (!state.cvData || state.jobListings.length === 0) {
-      dispatch({ type: "SET_JOB_MATCHES", matches: [] });
-      return;
-    }
-    dispatch({ type: "SET_JOB_MATCHES", matches: matchJobsToProfile(state.jobListings, state.cvData) });
-  }, [state.cvData, state.jobListings]);
-
-  // Unique industries for filter dropdown
-  const industries = useMemo(() => {
-    const set = new Set(state.jobListings.map((j) => j.industry).filter(Boolean));
-    return [...set].sort();
-  }, [state.jobListings]);
-
-  // Build display list with all filters + sorting
-  const displayJobs: JobMatch[] = useMemo(() => {
-    const base = hasCv
-      ? state.jobMatches
-      : state.jobListings.map((j) => ({
-          ...j, matchPercent: 0, matchedSkills: [] as string[], missingSkills: [] as string[],
-        }));
-
-    const filtered = base.filter((job) => {
-      if (sourceFilter !== "All" && job.source.toLowerCase() !== sourceFilter.toLowerCase()) return false;
-      if (filters.jobTypes.size > 0 && !filters.jobTypes.has(job.jobType)) return false;
-      if (filters.seniority.size > 0 && !filters.seniority.has(job.seniority)) return false;
-      if (filters.industry && job.industry !== filters.industry) return false;
-      if (filters.titleKeyword && extractTitleKeyword(job.title) !== filters.titleKeyword) return false;
-      if (filters.skill && !jobMatchesSkillFilter(job, filters.skill)) return false;
-      if (searchQuery) {
-        const q = searchQuery.toLowerCase();
-        return job.title.toLowerCase().includes(q) || job.company.toLowerCase().includes(q) || job.skillSummary.toLowerCase().includes(q);
-      }
-      return true;
-    });
-
-    // Sort
-    return [...filtered].sort((a, b) => {
-      if (filters.sortBy === "recent") return new Date(b.posted).getTime() - new Date(a.posted).getTime();
-      if (filters.sortBy === "match") return b.matchPercent - a.matchPercent;
-      if (filters.sortBy === "salary") return parseSalaryMinimum(b.salary) - parseSalaryMinimum(a.salary);
-      return 0;
-    });
-  }, [hasCv, state.jobMatches, state.jobListings, sourceFilter, searchQuery, filters]);
-
-  const matchedCount = state.jobMatches.filter((m) => m.matchPercent >= 40).length;
-  const activeFilterCount = countActiveFilters(filters);
+  const handleFilterBySkill = useCallback((skill: string) => {
+    setFilters((prev) => ({ ...prev, skill }));
+    if (skill) scrollToResults();
+  }, [scrollToResults]);
 
   if (state.jobsLoading) {
     return (
@@ -118,7 +88,6 @@ const JobMatchPanel = () => {
         </div>
       </div>
 
-      {/* Search + source filter */}
       <div className="flex gap-2">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
@@ -150,28 +119,19 @@ const JobMatchPanel = () => {
           jobs={state.jobListings}
           activeIndustry={filters.industry}
           activeRole={filters.titleKeyword}
-          onFilterByIndustry={(industry) => { setFilters((prev) => ({ ...prev, industry })); if (industry) scrollToResults(); }}
-          onFilterByRole={(role) => { setFilters((prev) => ({ ...prev, titleKeyword: role })); if (role) scrollToResults(); }}
-          onFilterBySeniority={(level) => {
-            setFilters((prev) => {
-              const next = new Set(prev.seniority);
-              if (next.has(level)) next.delete(level);
-              else { next.clear(); next.add(level); }
-              return { ...prev, seniority: next };
-            });
-            scrollToResults();
-          }}
+          onFilterByIndustry={handleFilterByIndustry}
+          onFilterByRole={handleFilterByRole}
+          onFilterBySeniority={handleFilterBySeniority}
         />
       )}
       {state.trendingSkills.length > 0 && (
         <TrendingSkillsBar
           skills={state.trendingSkills}
           activeSkill={filters.skill}
-          onFilterBySkill={(skill) => { setFilters((prev) => ({ ...prev, skill })); if (skill) scrollToResults(); }}
+          onFilterBySkill={handleFilterBySkill}
         />
       )}
 
-      {/* Sort + Filters */}
       <JobFilters
         filters={filters}
         onFiltersChange={setFilters}
@@ -180,31 +140,13 @@ const JobMatchPanel = () => {
         activeFilterCount={activeFilterCount}
       />
 
-      {/* Results header */}
-      <div ref={resultsRef} className="flex items-center justify-between scroll-mt-4">
-        <h3 className="text-sm font-semibold text-foreground">
-          {hasCv ? "Jobs Ranked by Your Skill Match" : "All Montgomery Jobs"}
-        </h3>
-        <span className="text-xs text-muted-foreground">{displayJobs.length} results</span>
-      </div>
-
-      <div className="space-y-3">
-        {displayJobs.map((job) => (
-          <JobMatchCard
-            key={job.id}
-            job={job}
-            showMatch={hasCv}
-            isExpanded={expandedJobId === job.id}
-            onToggleExpand={() => setExpandedJobId(expandedJobId === job.id ? null : job.id)}
-          />
-        ))}
-      </div>
-
-      {displayJobs.length === 0 && (
-        <div className="text-center py-8 text-muted-foreground">
-          <p className="text-sm">No jobs match your filters</p>
-        </div>
-      )}
+      <JobResultsList
+        jobs={displayJobs}
+        hasCv={hasCv}
+        expandedJobId={expandedJobId}
+        onToggleExpand={handleToggleExpand}
+        resultsRef={resultsRef}
+      />
     </div>
   );
 };

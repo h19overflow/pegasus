@@ -1,36 +1,11 @@
 import { useRef, useState } from "react";
-import { Upload, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { useApp } from "@/lib/appContext";
 import { MOCK_CV_DATA } from "@/lib/mockCvData";
+import { ANALYSIS_STEPS, AnalyzingSteps } from "./AnalysisProgress";
+import { DropZoneArea } from "./DropZoneArea";
 
 type UploadState = "idle" | "dragging" | "uploading" | "analyzing" | "complete";
-
-const ANALYSIS_STEPS = [
-  { label: "Extracting personal info", completeAfterMs: 500 },
-  { label: "Analyzing work experience", completeAfterMs: 1000 },
-  { label: "Mapping skills", completeAfterMs: 1500 },
-];
-
-const StepRow = ({ label, completed }: { label: string; completed: boolean }) => (
-  <div className="flex items-center gap-2">
-    {completed ? (
-      <span className="text-green-500 text-xs font-bold">✓</span>
-    ) : (
-      <div className="w-3 h-3 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-    )}
-    <span className={`text-sm ${completed ? "text-muted-foreground" : "text-foreground"}`}>
-      {label}
-    </span>
-  </div>
-);
-
-const AnalyzingSteps = ({ completedCount }: { completedCount: number }) => (
-  <div className="space-y-2 mt-4">
-    {ANALYSIS_STEPS.map((step, index) => (
-      <StepRow key={step.label} label={step.label} completed={index < completedCount} />
-    ))}
-  </div>
-);
 
 const formatFileSize = (bytes: number): string => {
   if (bytes < 1024) return `${bytes} B`;
@@ -84,9 +59,7 @@ export default function UploadZone({ compact = false }: { compact?: boolean }) {
   };
 
   const handleDragLeave = () => setUploadState("idle");
-
   const handleZoneClick = () => fileInputRef.current?.click();
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleFileSelected(event.target.files?.[0]);
   };
@@ -104,16 +77,6 @@ export default function UploadZone({ compact = false }: { compact?: boolean }) {
     ? "flex flex-col items-center justify-center p-3"
     : "flex flex-col h-full min-h-[300px] items-center justify-center p-4";
 
-  const dropzoneClass = compact
-    ? "w-full flex flex-col items-center justify-center border-2 border-dashed border-border/50 rounded-xl cursor-pointer transition-colors hover:border-primary/40 hover:bg-primary/5 py-6 px-4"
-    : "w-full h-full min-h-[300px] flex flex-col items-center justify-center border-2 border-dashed border-border/50 rounded-xl cursor-pointer transition-colors hover:border-primary/40 hover:bg-primary/5";
-
-  const draggingClass = compact
-    ? "w-full flex flex-col items-center justify-center border-2 border-dashed border-primary rounded-xl bg-primary/5 transition-colors py-6 px-4"
-    : "w-full h-full min-h-[300px] flex flex-col items-center justify-center border-2 border-dashed border-primary rounded-xl bg-primary/5 transition-colors";
-
-  const iconSize = compact ? "w-8 h-8" : "w-12 h-12";
-
   return (
     <div className={wrapperClass}>
       <input
@@ -124,35 +87,15 @@ export default function UploadZone({ compact = false }: { compact?: boolean }) {
         onChange={handleInputChange}
       />
 
-      {uploadState === "idle" && (
-        <div
+      {(uploadState === "idle" || uploadState === "dragging") && (
+        <DropZoneArea
+          isDragging={uploadState === "dragging"}
+          compact={compact}
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
           onClick={handleZoneClick}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          className={dropzoneClass}
-        >
-          <Upload className={`${iconSize} text-muted-foreground/50 mb-3`} />
-          <p className={`${compact ? "text-sm" : "text-base"} font-medium text-foreground mb-1`}>
-            Drop your CV here
-          </p>
-          <p className="text-xs text-muted-foreground mb-2">or click to browse</p>
-          <p className="text-[10px] text-muted-foreground/70">PDF, DOCX, TXT · Max 10MB</p>
-        </div>
-      )}
-
-      {uploadState === "dragging" && (
-        <div
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          className={draggingClass}
-        >
-          <Upload className={`${iconSize} text-primary mb-3`} />
-          <p className={`${compact ? "text-sm" : "text-base"} font-medium text-primary`}>
-            Release to upload
-          </p>
-        </div>
+        />
       )}
 
       {uploadState === "uploading" && (

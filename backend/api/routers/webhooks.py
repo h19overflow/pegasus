@@ -4,10 +4,11 @@ import json
 import logging
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
+from backend.api.deps import verify_webhook_secret
 from backend.api.schemas.webhook_schemas import JobRecord, NewsWebhookBody, ZillowListing
 from backend.config import RAW_DIR
 from backend.core.sse_broadcaster import broadcast_event
@@ -42,12 +43,15 @@ def broadcast_event_safe(event_type: str, data: list | dict) -> None:
     """Broadcast SSE event, logging any failure without propagating it."""
     try:
         broadcast_event(event_type, data)
-    except Exception:
-        logger.warning("SSE broadcast failed for event type '%s'", event_type)
+    except (RuntimeError, OSError, ValueError) as e:
+        logger.warning("SSE broadcast failed for event type '%s': %s", event_type, e)
 
 
 @router.post("/jobs")
-async def webhook_jobs(request: Request) -> JSONResponse:
+async def webhook_jobs(
+    request: Request,
+    _: None = Depends(verify_webhook_secret),
+) -> JSONResponse:
     """Receive job scraper results from Bright Data."""
     try:
         raw_body = await request.json()
@@ -79,7 +83,10 @@ async def webhook_jobs(request: Request) -> JSONResponse:
 
 
 @router.post("/news")
-async def webhook_news(request: Request) -> JSONResponse:
+async def webhook_news(
+    request: Request,
+    _: None = Depends(verify_webhook_secret),
+) -> JSONResponse:
     """Receive SERP news results from Bright Data."""
     try:
         raw_body = await request.json()
@@ -112,7 +119,10 @@ async def webhook_news(request: Request) -> JSONResponse:
 
 
 @router.post("/housing")
-async def webhook_housing(request: Request) -> JSONResponse:
+async def webhook_housing(
+    request: Request,
+    _: None = Depends(verify_webhook_secret),
+) -> JSONResponse:
     """Receive Zillow listing results from Bright Data."""
     try:
         raw_body = await request.json()

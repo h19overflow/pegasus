@@ -26,6 +26,9 @@ def get_api_key() -> str:
     return require_env("BRIGHTDATA_API_KEY")
 
 
+WEBHOOK_SECRET: str | None = os.environ.get("WEBHOOK_SECRET")
+
+
 SERP_ZONE = os.environ.get("BRIGHTDATA_SERP_ZONE", "serp_api1")
 UNLOCKER_ZONE = os.environ.get("BRIGHTDATA_UNLOCKER_ZONE", "web_unlocker1")
 

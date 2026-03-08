@@ -30,7 +30,7 @@ export function FlowSidebar({ onQuickAction }: FlowSidebarProps) {
   const [collapsed, setCollapsed] = useState(true);
 
   function handleViewSelect(view: AppView) {
-    navigate(`/app/${view}`);
+    navigate(`/app/${view}`, { replace: true });
   }
 
   if (collapsed) {
