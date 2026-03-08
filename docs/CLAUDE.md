@@ -3,7 +3,7 @@
 > **Event:** World Wide Vibes Hackathon (WWV Mar 2026) — GenAI.Works Academy
 > **Last Updated:** March 6, 2026
 > **Deadline:** March 9, 2026
-> **Status:** Phase 5 — Frontend live.
+> **Status:** Phase 6 — Docs, tests, polish.
 
 ---
 
@@ -13,7 +13,7 @@
 
 The frontend is a React + TypeScript + Vite + Tailwind CSS + shadcn/ui app in `frontend/`.
 
-### Current Tabs (4 live)
+### Current Tabs (5 views)
 
 | Tab | View Key | Purpose | Key Components |
 |-----|----------|---------|----------------|
@@ -21,6 +21,7 @@ The frontend is a React + TypeScript + Vite + Tailwind CSS + shadcn/ui app in `f
 | **News** | `news` | Community news feed with reactions, comments, sentiment, and newsletter | `NewsView.tsx`, `NewsCard.tsx`, `NewsDetail.tsx`, `CommentFeed.tsx` |
 | **Admin** | `admin` | Admin dashboard — AI insights, comment analysis, mayor's brief, citizen view | `AdminDashboard.tsx`, `AIInsightsCard.tsx`, `MayorsBrief.tsx`, `CommentFeed.tsx` |
 | **Profile** | `profile` | Citizen persona dashboard — civic snapshot, benefits, settings | `ProfileView.tsx`, `PersonaSelector.tsx` |
+| **Career Growth** | `cv` | CV upload, job matching, commute, upskilling | `CvUploadView.tsx`, `JobMatchPanel.tsx`, `CommuteCard.tsx`, `UpskillingPanel.tsx` |
 
 ---
 
@@ -31,11 +32,14 @@ frontend/
 ├── public/data/              ← Static JSON data (mock citizens, gov services, jobs, transit)
 ├── src/
 │   ├── components/app/       ← UI components by feature
-│   │   ├── cv/               ← Career Growth tab (16 files)
-│   │   ├── services/         ← Services tab (19 files)
+│   │   ├── cv/               ← Career Growth (36 files)
+│   │   ├── services/         ← Services (37 files)
+│   │   ├── news/             ← News feed (28 files)
+│   │   ├── admin/            ← Admin dashboard (22 files)
+│   │   ├── cards/            ← Shared cards (8 files)
 │   │   └── *.tsx             ← Shared components (TopBar, FlowSidebar, ChatInput, etc.)
 │   ├── lib/                  ← Business logic, data loaders, types
-│   │   ├── appContext.tsx     ← Global state (useReducer, 50+ actions)
+│   │   ├── appContext.tsx     ← Thin provider (30 lines, delegates to context/slices/)
 │   │   ├── types.ts          ← All TypeScript interfaces
 │   │   ├── citizenProfiles.ts ← Mock citizen data loader
 │   │   ├── jobMatcher.ts     ← Job matching engine
@@ -48,7 +52,7 @@ frontend/
 
 ### State Management
 
-Global state via `useReducer` in `appContext.tsx`. All views read from `state` and dispatch actions. Key state shape defined in `AppState` interface in `types.ts`.
+Global state via `useReducer` + 7 domain slices in `context/slices/`. `appContext.tsx` is a thin 30-line provider. All views read from `state` and dispatch actions. Key state shape defined in `AppState` interface in `types.ts`.
 
 - `state.activeView` controls which tab renders (`"cv" | "services" | "profile" | "admin" | "news"`)
 - `state.citizenMeta` holds the active citizen persona (or null)
@@ -83,7 +87,7 @@ Global state via `useReducer` in `appContext.tsx`. All views read from `state` a
 - **Commit format**: `feat(scope): description`, `fix(scope): description`, etc.
 - **Build validation**: Run `npm run build` after changes. 0 errors required.
 - **Component pattern**: Each feature gets its own folder under `components/app/`.
-- **State pattern**: All state flows through `appContext.tsx` reducer. No local state for shared data.
+- **State pattern**: All state flows through `context/reducer.ts` with 7 domain slices. No local state for shared data.
 
 ---
 
