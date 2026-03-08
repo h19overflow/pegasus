@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useMemo } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import TopBar from "@/components/app/TopBar";
 import { AppNav, type MobileTab } from "@/components/app/MobileNav";
 import { ServicesView } from "@/components/app/services/ServicesView";
@@ -13,7 +13,7 @@ import {
   buildUserMessage,
   buildArtifactForResponse,
 } from "@/lib/chatHelpers";
-import type { AppView, Language } from "@/lib/types";
+import type { AppView, Language, ServiceCategory } from "@/lib/types";
 
 const VALID_VIEWS = new Set<string>(["services", "admin", "profile", "news"]);
 
@@ -21,6 +21,7 @@ export default function CommandCenter() {
   const { state, dispatch } = useApp();
   const { view: urlView } = useParams<{ view: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const lang: Language = "EN";
 
   // Derive the current view from the URL (single source of truth)
@@ -43,6 +44,30 @@ export default function CommandCenter() {
     },
     [currentView, navigate],
   );
+
+  const requestedCategory = useMemo<ServiceCategory | null>(() => {
+    if (currentView !== "services") return null;
+    const category = new URLSearchParams(location.search).get("category");
+    if (category === "health" || category === "community" || category === "libraries") {
+      return category;
+    }
+    return null;
+  }, [currentView, location.search]);
+
+  useEffect(() => {
+    if (currentView !== "services") return;
+    const params = new URLSearchParams(location.search);
+    const shouldOpenChat = params.get("chat") === "open";
+    const hasCategory = !!requestedCategory;
+
+    if (shouldOpenChat) {
+      dispatch({ type: "SET_CHAT_BUBBLE_OPEN", open: true });
+    }
+
+    if (shouldOpenChat || hasCategory) {
+      navigate("/app/services", { replace: true });
+    }
+  }, [currentView, location.search, requestedCategory, dispatch, navigate]);
 
   useEffect(() => {
     if (state.messages.length === 0) {
@@ -86,7 +111,12 @@ export default function CommandCenter() {
   const activeView = useMemo(() => {
     switch (currentView) {
       case "services":
-        return <ServicesView onNavigateToChat={handleSendMessage} />;
+        return (
+          <ServicesView
+            onNavigateToChat={handleSendMessage}
+            requestedCategory={requestedCategory}
+          />
+        );
       case "profile":
         return <ProfileView />;
       case "news":
@@ -94,7 +124,7 @@ export default function CommandCenter() {
       default:
         return null;
     }
-  }, [currentView, handleSendMessage]);
+  }, [currentView, handleSendMessage, requestedCategory]);
 
   const actionItemCount = useMemo(
     () => state.actionItems.filter((i) => !i.completed).length,

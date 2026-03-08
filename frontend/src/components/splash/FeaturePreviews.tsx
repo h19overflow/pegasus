@@ -1,10 +1,14 @@
 import { AlertTriangle } from "lucide-react";
 
-export function ServicesPreview() {
+export function ServicesPreview({
+  onSelectService,
+}: {
+  onSelectService: (category: "health" | "community" | "libraries") => void;
+}) {
   const services = [
-    { name: "Family Health Center", cat: "Health", detail: "Walk-ins accepted" },
-    { name: "Newtown Community Center", cat: "Community", detail: "Mon-Sat 8am-6pm" },
-    { name: "Montgomery Public Library", cat: "Library", detail: "Free WiFi & programs" },
+    { name: "Family Health Center", cat: "Health", detail: "Walk-ins accepted", category: "health" as const },
+    { name: "Newtown Community Center", cat: "Community", detail: "Mon-Sat 8am-6pm", category: "community" as const },
+    { name: "Montgomery Public Library", cat: "Library", detail: "Free WiFi & programs", category: "libraries" as const },
   ];
 
   return (
@@ -14,7 +18,11 @@ export function ServicesPreview() {
         <span className="text-xs font-medium text-muted-foreground">Services Map</span>
       </div>
       {services.map((s) => (
-        <div key={s.name} className="flex items-center justify-between rounded-xl bg-muted/40 px-4 py-3">
+        <button
+          key={s.name}
+          onClick={() => onSelectService(s.category)}
+          className="w-full flex items-center justify-between rounded-xl bg-muted/40 px-4 py-3 text-left"
+        >
           <div>
             <p className="text-sm font-semibold text-foreground">{s.name}</p>
             <p className="text-xs text-muted-foreground">{s.detail}</p>
@@ -22,7 +30,7 @@ export function ServicesPreview() {
           <span className="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded-full">
             {s.cat}
           </span>
-        </div>
+        </button>
       ))}
     </div>
   );

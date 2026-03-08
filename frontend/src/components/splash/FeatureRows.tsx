@@ -54,7 +54,11 @@ function FeatureRow({
   );
 }
 
-export function FeaturesSection() {
+export function FeaturesSection({
+  onSelectService,
+}: {
+  onSelectService: (category: "health" | "community" | "libraries") => void;
+}) {
   return (
     <section className="bg-muted/30 py-16 md:py-20 px-6">
       <div className="max-w-5xl mx-auto space-y-12">
@@ -68,7 +72,7 @@ export function FeaturesSection() {
             { icon: Shield, text: "Benefits eligibility and cliff analysis" },
             { icon: MessageSquare, text: "AI assistant for civic questions" },
           ]}
-          preview={<ServicesPreview />}
+          preview={<ServicesPreview onSelectService={onSelectService} />}
         />
 
         <div className="border-t border-border/40" />

@@ -10,9 +10,10 @@ type ServicesMode = "directory" | "map" | "detail" | "roadmap";
 
 interface ServicesViewProps {
   onNavigateToChat: (message: string) => void;
+  requestedCategory?: ServiceCategory | null;
 }
 
-export function ServicesView({ onNavigateToChat }: ServicesViewProps) {
+export function ServicesView({ onNavigateToChat, requestedCategory = null }: ServicesViewProps) {
   const { state } = useApp();
   const [mode, setMode] = useState<ServicesMode>("directory");
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory | null>(null);
@@ -37,6 +38,12 @@ export function ServicesView({ onNavigateToChat }: ServicesViewProps) {
       setMode("map");
     }
   }, [state.selectedArticleId]);
+
+  useEffect(() => {
+    if (!requestedCategory) return;
+    setSelectedCategory(requestedCategory);
+    setMode("detail");
+  }, [requestedCategory]);
 
   function handleSelectCategory(category: ServiceCategory) {
     setSelectedCategory(category);

@@ -5,24 +5,37 @@ function ValueCard({
   title,
   description,
   accent,
+  onClick,
 }: {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
   accent: string;
+  onClick: () => void;
 }) {
   return (
-    <div className="rounded-2xl border border-border/60 bg-white p-6 hover:shadow-lg transition-shadow">
+    <button
+      onClick={onClick}
+      className="rounded-2xl border border-border/60 bg-white p-6 hover:shadow-lg transition-shadow text-left w-full"
+    >
       <div className={`w-12 h-12 rounded-xl ${accent} border flex items-center justify-center mb-4`}>
         <Icon className="w-6 h-6" />
       </div>
       <h3 className="font-bold text-foreground text-lg mb-2">{title}</h3>
       <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
-    </div>
+    </button>
   );
 }
 
-export function ValueSection() {
+export function ValueSection({
+  onFindServices,
+  onStayInformed,
+  onGetAnswers,
+}: {
+  onFindServices: () => void;
+  onStayInformed: () => void;
+  onGetAnswers: () => void;
+}) {
   return (
     <section className="bg-background py-16 md:py-20 px-6">
       <div className="max-w-5xl mx-auto">
@@ -45,18 +58,21 @@ export function ValueSection() {
             title="Find Services"
             description="Health clinics, childcare, libraries, parks, and community resources — all on an interactive map with real details."
             accent="bg-blue-50 text-blue-600 border-blue-100"
+            onClick={onFindServices}
           />
           <ValueCard
             icon={Newspaper}
             title="Stay Informed"
             description="Local news with community sentiment analysis, misinformation detection, and reactions from fellow residents."
             accent="bg-emerald-50 text-emerald-600 border-emerald-100"
+            onClick={onStayInformed}
           />
           <ValueCard
             icon={MessageSquare}
             title="Get Answers"
             description="Ask the AI assistant about benefits, jobs, healthcare, or any civic question — in plain English."
             accent="bg-purple-50 text-purple-600 border-purple-100"
+            onClick={onGetAnswers}
           />
         </div>
       </div>

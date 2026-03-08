@@ -121,11 +121,31 @@ function Footer() {
 export default function Splash() {
   const navigate = useNavigate();
 
+  function openServices() {
+    navigate("/app/services");
+  }
+
+  function openNews() {
+    navigate("/app/news");
+  }
+
+  function openAnswers() {
+    navigate("/app/services?chat=open");
+  }
+
+  function openServiceCategory(category: "health" | "community" | "libraries") {
+    navigate(`/app/services?category=${category}`);
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <HeroSection onGetStarted={() => navigate("/app")} />
-      <ValueSection />
-      <FeaturesSection />
+      <ValueSection
+        onFindServices={openServices}
+        onStayInformed={openNews}
+        onGetAnswers={openAnswers}
+      />
+      <FeaturesSection onSelectService={openServiceCategory} />
       <NotificationSection />
       <CTASection onGetStarted={() => navigate("/app")} />
       <Footer />
