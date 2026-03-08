@@ -7,7 +7,6 @@ import ProfileView from "@/components/app/ProfileView";
 import { NewsPage } from "@/components/app/news/NewsPage";
 import FloatingChatBubble from "@/components/app/FloatingChatBubble";
 import { useApp } from "@/lib/appContext";
-import { useDataStream } from "@/lib/useDataStream";
 import { getSmartResponse } from "@/lib/aiChatService";
 import {
   buildWelcomeMessage,
@@ -20,7 +19,6 @@ const VALID_VIEWS = new Set<string>(["services", "admin", "profile", "news"]);
 
 export default function CommandCenter() {
   const { state, dispatch } = useApp();
-  useDataStream();
   const { view: urlView } = useParams<{ view: string }>();
   const navigate = useNavigate();
   const lang: Language = "EN";
@@ -28,13 +26,6 @@ export default function CommandCenter() {
   // Derive the current view from the URL (single source of truth)
   const currentView: AppView =
     urlView && VALID_VIEWS.has(urlView) ? (urlView as AppView) : "services";
-
-  // Keep state.activeView in sync with URL (one-way: URL → state)
-  useEffect(() => {
-    if (currentView !== state.activeView) {
-      dispatch({ type: "SET_VIEW", view: currentView });
-    }
-  }, [currentView]);
 
   // Redirect invalid URLs to the default view
   useEffect(() => {

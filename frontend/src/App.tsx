@@ -6,9 +6,15 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppProvider } from "@/lib/appContext";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { useDataStream } from "@/lib/useDataStream";
 import Splash from "./pages/Splash";
 import Notifications from "./pages/Notifications";
 import NotFound from "./pages/NotFound";
+
+function DataStreamConnector() {
+  useDataStream();
+  return null;
+}
 
 const CommandCenter = lazy(() => import("./pages/CommandCenter"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
@@ -23,6 +29,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AppProvider>
+          <DataStreamConnector />
           <ErrorBoundary>
             <Suspense fallback={<div className="flex h-screen items-center justify-center text-muted-foreground text-sm">Loading…</div>}>
               <Routes>

@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(cd \"C:\\\\Users\\\\Theas\\\\Documents\\\\GitHub\\\\pegasus\\\\montgomery-navigator\" && npm run build 2>&1)",
-      "Bash(tail:*)"
+      "Bash(tail:*)",
+      "Bash(echo -n \"hl_9067ef31\" | gcloud secrets create BRIGHTDATA_CUSTOMER_ID --data-file=- 2>&1 && \\\\\necho -n \"scraping_browser1\" | gcloud secrets create BRIGHTDATA_BROWSER_ZONE --data-file=- 2>&1 && \\\\\necho -n \"54iofevfivh1\" | gcloud secrets create BRIGHTDATA_BROWSER_PASSWORD --data-file=- 2>&1 && \\\\\necho -n \"serp_api1\" | gcloud secrets create BRIGHTDATA_SERP_ZONE --data-file=- 2>&1)"
     ]
   }
 }

@@ -30,3 +30,6 @@ montgomery-navigator/
 # OS / Editor files
 .DS_Store
 .vscode/
+
+# Local resolutions log
+resolutions.md
