@@ -17,7 +17,7 @@ export function PredictiveHeatmap({ onAskAI }: PredictiveHeatmapProps) {
   const [showMisinfo, setShowMisinfo] = useState(false);
 
   return (
-    <Card>
+    <Card className="h-full flex flex-col">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-base">Predictive Heatmap</CardTitle>
         <div className="flex items-center gap-1.5">
@@ -45,8 +45,8 @@ export function PredictiveHeatmap({ onAskAI }: PredictiveHeatmapProps) {
           </button>
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="h-[350px] rounded-lg overflow-hidden">
+      <CardContent className="flex-1 min-h-0">
+        <div className="h-[350px] md:h-full rounded-lg overflow-hidden">
           <MapContainer
             center={MONTGOMERY_CENTER}
             zoom={DEFAULT_ZOOM}

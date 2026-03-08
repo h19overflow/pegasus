@@ -35,7 +35,13 @@ export function CollapsibleSection({
       {hint && (
         <p className="text-xs text-muted-foreground mt-0.5 ml-6">{hint}</p>
       )}
-      {isOpen && <div className="mt-3 ml-0">{children}</div>}
+      <div
+        className={`grid transition-[grid-template-rows,opacity,margin] duration-200 ease-out ${
+          isOpen ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0 mt-0"
+        }`}
+      >
+        <div className="overflow-hidden">{children}</div>
+      </div>
     </div>
   );
 }

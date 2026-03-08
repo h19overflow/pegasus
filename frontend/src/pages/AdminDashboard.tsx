@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import citysenseLogo from "@/assets/citysense-logo.png";
 import { AIInsightsCard } from "@/components/app/admin/AIInsightsCard";
 import { AdminChatBubble } from "@/components/app/admin/AdminChatBubble";
-import { AnalyzeButton } from "@/components/app/admin/AnalyzeButton";
 import { OnboardingBanner } from "@/components/app/admin/OnboardingBanner";
 import { CommentFeed } from "@/components/app/admin/CommentFeed";
 import { HotSpotsPanel } from "@/components/app/admin/HotSpotsPanel";
@@ -12,6 +11,7 @@ import { PredictiveHeatmap } from "@/components/app/admin/PredictiveHeatmap";
 import { PredictiveHeatmapPanel } from "@/components/app/admin/PredictiveHeatmapPanel";
 import { MayorsBrief } from "@/components/app/admin/MayorsBrief";
 import { SentimentOverview } from "@/components/app/admin/SentimentOverview";
+import { ANALYSIS_API_BASE } from "@/lib/apiConfig";
 import { useApp } from "@/lib/appContext";
 import { computeNeighborhoodActivity } from "@/lib/newsAggregations";
 import { fetchNewsArticles, fetchNewsComments } from "@/lib/newsService";
@@ -30,7 +30,7 @@ function AdminHeader() {
 
   return (
     <header className="sticky top-0 z-[1001] bg-white border-t-[3px] border-[hsl(var(--amber-gold))] border-b border-border/40">
-      <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <div className="w-full px-5 md:px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate("/")}
@@ -94,6 +94,48 @@ export default function AdminDashboard() {
     }
   }, []);
 
+  useEffect(() => {
+    let intervalId: ReturnType<typeof setInterval> | undefined;
+    let cancelled = false;
+
+    const pollAnalysisStatus = () => {
+      intervalId = setInterval(async () => {
+        try {
+          const response = await fetch(`${ANALYSIS_API_BASE}/api/analysis/status`);
+          if (!response.ok) return;
+          const { state: statusState } = await response.json();
+          if (statusState !== "running") {
+            clearInterval(intervalId);
+            if (!cancelled && statusState === "complete") {
+              setAiRefreshTrigger((n) => n + 1);
+            }
+          }
+        } catch {
+          clearInterval(intervalId);
+        }
+      }, 2000);
+    };
+
+    const runAnalysisOnLoad = async () => {
+      try {
+        const runResponse = await fetch(`${ANALYSIS_API_BASE}/api/analysis/run`, { method: "POST" });
+        if (!runResponse.ok) {
+          throw new Error(`Failed to start analysis: ${runResponse.status}`);
+        }
+        pollAnalysisStatus();
+      } catch (error) {
+        console.error("[AdminDashboard] Failed to auto-run analysis:", error);
+      }
+    };
+
+    runAnalysisOnLoad();
+
+    return () => {
+      cancelled = true;
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, []);
+
   const { reactions } = loadStoredReactions();
   const mergedReactions = { ...reactions, ...state.newsReactions };
   const neighborhoods = computeNeighborhoodActivity(state.newsArticles, mergedReactions, state.newsComments);
@@ -102,7 +144,7 @@ export default function AdminDashboard() {
     <div className={`min-h-screen bg-background transition-[margin] duration-200 ${chatIsOpen ? "mr-[520px]" : ""}`}>
       <AdminHeader />
 
-      <main className="max-w-6xl mx-auto px-6 py-6 space-y-6">
+      <main className="w-full px-5 md:px-6 py-5 md:py-6 space-y-6">
         <OnboardingBanner />
 
         {/* Greeting + Actions */}
@@ -126,31 +168,39 @@ export default function AdminDashboard() {
               View Map
             </button>
           </div>
-          <AnalyzeButton onComplete={() => setAiRefreshTrigger((n) => n + 1)} />
         </section>
 
-        <MayorsBrief
-          articles={state.newsArticles}
-          comments={state.newsComments}
-          reactions={mergedReactions}
-          onAskAI={askAI}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:h-[520px] lg:h-[580px] items-stretch">
+          <div className="md:col-span-3 h-full min-h-0">
+            <PredictiveHeatmap onAskAI={askAI} />
+          </div>
+          <div className="md:col-span-1 h-full min-h-0">
+            <PredictiveHeatmapPanel onAskAI={askAI} />
+          </div>
+        </div>
 
         <SentimentOverview articles={state.newsArticles} onAskAI={askAI} />
 
-        <PredictiveHeatmap onAskAI={askAI} />
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <CommentFeed articles={state.newsArticles} onAskAI={askAI} />
-          <AIInsightsCard
-            refreshTrigger={aiRefreshTrigger}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <MayorsBrief
+            articles={state.newsArticles}
+            comments={state.newsComments}
+            reactions={mergedReactions}
             onAskAI={askAI}
           />
+          <HotSpotsPanel neighborhoods={neighborhoods} onAskAI={askAI} />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <HotSpotsPanel neighborhoods={neighborhoods} onAskAI={askAI} />
-          <PredictiveHeatmapPanel onAskAI={askAI} />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:h-[560px] lg:h-[620px] items-stretch">
+          <div className="md:col-span-3 h-full min-h-0">
+            <CommentFeed articles={state.newsArticles} onAskAI={askAI} />
+          </div>
+          <div className="md:col-span-1 h-full min-h-0">
+            <AIInsightsCard
+              refreshTrigger={aiRefreshTrigger}
+              onAskAI={askAI}
+            />
+          </div>
         </div>
       </main>
 

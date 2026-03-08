@@ -44,11 +44,11 @@ export function CommentFeed({ comments: propComments = [], articles, onAskAI }: 
   }
 
   return (
-    <Card>
+    <Card className="h-full flex flex-col">
       <CardHeader>
         <CardTitle className="text-base">What Citizens Are Saying</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-3 flex-1 min-h-0 flex flex-col">
         <div className="flex gap-2 flex-wrap">
           {SORT_OPTIONS.map((option) => (
             <button
@@ -67,8 +67,8 @@ export function CommentFeed({ comments: propComments = [], articles, onAskAI }: 
         {isLoading && <p className="text-sm text-muted-foreground animate-pulse">Loading comments…</p>}
         {!isLoading && allComments.length === 0 && <p className="text-sm text-muted-foreground">No comments yet.</p>}
         {!isLoading && allComments.length > 0 && (
-          <div className="relative">
-            <div className="max-h-[500px] overflow-y-auto pr-3 scroll-smooth">
+          <div className="relative flex-1 min-h-0">
+            <div className="h-full overflow-y-auto pr-3 scroll-smooth">
               {renderCommentList()}
             </div>
             <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card to-transparent" />

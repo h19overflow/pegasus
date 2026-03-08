@@ -107,7 +107,7 @@ export function PredictiveHeatmapPanel({ onAskAI }: PredictiveHeatmapPanelProps)
   const highCount = hotspots.filter((h) => h.risk_level === "high").length;
 
   return (
-    <Card>
+    <Card className="h-full flex flex-col">
       <CardHeader>
         <CardTitle className="text-base flex items-center gap-2">
           Areas to Watch
@@ -123,40 +123,42 @@ export function PredictiveHeatmapPanel({ onAskAI }: PredictiveHeatmapPanelProps)
           )}
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {loading ? (
-          <p className="text-sm text-muted-foreground">Loading...</p>
-        ) : hotspots.length === 0 ? (
-          <p className="text-sm text-muted-foreground">No hotspot data available.</p>
-        ) : (
-          <>
-            <div className="space-y-2">
-              {hotspots.slice(0, 5).map((h) => (
-                <HotspotRow key={h.area_id} hotspot={h} onAskAI={onAskAI} />
-              ))}
-            </div>
+      <CardContent className="space-y-4 flex-1 min-h-0 overflow-hidden">
+        <div className="h-full overflow-y-auto pr-1">
+          {loading ? (
+            <p className="text-sm text-muted-foreground">Loading...</p>
+          ) : hotspots.length === 0 ? (
+            <p className="text-sm text-muted-foreground">No hotspot data available.</p>
+          ) : (
+            <>
+              <div className="space-y-2">
+                {hotspots.slice(0, 5).map((h) => (
+                  <HotspotRow key={h.area_id} hotspot={h} onAskAI={onAskAI} />
+                ))}
+              </div>
 
-            {hotspots.length > 5 && (
-              <CollapsibleSection title={`All Hotspots (${hotspots.length})`} defaultOpen={false}>
-                <div className="space-y-2">
-                  {hotspots.slice(5).map((h) => (
-                    <HotspotRow key={h.area_id} hotspot={h} onAskAI={onAskAI} />
-                  ))}
-                </div>
-              </CollapsibleSection>
-            )}
+              {hotspots.length > 5 && (
+                <CollapsibleSection title={`All Hotspots (${hotspots.length})`} defaultOpen={false}>
+                  <div className="space-y-2">
+                    {hotspots.slice(5).map((h) => (
+                      <HotspotRow key={h.area_id} hotspot={h} onAskAI={onAskAI} />
+                    ))}
+                  </div>
+                </CollapsibleSection>
+              )}
 
-            {trends.length > 0 && (
-              <CollapsibleSection title="What's Changing" defaultOpen={false}>
-                <div className="space-y-2">
-                  {trends.map((t) => (
-                    <TrendRow key={t.category} trend={t} onAskAI={onAskAI} />
-                  ))}
-                </div>
-              </CollapsibleSection>
-            )}
-          </>
-        )}
+              {trends.length > 0 && (
+                <CollapsibleSection title="What's Changing" defaultOpen={false}>
+                  <div className="space-y-2">
+                    {trends.map((t) => (
+                      <TrendRow key={t.category} trend={t} onAskAI={onAskAI} />
+                    ))}
+                  </div>
+                </CollapsibleSection>
+              )}
+            </>
+          )}
+        </div>
       </CardContent>
     </Card>
   );

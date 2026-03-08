@@ -28,17 +28,19 @@ export function AIInsightsCard({ refreshTrigger = 0, onAskAI }: AIInsightsCardPr
   }, [refreshTrigger]);
 
   return (
-    <Card>
+    <Card className="h-full flex flex-col">
       <CardHeader>
         <CardTitle className="text-base">Key Takeaways</CardTitle>
       </CardHeader>
-      <CardContent>
-        {fetchState === "loading" && <p className="text-sm text-muted-foreground animate-pulse">Loading insights…</p>}
-        {fetchState === "empty" && <p className="text-sm text-muted-foreground">No analysis yet. Run Analysis to generate insights.</p>}
-        {fetchState === "error" && <p className="text-sm text-destructive">Failed to load. Check that the backend is running.</p>}
-        {fetchState === "ready" && insights && (
-          <InsightsDetails insights={insights} onAskAI={onAskAI} />
-        )}
+      <CardContent className="flex-1 min-h-0 overflow-hidden">
+        <div className="h-full overflow-y-auto pr-1">
+          {fetchState === "loading" && <p className="text-sm text-muted-foreground animate-pulse">Loading insights…</p>}
+          {fetchState === "empty" && <p className="text-sm text-muted-foreground">No analysis yet. Run Analysis to generate insights.</p>}
+          {fetchState === "error" && <p className="text-sm text-destructive">Failed to load. Check that the backend is running.</p>}
+          {fetchState === "ready" && insights && (
+            <InsightsDetails insights={insights} onAskAI={onAskAI} />
+          )}
+        </div>
       </CardContent>
     </Card>
   );
