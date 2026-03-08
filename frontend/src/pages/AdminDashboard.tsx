@@ -32,15 +32,21 @@ function AdminHeader() {
     <header className="sticky top-0 z-[1001] bg-white border-t-[3px] border-[hsl(var(--amber-gold))] border-b border-border/40">
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <img src={citysenseLogo} alt="CitySense" className="w-8 h-8 object-contain" />
-          <div className="flex flex-col">
-            <span className="text-secondary font-bold text-[15px] leading-tight tracking-tight">
-              CitySense
-            </span>
-            <span className="text-[hsl(var(--amber-gold))] text-[10px] leading-tight font-bold uppercase tracking-[0.12em]">
-              Admin Dashboard
-            </span>
-          </div>
+          <button
+            onClick={() => navigate("/")}
+            className="flex items-center gap-3 text-left"
+            aria-label="Go to landing page"
+          >
+            <img src={citysenseLogo} alt="CitySense" className="w-8 h-8 object-contain" />
+            <div className="flex flex-col">
+              <span className="text-secondary font-bold text-[15px] leading-tight tracking-tight">
+                CitySense
+              </span>
+              <span className="text-[hsl(var(--amber-gold))] text-[10px] leading-tight font-bold uppercase tracking-[0.12em]">
+                Admin Dashboard
+              </span>
+            </div>
+          </button>
         </div>
 
         <div className="flex items-center gap-4">
