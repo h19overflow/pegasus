@@ -26,6 +26,9 @@ const TopBar = ({ onBack }: TopBarProps) => (
         </div>
       </div>
     </div>
+    <span className="text-[10px] text-muted-foreground/50">
+      Data powered by Bright Data
+    </span>
   </div>
 );
 

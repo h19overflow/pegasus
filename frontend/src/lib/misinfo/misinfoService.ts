@@ -1,7 +1,7 @@
 /**
  * Orchestrates two-layer misinformation analysis:
  *   1. Heuristic scores  — instant, no API key needed
- *   2. GPT-4o-mini scores — async, overwrites heuristic when available
+ *   2. Gemini 2.0 Flash via backend proxy — async, overwrites heuristic when available
  *
  * Each layer calls `onUpdate` so the UI updates progressively.
  */
@@ -38,7 +38,7 @@ export async function runMisinfoAnalysis(
   });
   onUpdate(heuristicScores);
 
-  // Layer 2: GPT-4o-mini (async, overwrites heuristic scores)
+  // Layer 2: Gemini 2.0 Flash via backend proxy (async, overwrites heuristic scores)
   try {
     const aiScores = await analyzeArticlesBatch(
       articles.map((a) => ({
