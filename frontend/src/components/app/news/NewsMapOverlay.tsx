@@ -8,6 +8,7 @@ import { loadStoredReactions, saveReactions } from "@/lib/newsReactionStore";
 import { loadStoredComments, saveAllComments } from "@/lib/newsCommentStore";
 import { NewsPopupCard } from "./NewsPopupCard";
 import type { ReactionType } from "@/lib/types";
+import "./news-map.css";
 
 interface NewsMapOverlayProps {
   selectedArticleId?: string | null;
@@ -100,7 +101,7 @@ export function NewsMapOverlay({ selectedArticleId, selectionTs = 0 }: NewsMapOv
             icon={createNewsMarker(article.sentiment ?? "neutral", article.communitySentiment)}
             ref={(ref) => setMarkerRef(article.id, ref)}
           >
-            <Popup maxWidth={320} minWidth={260}>
+            <Popup className="news-map-popup" maxWidth={320} minWidth={260}>
               <NewsPopupCard
                 article={article}
                 reactionCounts={state.newsReactions[article.id] ?? ({} as Record<ReactionType, number>)}
@@ -128,7 +129,7 @@ export function NewsMapOverlay({ selectedArticleId, selectionTs = 0 }: NewsMapOv
                 opacity: 0.4,
               }}
             >
-              <Popup maxWidth={320} minWidth={260}>
+              <Popup className="news-map-popup" maxWidth={320} minWidth={260}>
                 <NewsPopupCard
                   article={article}
                   reactionCounts={state.newsReactions[article.id] ?? ({} as Record<ReactionType, number>)}

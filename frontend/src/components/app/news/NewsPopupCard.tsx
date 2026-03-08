@@ -57,12 +57,12 @@ export function NewsPopupCard({ article, reactionCounts, userReaction, onReact }
   const totalReactions = Object.values(reactionCounts).reduce((sum, n) => sum + n, 0);
 
   return (
-    <div className="min-w-[260px] max-w-[300px] font-sans">
+    <div className="w-full max-w-[300px] font-sans overflow-hidden">
       {article.imageUrl && (
         <img
           src={article.imageUrl}
           alt=""
-          className="w-full h-[120px] object-cover rounded-t-md mb-2"
+          className="block w-full h-[120px] object-cover rounded-t-md mb-2"
         />
       )}
 
@@ -72,9 +72,15 @@ export function NewsPopupCard({ article, reactionCounts, userReaction, onReact }
         <span className="text-[10px] text-muted-foreground capitalize">{article.category}</span>
       </div>
 
-      <h3 className="text-[13px] font-bold leading-snug text-foreground mb-1">
+      <a
+        href={article.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1 text-[13px] font-bold leading-snug text-foreground mb-1 hover:text-primary hover:underline"
+      >
         {article.title}
-      </h3>
+        <ExternalLink className="w-2.5 h-2.5" />
+      </a>
 
       {article.summary && (
         <p className="text-[11px] text-muted-foreground leading-relaxed mb-2 line-clamp-3">
@@ -127,14 +133,6 @@ export function NewsPopupCard({ article, reactionCounts, userReaction, onReact }
         </p>
       )}
 
-      <a
-        href={article.sourceUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-1 text-[11px] font-medium text-primary hover:underline"
-      >
-        Read full article <ExternalLink className="w-2.5 h-2.5" />
-      </a>
     </div>
   );
 }

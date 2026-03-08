@@ -56,5 +56,7 @@
 
 .news-map-popup .leaflet-popup-content {
   margin: 0;
-  width: auto !important;
+  width: 300px !important;
+  max-width: 300px;
+  overflow: hidden;
 }

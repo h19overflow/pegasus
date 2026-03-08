@@ -8,6 +8,7 @@ import logging
 import os
 from datetime import datetime, timezone
 from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
 from langchain_core.prompts import ChatPromptTemplate
@@ -25,7 +26,26 @@ from backend.core.redis_client import cache
 
 logger = logging.getLogger("roadmap_agent")
 ROADMAP_CACHE_TTL = int(os.environ.get("ROADMAP_CACHE_TTL", "86400"))
-_GOV_SERVICES_PATH = PUBLIC_DATA / "gov_services.json"
+
+
+def _gov_services_candidates() -> list[Path]:
+    env_path = os.environ.get("GOV_SERVICES_PATH")
+    candidates: list[Path] = []
+    if env_path:
+        candidates.append(Path(env_path))
+    candidates.extend([
+        PUBLIC_DATA / "gov_services.json",
+        Path(__file__).resolve().parents[1] / "data" / "gov_services.json",
+    ])
+    return candidates
+
+
+def _resolve_gov_services_path() -> Path:
+    for path in _gov_services_candidates():
+        if path.exists():
+            return path
+    searched = ", ".join(str(p) for p in _gov_services_candidates())
+    raise FileNotFoundError(f"gov_services.json not found. Searched: {searched}")
 
 SYSTEM_PROMPT = """You are CivicPath, an expert civic navigator for Montgomery, Alabama.
 Your job is to turn government service documentation into a clear roadmap a resident can follow.
@@ -41,13 +61,17 @@ Rules:
 
 @lru_cache(maxsize=1)
 def _load_services() -> dict[str, dict[str, Any]]:
-    with open(_GOV_SERVICES_PATH, encoding="utf-8") as f:
+    services_path = _resolve_gov_services_path()
+    with open(services_path, encoding="utf-8") as f:
         data = json.load(f)
     return {service["id"]: service for service in data["services"]}
 
 
 def _get_service(service_id: str) -> dict[str, Any]:
-    services = _load_services()
+    try:
+        services = _load_services()
+    except FileNotFoundError as exc:
+        raise RuntimeError(str(exc)) from exc
     if service_id not in services:
         available = ", ".join(sorted(services.keys()))
         raise ValueError(f"Service '{service_id}' not found. Available: {available}")
