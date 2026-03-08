@@ -31,14 +31,14 @@ export const AppNav = ({ activeTab, onTabChange, actionItemCount }: AppNavProps)
   ];
 
   return (
-    <nav className="flex items-center justify-around border-t bg-background px-2 py-2 relative z-50">
+    <nav className="flex items-center justify-around border-t border-border/60 bg-background/95 backdrop-blur-sm px-2 py-1.5 relative z-50">
       {tabs.map(({ id, label, icon: Icon, badgeCount = 0 }) => (
         <button
           key={id}
           onClick={() => onTabChange(id)}
-          className={`relative flex flex-col items-center gap-0.5 px-3 py-1 text-xs transition-colors ${
+          className={`relative flex flex-col items-center gap-0.5 px-4 py-1.5 text-xs rounded-xl transition-all ${
             activeTab === id
-              ? "text-primary"
+              ? "text-primary bg-primary/8 font-medium"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >

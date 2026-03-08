@@ -60,20 +60,22 @@ export default function ProfileView() {
 
   return (
     <div className="flex-1 overflow-y-auto bg-muted/30">
-      <div className="max-w-lg mx-auto p-6 space-y-6">
-        <div className="flex flex-col items-center gap-3 pt-2">
-          <div
-            className="w-20 h-20 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-md"
-            style={{ backgroundColor: meta.avatarColor }}
-          >
-            {meta.avatarInitials}
-          </div>
-          <div className="text-center">
-            <h1 className="text-xl font-bold text-foreground">{cv.name}</h1>
-            <p className="text-sm text-muted-foreground">{p.neighborhood}, Montgomery, AL</p>
-          </div>
+      {/* Gradient banner */}
+      <div className="bg-gradient-to-br from-[#060f1e] via-secondary to-[#0d1b35] pt-8 pb-10 px-6 flex flex-col items-center gap-3 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-24 rounded-full bg-primary/20 blur-[50px] pointer-events-none" />
+        <div
+          className="w-20 h-20 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg ring-4 ring-white/20 relative z-10"
+          style={{ backgroundColor: meta.avatarColor }}
+        >
+          {meta.avatarInitials}
         </div>
+        <div className="text-center relative z-10">
+          <h1 className="text-xl font-bold text-white">{cv.name}</h1>
+          <p className="text-sm text-white/60">{p.neighborhood}, Montgomery, AL</p>
+        </div>
+      </div>
 
+      <div className="max-w-lg mx-auto px-6 -mt-4 space-y-5 pb-10">
         <SettingsSection title="Personal Information">
           <SettingsRow icon={User} label="Name" value={cv.name} />
           <SettingsRow icon={MapPin} label="Location" value={`${p.neighborhood}, AL ${p.zip}`} />
@@ -103,12 +105,10 @@ export default function ProfileView() {
           <SettingsRow icon={Info} label="About CitySense" value="v1.0.0" chevron last />
         </SettingsSection>
 
-        <div className="pb-6">
-          <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-red-200 bg-white text-sm font-medium text-red-500 hover:bg-red-50 transition-colors">
-            <LogOut className="w-4 h-4" />
-            Sign Out
-          </button>
-        </div>
+        <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-red-200 bg-white text-sm font-medium text-red-500 hover:bg-red-50 transition-colors">
+          <LogOut className="w-4 h-4" />
+          Sign Out
+        </button>
       </div>
     </div>
   );

@@ -41,10 +41,10 @@ export function CollapsedBubble({
       <div
         className={`
           ${isMobile ? "w-14 h-14" : "w-16 h-16"}
-          rounded-full bg-primary text-primary-foreground
-          shadow-lg hover:shadow-xl
+          rounded-full bg-gradient-to-br from-primary to-secondary text-primary-foreground
+          shadow-[0_8px_24px_rgba(0,0,0,0.22)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.28)]
           flex items-center justify-center
-          transition-shadow
+          transition-shadow hover:scale-105 active:scale-95
         `}
       >
         <MessageSquare className={isMobile ? "w-6 h-6" : "w-7 h-7"} />

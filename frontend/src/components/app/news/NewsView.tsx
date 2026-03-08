@@ -111,14 +111,16 @@ export function NewsView() {
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="shrink-0 border-b border-border/50 bg-white px-5 py-4 space-y-3">
+      <div className="shrink-0 border-b border-border/50 bg-white shadow-sm px-5 py-4 space-y-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Newspaper className="w-5 h-5 text-primary" />
-            <h2 className="text-base font-semibold text-foreground">Montgomery News</h2>
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+              <Newspaper className="w-4 h-4 text-primary" />
+            </div>
+            <h2 className="text-base font-bold text-foreground">Montgomery News</h2>
           </div>
           {lastScraped && (
-            <span className="text-[11px] text-muted-foreground">
+            <span className="text-[11px] text-muted-foreground bg-muted/60 px-2 py-0.5 rounded-full">
               Updated {formatLastScrapedTimestamp(lastScraped)}
             </span>
           )}
@@ -153,7 +155,7 @@ export function NewsView() {
         {hasActiveFilters && (
           <button
             onClick={clearFilters}
-            className="text-xs text-primary hover:underline"
+            className="text-xs text-primary hover:underline font-medium"
           >
             Clear filters
           </button>

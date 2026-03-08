@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Minus } from "lucide-react";
+import { Minus, MessageSquare } from "lucide-react";
 import { useApp } from "@/lib/appContext";
 import MessageBubble from "../MessageBubble";
 import ChatInput from "../ChatInput";
@@ -25,13 +25,16 @@ function computeDesktopPanelPosition(bubblePos: { x: number; y: number }) {
 
 function PanelHeader({ onMinimize }: { onMinimize: () => void }) {
   return (
-    <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-secondary/5 shrink-0">
-      <span className="text-sm font-semibold text-foreground">
-        Montgomery Assistant
-      </span>
+    <div className="flex items-center justify-between px-4 py-3.5 border-b border-border bg-gradient-to-r from-secondary/8 to-secondary/4 shrink-0">
+      <div className="flex items-center gap-2.5">
+        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+          <MessageSquare className="w-3.5 h-3.5 text-white" />
+        </div>
+        <span className="text-sm font-semibold text-foreground">Montgomery Assistant</span>
+      </div>
       <button
         onClick={onMinimize}
-        className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+        className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
         title="Minimize"
       >
         <Minus className="w-4 h-4" />

@@ -92,36 +92,39 @@ export default function Notifications() {
   }
 
   return (
-    <div className="min-h-screen bg-muted/30">
-      <div className="max-w-3xl mx-auto px-6 py-8 space-y-6">
+    <div className="min-h-screen bg-background">
+      {/* Gradient header */}
+      <div className="bg-gradient-to-br from-[#060f1e] via-secondary to-[#0d1b35] px-6 pt-14 pb-10 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 rounded-full bg-primary/15 blur-[60px] pointer-events-none" />
         <button
           onClick={() => navigate("/")}
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm mb-8 relative z-10"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Home
         </button>
-
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-            <Bell className="w-6 h-6 text-primary" />
+        <div className="flex items-center gap-4 relative z-10">
+          <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm flex items-center justify-center">
+            <Bell className="w-7 h-7 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-foreground">Notifications</h1>
-            <p className="text-sm text-muted-foreground">Choose what updates you receive</p>
+            <h1 className="text-2xl font-bold text-white">Notifications</h1>
+            <p className="text-sm text-white/60">Choose what updates you receive</p>
           </div>
         </div>
+      </div>
 
+      {/* Content */}
+      <div className="max-w-3xl mx-auto px-6 py-8 space-y-6">
         <ContactForm email={email} phone={phone} onEmailChange={setEmail} onPhoneChange={setPhone} />
 
         <ServicePreferenceGrid preferences={preferences} onToggle={handleToggle} />
 
-        {/* Subscribe button + validation messages */}
         <div className="space-y-2">
           <button
             onClick={handleSubscribe}
             disabled={!canSubscribe}
-            className="w-full bg-primary text-white py-3 rounded-xl font-semibold text-sm hover:bg-primary/90 transition-colors disabled:bg-muted disabled:cursor-not-allowed disabled:text-muted-foreground"
+            className="w-full bg-gradient-to-r from-primary to-secondary text-white py-3.5 rounded-xl font-semibold text-sm hover:opacity-90 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
           >
             Subscribe to Notifications
           </button>
